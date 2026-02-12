@@ -1,0 +1,274 @@
+/**
+ * Tailwind CSS v4+ Theme Configuration
+ * 
+ * Maps CSS custom properties to Tailwind utility classes.
+ * Import this after your light.css and dark.css files.
+ * 
+ * Usage examples:
+ * - bg-primary hover:bg-primary-hover
+ * - text-primary-foreground
+ * - border-border
+ * - shadow-md
+ */
+
+@theme {
+  /* ========================================
+     COLOR PALETTE
+     All colors reference CSS variables from light.css / dark.css
+     Format: rgb(var(--variable-name))
+     ======================================== */
+
+  /* Primary Colors */
+  --color-primary: rgb(var(--primary));
+  --color-primary-foreground: rgb(var(--primary-foreground));
+  --color-primary-hover: rgb(var(--primary-hover));
+  --color-primary-active: rgb(var(--primary-active));
+  --color-primary-subtle: rgb(var(--primary-subtle));
+
+  /* Secondary Colors */
+  --color-secondary: rgb(var(--secondary));
+  --color-secondary-foreground: rgb(var(--secondary-foreground));
+  --color-secondary-hover: rgb(var(--secondary-hover));
+  --color-secondary-active: rgb(var(--secondary-active));
+  --color-secondary-subtle: rgb(var(--secondary-subtle));
+
+  /* Accent Colors */
+  --color-accent: rgb(var(--accent));
+  --color-accent-foreground: rgb(var(--accent-foreground));
+  --color-accent-hover: rgb(var(--accent-hover));
+  --color-accent-active: rgb(var(--accent-active));
+  --color-accent-subtle: rgb(var(--accent-subtle));
+
+  /* Background & Surfaces */
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-surface: rgb(var(--surface));
+  --color-surface-foreground: rgb(var(--surface-foreground));
+  --color-muted: rgb(var(--muted));
+  --color-muted-foreground: rgb(var(--muted-foreground));
+  --color-subtle: rgb(var(--subtle));
+
+  /* Borders */
+  --color-border: rgb(var(--border));
+  --color-border-subtle: rgb(var(--border-subtle));
+  --color-border-strong: rgb(var(--border-strong));
+
+  /* Text Hierarchy */
+  --color-text-primary: rgb(var(--text-primary));
+  --color-text-secondary: rgb(var(--text-secondary));
+  --color-text-tertiary: rgb(var(--text-tertiary));
+  --color-text-disabled: rgb(var(--text-disabled));
+
+  /* Semantic States */
+  --color-success: rgb(var(--success));
+  --color-success-foreground: rgb(var(--success-foreground));
+  --color-success-hover: rgb(var(--success-hover));
+  --color-success-active: rgb(var(--success-active));
+  --color-success-subtle: rgb(var(--success-subtle));
+
+  --color-destructive: rgb(var(--destructive));
+  --color-destructive-foreground: rgb(var(--destructive-foreground));
+  --color-destructive-hover: rgb(var(--destructive-hover));
+  --color-destructive-active: rgb(var(--destructive-active));
+  --color-destructive-subtle: rgb(var(--destructive-subtle));
+
+  --color-warning: rgb(var(--warning));
+  --color-warning-foreground: rgb(var(--warning-foreground));
+  --color-warning-hover: rgb(var(--warning-hover));
+  --color-warning-active: rgb(var(--warning-active));
+  --color-warning-subtle: rgb(var(--warning-subtle));
+
+  --color-info: rgb(var(--info));
+  --color-info-foreground: rgb(var(--info-foreground));
+  --color-info-hover: rgb(var(--info-hover));
+  --color-info-active: rgb(var(--info-active));
+  --color-info-subtle: rgb(var(--info-subtle));
+
+  /* Product-Specific Colors */
+  --color-badge-new: rgb(var(--badge-new));
+  --color-badge-sale: rgb(var(--badge-sale));
+  --color-badge-limited: rgb(var(--badge-limited));
+
+  --color-price-current: rgb(var(--price-current));
+  --color-price-original: rgb(var(--price-original));
+  --color-price-sale: rgb(var(--price-sale));
+
+  --color-rating-filled: rgb(var(--rating-filled));
+  --color-rating-empty: rgb(var(--rating-empty));
+
+  /* Input & Form Elements */
+  --color-input-background: rgb(var(--input-background));
+  --color-input-border: rgb(var(--input-border));
+  --color-input-border-hover: rgb(var(--input-border-hover));
+  --color-input-border-focus: rgb(var(--input-border-focus));
+  --color-input-text: rgb(var(--input-text));
+  --color-input-placeholder: rgb(var(--input-placeholder));
+  --color-input-disabled-background: rgb(var(--input-disabled-background));
+  --color-input-disabled-text: rgb(var(--input-disabled-text));
+
+  /* Focus Ring */
+  --color-focus-ring: rgb(var(--focus-ring));
+
+  /* ========================================
+     BOX SHADOWS
+     ======================================== */
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+
+  /* ========================================
+     BORDER RADIUS
+     Premium, refined corner radiuses
+     ======================================== */
+  --radius-none: 0;
+  --radius-sm: 0.25rem;    /* 4px - subtle rounding */
+  --radius: 0.5rem;        /* 8px - standard cards, buttons */
+  --radius-md: 0.75rem;    /* 12px - larger cards */
+  --radius-lg: 1rem;       /* 16px - modals, dialogs */
+  --radius-xl: 1.5rem;     /* 24px - hero elements */
+  --radius-full: 9999px;   /* Full pill shape */
+
+  /* ========================================
+     TRANSITIONS
+     Smooth, premium animations
+     ======================================== */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   UTILITY CLASS EXTENSIONS
+   Additional utilities for common patterns
+   ======================================== */
+
+@layer utilities {
+  /* Focus Ring Utility */
+  .focus-ring {
+    @apply outline-none ring-2 ring-focus-ring/40;
+  }
+
+  /* Interactive Overlay Utilities */
+  .hover-overlay {
+    position: relative;
+  }
+
+  .hover-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(var(--hover-overlay) / var(--hover-overlay-opacity));
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+  }
+
+  .hover-overlay:hover::before {
+    opacity: 1;
+  }
+
+  /* Gradient Overlays for Images */
+  .gradient-overlay-dark {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(var(--background) / 0.8) 100%
+    );
+  }
+
+  .gradient-overlay-light {
+    background: linear-gradient(
+      to bottom,
+      rgb(var(--background) / 0) 0%,
+      rgb(var(--background) / 0.6) 100%
+    );
+  }
+
+  /* Premium Text Styles */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-luxury {
+    letter-spacing: 0.025em;
+    font-weight: 500;
+  }
+
+  /* Product Card Hover Effect */
+  .product-card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+}
+
+/* ========================================
+   COMPONENT LAYER
+   Pre-built component patterns
+   ======================================== */
+
+@layer components {
+  /* Primary Button */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary-hover 
+           active:bg-primary-active px-6 py-3 rounded-md font-medium 
+           transition-colors duration-200 focus-ring;
+  }
+
+  /* Secondary Button */
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary-hover 
+           active:bg-secondary-active px-6 py-3 rounded-md font-medium 
+           transition-colors duration-200 focus-ring;
+  }
+
+  /* Accent Button */
+  .btn-accent {
+    @apply bg-accent text-accent-foreground hover:bg-accent-hover 
+           active:bg-accent-active px-6 py-3 rounded-md font-medium 
+           transition-colors duration-200 focus-ring;
+  }
+
+  /* Outline Button */
+  .btn-outline {
+    @apply bg-transparent text-primary border-2 border-primary 
+           hover:bg-primary hover:text-primary-foreground px-6 py-3 
+           rounded-md font-medium transition-all duration-200 focus-ring;
+  }
+
+  /* Ghost Button */
+  .btn-ghost {
+    @apply bg-transparent text-foreground hover:bg-muted px-6 py-3 
+           rounded-md font-medium transition-colors duration-200 focus-ring;
+  }
+
+  /* Input Field */
+  .input {
+    @apply bg-input-background text-input-text border border-input-border 
+           hover:border-input-border-hover focus:border-input-border-focus 
+           placeholder:text-input-placeholder px-4 py-2.5 rounded-md 
+           transition-colors duration-200 focus-ring;
+  }
+
+  /* Card */
+  .card {
+    @apply bg-surface text-surface-foreground border border-border 
+           rounded-lg shadow-sm p-6;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-new {
+    @apply bg-success-subtle text-success border border-success;
+  }
+
+  .badge-sale {
+    @apply bg-destructive-subtle text-destructive border border-destructive;
+  }
+
+  .badge-limited {
+    @apply bg-accent-subtle text-accent border border-accent;
+  }
+}

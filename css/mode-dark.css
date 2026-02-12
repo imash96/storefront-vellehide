@@ -1,0 +1,152 @@
+/**
+ * Dark Theme — Premium Leather Brand
+ * 
+ * An elevated dark experience using warm, luxurious tones.
+ * Built for evening browsing with reduced eye strain while maintaining premium aesthetics.
+ */
+
+:root[data-theme="dark"] {
+  /* ========================================
+     PRIMARY (Brand Color)
+     Elevated cognac brown — luxurious and warm for dark backgrounds
+     ======================================== */
+  --primary: 122 81 58; /* #7a513a */
+  --primary-foreground: 250 248 246; /* #faf8f6 */
+  --primary-hover: 143 102 80; /* #8f6650 - lighter */
+  --primary-active: 101 66 47; /* #65422f - darker */
+  --primary-subtle: 41 31 25; /* #291f19 - very dark tint */
+
+  /* ========================================
+     SECONDARY (Supporting Actions)
+     Warm taupe — refined secondary elements
+     ======================================== */
+  --secondary: 158 132 110; /* #9e846e */
+  --secondary-foreground: 26 22 18; /* #1a1612 */
+  --secondary-hover: 176 150 127; /* #b0967f - lighter */
+  --secondary-active: 139 115 95; /* #8b735f - darker */
+  --secondary-subtle: 39 34 29; /* #27221d */
+
+  /* ========================================
+     ACCENT (Highlights & Special Elements)
+     Bright cognac — stands out beautifully on dark backgrounds
+     ======================================== */
+  --accent: 201 149 93; /* #c9955d */
+  --accent-foreground: 26 22 18; /* #1a1612 - dark text for contrast */
+  --accent-hover: 218 169 115; /* #daa973 - lighter */
+  --accent-active: 184 130 74; /* #b8824a - darker */
+  --accent-subtle: 43 35 27; /* #2b231b */
+
+  /* ========================================
+     BACKGROUND & SURFACES
+     Warm dark charcoals for sophisticated depth
+     ======================================== */
+  --background: 26 22 18; /* #1a1612 - deep warm charcoal */
+  --foreground: 245 242 238; /* #f5f2ee - warm off-white */
+  
+  --surface: 37 32 27; /* #25201b - elevated surface */
+  --surface-foreground: 245 242 238; /* #f5f2ee */
+  
+  --muted: 48 42 36; /* #302a24 - muted backgrounds */
+  --muted-foreground: 179 168 157; /* #b3a89d - muted text */
+  
+  --subtle: 31 27 23; /* #1f1b17 - very subtle backgrounds */
+
+  /* ========================================
+     BORDERS & DIVIDERS
+     Subtle warm-toned separators for dark mode
+     ======================================== */
+  --border: 58 51 44; /* #3a332c - default border */
+  --border-subtle: 44 38 33; /* #2c2621 - very subtle border */
+  --border-strong: 79 69 60; /* #4f453c - emphasized border */
+
+  /* ========================================
+     TEXT HIERARCHY
+     Reduced contrast for comfortable reading
+     ======================================== */
+  --text-primary: 245 242 238; /* #f5f2ee - main body text */
+  --text-secondary: 204 196 186; /* #ccc4ba - secondary text */
+  --text-tertiary: 158 148 137; /* #9e9489 - subtle text, captions */
+  --text-disabled: 89 81 72; /* #595148 - disabled state */
+
+  /* ========================================
+     SEMANTIC STATES
+     Adjusted for dark backgrounds with maintained warmth
+     ======================================== */
+  
+  /* Success — Brighter forest green for visibility */
+  --success: 120 145 100; /* #789164 */
+  --success-foreground: 26 22 18; /* #1a1612 */
+  --success-hover: 141 167 120; /* #8da778 */
+  --success-active: 100 121 83; /* #647953 */
+  --success-subtle: 32 37 28; /* #20251c */
+
+  /* Destructive/Error — Vibrant brick red */
+  --destructive: 210 100 80; /* #d26450 */
+  --destructive-foreground: 26 22 18; /* #1a1612 */
+  --destructive-hover: 229 124 105; /* #e57c69 */
+  --destructive-active: 188 83 66; /* #bc5342 */
+  --destructive-subtle: 42 28 25; /* #2a1c19 */
+
+  /* Warning — Bright amber for attention */
+  --warning: 219 170 117; /* #dbaa75 */
+  --warning-foreground: 26 22 18; /* #1a1612 */
+  --warning-hover: 232 188 140; /* #e8bc8c */
+  --warning-active: 196 144 96; /* #c49060 */
+  --warning-subtle: 43 36 27; /* #2b241b */
+
+  /* Info — Lighter slate blue */
+  --info: 129 148 169; /* #8194a9 */
+  --info-foreground: 26 22 18; /* #1a1612 */
+  --info-hover: 152 169 187; /* #98a9bb */
+  --info-active: 108 126 145; /* #6c7e91 */
+  --info-subtle: 28 31 35; /* #1c1f23 */
+
+  /* ========================================
+     INTERACTIVE STATES (General)
+     ======================================== */
+  --hover-overlay: 255 255 255; /* White for hover on dark */
+  --hover-overlay-opacity: 0.06; /* Subtle lightening on hover */
+  
+  --active-overlay: 255 255 255; /* White for active states */
+  --active-overlay-opacity: 0.12; /* Stronger press feedback */
+
+  --focus-ring: 201 149 93; /* #c9955d - bright accent for visibility */
+  --focus-ring-opacity: 0.5; /* More visible in dark mode */
+
+  /* ========================================
+     SHADOWS
+     Deeper shadows with warm tones
+     ======================================== */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+
+  /* ========================================
+     PRODUCT-SPECIFIC
+     Enhanced visibility for dark mode
+     ======================================== */
+  --badge-new: 120 145 100; /* #789164 - success green */
+  --badge-sale: 210 100 80; /* #d26450 - destructive red */
+  --badge-limited: 201 149 93; /* #c9955d - accent */
+  
+  --price-current: 245 242 238; /* #f5f2ee - current price */
+  --price-original: 158 148 137; /* #9e9489 - crossed-out original price */
+  --price-sale: 210 100 80; /* #d26450 - sale price emphasis */
+
+  --rating-filled: 219 170 117; /* #dbaa75 - filled star */
+  --rating-empty: 58 51 44; /* #3a332c - empty star */
+
+  /* ========================================
+     INPUT & FORM ELEMENTS
+     ======================================== */
+  --input-background: 37 32 27; /* #25201b - elevated surface */
+  --input-border: 58 51 44; /* #3a332c */
+  --input-border-hover: 79 69 60; /* #4f453c */
+  --input-border-focus: 201 149 93; /* #c9955d - accent */
+  --input-text: 245 242 238; /* #f5f2ee */
+  --input-placeholder: 158 148 137; /* #9e9489 */
+  --input-disabled-background: 31 27 23; /* #1f1b17 */
+  --input-disabled-text: 89 81 72; /* #595148 */
+}
