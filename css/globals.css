@@ -14,10 +14,31 @@
 @import "tailwindcss";
 
 /* ========================================
+   STEP 2: Import Theme CSS Variables
+   Import both light and dark mode definitions
+   These define the actual color values
+   ======================================== */
+@import "./mode-light.css";
+@import "./mode-dark.css";
+
+/* ========================================
    STEP 3: Import Tailwind Theme Configuration
    This maps CSS variables to Tailwind utilities
    Must come AFTER the variable definitions
    ======================================== */
+/**
+ * Tailwind CSS v4+ Theme Configuration
+ * 
+ * Maps CSS custom properties to Tailwind utility classes.
+ * Import this after your light.css and dark.css files.
+ * 
+ * Usage examples:
+ * - bg-primary hover:bg-primary-hover
+ * - text-primary-foreground
+ * - border-border
+ * - shadow-md
+ */
+
 @theme {
   /* ========================================
      COLOR PALETTE
@@ -367,6 +388,126 @@ img {
 
   100% {
     background-position: -200% 0;
+  }
+}
+
+
+/* ========================================
+   UTILITY CLASS EXTENSIONS
+   Additional utilities for common patterns
+   ======================================== */
+
+@layer utilities {
+
+  /* Focus Ring Utility */
+  .focus-ring {
+    @apply outline-none ring-2 ring-focus-ring/40;
+  }
+
+  /* Interactive Overlay Utilities */
+  .hover-overlay {
+    position: relative;
+  }
+
+  .hover-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(var(--hover-overlay) / var(--hover-overlay-opacity));
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+  }
+
+  .hover-overlay:hover::before {
+    opacity: 1;
+  }
+
+  /* Gradient Overlays for Images */
+  .gradient-overlay-dark {
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        rgb(var(--background) / 0.8) 100%);
+  }
+
+  .gradient-overlay-light {
+    background: linear-gradient(to bottom,
+        rgb(var(--background) / 0) 0%,
+        rgb(var(--background) / 0.6) 100%);
+  }
+
+  /* Premium Text Styles */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-luxury {
+    letter-spacing: 0.025em;
+    font-weight: 500;
+  }
+
+  /* Product Card Hover Effect */
+  .product-card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+}
+
+/* ========================================
+   COMPONENT LAYER
+   Pre-built component patterns
+   ======================================== */
+
+@layer components {
+
+  /* Primary Button */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active px-6 py-3 rounded-md font-medium transition-colors duration-200 ring-focus-ring;
+  }
+
+  /* Secondary Button */
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary-hover active:bg-secondary-active px-6 py-3 rounded-md font-medium transition-colors duration-200 ring-focus-ring;
+  }
+
+  /* Accent Button */
+  .btn-accent {
+    @apply bg-accent text-accent-foreground hover:bg-accent-hover active:bg-accent-active px-6 py-3 rounded-md font-medium transition-colors duration-200 ring-focus-ring;
+  }
+
+  /* Outline Button */
+  .btn-outline {
+    @apply bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-primary-foreground px-6 py-3 rounded-md font-medium transition-all duration-200 ring-focus-ring;
+  }
+
+  /* Ghost Button */
+  .btn-ghost {
+    @apply bg-transparent text-foreground hover:bg-muted px-6 py-3 rounded-md font-medium transition-colors duration-200 ring-focus-ring;
+  }
+
+  /* Input Field */
+  .input {
+    @apply bg-input-background text-input-text border border-input-border hover:border-input-border-hover focus:border-input-border-focus placeholder:text-input-placeholder px-4 py-2.5 rounded-md transition-colors duration-200 ring-focus-ring;
+  }
+
+  /* Card */
+  .card {
+    @apply bg-surface text-surface-foreground border border-border rounded-lg shadow-sm p-6;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-new {
+    @apply bg-success-subtle text-success border border-success;
+  }
+
+  .badge-sale {
+    @apply bg-destructive-subtle text-destructive border border-destructive;
+  }
+
+  .badge-limited {
+    @apply bg-accent-subtle text-accent border border-accent;
   }
 }
 

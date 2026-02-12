@@ -5,149 +5,221 @@
  * All colors use warm undertones and controlled saturation for elegance.
  */
 
+:root,
 :root[data-theme="light"] {
-  /* ========================================
+   /* ========================================
      PRIMARY (Brand Color)
      Rich chocolate brown — main CTAs, branding
      ======================================== */
-  --primary: 79 52 36; /* #4f3424 */
-  --primary-foreground: 250 248 246; /* #faf8f6 */
-  --primary-hover: 98 66 47; /* #62422f - 10% lighter */
-  --primary-active: 63 42 29; /* #3f2a1d - 8% darker */
-  --primary-subtle: 235 228 223; /* #ebe4df - very light tint for backgrounds */
+   --primary: 79 52 36;
+   /* #4f3424 */
+   --primary-foreground: 250 248 246;
+   /* #faf8f6 */
+   --primary-hover: 98 66 47;
+   /* #62422f - 10% lighter */
+   --primary-active: 63 42 29;
+   /* #3f2a1d - 8% darker */
+   --primary-subtle: 235 228 223;
+   /* #ebe4df - very light tint for backgrounds */
 
-  /* ========================================
+   /* ========================================
      SECONDARY (Supporting Actions)
      Warm taupe — secondary CTAs, less prominent actions
      ======================================== */
-  --secondary: 139 115 95; /* #8b735f */
-  --secondary-foreground: 250 248 246; /* #faf8f6 */
-  --secondary-hover: 158 132 110; /* #9e846e - lighter */
-  --secondary-active: 122 100 83; /* #7a6453 - darker */
-  --secondary-subtle: 242 238 234; /* #f2eeea */
+   --secondary: 139 115 95;
+   /* #8b735f */
+   --secondary-foreground: 250 248 246;
+   /* #faf8f6 */
+   --secondary-hover: 158 132 110;
+   /* #9e846e - lighter */
+   --secondary-active: 122 100 83;
+   /* #7a6453 - darker */
+   --secondary-subtle: 242 238 234;
+   /* #f2eeea */
 
-  /* ========================================
+   /* ========================================
      ACCENT (Highlights & Special Elements)
      Muted cognac — strategic highlights, badges, premium labels
      ======================================== */
-  --accent: 184 130 74; /* #b8824a */
-  --accent-foreground: 255 255 255; /* #ffffff */
-  --accent-hover: 201 149 93; /* #c9955d - lighter */
-  --accent-active: 165 108 58; /* #a56c3a - darker */
-  --accent-subtle: 245 239 231; /* #f5efe7 */
+   --accent: 184 130 74;
+   /* #b8824a */
+   --accent-foreground: 255 255 255;
+   /* #ffffff */
+   --accent-hover: 201 149 93;
+   /* #c9955d - lighter */
+   --accent-active: 165 108 58;
+   /* #a56c3a - darker */
+   --accent-subtle: 245 239 231;
+   /* #f5efe7 */
 
-  /* ========================================
+   /* ========================================
      BACKGROUND & SURFACES
      Warm neutral layers for depth and hierarchy
      ======================================== */
-  --background: 250 248 246; /* #faf8f6 - soft cream base */
-  --foreground: 37 30 26; /* #251e1a - warm near-black for text */
-  
-  --surface: 255 255 255; /* #ffffff - pure white for cards */
-  --surface-foreground: 37 30 26; /* #251e1a */
-  
-  --muted: 242 238 234; /* #f2eeea - subtle background areas */
-  --muted-foreground: 89 73 61; /* #59493d - muted text */
-  
-  --subtle: 247 244 241; /* #f7f4f1 - very subtle backgrounds */
+   --background: 250 248 246;
+   /* #faf8f6 - soft cream base */
+   --foreground: 37 30 26;
+   /* #251e1a - warm near-black for text */
 
-  /* ========================================
+   --surface: 255 255 255;
+   /* #ffffff - pure white for cards */
+   --surface-foreground: 37 30 26;
+   /* #251e1a */
+
+   --muted: 242 238 234;
+   /* #f2eeea - subtle background areas */
+   --muted-foreground: 89 73 61;
+   /* #59493d - muted text */
+
+   --subtle: 247 244 241;
+   /* #f7f4f1 - very subtle backgrounds */
+
+   /* ========================================
      BORDERS & DIVIDERS
      Low-contrast, warm-toned separators
      ======================================== */
-  --border: 229 220 212; /* #e5dcd4 - default border */
-  --border-subtle: 240 235 230; /* #f0ebe6 - very light border */
-  --border-strong: 205 192 181; /* #cdc0b5 - emphasized border */
+   --border: 229 220 212;
+   /* #e5dcd4 - default border */
+   --border-subtle: 240 235 230;
+   /* #f0ebe6 - very light border */
+   --border-strong: 205 192 181;
+   /* #cdc0b5 - emphasized border */
 
-  /* ========================================
+   /* ========================================
      TEXT HIERARCHY
      Warm grays for reading comfort
      ======================================== */
-  --text-primary: 37 30 26; /* #251e1a - main body text */
-  --text-secondary: 89 73 61; /* #59493d - secondary text */
-  --text-tertiary: 139 122 108; /* #8b7a6c - subtle text, captions */
-  --text-disabled: 189 178 168; /* #bdb2a8 - disabled state */
+   --text-primary: 37 30 26;
+   /* #251e1a - main body text */
+   --text-secondary: 89 73 61;
+   /* #59493d - secondary text */
+   --text-tertiary: 139 122 108;
+   /* #8b7a6c - subtle text, captions */
+   --text-disabled: 189 178 168;
+   /* #bdb2a8 - disabled state */
 
-  /* ========================================
+   /* ========================================
      SEMANTIC STATES
      Success, error, warning, info with premium aesthetic
      ======================================== */
-  
-  /* Success — Forest green with brown undertones */
-  --success: 90 108 75; /* #5a6c4b */
-  --success-foreground: 255 255 255; /* #ffffff */
-  --success-hover: 107 128 91; /* #6b805b */
-  --success-active: 72 86 60; /* #48563c */
-  --success-subtle: 239 242 236; /* #eff2ec */
 
-  /* Destructive/Error — Muted brick red */
-  --destructive: 166 77 58; /* #a64d3a */
-  --destructive-foreground: 255 255 255; /* #ffffff */
-  --destructive-hover: 188 95 75; /* #bc5f4b */
-  --destructive-active: 144 61 46; /* #903d2e */
-  --destructive-subtle: 247 237 234; /* #f7edea */
+   /* Success — Forest green with brown undertones */
+   --success: 90 108 75;
+   /* #5a6c4b */
+   --success-foreground: 255 255 255;
+   /* #ffffff */
+   --success-hover: 107 128 91;
+   /* #6b805b */
+   --success-active: 72 86 60;
+   /* #48563c */
+   --success-subtle: 239 242 236;
+   /* #eff2ec */
 
-  /* Warning — Warm amber */
-  --warning: 196 144 96; /* #c49060 */
-  --warning-foreground: 255 255 255; /* #ffffff */
-  --warning-hover: 210 161 114; /* #d2a172 */
-  --warning-active: 176 122 78; /* #b07a4e */
-  --warning-subtle: 248 243 237; /* #f8f3ed */
+   /* Destructive/Error — Muted brick red */
+   --destructive: 166 77 58;
+   /* #a64d3a */
+   --destructive-foreground: 255 255 255;
+   /* #ffffff */
+   --destructive-hover: 188 95 75;
+   /* #bc5f4b */
+   --destructive-active: 144 61 46;
+   /* #903d2e */
+   --destructive-subtle: 247 237 234;
+   /* #f7edea */
 
-  /* Info — Muted slate blue */
-  --info: 92 106 122; /* #5c6a7a */
-  --info-foreground: 255 255 255; /* #ffffff */
-  --info-hover: 112 127 144; /* #707f90 */
-  --info-active: 74 85 98; /* #4a5562 */
-  --info-subtle: 238 241 244; /* #eef1f4 */
+   /* Warning — Warm amber */
+   --warning: 196 144 96;
+   /* #c49060 */
+   --warning-foreground: 255 255 255;
+   /* #ffffff */
+   --warning-hover: 210 161 114;
+   /* #d2a172 */
+   --warning-active: 176 122 78;
+   /* #b07a4e */
+   --warning-subtle: 248 243 237;
+   /* #f8f3ed */
 
-  /* ========================================
+   /* Info — Muted slate blue */
+   --info: 92 106 122;
+   /* #5c6a7a */
+   --info-foreground: 255 255 255;
+   /* #ffffff */
+   --info-hover: 112 127 144;
+   /* #707f90 */
+   --info-active: 74 85 98;
+   /* #4a5562 */
+   --info-subtle: 238 241 244;
+   /* #eef1f4 */
+
+   /* ========================================
      INTERACTIVE STATES (General)
      For elements without specific semantic meaning
      ======================================== */
-  --hover-overlay: 0 0 0; /* Black for hover overlays */
-  --hover-overlay-opacity: 0.04; /* Subtle darkening on hover */
-  
-  --active-overlay: 0 0 0; /* Black for active/pressed states */
-  --active-overlay-opacity: 0.08; /* Stronger press feedback */
+   --hover-overlay: 0 0 0;
+   /* Black for hover overlays */
+   --hover-overlay-opacity: 0.04;
+   /* Subtle darkening on hover */
 
-  --focus-ring: 184 130 74; /* #b8824a - accent color for focus rings */
-  --focus-ring-opacity: 0.4; /* Semi-transparent focus indicator */
+   --active-overlay: 0 0 0;
+   /* Black for active/pressed states */
+   --active-overlay-opacity: 0.08;
+   /* Stronger press feedback */
 
-  /* ========================================
+   --focus-ring: 184 130 74;
+   /* #b8824a - accent color for focus rings */
+   --focus-ring-opacity: 0.4;
+   /* Semi-transparent focus indicator */
+
+   /* ========================================
      SHADOWS
      Warm-toned shadows for depth
      ======================================== */
-  --shadow-sm: 0 1px 2px 0 rgb(79 52 36 / 0.05);
-  --shadow: 0 1px 3px 0 rgb(79 52 36 / 0.1), 0 1px 2px -1px rgb(79 52 36 / 0.1);
-  --shadow-md: 0 4px 6px -1px rgb(79 52 36 / 0.1), 0 2px 4px -2px rgb(79 52 36 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(79 52 36 / 0.1), 0 4px 6px -4px rgb(79 52 36 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(79 52 36 / 0.1), 0 8px 10px -6px rgb(79 52 36 / 0.1);
+   --shadow-sm: 0 1px 2px 0 rgb(79 52 36 / 0.05);
+   --shadow: 0 1px 3px 0 rgb(79 52 36 / 0.1), 0 1px 2px -1px rgb(79 52 36 / 0.1);
+   --shadow-md: 0 4px 6px -1px rgb(79 52 36 / 0.1), 0 2px 4px -2px rgb(79 52 36 / 0.1);
+   --shadow-lg: 0 10px 15px -3px rgb(79 52 36 / 0.1), 0 4px 6px -4px rgb(79 52 36 / 0.1);
+   --shadow-xl: 0 20px 25px -5px rgb(79 52 36 / 0.1), 0 8px 10px -6px rgb(79 52 36 / 0.1);
 
-  /* ========================================
+   /* ========================================
      PRODUCT-SPECIFIC
      eCommerce-specific color tokens
      ======================================== */
-  --badge-new: 90 108 75; /* #5a6c4b - success green for new items */
-  --badge-sale: 166 77 58; /* #a64d3a - destructive red for sale items */
-  --badge-limited: 184 130 74; /* #b8824a - accent for limited edition */
-  
-  --price-current: 37 30 26; /* #251e1a - current price */
-  --price-original: 139 122 108; /* #8b7a6c - crossed-out original price */
-  --price-sale: 166 77 58; /* #a64d3a - sale price emphasis */
+   --badge-new: 90 108 75;
+   /* #5a6c4b - success green for new items */
+   --badge-sale: 166 77 58;
+   /* #a64d3a - destructive red for sale items */
+   --badge-limited: 184 130 74;
+   /* #b8824a - accent for limited edition */
 
-  --rating-filled: 196 144 96; /* #c49060 - filled star */
-  --rating-empty: 229 220 212; /* #e5dcd4 - empty star */
+   --price-current: 37 30 26;
+   /* #251e1a - current price */
+   --price-original: 139 122 108;
+   /* #8b7a6c - crossed-out original price */
+   --price-sale: 166 77 58;
+   /* #a64d3a - sale price emphasis */
 
-  /* ========================================
+   --rating-filled: 196 144 96;
+   /* #c49060 - filled star */
+   --rating-empty: 229 220 212;
+   /* #e5dcd4 - empty star */
+
+   /* ========================================
      INPUT & FORM ELEMENTS
      ======================================== */
-  --input-background: 255 255 255; /* #ffffff */
-  --input-border: 229 220 212; /* #e5dcd4 */
-  --input-border-hover: 205 192 181; /* #cdc0b5 */
-  --input-border-focus: 184 130 74; /* #b8824a - accent */
-  --input-text: 37 30 26; /* #251e1a */
-  --input-placeholder: 139 122 108; /* #8b7a6c */
-  --input-disabled-background: 247 244 241; /* #f7f4f1 */
-  --input-disabled-text: 189 178 168; /* #bdb2a8 */
+   --input-background: 255 255 255;
+   /* #ffffff */
+   --input-border: 229 220 212;
+   /* #e5dcd4 */
+   --input-border-hover: 205 192 181;
+   /* #cdc0b5 */
+   --input-border-focus: 184 130 74;
+   /* #b8824a - accent */
+   --input-text: 37 30 26;
+   /* #251e1a */
+   --input-placeholder: 139 122 108;
+   /* #8b7a6c */
+   --input-disabled-background: 247 244 241;
+   /* #f7f4f1 */
+   --input-disabled-text: 189 178 168;
+   /* #bdb2a8 */
 }

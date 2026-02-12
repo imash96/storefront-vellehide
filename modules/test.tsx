@@ -60,13 +60,13 @@ export function ProductCard({
                 {/* Quick Actions - Appear on Hover */}
                 <div className="absolute top-4 right-4 flex flex-col gap-2 translate-x-16 group-hover:translate-x-0 transition-transform duration-300">
                     <button
-                        className="bg-surface/90 backdrop-blur-sm p-2.5 rounded-full hover:bg-accent hover:text-accent-foreground focus-ring transition-colors"
+                        className="bg-surface/90 backdrop-blur-sm p-2.5 rounded-full hover:bg-accent hover:text-accent-foreground ring-focus-ring transition-colors"
                         aria-label="Add to wishlist"
                     >
                         <Heart className="w-5 h-5" />
                     </button>
                     <button
-                        className="bg-surface/90 backdrop-blur-sm p-2.5 rounded-full hover:bg-accent hover:text-accent-foreground focus-ring transition-colors"
+                        className="bg-surface/90 backdrop-blur-sm p-2.5 rounded-full hover:bg-accent hover:text-accent-foreground ring-focus-ring transition-colors"
                         aria-label="Quick view"
                     >
                         <svg
@@ -162,7 +162,7 @@ export function ProductCard({
                 {/* Add to Cart Button */}
                 <button
                     disabled={!inStock}
-                    className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-md font-medium transition-all duration-200 focus-ring ${inStock
+                    className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-md font-medium transition-all duration-200 ring-focus-ring ${inStock
                         ? 'btn-primary'
                         : 'bg-input-disabled-background text-input-disabled-text cursor-not-allowed'
                         }`}
