@@ -1,5 +1,5 @@
 /**
- * globals.css — Main Stylesheet Entry Point
+ * globals.css — Main Stylesheet Entry Point (OPTIMIZED)
  * 
  * This is your primary CSS file for the Next.js app.
  * Import order is critical for proper theme functionality.
@@ -109,6 +109,12 @@
     --color-destructive-active: var(--destructive-active);
     --color-destructive-subtle: var(--destructive-subtle);
 
+    --color-error: var(--error);
+    --color-error-foreground: var(--error-foreground);
+    --color-error-hover: var(--error-hover);
+    --color-error-active: var(--error-active);
+    --color-error-subtle: var(--error-subtle);
+
     --color-warning: var(--warning);
     --color-warning-foreground: var(--warning-foreground);
     --color-warning-hover: var(--warning-hover);
@@ -120,12 +126,6 @@
     --color-info-hover: var(--info-hover);
     --color-info-active: var(--info-active);
     --color-info-subtle: var(--info-subtle);
-
-    --color-error: var(--error);
-    --color-error-foreground: var(--error-foreground);
-    --color-error-hover: var(--error-hover);
-    --color-error-active: var(--error-active);
-    --color-error-subtle: var(--error-subtle);
 
     --color-overlay: var(--overlay);
     --color-overlay-light: var(--overlay-light);
@@ -244,12 +244,6 @@
    Base styles for HTML elements
    ======================================== */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 html {
     /* Prevent font size adjustment on iOS */
     -webkit-text-size-adjust: 100%;
@@ -257,6 +251,10 @@ html {
     scroll-behavior: smooth;
     /* Better text rendering */
     text-rendering: optimizeLegibility;
+    /* Better kerning */
+    font-feature-settings: "kern" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -268,14 +266,15 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
         'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
         sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 
     /* Prevent horizontal scroll */
     overflow-x: hidden;
 
     /* Better line height */
-    line-height: 1.5;
+    line-height: 1.6;
+
+    /* Minimum height for full-page layouts */
+    min-height: 100vh;
 }
 
 /* ========================================
@@ -289,14 +288,26 @@ h3,
 h4,
 h5,
 h6 {
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
     line-height: 1.2;
     color: var(--text-primary);
     font-weight: 600;
 }
 
+h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
 p {
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--text-primary);
 }
 
@@ -314,6 +325,10 @@ a:visited {
     color: var(--link-visited);
 }
 
+a:active {
+    color: var(--link-active);
+}
+
 /* ========================================
    SELECTION COLORS
    Branded text selection
@@ -322,13 +337,11 @@ a:visited {
 ::selection {
     background-color: var(--accent);
     color: var(--accent-foreground);
-    opacity: 0.2;
 }
 
 ::-moz-selection {
     background-color: var(--accent);
     color: var(--accent-foreground);
-    opacity: 0.2;
 }
 
 /* ========================================
@@ -337,22 +350,30 @@ a:visited {
    ======================================== */
 
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
 }
 
 ::-webkit-scrollbar-track {
     background: var(--muted);
+    border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
     background: var(--border-strong);
-    border-radius: 5px;
+    border-radius: 6px;
+    border: 2px solid var(--muted);
     transition: background var(--transition-base);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) var(--muted);
 }
 
 /* ========================================
@@ -363,9 +384,16 @@ a:visited {
 :focus-visible {
     outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
+    border-radius: 4px;
 }
 
 :focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Remove default focus for mouse users */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
     outline: none;
 }
 
@@ -387,10 +415,56 @@ textarea {
    Better image rendering and responsiveness
    ======================================== */
 
-img {
+img,
+picture,
+video,
+canvas,
+svg {
     max-width: 100%;
     height: auto;
     display: block;
+}
+
+/* Better image rendering */
+img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* ========================================
+   FORM ELEMENTS RESET
+   Consistent form styling across browsers
+   ======================================== */
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+input,
+textarea,
+select {
+    background-color: transparent;
+}
+
+/* Remove number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
 }
 
 /* ========================================
@@ -408,6 +482,15 @@ img {
     .no-print {
         display: none !important;
     }
+
+    a {
+        color: black !important;
+        text-decoration: underline !important;
+    }
+
+    * {
+        box-shadow: none !important;
+    }
 }
 
 /* ========================================
@@ -424,6 +507,13 @@ img {
 }
 
 @media (min-width: 640px) {
+    .container-custom {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
     .container-custom {
         padding-left: 2rem;
         padding-right: 2rem;
@@ -473,6 +563,55 @@ img {
     }
 }
 
+/* Pulse animation for loading states */
+.pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Fade in animation */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Slide up animation */
+.slide-up {
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 /* ========================================
    UTILITY CLASS EXTENSIONS
    Additional utilities for common patterns
@@ -482,7 +621,7 @@ img {
 
     /* Focus Ring Utility */
     .ring-focus-ring {
-        @apply outline-none ring-2 ring-focus-ring/40;
+        @apply outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
     }
 
     /* Interactive Overlay Utilities */
@@ -497,6 +636,7 @@ img {
         background: var(--hover-overlay);
         opacity: 0;
         transition: opacity var(--transition-fast);
+        pointer-events: none;
     }
 
     .hover-overlay:hover::before {
@@ -532,6 +672,15 @@ img {
     .product-card-hover {
         @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
     }
+
+    /* Smooth appearance */
+    .smooth-appear {
+        @apply opacity-0 translate-y-4 transition-all duration-500;
+    }
+
+    .smooth-appear.visible {
+        @apply opacity-100 translate-y-0;
+    }
 }
 
 /* ========================================
@@ -543,37 +692,37 @@ img {
 
     /* PRIMARY BUTTON */
     .btn-primary {
-        @apply bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active px-6 py-3 rounded-md font-medium transition-colors duration-200 ring-focus-ring;
+        @apply bg-button-primary text-button-primary-foreground hover:bg-button-primary-hover active:bg-button-primary-active disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
     }
 
     /* SECONDARY BUTTON */
     .btn-secondary {
-        @apply bg-secondary text-secondary-foreground hover:bg-secondary-hover active:bg-secondary-active px-6 py-3 rounded-md font-medium transition-colors duration-200 ring-focus-ring;
+        @apply bg-button-secondary text-button-secondary-foreground hover:bg-button-secondary-hover active:bg-button-secondary-active disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
     }
 
     /* ACCENT BUTTON */
     .btn-accent {
-        @apply bg-accent text-accent-foreground hover:bg-accent-hover active:bg-accent-active px-6 py-3 rounded-md font-medium transition-colors duration-200 ring-focus-ring;
+        @apply bg-button-accent text-button-accent-foreground hover:bg-button-accent-hover active:bg-button-accent-active disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
     }
 
     /* OUTLINE BUTTON */
     .btn-outline {
-        @apply bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-primary-foreground px-6 py-3 rounded-md font-medium transition-all duration-200 ring-focus-ring;
+        @apply bg-button-outline text-button-outline-foreground border-2 border-button-outline-border hover:bg-button-outline-hover hover:text-button-outline-hover-foreground disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
     }
 
     /* GHOST BUTTON */
     .btn-ghost {
-        @apply bg-transparent text-foreground hover:bg-muted active:bg-muted-hover px-6 py-3 rounded-md font-medium transition-colors duration-200 ring-focus-ring;
+        @apply bg-button-ghost text-button-ghost-foreground hover:bg-button-ghost-hover active:bg-button-ghost-active disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
     }
 
     /* INPUT FIELD */
     .input {
-        @apply bg-input-background text-input-text border border-input-border hover:border-input-border-hover focus:border-input-border-focus placeholder:text-input-placeholder px-4 py-2.5 rounded-md transition-colors duration-200 ring-focus-ring outline-none;
+        @apply bg-input-background text-input-text border border-input-border hover:border-input-border-hover focus:border-input-border-focus focus:ring-2 focus:ring-focus-ring/20 placeholder:text-input-placeholder disabled:bg-input-disabled-background disabled:text-input-disabled-text disabled:border-input-disabled-border disabled:cursor-not-allowed px-4 py-2.5 rounded-md transition-all duration-200 outline-none;
     }
 
     /* CARD */
     .card {
-        @apply bg-surface text-surface-foreground border border-border rounded-lg shadow-sm p-6;
+        @apply bg-card text-card-foreground border border-card-border rounded-lg shadow-sm p-6 transition-colors duration-200;
     }
 
     /* BADGE */
@@ -582,15 +731,58 @@ img {
     }
 
     .badge-new {
-        @apply bg-success-subtle text-success border border-success;
+        @apply bg-badge-new text-badge-new-foreground px-2.5 py-1 rounded text-xs font-semibold uppercase tracking-wide;
     }
 
     .badge-sale {
-        @apply bg-destructive-subtle text-destructive border border-destructive;
+        @apply bg-badge-sale text-badge-sale-foreground px-2.5 py-1 rounded text-xs font-bold;
     }
 
     .badge-limited {
-        @apply bg-accent-subtle text-accent border border-accent;
+        @apply bg-badge-limited text-badge-limited-foreground px-2.5 py-1 rounded text-xs font-medium;
+    }
+
+    /* DIVIDER */
+    .divider {
+        @apply h-px bg-divider my-4;
+    }
+
+    .divider-strong {
+        @apply h-px bg-divider-strong my-4;
+    }
+
+    /* SECTION SPACING */
+    .section-spacing {
+        @apply py-12 md:py-16 lg:py-20;
+    }
+
+    /* GLASS EFFECT */
+    .glass {
+        @apply bg-surface/80 backdrop-blur-md border border-border;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY IMPROVEMENTS
+   ======================================== */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --border: var(--border-strong);
     }
 }
 
