@@ -15,12 +15,11 @@
     "incremental": true,
     "plugins": [ { "name": "next" } ],
     "paths": {
+      "@/css/*": [ "./css/*" ],
       "@/icon/*": [ "./icon/*" ],
-      "@/JSON/*": [ "./JSON/*" ],
       "@/layout/*": [ "./layout/*" ],
       "@lib/*": [ "./lib/*" ],
       "@module/*": [ "./module/*" ],
-      "@/css/*": [ "./css/*" ],
       "@/types/*": [ "./types/*" ]
     }
   },

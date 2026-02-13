@@ -68,18 +68,38 @@
   --color-accent-subtle: rgb(var(--accent-subtle));
 
   /* Background & Surfaces */
-  --color-background: rgb(var(--background));
-  --color-foreground: rgb(var(--foreground));
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
+  --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-foreground-tertiary: var(--foreground-tertiary);
   --color-surface: rgb(var(--surface));
   --color-surface-foreground: rgb(var(--surface-foreground));
   --color-muted: rgb(var(--muted));
   --color-muted-foreground: rgb(var(--muted-foreground));
+  --color-muted-hover: var(--muted-hover);
   --color-subtle: rgb(var(--subtle));
+
+  /* Card */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-card-hover: var(--card-hover);
+  --color-card-border: var(--card-border);
+
+  /* Popover */
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover-border: var(--popover-border);
 
   /* Borders */
   --color-border: rgb(var(--border));
   --color-border-subtle: rgb(var(--border-subtle));
   --color-border-strong: rgb(var(--border-strong));
+
+  /* Divider */
+  --color-divider: var(--divider);
+  --color-divider-strong: var(--divider-strong);
 
   /* Text Hierarchy */
   --color-text-primary: rgb(var(--text-primary));
@@ -112,6 +132,15 @@
   --color-info-active: rgb(var(--info-active));
   --color-info-subtle: rgb(var(--info-subtle));
 
+  --color-error: var(--error);
+  --color-error-foreground: var(--error-foreground);
+  --color-error-hover: rgb(var(--error-hover));
+  --color-error-active: rgb(var(--error-active));
+  --color-error-subtle: var(--error-subtle);
+
+  --color-overlay: var(--overlay);
+  --color-overlay-light: var(--overlay-light);
+
   /* Product-Specific Colors */
   --color-badge-new: rgb(var(--badge-new));
   --color-badge-sale: rgb(var(--badge-sale));
@@ -120,11 +149,20 @@
   --color-price-current: rgb(var(--price-current));
   --color-price-original: rgb(var(--price-original));
   --color-price-sale: rgb(var(--price-sale));
+  --color-price-save: var(--price-save);
 
   --color-rating-filled: rgb(var(--rating-filled));
   --color-rating-empty: rgb(var(--rating-empty));
 
+  --color-link: var(--link);
+  --color-link-hover: var(--link-hover);
+  --color-link-foreground: var(--link-foreground);
+  --color-link-visited: var(--link-visited);
+
   /* Input & Form Elements */
+  --color-input: var(--input);
+  --color-input-focus: var(--input-focus);
+
   --color-input-background: rgb(var(--input-background));
   --color-input-border: rgb(var(--input-border));
   --color-input-border-hover: rgb(var(--input-border-hover));
@@ -135,7 +173,39 @@
   --color-input-disabled-text: rgb(var(--input-disabled-text));
 
   /* Focus Ring */
+  --color-ring: var(--ring);
+  --color-ring-offset: var(--ring-offset);
   --color-focus-ring: rgb(var(--focus-ring));
+
+  /* Buttons */
+  --color-button-primary: var(--button-primary);
+  --color-button-primary-foreground: var(--button-primary-foreground);
+  --color-button-primary-hover: var(--button-primary-hover);
+  --color-button-secondary: var(--button-secondary);
+  --color-button-secondary-foreground: var(--button-secondary-foreground);
+  --color-button-secondary-hover: var(--button-secondary-hover);
+  --color-button-destructive: var(--button-destructive);
+  --color-button-destructive-foreground: var(--button-destructive-foreground);
+  --color-button-destructive-hover: var(--button-destructive-hover);
+  --color-button-badge: var(--button-badge);
+  --color-button-badge-foreground: var(--button-badge-foreground);
+  --color-button-cart: var(--button-cart);
+  --color-button-cart-foreground: var(--button-cart-foreground);
+  --color-button-wishlist: var(--button-wishlist);
+  --color-button-wishlist-foreground: var(--button-wishlist-foreground);
+
+  /* Neutral scale */
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-950: var(--neutral-950);
 
   /* ========================================
      BOX SHADOWS

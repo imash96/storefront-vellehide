@@ -1,4 +1,4 @@
-import { Alert, Newsletter, ProductCard, ProductCardProps, ProductSkeleton } from "../modules/test";
+import { Alert, Newsletter, ProductCard, ProductCardProps, ProductSkeleton } from "@module/test";
 
 export default function ProductsPage() {
   const products = [

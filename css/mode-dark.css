@@ -6,218 +6,287 @@
  */
 
 :root[data-theme="dark"] {
-   /* ========================================
+  /* ========================================
      PRIMARY (Brand Color)
      Elevated cognac brown — luxurious and warm for dark backgrounds
      ======================================== */
-   --primary: 122 81 58;
-   /* #7a513a */
-   --primary-foreground: 250 248 246;
-   /* #faf8f6 */
-   --primary-hover: 143 102 80;
-   /* #8f6650 - lighter */
-   --primary-active: 101 66 47;
-   /* #65422f - darker */
-   --primary-subtle: 41 31 25;
-   /* #291f19 - very dark tint */
+  --primary: 122 81 58;
+  /* #7a513a */
+  --primary-foreground: 250 248 246;
+  /* #faf8f6 */
+  --primary-hover: 143 102 80;
+  /* #8f6650 - lighter */
+  --primary-active: 101 66 47;
+  /* #65422f - darker */
+  --primary-subtle: 41 31 25;
+  /* #291f19 - very dark tint */
 
-   /* ========================================
+  /* ========================================
      SECONDARY (Supporting Actions)
      Warm taupe — refined secondary elements
      ======================================== */
-   --secondary: 158 132 110;
-   /* #9e846e */
-   --secondary-foreground: 26 22 18;
-   /* #1a1612 */
-   --secondary-hover: 176 150 127;
-   /* #b0967f - lighter */
-   --secondary-active: 139 115 95;
-   /* #8b735f - darker */
-   --secondary-subtle: 39 34 29;
-   /* #27221d */
+  --secondary: 158 132 110;
+  /* #9e846e */
+  --secondary-foreground: 26 22 18;
+  /* #1a1612 */
+  --secondary-hover: 176 150 127;
+  /* #b0967f - lighter */
+  --secondary-active: 139 115 95;
+  /* #8b735f - darker */
+  --secondary-subtle: 39 34 29;
+  /* #27221d */
 
-   /* ========================================
+  /* ========================================
      ACCENT (Highlights & Special Elements)
      Bright cognac — stands out beautifully on dark backgrounds
      ======================================== */
-   --accent: 201 149 93;
-   /* #c9955d */
-   --accent-foreground: 26 22 18;
-   /* #1a1612 - dark text for contrast */
-   --accent-hover: 218 169 115;
-   /* #daa973 - lighter */
-   --accent-active: 184 130 74;
-   /* #b8824a - darker */
-   --accent-subtle: 43 35 27;
-   /* #2b231b */
+  --accent: 201 149 93;
+  /* #c9955d */
+  --accent-foreground: 26 22 18;
+  /* #1a1612 - dark text for contrast */
+  --accent-hover: 218 169 115;
+  /* #daa973 - lighter */
+  --accent-active: 184 130 74;
+  /* #b8824a - darker */
+  --accent-subtle: 43 35 27;
+  /* #2b231b */
 
-   /* ========================================
+  /* ========================================
      BACKGROUND & SURFACES
      Warm dark charcoals for sophisticated depth
      ======================================== */
-   --background: 26 22 18;
-   /* #1a1612 - deep warm charcoal */
-   --foreground: 245 242 238;
-   /* #f5f2ee - warm off-white */
+  --background: 26 22 18;
+  /* #1a1612 - deep warm charcoal */
+  --background-secondary: oklch(21% 0.018 40);
+  --background-tertiary: oklch(24% 0.02 40);
+  --foreground: 245 242 238;
+  /* #f5f2ee - warm off-white */
+  --foreground-secondary: oklch(78% 0.015 50);
+  --foreground-tertiary: oklch(65% 0.02 50);
+  --surface: 37 32 27;
+  /* #25201b - elevated surface */
+  --surface-foreground: 245 242 238;
+  /* #f5f2ee */
+  --muted: 48 42 36;
+  /* #302a24 - muted backgrounds */
+  --muted-foreground: 179 168 157;
+  /* #b3a89d - muted text */
+  --muted-hover: oklch(28% 0.022 45);
+  --subtle: 31 27 23;
+  /* #1f1b17 - very subtle backgrounds */
 
-   --surface: 37 32 27;
-   /* #25201b - elevated surface */
-   --surface-foreground: 245 242 238;
-   /* #f5f2ee */
+  /* Card */
+  --card: oklch(20% 0.016 40);
+  --card-foreground: oklch(95% 0.008 50);
+  --card-hover: oklch(23% 0.018 40);
+  --card-border: oklch(30% 0.025 45);
 
-   --muted: 48 42 36;
-   /* #302a24 - muted backgrounds */
-   --muted-foreground: 179 168 157;
-   /* #b3a89d - muted text */
+  /* Popover */
+  --popover: oklch(20% 0.016 40);
+  --popover-foreground: oklch(95% 0.008 50);
+  --popover-border: oklch(32% 0.028 45);
 
-   --subtle: 31 27 23;
-   /* #1f1b17 - very subtle backgrounds */
-
-   /* ========================================
+  /* ========================================
      BORDERS & DIVIDERS
      Subtle warm-toned separators for dark mode
      ======================================== */
-   --border: 58 51 44;
-   /* #3a332c - default border */
-   --border-subtle: 44 38 33;
-   /* #2c2621 - very subtle border */
-   --border-strong: 79 69 60;
-   /* #4f453c - emphasized border */
+  --border: 58 51 44;
+  /* #3a332c - default border */
+  --border-subtle: 44 38 33;
+  /* #2c2621 - very subtle border */
+  --border-strong: 79 69 60;
+  /* #4f453c - emphasized border */
 
-   /* ========================================
+  /* Divider */
+  --divider: oklch(30% 0.025 45);
+  --divider-strong: oklch(38% 0.035 45);
+
+  /* ========================================
      TEXT HIERARCHY
      Reduced contrast for comfortable reading
      ======================================== */
-   --text-primary: 245 242 238;
-   /* #f5f2ee - main body text */
-   --text-secondary: 204 196 186;
-   /* #ccc4ba - secondary text */
-   --text-tertiary: 158 148 137;
-   /* #9e9489 - subtle text, captions */
-   --text-disabled: 89 81 72;
-   /* #595148 - disabled state */
+  --text-primary: 245 242 238;
+  /* #f5f2ee - main body text */
+  --text-secondary: 204 196 186;
+  /* #ccc4ba - secondary text */
+  --text-tertiary: 158 148 137;
+  /* #9e9489 - subtle text, captions */
+  --text-disabled: 89 81 72;
+  /* #595148 - disabled state */
 
-   /* ========================================
+  /* ========================================
      SEMANTIC STATES
      Adjusted for dark backgrounds with maintained warmth
      ======================================== */
 
-   /* Success — Brighter forest green for visibility */
-   --success: 120 145 100;
-   /* #789164 */
-   --success-foreground: 26 22 18;
-   /* #1a1612 */
-   --success-hover: 141 167 120;
-   /* #8da778 */
-   --success-active: 100 121 83;
-   /* #647953 */
-   --success-subtle: 32 37 28;
-   /* #20251c */
+  /* Success — Brighter forest green for visibility */
+  --success: 120 145 100;
+  /* #789164 */
+  --success-foreground: 26 22 18;
+  /* #1a1612 */
+  --success-hover: 141 167 120;
+  /* #8da778 */
+  --success-active: 100 121 83;
+  /* #647953 */
+  --success-subtle: 32 37 28;
+  /* #20251c */
 
-   /* Destructive/Error — Vibrant brick red */
-   --destructive: 210 100 80;
-   /* #d26450 */
-   --destructive-foreground: 26 22 18;
-   /* #1a1612 */
-   --destructive-hover: 229 124 105;
-   /* #e57c69 */
-   --destructive-active: 188 83 66;
-   /* #bc5342 */
-   --destructive-subtle: 42 28 25;
-   /* #2a1c19 */
+  /* Destructive/Error — Vibrant brick red */
+  --destructive: 210 100 80;
+  /* #d26450 */
+  --destructive-foreground: 26 22 18;
+  /* #1a1612 */
+  --destructive-hover: 229 124 105;
+  /* #e57c69 */
+  --destructive-active: 188 83 66;
+  /* #bc5342 */
+  --destructive-subtle: 42 28 25;
+  /* #2a1c19 */
 
-   /* Warning — Bright amber for attention */
-   --warning: 219 170 117;
-   /* #dbaa75 */
-   --warning-foreground: 26 22 18;
-   /* #1a1612 */
-   --warning-hover: 232 188 140;
-   /* #e8bc8c */
-   --warning-active: 196 144 96;
-   /* #c49060 */
-   --warning-subtle: 43 36 27;
-   /* #2b241b */
+  /* Warning — Bright amber for attention */
+  --warning: 219 170 117;
+  /* #dbaa75 */
+  --warning-foreground: 26 22 18;
+  /* #1a1612 */
+  --warning-hover: 232 188 140;
+  /* #e8bc8c */
+  --warning-active: 196 144 96;
+  /* #c49060 */
+  --warning-subtle: 43 36 27;
+  /* #2b241b */
 
-   /* Info — Lighter slate blue */
-   --info: 129 148 169;
-   /* #8194a9 */
-   --info-foreground: 26 22 18;
-   /* #1a1612 */
-   --info-hover: 152 169 187;
-   /* #98a9bb */
-   --info-active: 108 126 145;
-   /* #6c7e91 */
-   --info-subtle: 28 31 35;
-   /* #1c1f23 */
+  /* Info — Lighter slate blue */
+  --info: 129 148 169;
+  /* #8194a9 */
+  --info-foreground: 26 22 18;
+  /* #1a1612 */
+  --info-hover: 152 169 187;
+  /* #98a9bb */
+  --info-active: 108 126 145;
+  /* #6c7e91 */
+  --info-subtle: 28 31 35;
+  /* #1c1f23 */
 
-   /* ========================================
+  --error: oklch(52% 0.13 25);
+  --error-foreground: oklch(15% 0.02 25);
+  --error-hover: oklch(28% 0.065 25);
+  --error-active: oklch(28% 0.065 25);
+  --error-subtle: oklch(28% 0.065 25);
+
+  /* Overlay */
+  --overlay: oklch(5% 0.01 40 / 0.7);
+  --overlay-light: oklch(5% 0.01 40 / 0.4);
+
+  /* ========================================
      INTERACTIVE STATES (General)
+     For elements without specific semantic meaning
      ======================================== */
-   --hover-overlay: 255 255 255;
-   /* White for hover on dark */
-   --hover-overlay-opacity: 0.06;
-   /* Subtle lightening on hover */
+  --hover-overlay: 255 255 255;
+  /* White for hover on dark */
+  --hover-overlay-opacity: 0.06;
+  /* Subtle lightening on hover */
 
-   --active-overlay: 255 255 255;
-   /* White for active states */
-   --active-overlay-opacity: 0.12;
-   /* Stronger press feedback */
+  --active-overlay: 255 255 255;
+  /* White for active states */
+  --active-overlay-opacity: 0.12;
+  /* Stronger press feedback */
 
-   --focus-ring: 201 149 93;
-   /* #c9955d - bright accent for visibility */
-   --focus-ring-opacity: 0.5;
-   /* More visible in dark mode */
-
-   /* ========================================
-     SHADOWS
-     Deeper shadows with warm tones
-     ======================================== */
-   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-   --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
-   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
-   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
-
-   /* ========================================
+  /* ========================================
      PRODUCT-SPECIFIC
      Enhanced visibility for dark mode
      ======================================== */
-   --badge-new: 120 145 100;
-   /* #789164 - success green */
-   --badge-sale: 210 100 80;
-   /* #d26450 - destructive red */
-   --badge-limited: 201 149 93;
-   /* #c9955d - accent */
+  --badge-new: 120 145 100;
+  /* #789164 - success green */
+  --badge-sale: 210 100 80;
+  /* #d26450 - destructive red */
+  --badge-limited: 201 149 93;
+  /* #c9955d - accent */
 
-   --price-current: 245 242 238;
-   /* #f5f2ee - current price */
-   --price-original: 158 148 137;
-   /* #9e9489 - crossed-out original price */
-   --price-sale: 210 100 80;
-   /* #d26450 - sale price emphasis */
+  --price-current: 245 242 238;
+  /* #f5f2ee - current price */
+  --price-original: 158 148 137;
+  /* #9e9489 - crossed-out original price */
+  --price-sale: 210 100 80;
+  /* #d26450 - sale price emphasis */
+  --price-save: oklch(52% 0.09 140);
 
-   --rating-filled: 219 170 117;
-   /* #dbaa75 - filled star */
-   --rating-empty: 58 51 44;
-   /* #3a332c - empty star */
+  --rating-filled: 219 170 117;
+  /* #dbaa75 - filled star */
+  --rating-empty: 58 51 44;
+  /* #3a332c - empty star */
 
-   /* ========================================
+  /* Link */
+  --link: oklch(55% 0.09 45);
+  --link-hover: oklch(65% 0.1 45);
+  --link-foreground: oklch(55% 0.09 45);
+  --link-visited: oklch(60% 0.08 320);
+
+  /* ========================================
      INPUT & FORM ELEMENTS
      ======================================== */
-   --input-background: 37 32 27;
-   /* #25201b - elevated surface */
-   --input-border: 58 51 44;
-   /* #3a332c */
-   --input-border-hover: 79 69 60;
-   /* #4f453c */
-   --input-border-focus: 201 149 93;
-   /* #c9955d - accent */
-   --input-text: 245 242 238;
-   /* #f5f2ee */
-   --input-placeholder: 158 148 137;
-   /* #9e9489 */
-   --input-disabled-background: 31 27 23;
-   /* #1f1b17 */
-   --input-disabled-text: 89 81 72;
-   /* #595148 */
+  --input: oklch(28% 0.022 45);
+  --input-focus: oklch(55% 0.09 45);
+  --input-background: 37 32 27;
+  /* #25201b - elevated surface */
+  --input-border: 58 51 44;
+  /* #3a332c */
+  --input-border-hover: 79 69 60;
+  /* #4f453c */
+  --input-border-focus: 201 149 93;
+  /* #c9955d - accent */
+  --input-text: 245 242 238;
+  /* #f5f2ee */
+  --input-placeholder: 158 148 137;
+  /* #9e9489 */
+  --input-disabled-background: 31 27 23;
+  /* #1f1b17 */
+  --input-disabled-text: 89 81 72;
+  /* #595148 */
+
+  --ring: oklch(55% 0.09 45);
+  --ring-offset: oklch(18% 0.015 40);
+  --focus-ring: 201 149 93;
+  /* #c9955d - bright accent for visibility */
+  --focus-ring-opacity: 0.5;
+  /* More visible in dark mode */
+
+  /* Buttons */
+  --button-primary: oklch(42% 0.05 42);
+  --button-primary-foreground: oklch(98% 0.01 42);
+  --button-primary-hover: oklch(48% 0.055 42);
+  --button-secondary: oklch(28% 0.022 45);
+  --button-secondary-foreground: oklch(90% 0.01 50);
+  --button-secondary-hover: oklch(32% 0.028 45);
+  --button-destructive: oklch(52% 0.13 25);
+  --button-destructive-foreground: oklch(15% 0.02 25);
+  --button-destructive-hover: oklch(57% 0.14 25);
+  --button-badge: oklch(55% 0.09 45);
+  --button-badge-foreground: oklch(15% 0.02 45);
+  --button-cart: oklch(48% 0.1 140);
+  --button-cart-foreground: oklch(15% 0.02 140);
+  --button-wishlist: oklch(52% 0.13 25);
+  --button-wishlist-foreground: oklch(15% 0.02 25);
+
+  /* Neutral scale */
+  --neutral-50: oklch(15% 0.015 40);
+  --neutral-100: oklch(18% 0.016 40);
+  --neutral-200: oklch(24% 0.02 40);
+  --neutral-300: oklch(32% 0.025 45);
+  --neutral-400: oklch(45% 0.03 45);
+  --neutral-500: oklch(55% 0.035 45);
+  --neutral-600: oklch(65% 0.025 50);
+  --neutral-700: oklch(75% 0.02 50);
+  --neutral-800: oklch(82% 0.015 50);
+  --neutral-900: oklch(90% 0.01 50);
+  --neutral-950: oklch(95% 0.008 50);
+
+  /* ========================================
+     SHADOWS
+     Deeper shadows with warm tones
+     ======================================== */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
 }
