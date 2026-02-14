@@ -305,6 +305,14 @@
         box-sizing: border-box;
     }
 
+    :root {
+        /* Design Token Variables */
+        --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-elegant: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
     /* Root element styles */
     html {
         /* Prevent font size adjustment on iOS */
@@ -820,6 +828,21 @@
 
         100% {
             background-position: -200% 0;
+        }
+    }
+
+    /* Custom Button Styles */
+    .btn-loading-spinner {
+        animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
         }
     }
 
