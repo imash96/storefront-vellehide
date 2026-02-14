@@ -127,6 +127,18 @@ export default function InteractiveTestPage() {
                             >
                                 E-Commerce
                             </button>
+                            <button
+                                onClick={() => {
+                                    setActiveTab('fonts');
+                                    setMobileMenuOpen(false);
+                                }}
+                                className={`w-full px-4 py-3 rounded-md font-medium transition-all text-left ${activeTab === 'fonts'
+                                    ? 'bg-primary text-primary-foreground'
+                                    : 'text-text-secondary hover:text-text-primary hover:bg-muted'
+                                    }`}
+                            >
+                                Fonts
+                            </button>
                         </div>
                     )}
                 </div>
@@ -1017,7 +1029,7 @@ export default function InteractiveTestPage() {
                             <div className="bg-surface border border-border rounded-lg p-4 sm:p-6">
                                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 sm:mb-6">
                                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 w-full sm:w-auto">
-                                        <h2 className="text-lg sm:text-xl font-bold text-text-primary">Artisan Hide</h2>
+                                        <h2 className="text-lg sm:text-xl font-bold text-text-primary">Velle Hide</h2>
                                         <nav className="hidden md:flex items-center gap-4 lg:gap-6">
                                             {['New Arrivals', 'Jackets', 'Coats', 'Blazers', 'Sale'].map((item) => (
                                                 <a
@@ -1149,7 +1161,7 @@ export default function InteractiveTestPage() {
                             <div className="bg-surface border border-border rounded-lg p-6">
                                 <div className="flex items-center justify-between mb-6">
                                     <div className="flex items-center gap-8">
-                                        <h2 className="text-xl font-bold text-text-primary">Artisan Hide</h2>
+                                        <h2 className="text-xl font-bold text-text-primary">Velle Hide</h2>
                                         <nav className="hidden md:flex items-center gap-6">
                                             {['New Arrivals', 'Jackets', 'Coats', 'Blazers', 'Sale'].map((item) => (
                                                 <a
@@ -1281,7 +1293,7 @@ export default function InteractiveTestPage() {
                             <div className="bg-surface border border-border rounded-lg p-6 sm:p-8">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
                                     <div className="space-y-3 sm:space-y-4">
-                                        <h3 className="font-bold text-text-primary text-base sm:text-lg">Artisan Hide</h3>
+                                        <h3 className="font-bold text-text-primary text-base sm:text-lg">Velle Hide</h3>
                                         <p className="text-xs sm:text-sm text-text-secondary">
                                             Premium leather goods crafted with excellence since 2020.
                                         </p>
@@ -1340,7 +1352,7 @@ export default function InteractiveTestPage() {
                                             </li>
                                             <li className="flex items-center gap-2">
                                                 <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                                                hello@artisanhide.com
+                                                hello@vellehide.com
                                             </li>
                                         </ul>
                                     </div>
@@ -1350,7 +1362,7 @@ export default function InteractiveTestPage() {
 
                                 <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
                                     <p className="text-xs sm:text-sm text-text-tertiary text-center sm:text-left">
-                                        © 2026 Artisan Hide. All rights reserved.
+                                        © 2026 Velle Hide. All rights reserved.
                                     </p>
                                     <div className="flex gap-4 sm:gap-6">
                                         <a href="#" className="text-xs sm:text-sm text-text-tertiary hover:text-text-primary transition-colors">
@@ -1380,7 +1392,7 @@ export default function InteractiveTestPage() {
                                     & Inter
                                 </p>
                                 <p className="font-body text-base sm:text-lg leading-relaxed text-text-secondary max-w-2xl mx-auto px-4">
-                                    A distinctive pairing designed for modern artisan brands. Bricolage Grotesque brings characterful personality to headlines with its optical sizing, while Inter ensures crystal-clear readability for all body content.
+                                    A distinctive pairing designed for modern velle brands. Bricolage Grotesque brings characterful personality to headlines with its optical sizing, while Inter ensures crystal-clear readability for all body content.
                                 </p>
                                 <div className="flex flex-wrap justify-center gap-3 pt-4">
                                     <span className="px-4 py-2 bg-accent-subtle text-accent text-sm font-semibold rounded-full font-body">
@@ -1641,7 +1653,7 @@ export default function InteractiveTestPage() {
                                         <p className="font-body text-sm sm:text-base leading-relaxed text-text-secondary">
                                             For body content, we use Inter for optimal readability. Crafted from the finest Italian
                                             leather, this premium jacket combines timeless style with modern craftsmanship. Each piece
-                                            is meticulously hand-finished by master artisans.
+                                            is meticulously hand-finished by master velles.
                                         </p>
                                         <p className="text-sm text-text-secondary mt-2 font-body">
                                             Clean Inter sans-serif for perfect readability
@@ -1704,7 +1716,7 @@ export default function InteractiveTestPage() {
                                         <h3 className="font-heading text-xl sm:text-2xl font-semibold">Description</h3>
                                         <p className="font-body text-sm sm:text-base leading-relaxed text-text-secondary">
                                             Crafted from the finest Italian leather, this premium jacket combines timeless style
-                                            with modern craftsmanship. Each piece is meticulously hand-finished by master artisans
+                                            with modern craftsmanship. Each piece is meticulously hand-finished by master velles
                                             in Florence, ensuring unparalleled quality and attention to detail. The supple leather
                                             develops a beautiful patina over time, making each jacket uniquely yours.
                                         </p>
@@ -1727,7 +1739,7 @@ export default function InteractiveTestPage() {
                                             </li>
                                             <li className="flex items-start gap-2">
                                                 <Check className="w-5 h-5 text-success mt-0.5 shrink-0" />
-                                                <span className="text-text-secondary">Hand-finished by master artisans in Florence</span>
+                                                <span className="text-text-secondary">Hand-finished by master velles in Florence</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -1897,7 +1909,7 @@ export default function InteractiveTestPage() {
                                     <div className="pt-3 border-t border-divider space-y-1">
                                         <p className="text-xs font-semibold text-text-primary font-body">Best For:</p>
                                         <p className="text-xs text-text-tertiary font-body">
-                                            Modern artisan brands, craft focus, $200-600
+                                            Modern velle brands, craft focus, $200-600
                                         </p>
                                     </div>
                                 </div>
@@ -2163,7 +2175,7 @@ export default function InteractiveTestPage() {
                                     <h4 className="font-heading text-lg sm:text-xl font-semibold mb-4">Navigation</h4>
                                     <div className="bg-surface border border-border rounded-lg p-4">
                                         <div className="flex items-center justify-between flex-wrap gap-4">
-                                            <h2 className="font-heading text-xl sm:text-2xl font-bold">Artisan Hide</h2>
+                                            <h2 className="font-heading text-xl sm:text-2xl font-bold">Velle Hide</h2>
                                             <nav className="flex gap-4 sm:gap-6 font-body text-sm sm:text-base font-medium">
                                                 <a href="#" className="text-text-primary hover:text-accent transition-colors">New</a>
                                                 <a href="#" className="text-text-secondary hover:text-text-primary transition-colors">Jackets</a>
@@ -2211,7 +2223,7 @@ export default function InteractiveTestPage() {
                                 <div className="card">
                                     <h4 className="font-heading text-lg sm:text-xl font-semibold mb-4">Footer</h4>
                                     <div className="bg-surface border border-border rounded-lg p-4 sm:p-6 space-y-6">
-                                        <h3 className="font-heading text-xl sm:text-2xl font-bold">Artisan Hide</h3>
+                                        <h3 className="font-heading text-xl sm:text-2xl font-bold">Velle Hide</h3>
                                         <p className="font-body text-sm text-text-secondary max-w-md">
                                             Premium leather goods crafted with modern techniques and timeless soul.
                                             Handmade in Brooklyn since 2020.
@@ -2330,7 +2342,7 @@ export default function InteractiveTestPage() {
                         <section className="space-y-6 sm:space-y-8">
                             <SectionHeader
                                 title="Why Bricolage Grotesque + Inter Works"
-                                subtitle="The perfect pairing for modern artisan brands"
+                                subtitle="The perfect pairing for modern velle brands"
                             />
 
                             <div className="card bg-linear-to-br from-accent-subtle via-background to-success-subtle space-y-6">
@@ -2372,7 +2384,7 @@ export default function InteractiveTestPage() {
                                 <div className="pt-6 border-t border-divider">
                                     <p className="font-body text-sm text-text-secondary text-center max-w-3xl mx-auto">
                                         <strong className="text-text-primary">The Result:</strong> A typography system that positions
-                                        your brand as modern artisan leather goods with soul—not generic minimalism, not stuffy luxury,
+                                        your brand as modern velle leather goods with soul—not generic minimalism, not stuffy luxury,
                                         but contemporary craft with personality. Perfect for brands like yours.
                                     </p>
                                 </div>
