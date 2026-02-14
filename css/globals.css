@@ -44,6 +44,8 @@
 @theme {
     /* COLOR PALETTE - All colors reference CSS variables from theme files */
 
+    --color-*: initial;
+
     /* Primary Colors */
     --color-primary: var(--primary);
     --color-primary-foreground: var(--primary-foreground);
