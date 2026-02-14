@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { Star, Heart, ShoppingCart, Check, X, AlertCircle, Info, ChevronRight, Search, Menu, User, Package, Truck, CreditCard, Eye, Trash2, Plus, Minus, Grid, List, MapPin, Phone, Mail } from 'lucide-react';
 
 export default function InteractiveTestPage() {
-    const [activeTab, setActiveTab] = useState<'colors' | 'components' | 'ecommerce'>('colors');
+    const [activeTab, setActiveTab] = useState<'colors' | 'components' | 'ecommerce' | 'fonts'>('colors');
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const neutralBg: Record<number, string> = {
@@ -75,6 +75,15 @@ export default function InteractiveTestPage() {
                                     }`}
                             >
                                 E-Commerce
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('fonts')}
+                                className={`px-4 py-2 rounded-md font-medium transition-all text-sm lg:text-base ${activeTab === 'fonts'
+                                    ? 'bg-primary text-primary-foreground'
+                                    : 'text-text-secondary hover:text-text-primary hover:bg-muted'
+                                    }`}
+                            >
+                                Fonts
                             </button>
                         </div>
                     </div>
@@ -1350,6 +1359,621 @@ export default function InteractiveTestPage() {
                                         <a href="#" className="text-xs sm:text-sm text-text-tertiary hover:text-text-primary transition-colors">
                                             Terms of Service
                                         </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </>
+                )}
+
+                {/* Fonts Tab Component - Typography Showcase */}
+                {activeTab === 'fonts' && (
+                    <>
+                        {/* Typography Hero */}
+                        <section className="space-y-6 sm:space-y-8">
+                            <div className="text-center space-y-4 py-12">
+                                <p className="text-sm font-medium text-accent tracking-wider uppercase">Typography System</p>
+                                <h1 className="font-heading text-6xl font-extrabold tracking-tighter text-text-primary">
+                                    Montserrat & Inter
+                                </h1>
+                                <p className="font-body text-lg leading-relaxed text-text-secondary max-w-2xl mx-auto">
+                                    A sophisticated pairing designed for premium leather e-commerce. Montserrat brings geometric elegance to headlines, while Inter ensures crystal-clear readability for body content.
+                                </p>
+                            </div>
+                        </section>
+
+                        {/* Font Families */}
+                        <section className="space-y-8">
+                            <SectionHeader
+                                title="Font Families"
+                                subtitle="Primary heading font and body text font"
+                            />
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Montserrat */}
+                                <div className="card space-y-4">
+                                    <div>
+                                        <h3 className="font-heading text-2xl font-bold mb-2">Montserrat</h3>
+                                        <p className="text-sm text-text-tertiary">Primary — Headings, Titles, CTAs</p>
+                                    </div>
+                                    <div className="space-y-3">
+                                        <div className="space-y-1">
+                                            <p className="text-xs text-text-tertiary">Light (300)</p>
+                                            <p className="font-heading text-xl font-light">The quick brown fox jumps</p>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <p className="text-xs text-text-tertiary">Regular (400)</p>
+                                            <p className="font-heading text-xl font-normal">The quick brown fox jumps</p>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <p className="text-xs text-text-tertiary">Medium (500)</p>
+                                            <p className="font-heading text-xl font-medium">The quick brown fox jumps</p>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <p className="text-xs text-text-tertiary">SemiBold (600)</p>
+                                            <p className="font-heading text-xl font-semibold">The quick brown fox jumps</p>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <p className="text-xs text-text-tertiary">Bold (700)</p>
+                                            <p className="font-heading text-xl font-bold">The quick brown fox jumps</p>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <p className="text-xs text-text-tertiary">ExtraBold (800)</p>
+                                            <p className="font-heading text-xl font-extrabold">The quick brown fox jumps</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Inter */}
+                                <div className="card space-y-4">
+                                    <div>
+                                        <h3 className="font-body text-2xl font-bold mb-2">Inter</h3>
+                                        <p className="text-sm text-text-tertiary">Secondary — Body Text, Descriptions</p>
+                                    </div>
+                                    <div className="space-y-3">
+                                        <div className="space-y-1">
+                                            <p className="text-xs text-text-tertiary">Light (300)</p>
+                                            <p className="font-body text-xl font-light">The quick brown fox jumps</p>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <p className="text-xs text-text-tertiary">Regular (400)</p>
+                                            <p className="font-body text-xl font-normal">The quick brown fox jumps</p>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <p className="text-xs text-text-tertiary">Medium (500)</p>
+                                            <p className="font-body text-xl font-medium">The quick brown fox jumps</p>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <p className="text-xs text-text-tertiary">SemiBold (600)</p>
+                                            <p className="font-body text-xl font-semibold">The quick brown fox jumps</p>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <p className="text-xs text-text-tertiary">Bold (700)</p>
+                                            <p className="font-body text-xl font-bold">The quick brown fox jumps</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Type Scale */}
+                        <section className="space-y-8">
+                            <SectionHeader
+                                title="Type Scale (Fluid Typography)"
+                                subtitle="Responsive sizing using CSS clamp()"
+                            />
+
+                            <div className="card space-y-6">
+                                <div className="space-y-4">
+                                    <div className="border-l-4 border-primary pl-4">
+                                        <p className="text-xs text-text-tertiary mb-1">text-6xl (60-72px)</p>
+                                        <h1 className="font-heading text-6xl font-extrabold tracking-tighter">Display Headline</h1>
+                                    </div>
+
+                                    <div className="border-l-4 border-accent pl-4">
+                                        <p className="text-xs text-text-tertiary mb-1">text-5xl (48-60px)</p>
+                                        <h2 className="font-heading text-5xl font-bold tracking-tight">Hero Title</h2>
+                                    </div>
+
+                                    <div className="border-l-4 border-secondary pl-4">
+                                        <p className="text-xs text-text-tertiary mb-1">text-4xl (36-48px)</p>
+                                        <h3 className="font-heading text-4xl font-bold tracking-tight">Page Header</h3>
+                                    </div>
+
+                                    <div className="border-l-4 border-muted pl-4">
+                                        <p className="text-xs text-text-tertiary mb-1">text-3xl (30-36px)</p>
+                                        <h4 className="font-heading text-3xl font-semibold">Section Title</h4>
+                                    </div>
+
+                                    <div className="border-l-4 border-border pl-4">
+                                        <p className="text-xs text-text-tertiary mb-1">text-2xl (24-30px)</p>
+                                        <h5 className="font-heading text-2xl font-semibold">Product Title</h5>
+                                    </div>
+
+                                    <div className="border-l-4 border-border-subtle pl-4">
+                                        <p className="text-xs text-text-tertiary mb-1">text-xl (20-24px)</p>
+                                        <h6 className="font-heading text-xl font-semibold">Card Header</h6>
+                                    </div>
+
+                                    <div className="border-l-4 border-divider pl-4">
+                                        <p className="text-xs text-text-tertiary mb-1">text-lg (18-20px)</p>
+                                        <p className="font-body text-lg leading-relaxed">Large body text for introductions and emphasis</p>
+                                    </div>
+
+                                    <div className="border-l-4 border-divider pl-4">
+                                        <p className="text-xs text-text-tertiary mb-1">text-base (16-17px) - Body Default</p>
+                                        <p className="font-body text-base leading-relaxed">Standard body text for paragraphs, descriptions, and main content. Maintains 16px minimum for accessibility.</p>
+                                    </div>
+
+                                    <div className="border-l-4 border-divider pl-4">
+                                        <p className="text-xs text-text-tertiary mb-1">text-sm (14-15px)</p>
+                                        <p className="font-body text-sm">Small text for labels, captions, and secondary information</p>
+                                    </div>
+
+                                    <div className="border-l-4 border-divider pl-4">
+                                        <p className="text-xs text-text-tertiary mb-1">text-xs (12-13px)</p>
+                                        <p className="font-body text-xs">Extra small for badges, timestamps, and legal text</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Product Page Typography */}
+                        <section className="space-y-8">
+                            <SectionHeader
+                                title="Product Page Typography"
+                                subtitle="Real-world examples of typography in use"
+                            />
+
+                            <div className="card space-y-8">
+                                {/* Product Header */}
+                                <div className="space-y-4">
+                                    <div className="flex items-center gap-2">
+                                        <span className="badge-new">New Arrival</span>
+                                        <span className="badge-sale">-40% OFF</span>
+                                    </div>
+                                    <h1 className="product-title-large">
+                                        Premium Italian Leather Jacket
+                                    </h1>
+                                    <div className="flex items-center gap-3">
+                                        <div className="flex items-center gap-1">
+                                            {[1, 2, 3, 4, 5].map((star) => (
+                                                <Star
+                                                    key={star}
+                                                    className="w-5 h-5 fill-rating-filled text-rating-filled"
+                                                />
+                                            ))}
+                                        </div>
+                                        <span className="text-sm text-text-tertiary">(247 reviews)</span>
+                                    </div>
+                                </div>
+
+                                {/* Price Display */}
+                                <div className="space-y-2">
+                                    <div className="flex items-baseline gap-3">
+                                        <span className="price text-price-current">$449.99</span>
+                                        <span className="text-lg line-through text-price-original">$749.99</span>
+                                        <span className="text-sm font-semibold text-price-save bg-success-subtle px-2 py-1 rounded">
+                                            Save $300
+                                        </span>
+                                    </div>
+                                    <p className="text-sm text-text-tertiary">Tax included. Shipping calculated at checkout.</p>
+                                </div>
+
+                                {/* Product Description */}
+                                <div className="space-y-3">
+                                    <h3 className="font-heading text-xl font-semibold">Description</h3>
+                                    <p className="font-body text-base leading-relaxed text-text-secondary">
+                                        Crafted from the finest Italian leather, this premium jacket combines timeless style with modern craftsmanship. Each piece is meticulously hand-finished by master artisans, ensuring unparalleled quality and attention to detail. The supple leather develops a beautiful patina over time, making each jacket uniquely yours.
+                                    </p>
+                                </div>
+
+                                {/* Features */}
+                                <div className="space-y-3">
+                                    <h3 className="font-heading text-xl font-semibold">Key Features</h3>
+                                    <ul className="space-y-2 font-body text-base text-text-secondary">
+                                        <li className="flex items-start gap-2">
+                                            <Check className="w-5 h-5 text-success mt-0.5 shrink-0" />
+                                            <span>100% genuine Italian leather from certified tanneries</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <Check className="w-5 h-5 text-success mt-0.5 shrink-0" />
+                                            <span>YKK metal zippers for durability and smooth operation</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <Check className="w-5 h-5 text-success mt-0.5 shrink-0" />
+                                            <span>Quilted satin lining for comfort and insulation</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <Check className="w-5 h-5 text-success mt-0.5 shrink-0" />
+                                            <span>Adjustable cuffs and hem for personalized fit</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                {/* Size Selection */}
+                                <div className="space-y-3">
+                                    <label className="font-body text-sm font-medium text-text-primary">
+                                        Size: <span className="font-semibold">Medium</span>
+                                    </label>
+                                    <div className="flex gap-2">
+                                        {['XS', 'S', 'M', 'L', 'XL', '2XL'].map((size) => (
+                                            <button
+                                                key={size}
+                                                className={`px-4 py-2 border-2 font-body font-medium text-sm rounded transition-all ${size === 'M'
+                                                    ? 'border-primary bg-primary text-primary-foreground'
+                                                    : 'border-border hover:border-primary'
+                                                    }`}
+                                            >
+                                                {size}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* CTA Buttons */}
+                                <div className="flex gap-3">
+                                    <button className="btn-primary flex-1 flex items-center justify-center gap-2">
+                                        <ShoppingCart className="w-5 h-5" />
+                                        Add to Cart
+                                    </button>
+                                    <button className="p-3 border-2 border-border hover:border-primary rounded-md transition-all">
+                                        <Heart className="w-5 h-5" />
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Navigation Typography */}
+                        <section className="space-y-8">
+                            <SectionHeader
+                                title="Navigation Typography"
+                                subtitle="Menu, links, and navigation elements"
+                            />
+
+                            <div className="card space-y-6">
+                                {/* Main Navigation */}
+                                <div className="space-y-4">
+                                    <h4 className="font-heading text-lg font-semibold">Main Navigation</h4>
+                                    <nav className="flex flex-wrap gap-6">
+                                        {['New Arrivals', 'Jackets', 'Coats', 'Blazers', 'Accessories', 'Sale'].map((item) => (
+                                            <a
+                                                key={item}
+                                                href="#"
+                                                className="font-body text-base font-medium text-text-primary hover:text-accent transition-colors"
+                                            >
+                                                {item}
+                                            </a>
+                                        ))}
+                                    </nav>
+                                </div>
+
+                                {/* Breadcrumbs */}
+                                <div className="space-y-4">
+                                    <h4 className="font-heading text-lg font-semibold">Breadcrumbs</h4>
+                                    <nav className="flex items-center gap-2 text-sm font-body">
+                                        <a href="#" className="text-text-tertiary hover:text-text-primary">Home</a>
+                                        <ChevronRight className="w-4 h-4 text-text-tertiary" />
+                                        <a href="#" className="text-text-tertiary hover:text-text-primary">Jackets</a>
+                                        <ChevronRight className="w-4 h-4 text-text-tertiary" />
+                                        <span className="text-text-primary font-medium">Leather Jackets</span>
+                                    </nav>
+                                </div>
+
+                                {/* Footer Links */}
+                                <div className="space-y-4">
+                                    <h4 className="font-heading text-lg font-semibold">Footer Links</h4>
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                        {['About Us', 'Contact', 'Shipping', 'Returns', 'Privacy', 'Terms', 'Careers', 'Press'].map((link) => (
+                                            <a
+                                                key={link}
+                                                href="#"
+                                                className="font-body text-sm text-text-secondary hover:text-text-primary transition-colors"
+                                            >
+                                                {link}
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Form Typography */}
+                        <section className="space-y-8">
+                            <SectionHeader
+                                title="Form & Input Typography"
+                                subtitle="Labels, inputs, and helper text"
+                            />
+
+                            <div className="card space-y-6">
+                                <div className="space-y-2">
+                                    <label className="block font-body text-sm font-medium text-text-primary">
+                                        Email Address
+                                    </label>
+                                    <input
+                                        type="email"
+                                        placeholder="Enter your email"
+                                        className="input w-full font-body text-base"
+                                    />
+                                    <p className="font-body text-xs text-text-tertiary">
+                                        {"We'll never share your email with anyone else."}
+                                    </p>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="block font-body text-sm font-medium text-text-primary">
+                                        Full Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        defaultValue="John Smith"
+                                        className="input w-full font-body text-base border-success"
+                                        readOnly
+                                    />
+                                    <p className="font-body text-sm text-success flex items-center gap-1">
+                                        <Check className="w-4 h-4" />
+                                        Name verified successfully
+                                    </p>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="block font-body text-sm font-medium text-text-primary">
+                                        Card Number
+                                    </label>
+                                    <input
+                                        type="text"
+                                        defaultValue="4111 1111"
+                                        className="input w-full font-body text-base border-destructive"
+                                    />
+                                    <p className="font-body text-sm text-destructive flex items-center gap-1">
+                                        <X className="w-4 h-4" />
+                                        Please enter a valid card number
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Cart & Checkout Typography */}
+                        <section className="space-y-8">
+                            <SectionHeader
+                                title="Cart & Checkout Typography"
+                                subtitle="Shopping cart and order summary"
+                            />
+
+                            <div className="card space-y-6">
+                                {/* Cart Item */}
+                                <div className="flex gap-4 pb-6 border-b border-divider">
+                                    <div className="w-24 h-24 bg-muted rounded-lg shrink-0" />
+                                    <div className="flex-1 space-y-2">
+                                        <h4 className="font-heading text-base font-semibold">Premium Leather Jacket</h4>
+                                        <p className="font-body text-sm text-text-secondary">Size: L | Color: Black</p>
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-2">
+                                                <button className="p-1 border border-border rounded">
+                                                    <Minus className="w-4 h-4" />
+                                                </button>
+                                                <span className="font-body text-base font-medium w-8 text-center">1</span>
+                                                <button className="p-1 border border-border rounded">
+                                                    <Plus className="w-4 h-4" />
+                                                </button>
+                                            </div>
+                                            <p className="font-heading text-lg font-bold">$449.99</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Order Summary */}
+                                <div className="space-y-3">
+                                    <h3 className="font-heading text-xl font-semibold">Order Summary</h3>
+                                    <div className="space-y-2 font-body text-base">
+                                        <div className="flex justify-between">
+                                            <span className="text-text-secondary">Subtotal</span>
+                                            <span className="font-medium">$449.99</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-text-secondary">Shipping</span>
+                                            <span className="font-medium text-success">Free</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-text-secondary">Tax</span>
+                                            <span className="font-medium">$36.00</span>
+                                        </div>
+                                        <div className="h-px bg-divider my-3" />
+                                        <div className="flex justify-between items-baseline">
+                                            <span className="font-heading text-lg font-semibold">Total</span>
+                                            <span className="font-heading text-2xl font-bold text-primary">$485.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Responsive Typography */}
+                        <section className="space-y-8">
+                            <SectionHeader
+                                title="Responsive Typography"
+                                subtitle="How typography adapts across devices"
+                            />
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div className="card">
+                                    <h4 className="font-heading text-lg font-semibold mb-4">{"Mobile (< 640px)"}</h4>
+                                    <ul className="space-y-2 font-body text-sm text-text-secondary">
+                                        <li>• H1: 60px minimum</li>
+                                        <li>• Body: 16px (accessibility)</li>
+                                        <li>• Line-height: 1.625</li>
+                                        <li>• Comfortable for thumbs</li>
+                                        <li>• Touch-friendly targets</li>
+                                    </ul>
+                                </div>
+
+                                <div className="card">
+                                    <h4 className="font-heading text-lg font-semibold mb-4">Tablet (640-1024px)</h4>
+                                    <ul className="space-y-2 font-body text-sm text-text-secondary">
+                                        <li>• H1: Scales to 66px</li>
+                                        <li>• Body: 16-17px</li>
+                                        <li>• Line-height: 1.5</li>
+                                        <li>• Balanced layout</li>
+                                        <li>• Optimal for reading</li>
+                                    </ul>
+                                </div>
+
+                                <div className="card">
+                                    <h4 className="font-heading text-lg font-semibold mb-4">{"Desktop (> 1024px)"}</h4>
+                                    <ul className="space-y-2 font-body text-sm text-text-secondary">
+                                        <li>• H1: 72px maximum</li>
+                                        <li>• Body: 17px</li>
+                                        <li>• Line-height: 1.5</li>
+                                        <li>• Full elegance</li>
+                                        <li>• Maximum impact</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Typography Best Practices */}
+                        <section className="space-y-8">
+                            <SectionHeader
+                                title="Typography Best Practices"
+                                subtitle="Guidelines for consistent, accessible typography"
+                            />
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* DO */}
+                                <div className="card bg-success-subtle border-success">
+                                    <h4 className="font-heading text-lg font-semibold text-success mb-4 flex items-center gap-2">
+                                        <Check className="w-5 h-5" />
+                                        DO ✓
+                                    </h4>
+                                    <ul className="space-y-2 font-body text-sm">
+                                        <li>✓ Maintain 16px minimum body text</li>
+                                        <li>✓ Use Montserrat for all headings</li>
+                                        <li>✓ Use Inter for all body copy</li>
+                                        <li>✓ Apply negative tracking to large headings</li>
+                                        <li>✓ Use positive tracking for uppercase</li>
+                                        <li>✓ Keep line-height at 1.5+ for body</li>
+                                        <li>✓ Test on actual devices</li>
+                                        <li>✓ Ensure sufficient contrast</li>
+                                    </ul>
+                                </div>
+
+                                {/* DON'T */}
+                                <div className="card bg-destructive-subtle border-destructive">
+                                    <h4 className="font-heading text-lg font-semibold text-destructive mb-4 flex items-center gap-2">
+                                        <X className="w-5 h-5" />
+                                        {"DON'T ✗"}
+                                    </h4>
+                                    <ul className="space-y-2 font-body text-sm">
+                                        <li>✗ Use more than 2 font families</li>
+                                        <li>✗ Go below 14px for user-facing text</li>
+                                        <li>✗ Mix fonts randomly</li>
+                                        <li>✗ Use too many font weights</li>
+                                        <li>✗ Ignore accessibility guidelines</li>
+                                        <li>✗ Forget mobile optimization</li>
+                                        <li>✗ Use tight line-height on body text</li>
+                                        <li>✗ Sacrifice readability for style</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Typography Hierarchy Visual */}
+                        <section className="space-y-8">
+                            <SectionHeader
+                                title="Complete Hierarchy Visualization"
+                                subtitle="All heading levels and body text in context"
+                            />
+
+                            <div className="card space-y-8">
+                                <div className="space-y-6">
+                                    <div className="space-y-2">
+                                        <h1 className="font-heading text-6xl font-extrabold tracking-tighter">
+                                            H1 Display Headline
+                                        </h1>
+                                        <p className="font-body text-base text-text-secondary">
+                                            Used for hero sections and main page headlines. Maximum impact with tight tracking.
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <h2 className="font-heading text-5xl font-bold tracking-tight">
+                                            H2 Page Title
+                                        </h2>
+                                        <p className="font-body text-base text-text-secondary">
+                                            Main page titles and collection headers. Bold and prominent.
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <h3 className="font-heading text-4xl font-bold tracking-tight">
+                                            H3 Section Header
+                                        </h3>
+                                        <p className="font-body text-base text-text-secondary">
+                                            Section titles and category headers. Clear hierarchy.
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <h4 className="font-heading text-3xl font-semibold">
+                                            H4 Subsection Title
+                                        </h4>
+                                        <p className="font-body text-base text-text-secondary">
+                                            Subsection headers and featured content titles.
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <h5 className="font-heading text-2xl font-semibold">
+                                            H5 Card & Product Title
+                                        </h5>
+                                        <p className="font-body text-base text-text-secondary">
+                                            Product names, card headers, and small section titles.
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <h6 className="font-heading text-xl font-semibold">
+                                            H6 Inline Header
+                                        </h6>
+                                        <p className="font-body text-base text-text-secondary">
+                                            Small headers, list titles, and inline section breaks.
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <p className="font-body text-lg leading-relaxed font-medium">
+                                            Large Body Text (18-20px)
+                                        </p>
+                                        <p className="font-body text-base leading-relaxed text-text-secondary">
+                                            Used for introductions, lead paragraphs, and emphasized content. Slightly larger for impact while maintaining readability.
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <p className="font-body text-base leading-relaxed font-medium">
+                                            Standard Body Text (16-17px)
+                                        </p>
+                                        <p className="font-body text-base leading-relaxed text-text-secondary">
+                                            Default body text size for all paragraphs, product descriptions, and main content. Maintains 16px minimum for accessibility and optimal reading experience across all devices.
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <p className="font-body text-sm font-medium">
+                                            Small Text (14-15px)
+                                        </p>
+                                        <p className="font-body text-sm text-text-secondary">
+                                            Labels, captions, metadata, and secondary information. Used for supporting content.
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <p className="font-body text-xs font-medium">
+                                            Extra Small Text (12-13px)
+                                        </p>
+                                        <p className="font-body text-xs text-text-secondary">
+                                            Badges, timestamps, legal text, and minimal UI elements.
+                                        </p>
                                     </div>
                                 </div>
                             </div>

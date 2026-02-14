@@ -10,17 +10,24 @@
  * 3. Base layer styles (can be overridden by utilities)
  * 4. Component layer styles
  * 5. Utility layer styles
+ * 6. Google Fonts
  * 
  */
 
 /* ========================================
-   STEP 1: Import Tailwind CSS Base
+   STEP 1: Import Google Fonts
+   Montserrat for headings, Inter for body
+   ======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ========================================
+   STEP 2: Import Tailwind CSS Base
    Must come first to ensure utilities work properly
    ======================================== */
 @import "tailwindcss";
 
 /* ========================================
-   STEP 2: Import Theme CSS Variables
+   STEP 3: Import Theme CSS Variables
    Import both light and dark mode definitions
    These define the actual color values used throughout
    ======================================== */
@@ -29,7 +36,7 @@
 @import "./common.css";
 
 /* ========================================
-   STEP 3: Tailwind Theme Configuration
+   STEP 4: Tailwind Theme Configuration
    Maps CSS variables to Tailwind utility classes
    Must come AFTER variable definitions
    ======================================== */
@@ -238,6 +245,48 @@
     --radius-xl: var(--radius-xl);
     --radius-2xl: var(--radius-2xl);
     --radius-full: var(--radius-full);
+
+    /* TYPOGRAPHY SYSTEM */
+    /* Font Families */
+    --font-heading: var(--font-family-heading);
+    --font-body: var(--font-family-body);
+    --font-mono: var(--font-family-mono);
+
+    /* Font Sizes - Complete Scale */
+    --font-size-xs: var(--text-xs);
+    --font-size-sm: var(--text-sm);
+    --font-size-base: var(--text-base);
+    --font-size-lg: var(--text-lg);
+    --font-size-xl: var(--text-xl);
+    --font-size-2xl: var(--text-2xl);
+    --font-size-3xl: var(--text-3xl);
+    --font-size-4xl: var(--text-4xl);
+    --font-size-5xl: var(--text-5xl);
+    --font-size-6xl: var(--text-6xl);
+
+    /* Line Heights */
+    --line-height-none: var(--leading-none);
+    --line-height-tight: var(--leading-tight);
+    --line-height-snug: var(--leading-snug);
+    --line-height-normal: var(--leading-normal);
+    --line-height-relaxed: var(--leading-relaxed);
+    --line-height-loose: var(--leading-loose);
+
+    /* Letter Spacing */
+    --letter-spacing-tighter: var(--tracking-tighter);
+    --letter-spacing-tight: var(--tracking-tight);
+    --letter-spacing-normal: var(--tracking-normal);
+    --letter-spacing-wide: var(--tracking-wide);
+    --letter-spacing-wider: var(--tracking-wider);
+    --letter-spacing-widest: var(--tracking-widest);
+
+    /* Font Weights */
+    --font-weight-light: var(--font-light);
+    --font-weight-normal: var(--font-normal);
+    --font-weight-medium: var(--font-medium);
+    --font-weight-semibold: var(--font-semibold);
+    --font-weight-bold: var(--font-bold);
+    --font-weight-extrabold: var(--font-extrabold);
 }
 
 /* ========================================
@@ -273,10 +322,12 @@
         background-color: var(--background);
         color: var(--foreground);
 
-        /* Premium typography */
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-            'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-            sans-serif;
+        /* Premium typography - Inter for body */
+        font-family: var(--font-family-body);
+        font-size: var(--text-base);
+        line-height: var(--leading-normal);
+        font-weight: var(--font-normal);
+        letter-spacing: var(--tracking-normal);
 
         /* Prevent horizontal scroll */
         overflow-x: hidden;
@@ -288,7 +339,6 @@
         margin: 0;
     }
 
-    /* Typography - can be overridden by text utilities */
     h1,
     h2,
     h3,
@@ -296,29 +346,50 @@
     h5,
     h6 {
         margin: 0;
-        letter-spacing: -0.02em;
-        line-height: 1.2;
+        font-family: var(--font-family-heading);
+        letter-spacing: var(--tracking-tight);
+        line-height: var(--leading-tight);
         color: var(--text-primary);
-        font-weight: 600;
+        font-weight: var(--font-bold);
     }
 
     h1 {
-        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-size: var(--text-6xl);
+        font-weight: var(--font-extrabold);
+        letter-spacing: var(--tracking-tighter);
     }
 
     h2 {
-        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        font-size: var(--text-5xl);
+        font-weight: var(--font-bold);
     }
 
     h3 {
-        font-size: clamp(1.5rem, 3vw, 2rem);
+        font-size: var(--text-4xl);
+        font-weight: var(--font-bold);
+    }
+
+    h4 {
+        font-size: var(--text-3xl);
+        font-weight: var(--font-semibold);
+    }
+
+    h5 {
+        font-size: var(--text-2xl);
+        font-weight: var(--font-semibold);
+    }
+
+    h6 {
+        font-size: var(--text-xl);
+        font-weight: var(--font-semibold);
     }
 
     /* Paragraph styles - NOW OVERRIDABLE by utilities */
     p {
         margin: 0;
-        line-height: 1.7;
+        line-height: var(--leading-relaxed);
         color: var(--text-primary);
+        font-family: var(--font-family-body);
     }
 
     /* Link styles - can be overridden */
@@ -326,6 +397,7 @@
         color: var(--link);
         text-decoration: none;
         transition: color var(--transition-base);
+        font-family: inherit;
     }
 
     a:hover {
@@ -355,12 +427,14 @@
         cursor: pointer;
         border: none;
         background: none;
+        font-family: var(--font-family-body);
     }
 
     input,
     textarea,
     select {
         background-color: transparent;
+        font-family: var(--font-family-body);
     }
 
     /* Remove number input spinners */
@@ -457,31 +531,37 @@
     /* PRIMARY BUTTON */
     .btn-primary {
         @apply bg-button-primary text-button-primary-foreground hover:bg-button-primary-hover active:bg-button-primary-active disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
+        font-family: var(--font-family-body);
     }
 
     /* SECONDARY BUTTON */
     .btn-secondary {
         @apply bg-button-secondary text-button-secondary-foreground hover:bg-button-secondary-hover active:bg-button-secondary-active disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
+        font-family: var(--font-family-body);
     }
 
     /* ACCENT BUTTON */
     .btn-accent {
         @apply bg-button-accent text-button-accent-foreground hover:bg-button-accent-hover active:bg-button-accent-active disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
+        font-family: var(--font-family-body);
     }
 
     /* OUTLINE BUTTON */
     .btn-outline {
         @apply bg-button-outline text-button-outline-foreground border-2 border-button-outline-border hover:bg-button-outline-hover hover:text-button-outline-hover-foreground disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
+        font-family: var(--font-family-body);
     }
 
     /* GHOST BUTTON */
     .btn-ghost {
         @apply bg-button-ghost text-button-ghost-foreground hover:bg-button-ghost-hover active:bg-button-ghost-active disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
+        font-family: var(--font-family-body);
     }
 
     /* INPUT FIELD */
     .input {
         @apply bg-input-background text-input-text border border-input-border hover:border-input-border-hover focus:border-input-border-focus focus:ring-2 focus:ring-focus-ring/20 placeholder:text-input-placeholder disabled:bg-input-disabled-background disabled:text-input-disabled-text disabled:border-input-disabled-border disabled:cursor-not-allowed px-4 py-2.5 rounded-md transition-all duration-200 outline-none;
+        font-family: var(--font-family-body);
     }
 
     /* CARD */
@@ -492,18 +572,22 @@
     /* BADGE */
     .badge {
         @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+        font-family: var(--font-family-body);
     }
 
     .badge-new {
         @apply bg-badge-new text-badge-new-foreground px-2.5 py-1 rounded text-xs font-semibold uppercase tracking-wide;
+        font-family: var(--font-family-body);
     }
 
     .badge-sale {
         @apply bg-badge-sale text-badge-sale-foreground px-2.5 py-1 rounded text-xs font-bold;
+        font-family: var(--font-family-body);
     }
 
     .badge-limited {
         @apply bg-badge-limited text-badge-limited-foreground px-2.5 py-1 rounded text-xs font-medium;
+        font-family: var(--font-family-body);
     }
 
     /* DIVIDER */
@@ -532,6 +616,70 @@
    ======================================== */
 
 @layer utilities {
+
+    /* Typography Utilities */
+    .font-heading {
+        font-family: var(--font-family-heading);
+    }
+
+    .font-body {
+        font-family: var(--font-family-body);
+    }
+
+    .font-mono {
+        font-family: var(--font-family-mono);
+    }
+
+    /* Text Display Classes */
+    .text-display-1 {
+        font-family: var(--font-family-heading);
+        font-size: var(--text-6xl);
+        font-weight: var(--font-extrabold);
+        line-height: var(--leading-none);
+        letter-spacing: var(--tracking-tighter);
+    }
+
+    .text-display-2 {
+        font-family: var(--font-family-heading);
+        font-size: var(--text-5xl);
+        font-weight: var(--font-bold);
+        line-height: var(--leading-tight);
+        letter-spacing: var(--tracking-tight);
+    }
+
+    /* Product Title Classes */
+    .product-title {
+        font-family: var(--font-family-heading);
+        font-size: var(--text-2xl);
+        font-weight: var(--font-semibold);
+        line-height: var(--leading-snug);
+        letter-spacing: var(--tracking-tight);
+    }
+
+    .product-title-large {
+        font-family: var(--font-family-heading);
+        font-size: var(--text-4xl);
+        font-weight: var(--font-bold);
+        line-height: var(--leading-tight);
+        letter-spacing: var(--tracking-tight);
+    }
+
+    /* Price Display Classes */
+    .price {
+        font-family: var(--font-family-heading);
+        font-size: var(--text-3xl);
+        font-weight: var(--font-bold);
+        line-height: var(--leading-none);
+        letter-spacing: var(--tracking-tight);
+    }
+
+    .price-large {
+        font-family: var(--font-family-heading);
+        font-size: var(--text-5xl);
+        font-weight: var(--font-extrabold);
+        line-height: var(--leading-none);
+        letter-spacing: var(--tracking-tighter);
+    }
 
     /* Focus Ring Utility */
     .ring-focus-ring {
@@ -578,8 +726,9 @@
     }
 
     .text-luxury {
-        letter-spacing: 0.025em;
-        font-weight: 500;
+        letter-spacing: var(--tracking-wide);
+        font-weight: var(--font-medium);
+        text-transform: uppercase;
     }
 
     /* Product Card Hover Effect */
