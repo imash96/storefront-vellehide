@@ -1998,6 +1998,158 @@ export default function InteractiveTestPage() {
                             </div>
                         </section>
 
+                        {/* Navigation Typography */}
+                        <section className="space-y-8">
+                            <SectionHeader
+                                title="Navigation Typography"
+                                subtitle="Menu, links, and navigation elements"
+                            />
+
+                            <div className="card space-y-6">
+                                {/* Main Navigation */}
+                                <div className="space-y-4">
+                                    <h4 className="font-heading text-lg font-semibold">Main Navigation</h4>
+                                    <nav className="flex flex-wrap gap-6">
+                                        {['New Arrivals', 'Jackets', 'Coats', 'Blazers', 'Accessories', 'Sale'].map((item) => (
+                                            <a
+                                                key={item}
+                                                href="#"
+                                                className="font-body text-base font-medium text-text-primary hover:text-accent transition-colors"
+                                            >
+                                                {item}
+                                            </a>
+                                        ))}
+                                    </nav>
+                                </div>
+
+                                {/* Breadcrumbs */}
+                                <div className="space-y-4">
+                                    <h4 className="font-heading text-lg font-semibold">Breadcrumbs</h4>
+                                    <nav className="flex items-center gap-2 text-sm font-body">
+                                        <a href="#" className="text-text-tertiary hover:text-text-primary">Home</a>
+                                        <ChevronRight className="w-4 h-4 text-text-tertiary" />
+                                        <a href="#" className="text-text-tertiary hover:text-text-primary">Jackets</a>
+                                        <ChevronRight className="w-4 h-4 text-text-tertiary" />
+                                        <span className="text-text-primary font-medium">Leather Jackets</span>
+                                    </nav>
+                                </div>
+
+                                {/* Footer Links */}
+                                <div className="space-y-4">
+                                    <h4 className="font-heading text-lg font-semibold">Footer Links</h4>
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                        {['About Us', 'Contact', 'Shipping', 'Returns', 'Privacy', 'Terms', 'Careers', 'Press'].map((link) => (
+                                            <a
+                                                key={link}
+                                                href="#"
+                                                className="font-body text-sm text-text-secondary hover:text-text-primary transition-colors"
+                                            >
+                                                {link}
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Cart & Checkout Typography */}
+                        <section className="space-y-8">
+                            <SectionHeader
+                                title="Cart & Checkout Typography"
+                                subtitle="Shopping cart and order summary"
+                            />
+
+                            <div className="card space-y-6">
+                                {/* Cart Item */}
+                                <div className="flex gap-4 pb-6 border-b border-divider">
+                                    <div className="w-24 h-24 bg-muted rounded-lg shrink-0" />
+                                    <div className="flex-1 space-y-2">
+                                        <h4 className="font-heading text-base font-semibold">Premium Leather Jacket</h4>
+                                        <p className="font-body text-sm text-text-secondary">Size: L | Color: Black</p>
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-2">
+                                                <button className="p-1 border border-border rounded">
+                                                    <Minus className="w-4 h-4" />
+                                                </button>
+                                                <span className="font-body text-base font-medium w-8 text-center">1</span>
+                                                <button className="p-1 border border-border rounded">
+                                                    <Plus className="w-4 h-4" />
+                                                </button>
+                                            </div>
+                                            <p className="font-heading text-lg font-bold">$449.99</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Order Summary */}
+                                <div className="space-y-3">
+                                    <h3 className="font-heading text-xl font-semibold">Order Summary</h3>
+                                    <div className="space-y-2 font-body text-base">
+                                        <div className="flex justify-between">
+                                            <span className="text-text-secondary">Subtotal</span>
+                                            <span className="font-medium">$449.99</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-text-secondary">Shipping</span>
+                                            <span className="font-medium text-success">Free</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-text-secondary">Tax</span>
+                                            <span className="font-medium">$36.00</span>
+                                        </div>
+                                        <div className="h-px bg-divider my-3" />
+                                        <div className="flex justify-between items-baseline">
+                                            <span className="font-heading text-lg font-semibold">Total</span>
+                                            <span className="font-heading text-2xl font-bold text-primary">$485.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Responsive Typography */}
+                        <section className="space-y-8">
+                            <SectionHeader
+                                title="Responsive Typography"
+                                subtitle="How typography adapts across devices"
+                            />
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div className="card">
+                                    <h4 className="font-heading text-lg font-semibold mb-4">{"Mobile (< 640px)"}</h4>
+                                    <ul className="space-y-2 font-body text-sm text-text-secondary">
+                                        <li>• H1: 60px minimum</li>
+                                        <li>• Body: 16px (accessibility)</li>
+                                        <li>• Line-height: 1.625</li>
+                                        <li>• Comfortable for thumbs</li>
+                                        <li>• Touch-friendly targets</li>
+                                    </ul>
+                                </div>
+
+                                <div className="card">
+                                    <h4 className="font-heading text-lg font-semibold mb-4">Tablet (640-1024px)</h4>
+                                    <ul className="space-y-2 font-body text-sm text-text-secondary">
+                                        <li>• H1: Scales to 66px</li>
+                                        <li>• Body: 16-17px</li>
+                                        <li>• Line-height: 1.5</li>
+                                        <li>• Balanced layout</li>
+                                        <li>• Optimal for reading</li>
+                                    </ul>
+                                </div>
+
+                                <div className="card">
+                                    <h4 className="font-heading text-lg font-semibold mb-4">{"Desktop (> 1024px)"}</h4>
+                                    <ul className="space-y-2 font-body text-sm text-text-secondary">
+                                        <li>• H1: 72px maximum</li>
+                                        <li>• Body: 17px</li>
+                                        <li>• Line-height: 1.5</li>
+                                        <li>• Full elegance</li>
+                                        <li>• Maximum impact</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
                         {/* Usage Examples */}
                         <section className="space-y-6 sm:space-y-8">
                             <SectionHeader
