@@ -19,6 +19,7 @@
    Montserrat for headings, Inter for body
    ======================================== */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ========================================
    STEP 2: Import Tailwind CSS Base
@@ -351,6 +352,8 @@
         line-height: var(--leading-tight);
         color: var(--text-primary);
         font-weight: var(--font-bold);
+        /* Enable optical sizing for Bricolage Grotesque */
+        font-optical-sizing: auto;
     }
 
     h1 {
@@ -620,6 +623,7 @@
     /* Typography Utilities */
     .font-heading {
         font-family: var(--font-family-heading);
+        font-optical-sizing: auto;
     }
 
     .font-body {
@@ -637,6 +641,7 @@
         font-weight: var(--font-extrabold);
         line-height: var(--leading-none);
         letter-spacing: var(--tracking-tighter);
+        font-optical-sizing: auto;
     }
 
     .text-display-2 {
@@ -645,6 +650,7 @@
         font-weight: var(--font-bold);
         line-height: var(--leading-tight);
         letter-spacing: var(--tracking-tight);
+        font-optical-sizing: auto;
     }
 
     /* Product Title Classes */
@@ -654,6 +660,7 @@
         font-weight: var(--font-semibold);
         line-height: var(--leading-snug);
         letter-spacing: var(--tracking-tight);
+        font-optical-sizing: auto;
     }
 
     .product-title-large {
@@ -662,6 +669,7 @@
         font-weight: var(--font-bold);
         line-height: var(--leading-tight);
         letter-spacing: var(--tracking-tight);
+        font-optical-sizing: auto;
     }
 
     /* Price Display Classes */
@@ -671,6 +679,7 @@
         font-weight: var(--font-bold);
         line-height: var(--leading-none);
         letter-spacing: var(--tracking-tight);
+        font-optical-sizing: auto;
     }
 
     .price-large {
@@ -679,6 +688,7 @@
         font-weight: var(--font-extrabold);
         line-height: var(--leading-none);
         letter-spacing: var(--tracking-tighter);
+        font-optical-sizing: auto;
     }
 
     /* Focus Ring Utility */
