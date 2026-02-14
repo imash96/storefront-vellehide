@@ -7,9 +7,10 @@
  * Structure:
  * 1. Tailwind CSS base
  * 2. Theme CSS variables (light & dark)
- * 3. Global styles and utilities
+ * 3. Base layer styles (can be overridden by utilities)
+ * 4. Component layer styles
+ * 5. Utility layer styles
  * 
- * Location: app/globals.css or src/app/globals.css
  */
 
 /* ========================================
@@ -25,7 +26,7 @@
    ======================================== */
 @import "./mode-light.css";
 @import "./mode-dark.css";
-@import "./constant.css";
+@import "./common.css";
 
 /* ========================================
    STEP 3: Tailwind Theme Configuration
@@ -240,446 +241,209 @@
 }
 
 /* ========================================
-   GLOBAL STYLES
-   Base styles for HTML elements
+   BASE LAYER
+   Element styles that can be overridden by utilities
+   CRITICAL: These MUST be in @layer base to allow
+   Tailwind utilities to override them
    ======================================== */
+@layer base {
 
-html {
-    /* Prevent font size adjustment on iOS */
-    -webkit-text-size-adjust: 100%;
-    /* Smooth scrolling */
-    scroll-behavior: smooth;
-    /* Better text rendering */
-    text-rendering: optimizeLegibility;
-    /* Better kerning */
-    font-feature-settings: "kern" 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-    /* Apply theme colors */
-    background-color: var(--background);
-    color: var(--foreground);
-
-    /* Premium typography */
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
-
-    /* Prevent horizontal scroll */
-    overflow-x: hidden;
-
-    /* Better line height */
-    line-height: 1.6;
-
-    /* Minimum height for full-page layouts */
-    min-height: 100vh;
-}
-
-/* ========================================
-   TYPOGRAPHY ENHANCEMENTS
-   Premium text styling
-   ======================================== */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-    color: var(--text-primary);
-    font-weight: 600;
-}
-
-h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-}
-
-h2 {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-}
-
-h3 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-}
-
-p {
-    line-height: 1.7;
-    color: var(--text-primary);
-}
-
-a {
-    color: var(--link);
-    text-decoration: none;
-    transition: color var(--transition-base);
-}
-
-a:hover {
-    color: var(--link-hover);
-}
-
-a:visited {
-    color: var(--link-visited);
-}
-
-a:active {
-    color: var(--link-active);
-}
-
-/* ========================================
-   SELECTION COLORS
-   Branded text selection
-   ======================================== */
-
-::selection {
-    background-color: var(--accent);
-    color: var(--accent-foreground);
-}
-
-::-moz-selection {
-    background-color: var(--accent);
-    color: var(--accent-foreground);
-}
-
-/* ========================================
-   SCROLLBAR STYLING
-   Premium scrollbar for webkit browsers
-   ======================================== */
-
-::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--muted);
-    border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--border-strong);
-    border-radius: 6px;
-    border: 2px solid var(--muted);
-    transition: background var(--transition-base);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
-}
-
-/* Firefox scrollbar */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: var(--border-strong) var(--muted);
-}
-
-/* ========================================
-   FOCUS VISIBLE
-   Better keyboard navigation
-   ======================================== */
-
-:focus-visible {
-    outline: 2px solid var(--focus-ring);
-    outline-offset: 2px;
-    border-radius: 4px;
-}
-
-:focus:not(:focus-visible) {
-    outline: none;
-}
-
-/* Remove default focus for mouse users */
-button:focus:not(:focus-visible),
-a:focus:not(:focus-visible) {
-    outline: none;
-}
-
-/* ========================================
-   TRANSITIONS
-   Global transition defaults for smooth interactions
-   ======================================== */
-
-button,
-a,
-input,
-select,
-textarea {
-    transition: all var(--transition-base);
-}
-
-/* ========================================
-   IMAGE OPTIMIZATION
-   Better image rendering and responsiveness
-   ======================================== */
-
-img,
-picture,
-video,
-canvas,
-svg {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Better image rendering */
-img {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-}
-
-/* ========================================
-   FORM ELEMENTS RESET
-   Consistent form styling across browsers
-   ======================================== */
-
-button,
-input,
-select,
-textarea {
-    font: inherit;
-    color: inherit;
-}
-
-button {
-    cursor: pointer;
-    border: none;
-    background: none;
-}
-
-input,
-textarea,
-select {
-    background-color: transparent;
-}
-
-/* Remove number input spinners */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    -moz-appearance: textfield;
-}
-
-/* ========================================
-   PRINT STYLES
-   Clean printing for receipts, invoices
-   ======================================== */
-
-@media print {
-    body {
-        background-color: white !important;
-        color: black !important;
-    }
-
-    button,
-    .no-print {
-        display: none !important;
-    }
-
-    a {
-        color: black !important;
-        text-decoration: underline !important;
-    }
-
+    /* Universal reset - can be overridden by margin/padding utilities */
     * {
-        box-shadow: none !important;
-    }
-}
-
-/* ========================================
-   CUSTOM UTILITIES
-   Additional helper classes
-   ======================================== */
-
-.container-custom {
-    max-width: var(--container-xl);
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-@media (min-width: 640px) {
-    .container-custom {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
-}
-
-@media (min-width: 1024px) {
-    .container-custom {
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
-}
-
-/* Visually hidden but accessible to screen readers */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-/* Hide scrollbar but keep functionality */
-.no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-
-/* Skeleton loading animation */
-.skeleton {
-    background: linear-gradient(90deg,
-            var(--muted) 0%,
-            var(--subtle) 50%,
-            var(--muted) 100%);
-    background-size: 200% 100%;
-    animation: skeleton-loading 1.5s ease-in-out infinite;
-}
-
-@keyframes skeleton-loading {
-    0% {
-        background-position: 200% 0;
+        box-sizing: border-box;
     }
 
-    100% {
-        background-position: -200% 0;
-    }
-}
-
-/* Pulse animation for loading states */
-.pulse {
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 1;
+    /* Root element styles */
+    html {
+        /* Prevent font size adjustment on iOS */
+        -webkit-text-size-adjust: 100%;
+        /* Smooth scrolling */
+        scroll-behavior: smooth;
+        /* Better text rendering */
+        text-rendering: optimizeLegibility;
+        /* Better kerning */
+        font-feature-settings: "kern" 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
-    50% {
-        opacity: 0.5;
-    }
-}
+    /* Body base styles - can be overridden */
+    body {
+        /* Apply theme colors */
+        background-color: var(--background);
+        color: var(--foreground);
 
-/* Fade in animation */
-.fade-in {
-    animation: fadeIn 0.3s ease-in;
-}
+        /* Premium typography */
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+            'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+            sans-serif;
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+        /* Prevent horizontal scroll */
+        overflow-x: hidden;
 
-    to {
-        opacity: 1;
-    }
-}
+        /* Minimum height for full-page layouts */
+        min-height: 100vh;
 
-/* Slide up animation */
-.slide-up {
-    animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(10px);
-        opacity: 0;
+        /* Remove default margin */
+        margin: 0;
     }
 
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* ========================================
-   UTILITY CLASS EXTENSIONS
-   Additional utilities for common patterns
-   ======================================== */
-
-@layer utilities {
-
-    /* Focus Ring Utility */
-    .ring-focus-ring {
-        @apply outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+    /* Typography - can be overridden by text utilities */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        color: var(--text-primary);
+        font-weight: 600;
     }
 
-    /* Interactive Overlay Utilities */
-    .hover-overlay {
-        position: relative;
+    h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
     }
 
-    .hover-overlay::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: var(--hover-overlay);
-        opacity: 0;
-        transition: opacity var(--transition-fast);
-        pointer-events: none;
+    h2 {
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
     }
 
-    .hover-overlay:hover::before {
-        opacity: var(--hover-overlay-opacity);
+    h3 {
+        font-size: clamp(1.5rem, 3vw, 2rem);
     }
 
-    /* Gradient Overlays for Images */
-    .gradient-overlay-dark {
-        background: linear-gradient(to bottom,
-                transparent 0%,
-                var(--background) 100%);
-        opacity: 0.8;
+    /* Paragraph styles - NOW OVERRIDABLE by utilities */
+    p {
+        margin: 0;
+        line-height: 1.7;
+        color: var(--text-primary);
     }
 
-    .gradient-overlay-light {
-        background: linear-gradient(to bottom,
-                transparent 0%,
-                var(--background) 100%);
-        opacity: 0.6;
+    /* Link styles - can be overridden */
+    a {
+        color: var(--link);
+        text-decoration: none;
+        transition: color var(--transition-base);
     }
 
-    /* Premium Text Styles */
-    .text-balance {
-        text-wrap: balance;
+    a:hover {
+        color: var(--link-hover);
     }
 
-    .text-luxury {
-        letter-spacing: 0.025em;
-        font-weight: 500;
+    a:visited {
+        color: var(--link-visited);
     }
 
-    /* Product Card Hover Effect */
-    .product-card-hover {
-        @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+    a:active {
+        color: var(--link-active);
     }
 
-    /* Smooth appearance */
-    .smooth-appear {
-        @apply opacity-0 translate-y-4 transition-all duration-500;
+    /* Form elements */
+    button,
+    input,
+    select,
+    textarea {
+        margin: 0;
+        padding: 0;
+        font: inherit;
+        color: inherit;
     }
 
-    .smooth-appear.visible {
-        @apply opacity-100 translate-y-0;
+    button {
+        cursor: pointer;
+        border: none;
+        background: none;
+    }
+
+    input,
+    textarea,
+    select {
+        background-color: transparent;
+    }
+
+    /* Remove number input spinners */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+    }
+
+    /* Image optimization */
+    img,
+    picture,
+    video,
+    canvas,
+    svg {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+
+    /* Focus visible - can be overridden */
+    :focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
+
+    :focus:not(:focus-visible) {
+        outline: none;
+    }
+
+    button:focus:not(:focus-visible),
+    a:focus:not(:focus-visible) {
+        outline: none;
+    }
+
+    /* Selection colors */
+    ::selection {
+        background-color: var(--accent);
+        color: var(--accent-foreground);
+    }
+
+    ::-moz-selection {
+        background-color: var(--accent);
+        color: var(--accent-foreground);
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--muted);
+        border-radius: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--border-strong);
+        border-radius: 6px;
+        border: 2px solid var(--muted);
+        transition: background var(--transition-base);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary);
+    }
+
+    /* Firefox scrollbar */
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--border-strong) var(--muted);
     }
 }
 
@@ -759,6 +523,218 @@ input[type="number"] {
     /* GLASS EFFECT */
     .glass {
         @apply bg-surface/80 backdrop-blur-md border border-border;
+    }
+}
+
+/* ========================================
+   UTILITY LAYER
+   Additional utilities for common patterns
+   ======================================== */
+
+@layer utilities {
+
+    /* Focus Ring Utility */
+    .ring-focus-ring {
+        @apply outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+    }
+
+    /* Interactive Overlay Utilities */
+    .hover-overlay {
+        position: relative;
+    }
+
+    .hover-overlay::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--hover-overlay);
+        opacity: 0;
+        transition: opacity var(--transition-fast);
+        pointer-events: none;
+    }
+
+    .hover-overlay:hover::before {
+        opacity: var(--hover-overlay-opacity);
+    }
+
+    /* Gradient Overlays for Images */
+    .gradient-overlay-dark {
+        background: linear-gradient(to bottom,
+                transparent 0%,
+                var(--background) 100%);
+        opacity: 0.8;
+    }
+
+    .gradient-overlay-light {
+        background: linear-gradient(to bottom,
+                transparent 0%,
+                var(--background) 100%);
+        opacity: 0.6;
+    }
+
+    /* Premium Text Styles */
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    .text-luxury {
+        letter-spacing: 0.025em;
+        font-weight: 500;
+    }
+
+    /* Product Card Hover Effect */
+    .product-card-hover {
+        @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+    }
+
+    /* Smooth appearance */
+    .smooth-appear {
+        @apply opacity-0 translate-y-4 transition-all duration-500;
+    }
+
+    .smooth-appear.visible {
+        @apply opacity-100 translate-y-0;
+    }
+
+    /* Container Custom */
+    .container-custom {
+        max-width: var(--container-xl);
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    @media (min-width: 640px) {
+        .container-custom {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .container-custom {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    }
+
+    /* Visually hidden but accessible to screen readers */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+
+    /* Hide scrollbar but keep functionality */
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Skeleton loading animation */
+    .skeleton {
+        background: linear-gradient(90deg,
+                var(--muted) 0%,
+                var(--subtle) 50%,
+                var(--muted) 100%);
+        background-size: 200% 100%;
+        animation: skeleton-loading 1.5s ease-in-out infinite;
+    }
+
+    @keyframes skeleton-loading {
+        0% {
+            background-position: 200% 0;
+        }
+
+        100% {
+            background-position: -200% 0;
+        }
+    }
+
+    /* Pulse animation for loading states */
+    .pulse {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    /* Fade in animation */
+    .fade-in {
+        animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Slide up animation */
+    .slide-up {
+        animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(10px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+}
+
+/* ========================================
+   PRINT STYLES
+   Clean printing for receipts, invoices
+   ======================================== */
+
+@media print {
+    body {
+        background-color: white !important;
+        color: black !important;
+    }
+
+    button,
+    .no-print {
+        display: none !important;
+    }
+
+    a {
+        color: black !important;
+        text-decoration: underline !important;
+    }
+
+    * {
+        box-shadow: none !important;
     }
 }
 
