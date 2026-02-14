@@ -8,11 +8,12 @@
 "use client";
 
 import { useState } from 'react';
-import { Star, Heart, ShoppingCart, Check, X, AlertCircle, Info, ChevronRight, Search, Menu, User, Package, Truck, CreditCard, Eye, Trash2, Plus, Minus, Grid, List, MapPin, Phone, Mail } from 'lucide-react';
+import { Star, Heart, ShoppingCart, Check, X, AlertCircle, Info, ChevronRight, Search, Menu, User, Package, Truck, CreditCard, Eye, Trash2, Plus, Minus, Grid, List, MapPin, Phone, Mail, LightbulbOff, Lightbulb } from 'lucide-react';
 
 export default function InteractiveTestPage() {
     const [activeTab, setActiveTab] = useState<'colors' | 'components' | 'ecommerce' | 'fonts'>('colors');
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
     const neutralBg: Record<number, string> = {
         50: "bg-neutral-50",
@@ -86,6 +87,20 @@ export default function InteractiveTestPage() {
                                 Fonts
                             </button>
                         </div>
+                        <button onClick={() => {
+                            setTheme((prevTheme) => {
+                                const toggleTheme = prevTheme === "light" ? "dark" : "light"
+                                document.documentElement.dataset.theme = toggleTheme;
+                                return toggleTheme
+                            });
+                        }} className='rounded-md border p-2 border-border hover:text-accent-foreground hover:bg-accent transition-colors'>
+                            {theme === "light" ? (
+                                <LightbulbOff className="h-5 w-5" />
+                            ) : (
+                                <Lightbulb className="h-5 w-5" />
+                            )}
+                            <span className="sr-only">Theme Toggle</span>
+                        </button>
                     </div>
 
                     {/* Mobile Navigation Menu */}
