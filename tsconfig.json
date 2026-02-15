@@ -19,7 +19,7 @@
       "@/icon/*": [ "./icon/*" ],
       "@/layout/*": [ "./layout/*" ],
       "@lib/*": [ "./lib/*" ],
-      "@module/*": [ "./module/*" ],
+      "@/module/*": [ "./module/*" ],
       "@/types/*": [ "./types/*" ]
     }
   },

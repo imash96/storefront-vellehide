@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { AlertModal, CustomModal, ModalButton } from '@module/common/custom-modal';
-import { CustomAccordion, FAQAccordion, ProductDetailsAccordion, } from '@module/common/custom-accordion';
-import { ActionsMenu, CustomDropdownMenu, FilterMenu, UserMenu, } from '@module/common/custom-dropdown';
-import CustomInput from '@module/common/custom-input';
+import { AlertModal, CustomModal, ModalButton } from '@/module/common/custom-modal';
+import { CustomAccordion, FAQAccordion, ProductDetailsAccordion, } from '@/module/common/custom-accordion';
+import { ActionsMenu, CustomDropdownMenu, FilterMenu, UserMenu, } from '@/module/common/custom-dropdown';
+import CustomInput from '@/module/common/custom-input';
 
 export default function ExtraTab() {
     const [basicModalOpen, setBasicModalOpen] = useState(false);
@@ -501,15 +501,6 @@ export default function ExtraTab() {
                     </div>
                 </section>
             </main>
-
-            {/* Footer */}
-            <footer className="bg-primary text-primary-foreground py-8 px-6 mt-16">
-                <div className="max-w-6xl mx-auto text-center">
-                    <p className="text-sm font-body">
-                        Advanced Components • Built with Radix UI & Tailwind CSS • Next.js 16+
-                    </p>
-                </div>
-            </footer>
         </div>
     );
 }

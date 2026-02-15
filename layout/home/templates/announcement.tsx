@@ -5,7 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
 import type { EmblaOptionsType } from "embla-carousel";
 import { ChevronLeft } from "lucide-react";
-import Container from '@module/common/create-section';
+import Container from '@/module/common/create-section';
 import { announcements } from "@lib/constant/announcement";
 
 const options: EmblaOptionsType = { loop: true }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AlertComponent, SectionHeader } from "./common";
-import { AlertCircle, Check, CreditCard, Info, Package, Search, Star, Truck, X } from "lucide-react";
+import { AlertCircle, Check, CreditCard, Info, Package, Search, Truck, X } from "lucide-react";
 
 export default function ColorTab() {
 
@@ -343,38 +343,6 @@ export default function ColorTab() {
                             ))}
                         </div>
                     </div>
-                </div>
-            </section>
-
-            {/* Rating Stars */}
-            <section className="space-y-8">
-                <SectionHeader title="Rating Display" subtitle="Customer review ratings" />
-
-                <div className="space-y-4">
-                    {[5, 4.5, 4, 3.5, 3, 2.5, 2, 1.5, 1, 0.5].map((rating) => (
-                        <div key={rating} className="flex items-center gap-4">
-                            <div className="flex items-center gap-0.5">
-                                {[1, 2, 3, 4, 5].map((star) => (
-                                    <Star
-                                        key={star}
-                                        className={`w-5 h-5 transition-colors ${star <= Math.floor(rating)
-                                            ? 'fill-rating-filled text-rating-filled'
-                                            : star - 0.5 === rating
-                                                ? 'fill-rating-filled text-rating-filled opacity-50'
-                                                : 'fill-rating-empty text-rating-empty'
-                                            }`}
-                                    />
-                                ))}
-                            </div>
-                            <span className="text-sm text-text-secondary min-w-24">{rating} stars</span>
-                            <div className="flex-1 bg-muted rounded-full h-2 max-w-xs">
-                                <div
-                                    className="bg-rating-filled h-2 rounded-full transition-all"
-                                    style={{ width: `${(rating / 5) * 100}%` }}
-                                />
-                            </div>
-                        </div>
-                    ))}
                 </div>
             </section>
 

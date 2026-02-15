@@ -357,7 +357,7 @@ export default function ComponentTab() {
                 <SectionHeader title="Rating Display" subtitle="Customer review ratings" />
 
                 <div className="space-y-3 sm:space-y-4">
-                    {[5, 4.5, 4, 3.5, 3, 2.5, 2, 1.5, 1, 0.5].map((rating) => (
+                    {[5, 4, 3, 2, 1].map((rating) => (
                         <div key={rating} className="flex items-center gap-3 sm:gap-4">
                             <div className="flex items-center gap-0.5">
                                 {[1, 2, 3, 4, 5].map((star) => (

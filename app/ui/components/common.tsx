@@ -1,4 +1,4 @@
-export type Tabs = 'colors' | 'components' | 'ecommerce' | 'fonts' | 'input' | 'button' | 'extra';
+export type Tabs = 'colors' | 'components' | 'ecommerce' | 'fonts' | 'input' | 'button' | 'extra' | 'drawer';
 
 export function SectionHeader({ title, subtitle }: { title: string; subtitle: string }) {
     return (

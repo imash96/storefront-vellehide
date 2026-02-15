@@ -1,7 +1,5 @@
-'use client';
-
 import { useState } from 'react';
-import CustomButton, { IconButton } from '@module/common/custom-button';
+import CustomButton, { IconButton } from '@/module/common/custom-button';
 
 export default function ButtonTab() {
     const [isLoading, setIsLoading] = useState(false);
@@ -441,15 +439,6 @@ export default function ButtonTab() {
                     </div>
                 </section>
             </main>
-
-            {/* Footer */}
-            <footer className="bg-primary text-primary-foreground py-8 px-6 mt-16">
-                <div className="max-w-6xl mx-auto text-center">
-                    <p className="text-sm font-body">
-                        Custom Button Component • Polymorphic • Interactive • Accessible
-                    </p>
-                </div>
-            </footer>
         </div>
     );
 }

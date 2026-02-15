@@ -9,14 +9,15 @@
 
 import { useState } from 'react';
 import { LightbulbOff, Lightbulb, Menu } from 'lucide-react';
-import ColorTab from './color';
-import { Tabs } from './common';
-import ComponentTab from './component';
-import EcommerceTab from './ecommerce';
-import FontTab from './font';
-import InputTab from './input';
-import ButtonTab from './button';
-import ExtraTab from './extra';
+import ColorTab from './components/color';
+import { Tabs } from './components/common';
+import ComponentTab from './components/component';
+import EcommerceTab from './components/ecommerce';
+import FontTab from './components/font';
+import InputTab from './components/input';
+import ButtonTab from './components/button';
+import ExtraTab from './components/extra';
+import DrawerTab from './components/drawer';
 
 export default function InteractiveTestPage() {
     const [activeTab, setActiveTab] = useState<Tabs>('colors');
@@ -40,30 +41,14 @@ export default function InteractiveTestPage() {
 
                         {/* Desktop Navigation */}
                         <div className="hidden md:flex gap-2">
-                            <button
-                                onClick={() => setActiveTab('colors')}
-                                className={`px-4 py-2 rounded-md font-medium transition-all text-sm lg:text-base ${activeTab === 'colors' ? 'bg-primary text-primary-foreground' : 'text-text-secondary hover:text-text-primary hover:bg-muted'}`}
-                            >
-                                Colors
-                            </button>
-                            <button
-                                onClick={() => setActiveTab('components')}
-                                className={`px-4 py-2 rounded-md font-medium transition-all text-sm lg:text-base ${activeTab === 'components' ? 'bg-primary text-primary-foreground' : 'text-text-secondary hover:text-text-primary hover:bg-muted'}`}
-                            >
-                                Components
-                            </button>
-                            <button
-                                onClick={() => setActiveTab('ecommerce')}
-                                className={`px-4 py-2 rounded-md font-medium transition-all text-sm lg:text-base ${activeTab === 'ecommerce' ? 'bg-primary text-primary-foreground' : 'text-text-secondary hover:text-text-primary hover:bg-muted'}`}
-                            >
-                                E-Commerce
-                            </button>
-                            <button
-                                onClick={() => setActiveTab('fonts')}
-                                className={`px-4 py-2 rounded-md font-medium transition-all text-sm lg:text-base ${activeTab === 'fonts' ? 'bg-primary text-primary-foreground' : 'text-text-secondary hover:text-text-primary hover:bg-muted'}`}
-                            >
-                                Fonts
-                            </button>
+                            <NavButton activeTab={activeTab} currentTab='colors' onClick={() => setActiveTab('colors')} name='Colors' />
+                            <NavButton activeTab={activeTab} currentTab='components' onClick={() => setActiveTab('components')} name='Components' />
+                            <NavButton activeTab={activeTab} currentTab='ecommerce' onClick={() => setActiveTab('ecommerce')} name='E-Commerce' />
+                            <NavButton activeTab={activeTab} currentTab='fonts' onClick={() => setActiveTab('fonts')} name='Fonts' />
+                            <NavButton activeTab={activeTab} currentTab='button' onClick={() => setActiveTab('button')} name='Button' />
+                            <NavButton activeTab={activeTab} currentTab='input' onClick={() => setActiveTab('input')} name='Input' />
+                            <NavButton activeTab={activeTab} currentTab='extra' onClick={() => setActiveTab('extra')} name='Extra' />
+                            <NavButton activeTab={activeTab} currentTab='drawer' onClick={() => setActiveTab('drawer')} name='Drawer' />
                         </div>
                         <button onClick={() => {
                             setTheme((prevTheme) => {
@@ -84,10 +69,14 @@ export default function InteractiveTestPage() {
                     {/* Mobile Navigation Menu */}
                     {mobileMenuOpen && (
                         <div className="md:hidden pb-4 space-y-2 animate-fadeIn">
-                            <TabButton activeTab={activeTab} onClick={() => { setActiveTab('colors'); setMobileMenuOpen(false); }} name='Colors' />
-                            <TabButton activeTab={activeTab} onClick={() => { setActiveTab('components'); setMobileMenuOpen(false); }} name='Components' />
-                            <TabButton activeTab={activeTab} onClick={() => { setActiveTab('ecommerce'); setMobileMenuOpen(false); }} name='E-Commerce' />
-                            <TabButton activeTab={activeTab} onClick={() => { setActiveTab('fonts'); setMobileMenuOpen(false); }} name='Fonts' />
+                            <TabButton activeTab={activeTab} currentTab='colors' onClick={() => { setActiveTab('colors'); setMobileMenuOpen(false); }} name='Colors' />
+                            <TabButton activeTab={activeTab} currentTab='components' onClick={() => { setActiveTab('components'); setMobileMenuOpen(false); }} name='Components' />
+                            <TabButton activeTab={activeTab} currentTab='ecommerce' onClick={() => { setActiveTab('ecommerce'); setMobileMenuOpen(false); }} name='E-Commerce' />
+                            <TabButton activeTab={activeTab} currentTab='fonts' onClick={() => { setActiveTab('fonts'); setMobileMenuOpen(false); }} name='Fonts' />
+                            <TabButton activeTab={activeTab} currentTab='button' onClick={() => { setActiveTab('button'); setMobileMenuOpen(false); }} name='Button' />
+                            <TabButton activeTab={activeTab} currentTab='input' onClick={() => { setActiveTab('input'); setMobileMenuOpen(false); }} name='Input' />
+                            <TabButton activeTab={activeTab} currentTab='extra' onClick={() => { setActiveTab('extra'); setMobileMenuOpen(false); }} name='Extra' />
+                            <TabButton activeTab={activeTab} currentTab='drawer' onClick={() => { setActiveTab('drawer'); setMobileMenuOpen(false); }} name='Drawer' />
                         </div>
                     )}
                 </div>
@@ -123,6 +112,9 @@ export default function InteractiveTestPage() {
 
                 {/* Extra Tab */}
                 {activeTab === 'extra' && (<ExtraTab />)}
+
+                {/* Drawer Tab */}
+                {activeTab === 'drawer' && (<DrawerTab />)}
             </section>
         </main>
     )
@@ -131,24 +123,24 @@ export default function InteractiveTestPage() {
 
 type TabButtonProps = {
     activeTab: Tabs,
+    currentTab: Tabs,
     name: string,
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
-function TabButton({ activeTab, name, className = '', ...props }: TabButtonProps) {
+function TabButton({ activeTab, currentTab, name, className = '', ...props }: TabButtonProps) {
     return (
-        <button className={`w-full px-4 py-3 rounded-md font-medium transition-all text-left ${activeTab === '' ? 'bg-primary text-primary-foreground' : 'text-text-secondary hover:text-text-primary hover:bg-muted'} ${className}`} {...props}>
+        <button className={`w-full px-4 py-3 rounded-md font-medium transition-all text-left ${activeTab === currentTab ? 'bg-primary text-primary-foreground' : 'text-text-secondary hover:text-text-primary hover:bg-muted'} ${className}`} {...props}>
             {name}
         </button>
     )
 }
 
-function NavButton({ activeTab, name, className = '', ...props }: TabButtonProps) {
+function NavButton({ activeTab, currentTab, name, className = '', ...props }: TabButtonProps) {
     return (
         <button
-            onClick={() => setActiveTab('colors')}
-            className={`px-4 py-2 rounded-md font-medium transition-all text-sm lg:text-base ${activeTab === 'colors' ? 'bg-primary text-primary-foreground' : 'text-text-secondary hover:text-text-primary hover:bg-muted'}`}
+            className={`px-4 py-2 rounded-md font-medium transition-all text-sm lg:text-base ${activeTab === currentTab ? 'bg-primary text-primary-foreground' : 'text-text-secondary hover:text-text-primary hover:bg-muted'} ${className}`} {...props}
         >
-            Colors
+            {name}
         </button>
     )
 }

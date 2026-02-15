@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import CustomRadio, { RadioGroup } from '@module/common/custom-radio';
-import CustomCheckbox, { CheckboxGroup } from '@module/common/custom-checkbox';
-import CustomInput from '@module/common/custom-input';
-import CustomSelect from '@module/common/custom-select';
+import CustomRadio, { RadioGroup } from '@/module/common/custom-radio';
+import CustomCheckbox, { CheckboxGroup } from '@/module/common/custom-checkbox';
+import CustomInput from '@/module/common/custom-input';
+import CustomSelect from '@/module/common/custom-select';
 
 export default function InputTab() {
     const [formData, setFormData] = useState({
@@ -439,17 +439,6 @@ export default function InputTab() {
                     </div>
                 </form>
             </main>
-
-            {/* Footer */}
-            <footer className="bg-leather-900 text-leather-200 py-8 px-6 mt-16">
-                <div className="max-w-6xl mx-auto text-center">
-                    <p
-                        className="text-sm font-body"
-                    >
-                        Premium Form Components • Built with Next.js 16+ & Tailwind CSS 4+ • Medusa.js Compatible
-                    </p>
-                </div>
-            </footer>
         </div>
     );
 }
