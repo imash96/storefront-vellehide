@@ -327,6 +327,7 @@ export default function ButtonDemo() {
                             <h3 className="text-base font-semibold text-leather-900 mb-4">Internal Links</h3>
                             <div className="flex flex-wrap gap-4">
                                 <CustomButton
+                                    as='a'
                                     variant="primary"
                                     href="/shop"
                                     icon={icons.arrow}
@@ -334,7 +335,7 @@ export default function ButtonDemo() {
                                 >
                                     Shop Now
                                 </CustomButton>
-                                <CustomButton variant="outline" href="/about">
+                                <CustomButton as='a' variant="outline" href="/about">
                                     Learn More
                                 </CustomButton>
                             </div>
@@ -344,6 +345,7 @@ export default function ButtonDemo() {
                             <h3 className="text-base font-semibold text-leather-900 mb-4">External Links</h3>
                             <div className="flex flex-wrap gap-4">
                                 <CustomButton
+                                    as='a'
                                     variant="secondary"
                                     href="https://example.com"
                                     target="_blank"
@@ -353,6 +355,7 @@ export default function ButtonDemo() {
                                     Visit Website
                                 </CustomButton>
                                 <CustomButton
+                                    as='a'
                                     variant="outline"
                                     href="https://github.com"
                                     target="_blank"

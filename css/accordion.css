@@ -38,7 +38,7 @@
     .accordion-trigger {
         @apply flex flex-1 items-center justify-between gap-4 py-4 px-5 text-left font-medium transition-all;
         @apply hover:bg-stone-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gold-500/20;
-        @apply data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50;
+        @apply data-disabled:cursor-not-allowed data-disabled:opacity-50;
     }
 
     .accordion-separated .accordion-trigger {
