@@ -5,7 +5,8 @@ import * as Accordion from '@radix-ui/react-accordion';
 import "@/css/accordion.css"
 
 export interface AccordionItemData {
-    id: string;
+    id?: string;
+    value: string;
     title: string;
     content: React.ReactNode;
     disabled?: boolean;
@@ -63,16 +64,14 @@ export const CustomAccordion: React.FC<CustomAccordionProps> = ({
         >
             {items.map((item) => (
                 <Accordion.Item
-                    key={item.id}
-                    value={item.id}
+                    key={item.id || item.value}
+                    value={item.value}
                     disabled={item.disabled}
                     className="accordion-item"
                 >
                     <Accordion.Header className="accordion-header">
                         <Accordion.Trigger className="accordion-trigger">
-                            <span
-                                className="accordion-trigger-text"
-                            >
+                            <span className="accordion-trigger-text">
                                 {item.title}
                             </span>
 
@@ -94,9 +93,7 @@ export const CustomAccordion: React.FC<CustomAccordionProps> = ({
                     </Accordion.Header>
 
                     <Accordion.Content className="accordion-content">
-                        <div
-                            className="accordion-content-inner"
-                        >
+                        <div className="accordion-content-inner">
                             {item.content}
                         </div>
                     </Accordion.Content>
@@ -109,32 +106,68 @@ export const CustomAccordion: React.FC<CustomAccordionProps> = ({
 // Convenience component for FAQ-style accordions
 export interface FAQItem {
     question: string;
-    answer: string;
+    answer: React.ReactNode;
 }
 
 export interface FAQAccordionProps {
-    faqs: FAQItem[];
+    items: FAQItem[];
     variant?: 'default' | 'bordered' | 'separated';
     className?: string;
 }
 
 export const FAQAccordion: React.FC<FAQAccordionProps> = ({
-    faqs,
-    variant = 'default',
+    items,
+    variant = 'separated',
     className = '',
 }) => {
-    const items: AccordionItemData[] = faqs.map((faq, index) => ({
+    const accordionItems: AccordionItemData[] = items.map((item, index) => ({
         id: `faq-${index}`,
-        title: faq.question,
-        content: <p className="text-leather-800 leading-relaxed">{faq.answer}</p>,
+        value: `faq-${index}`,
+        title: item.question,
+        content: typeof item.answer === 'string'
+            ? <p className="text-text-primary leading-relaxed">{item.answer}</p>
+            : item.answer,
+    }));
+
+    return (
+        <div className={className}>
+            <CustomAccordion
+                items={accordionItems}
+                type="single"
+                collapsible
+                variant={variant}
+            />
+        </div>
+    );
+};
+
+// ProductDetailsAccordion Component - MISSING IN ORIGINAL
+export interface ProductDetailsSection {
+    title: string;
+    content: React.ReactNode;
+}
+
+export interface ProductDetailsAccordionProps {
+    sections: ProductDetailsSection[];
+    className?: string;
+}
+
+export const ProductDetailsAccordion: React.FC<ProductDetailsAccordionProps> = ({
+    sections,
+    className = '',
+}) => {
+    const accordionItems: AccordionItemData[] = sections.map((section, index) => ({
+        id: `section-${index}`,
+        value: `section-${index}`,
+        title: section.title,
+        content: section.content,
     }));
 
     return (
         <CustomAccordion
-            items={items}
-            type="single"
-            collapsible
-            variant={variant}
+            items={accordionItems}
+            type="multiple"
+            variant="default"
             className={className}
         />
     );
@@ -158,9 +191,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
         <Accordion.Item value={value} disabled={disabled} className="accordion-item">
             <Accordion.Header className="accordion-header">
                 <Accordion.Trigger className="accordion-trigger">
-                    <span
-                        className="accordion-trigger-text"
-                    >
+                    <span className="accordion-trigger-text">
                         {title}
                     </span>
 
@@ -182,9 +213,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
             </Accordion.Header>
 
             <Accordion.Content className="accordion-content">
-                <div
-                    className="accordion-content-inner"
-                >
+                <div className="accordion-content-inner">
                     {children}
                 </div>
             </Accordion.Content>

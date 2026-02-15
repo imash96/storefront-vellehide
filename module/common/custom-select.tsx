@@ -143,6 +143,7 @@ export default function CustomSelect({
             <div className="relative">
                 {/* Hidden native select for form submission and accessibility */}
                 <select
+                    ref={selectRef}
                     id={selectId}
                     value={value}
                     defaultValue={defaultValue}
@@ -173,11 +174,36 @@ export default function CustomSelect({
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
                     onKeyDown={handleKeyDown}
-                    className={`${sizeClasses[selectSize]} ${fullWidth ? 'w-full' : 'w-auto'} px-4 pr-10 pt-5 pb-1 rounded-md border font-body text-left transition-all outline-none ${variant === 'filled' ? 'bg-stone-100' : 'bg-white'} ${error ? 'border-semantic-error focus:border-semantic-error' : disabled ? 'border-stone-300 bg-stone-50 cursor-not-allowed' : isFocused || isOpen ? 'border-gold-500 ring-4 ring-gold-500/15' : 'border-stone-300 hover:border-stone-400'} ${disabled ? 'text-stone-500' : hasValue ? 'text-leather-900' : 'text-stone-500'} `}                >
+                    className={`
+                        ${sizeClasses[selectSize]} 
+                        ${fullWidth ? 'w-full' : 'w-auto'} 
+                        px-4 pr-10 pt-5 pb-1 rounded-md border font-body text-left transition-all outline-none 
+                        ${variant === 'filled' ? 'bg-input-background' : 'bg-surface'} 
+                        ${error
+                            ? 'border-error focus:border-error'
+                            : disabled
+                                ? 'border-input-disabled-border bg-input-disabled-background cursor-not-allowed'
+                                : isFocused || isOpen
+                                    ? 'border-input-border-focus ring-4 ring-focus-ring/20'
+                                    : 'border-input-border hover:border-input-border-hover'
+                        } 
+                        ${disabled
+                            ? 'text-input-disabled-text'
+                            : hasValue
+                                ? 'text-input-text'
+                                : 'text-input-placeholder'
+                        }
+                    `}
+                >
                     <span className="block truncate">{displayText}</span>
 
                     {/* Chevron Icon */}
-                    <span className={` absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform ${isOpen ? 'rotate-180' : 'rotate-0'} ${disabled ? 'text-stone-400' : 'text-stone-600'}`}
+                    <span
+                        className={`
+                            absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform 
+                            ${isOpen ? 'rotate-180' : 'rotate-0'} 
+                            ${disabled ? 'text-input-disabled-text' : 'text-text-secondary'}
+                        `}
                     >
                         <ChevronDown />
                     </span>
@@ -186,7 +212,21 @@ export default function CustomSelect({
                 {/* Floating Label */}
                 <label
                     id={`${selectId}-label`}
-                    className={`absolute left-4 pointer-events-none transition-all font-body origin-left ${isFloating ? `${labelSizeClasses[selectSize].floating} ${labelSizeClasses[selectSize].floatingTop} scale-90` : `${labelSizeClasses[selectSize].default} ${labelSizeClasses[selectSize].top} scale-100`} ${error ? 'text-semantic-error' : disabled ? 'text-stone-500' : isFloating ? 'text-gold-600' : 'text-stone-600'}`}
+                    className={`
+                        absolute left-4 pointer-events-none transition-all font-body origin-left 
+                        ${isFloating
+                            ? `${labelSizeClasses[selectSize].floating} ${labelSizeClasses[selectSize].floatingTop} scale-90`
+                            : `${labelSizeClasses[selectSize].default} ${labelSizeClasses[selectSize].top} scale-100`
+                        } 
+                        ${error
+                            ? 'text-error'
+                            : disabled
+                                ? 'text-input-disabled-text'
+                                : isFloating
+                                    ? 'text-primary'
+                                    : 'text-input-placeholder'
+                        }
+                    `}
                 >
                     {label}
                 </label>
@@ -196,7 +236,7 @@ export default function CustomSelect({
                     <div
                         id={`${selectId}-listbox`}
                         role="listbox"
-                        className={`absolute z-50 w-full mt-1 bg-white border border-stone-300 rounded-md shadow-lg max-h-60 overflow-auto animate-in fade-in slide-in-from-top-1`}
+                        className="absolute z-50 w-full mt-1 bg-surface border border-border rounded-md shadow-lg max-h-60 overflow-auto animate-in fade-in slide-in-from-top-1"
                     >
                         {options.map((option) => {
                             const isSelected = (value || selectedValue) === option.value;
@@ -209,7 +249,15 @@ export default function CustomSelect({
                                     aria-selected={isSelected}
                                     disabled={option.disabled}
                                     onClick={() => handleOptionClick(option)}
-                                    className={`w-full px-4 ${optionSizeClasses[selectSize]} text-left font-body transition-colors ${option.disabled ? 'text-stone-400 cursor-not-allowed' : isSelected ? 'bg-gold-50 text-leather-900' : 'text-leather-900 hover:bg-stone-50'}`}
+                                    className={`
+                                        w-full px-4 ${optionSizeClasses[selectSize]} text-left font-body transition-colors 
+                                        ${option.disabled
+                                            ? 'text-text-disabled cursor-not-allowed'
+                                            : isSelected
+                                                ? 'bg-primary-subtle text-text-primary'
+                                                : 'text-text-primary hover:bg-muted'
+                                        }
+                                    `}
                                 >
                                     <span className="flex items-center justify-between">
                                         <span className="truncate">{option.label}</span>
@@ -223,7 +271,7 @@ export default function CustomSelect({
                                                 strokeWidth="2.5"
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
-                                                className="text-gold-600 ml-2 shrink-0"
+                                                className="text-primary ml-2 shrink-0"
                                             >
                                                 <polyline points="20 6 9 17 4 12" />
                                             </svg>
@@ -240,7 +288,7 @@ export default function CustomSelect({
             {(error || helperText) && (
                 <p
                     id={error ? `${selectId}-error` : `${selectId}-helper`}
-                    className={`mt-1.5 text-xs font-body transition-colors ${error ? 'text-semantic-error' : 'text-stone-600'}`}
+                    className={`mt-1.5 text-xs font-body transition-colors ${error ? 'text-error' : 'text-text-secondary'}`}
                     role={error ? 'alert' : undefined}
                 >
                     {error || helperText}
@@ -248,4 +296,4 @@ export default function CustomSelect({
             )}
         </div>
     );
-};
+}

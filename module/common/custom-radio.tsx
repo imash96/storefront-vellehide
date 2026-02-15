@@ -1,6 +1,6 @@
 'use client';
 
-import { useId } from 'react';
+import React, { useId, useState } from 'react';
 
 export interface CustomRadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
     label: string;
@@ -59,11 +59,29 @@ export default function CustomRadio({
                 {/* Custom Radio Button */}
                 <label
                     htmlFor={radioId}
-                    className={`${sizeClasses[radioSize].radio} relative flex items-center justify-center rounded-full border-2 transition-all cursor-pointer ${disabled ? 'border-stone-300 bg-stone-100 cursor-not-allowed' : error ? 'border-semantic-error' : 'border-stone-400'} peer-checked:border-gold-600 peer-checked:bg-gold-50 peer-focus-visible:ring-4 peer-focus-visible:ring-gold-500/15 peer-disabled:border-stone-300 peer-disabled:bg-stone-100 peer-disabled:cursor-not-allowed ${!disabled && !error && 'hover:border-gold-500 hover:bg-gold-50/50'}`}
+                    className={`
+                        ${sizeClasses[radioSize].radio} 
+                        relative flex items-center justify-center rounded-full border-2 transition-all cursor-pointer 
+                        ${disabled
+                            ? 'border-border-subtle bg-input-disabled-background cursor-not-allowed'
+                            : error
+                                ? 'border-error'
+                                : 'border-border'
+                        } 
+                        peer-checked:border-primary peer-checked:bg-primary-subtle 
+                        peer-focus-visible:ring-4 peer-focus-visible:ring-focus-ring/20 
+                        peer-disabled:border-border-subtle peer-disabled:bg-input-disabled-background peer-disabled:cursor-not-allowed 
+                        ${!disabled && !error && 'hover:border-primary hover:bg-primary-subtle/50'}
+                    `}
                 >
                     {/* Inner dot */}
                     <span
-                        className={`${sizeClasses[radioSize].dot} rounded-full bg-gold-600 transition-all ${checked ? 'scale-100 opacity-100' : 'scale-0 opacity-0'} ${disabled && 'bg-stone-400'}`}
+                        className={`
+                            ${sizeClasses[radioSize].dot} 
+                            rounded-full bg-primary transition-all 
+                            ${checked ? 'scale-100 opacity-100' : 'scale-0 opacity-0'} 
+                            ${disabled && 'bg-text-disabled'}
+                        `}
                     />
                 </label>
             </div>
@@ -72,19 +90,100 @@ export default function CustomRadio({
             <div className="ml-3 flex-1">
                 <label
                     htmlFor={radioId}
-                    className={`${sizeClasses[radioSize].label} font-body font-medium block cursor-pointer transition-colors ${disabled ? 'text-stone-500 cursor-not-allowed' : error ? 'text-semantic-error' : 'text-leather-900'} ${!disabled && 'hover:text-gold-700'}`}
+                    className={`
+                        ${sizeClasses[radioSize].label} 
+                        font-body font-medium block cursor-pointer transition-colors 
+                        ${disabled
+                            ? 'text-text-disabled cursor-not-allowed'
+                            : error
+                                ? 'text-error'
+                                : 'text-text-primary'
+                        } 
+                        ${!disabled && 'hover:text-primary'}
+                    `}
                 >
                     {label}
                 </label>
 
                 {description && (
                     <p
-                        className={`${sizeClasses[radioSize].description} mt-0.5 font-body transition-colors ${disabled ? 'text-stone-400' : 'text-stone-600'} `}
+                        className={`
+                            ${sizeClasses[radioSize].description} 
+                            mt-0.5 font-body transition-colors 
+                            ${disabled ? 'text-text-disabled' : 'text-text-secondary'}
+                        `}
                     >
                         {description}
                     </p>
                 )}
             </div>
+        </div>
+    );
+}
+
+// RadioGroup Component - MISSING IN ORIGINAL
+export interface RadioGroupProps {
+    name: string;
+    value?: string;
+    onChange?: (value: string) => void;
+    children: React.ReactNode;
+    layout?: 'vertical' | 'horizontal';
+    label?: string;
+    error?: string;
+    className?: string;
+}
+
+export const RadioGroup: React.FC<RadioGroupProps> = ({
+    name,
+    value,
+    onChange,
+    children,
+    layout = 'vertical',
+    label,
+    error,
+    className = '',
+}) => {
+    const [internalValue, setInternalValue] = useState(value);
+
+    const handleChange = (newValue: string) => {
+        setInternalValue(newValue);
+        onChange?.(newValue);
+    };
+
+    const layoutClasses = {
+        vertical: 'flex flex-col gap-3',
+        horizontal: 'flex flex-row flex-wrap gap-4',
+    };
+
+    // Clone children and inject name, checked, and onChange props
+    const radioButtons = React.Children.map(children, (child) => {
+        if (React.isValidElement(child)) {
+            const radioValue = child.props.value;
+            return React.cloneElement(child, {
+                name,
+                checked: (value !== undefined ? value : internalValue) === radioValue,
+                onChange: () => handleChange(radioValue),
+                error: !!error,
+            } as any);
+        }
+        return child;
+    });
+
+    return (
+        <div className={className}>
+            {label && (
+                <label className="block text-sm font-medium text-text-primary mb-2">
+                    {label}
+                </label>
+            )}
+            <div className={layoutClasses[layout]} role="radiogroup">
+                {radioButtons}
+            </div>
+            {error && (
+                <p className="mt-1.5 text-xs text-error" role="alert">
+                    {error}
+                </p>
+            )}
         </div>
     );
 };

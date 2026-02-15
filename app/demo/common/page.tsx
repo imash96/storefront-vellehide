@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { CustomModal } from '@module/common/custom-modal';
-import { CustomAccordion, FAQAccordion, } from '@module/common/custom-accordion';
-import { CustomDropdownMenu, } from '@module/common/custom-dropdown';
+import { AlertModal, CustomModal, ModalButton } from '@module/common/custom-modal';
+import { CustomAccordion, FAQAccordion, ProductDetailsAccordion, } from '@module/common/custom-accordion';
+import { ActionsMenu, CustomDropdownMenu, FilterMenu, UserMenu, } from '@module/common/custom-dropdown';
 import CustomInput from '@module/common/custom-input';
 
 export default function AdvancedComponentsDemo() {
@@ -114,10 +114,10 @@ export default function AdvancedComponentsDemo() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="border-b"><td className="py-2">S</td><td>36-38"</td><td>17"</td><td>25"</td></tr>
-                            <tr className="border-b"><td className="py-2">M</td><td>38-40"</td><td>18"</td><td>26"</td></tr>
-                            <tr className="border-b"><td className="py-2">L</td><td>40-42"</td><td>19"</td><td>27"</td></tr>
-                            <tr><td className="py-2">XL</td><td>42-44"</td><td>20"</td><td>28"</td></tr>
+                            <tr className="border-b"><td className="py-2">S</td><td>{`36-38"`}</td><td>{`17"`}</td><td>{`25"`}</td></tr>
+                            <tr className="border-b"><td className="py-2">M</td><td>{`38-40"`}</td><td>{`18"`}</td><td>{`26"`}</td></tr>
+                            <tr className="border-b"><td className="py-2">L</td><td>{`40-42"`}</td><td>{`19"`}</td><td>{`27"`}</td></tr>
+                            <tr><td className="py-2">XL</td><td>{`42-44"`}</td><td>{`20"`}</td><td>{`28"`}</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -310,7 +310,7 @@ export default function AdvancedComponentsDemo() {
                                     <CustomModal
                                         key={size}
                                         trigger={
-                                            <button className="px-4 py-2 border-2 border-stone-300 rounded-lg hover:border-gold-500 transition-all font-semibold">
+                                            <button className="px-4 py-2 border-2 border-border rounded-lg hover:border-gold-500 transition-all font-semibold">
                                                 {size.toUpperCase()} Modal
                                             </button>
                                         }

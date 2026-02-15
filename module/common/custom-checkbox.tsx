@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef } from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
 
 export interface CustomCheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
     label: string;
@@ -70,11 +70,30 @@ export default function CustomCheckbox({
                 {/* Custom Checkbox */}
                 <label
                     htmlFor={checkboxId}
-                    className={`${sizeClasses[checkboxSize].checkbox} relative flex items-center justify-center rounded border-2 transition-all cursor-pointer ${disabled ? 'border-stone-300 bg-stone-100 cursor-not-allowed' : error ? 'border-semantic-error' : 'border-stone-400'} peer-checked:border-gold-600 peer-checked:bg-gold-600 peer-indeterminate:border-gold-600 peer-indeterminate:bg-gold-600 peer-focus-visible:ring-4 peer-focus-visible:ring-gold-500/15 peer-disabled:border-stone-300 peer-disabled:bg-stone-100 peer-disabled:cursor-not-allowed ${!disabled && !error && 'hover:border-gold-500'}`}
+                    className={`
+                        ${sizeClasses[checkboxSize].checkbox} 
+                        relative flex items-center justify-center rounded border-2 transition-all cursor-pointer 
+                        ${disabled
+                            ? 'border-border-subtle bg-input-disabled-background cursor-not-allowed'
+                            : error
+                                ? 'border-error'
+                                : 'border-border'
+                        } 
+                        peer-checked:border-primary peer-checked:bg-primary 
+                        peer-indeterminate:border-primary peer-indeterminate:bg-primary 
+                        peer-focus-visible:ring-4 peer-focus-visible:ring-focus-ring/20 
+                        peer-disabled:border-border-subtle peer-disabled:bg-input-disabled-background peer-disabled:cursor-not-allowed 
+                        ${!disabled && !error && 'hover:border-primary'}
+                    `}
                 >
                     {/* Check Icon */}
                     <svg
-                        className={`${sizeClasses[checkboxSize].icon} text-white transition-all absolute ${checked && !indeterminate ? 'scale-100 opacity-100' : 'scale-0 opacity-0'} ${disabled && 'text-stone-400'}`}
+                        className={`
+                            ${sizeClasses[checkboxSize].icon} 
+                            text-primary-foreground transition-all absolute 
+                            ${checked && !indeterminate ? 'scale-100 opacity-100' : 'scale-0 opacity-0'} 
+                            ${disabled && 'text-text-disabled'}
+                        `}
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -87,7 +106,12 @@ export default function CustomCheckbox({
 
                     {/* Indeterminate Icon (horizontal line) */}
                     <svg
-                        className={`${sizeClasses[checkboxSize].icon} text-white transition-all absolute ${indeterminate ? 'scale-100 opacity-100' : 'scale-0 opacity-0'} ${disabled && 'text-stone-400'}`}
+                        className={`
+                            ${sizeClasses[checkboxSize].icon} 
+                            text-primary-foreground transition-all absolute 
+                            ${indeterminate ? 'scale-100 opacity-100' : 'scale-0 opacity-0'} 
+                            ${disabled && 'text-text-disabled'}
+                        `}
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -104,19 +128,104 @@ export default function CustomCheckbox({
             <div className="ml-3 flex-1">
                 <label
                     htmlFor={checkboxId}
-                    className={`${sizeClasses[checkboxSize].label} font-body font-medium block cursor-pointer transition-colors ${disabled ? 'text-stone-500 cursor-not-allowed' : error ? 'text-semantic-error' : 'text-leather-900'} ${!disabled && 'hover:text-gold-700'}`}
+                    className={`
+                        ${sizeClasses[checkboxSize].label} 
+                        font-body font-medium block cursor-pointer transition-colors 
+                        ${disabled
+                            ? 'text-text-disabled cursor-not-allowed'
+                            : error
+                                ? 'text-error'
+                                : 'text-text-primary'
+                        } 
+                        ${!disabled && 'hover:text-primary'}
+                    `}
                 >
                     {label}
                 </label>
 
                 {description && (
                     <p
-                        className={`${sizeClasses[checkboxSize].description} mt-0.5 font-body transition-colors ${disabled ? 'text-stone-400' : 'text-stone-600'}`}
+                        className={`
+                            ${sizeClasses[checkboxSize].description} 
+                            mt-0.5 font-body transition-colors 
+                            ${disabled ? 'text-text-disabled' : 'text-text-secondary'}
+                        `}
                     >
                         {description}
                     </p>
                 )}
             </div>
+        </div>
+    );
+}
+
+// CheckboxGroup Component - MISSING IN ORIGINAL
+export interface CheckboxGroupProps {
+    value?: string[];
+    onChange?: (value: string[]) => void;
+    children: React.ReactNode;
+    layout?: 'vertical' | 'horizontal';
+    label?: string;
+    error?: string;
+    className?: string;
+}
+
+export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
+    value = [],
+    onChange,
+    children,
+    layout = 'vertical',
+    label,
+    error,
+    className = '',
+}) => {
+    const [internalValue, setInternalValue] = useState(value);
+
+    const handleChange = (checkboxValue: string, isChecked: boolean) => {
+        const newValue = isChecked
+            ? [...internalValue, checkboxValue]
+            : internalValue.filter((v) => v !== checkboxValue);
+
+        setInternalValue(newValue);
+        onChange?.(newValue);
+    };
+
+    const layoutClasses = {
+        vertical: 'flex flex-col gap-3',
+        horizontal: 'flex flex-row flex-wrap gap-4',
+    };
+
+    // Clone children and inject checked and onChange props
+    const checkboxes = React.Children.map(children, (child) => {
+        if (React.isValidElement(child)) {
+            const checkboxValue = child.props.value;
+            const currentValue = value.length > 0 ? value : internalValue;
+            return React.cloneElement(child, {
+                checked: currentValue.includes(checkboxValue),
+                onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(checkboxValue, e.target.checked);
+                },
+                error: !!error,
+            } as any);
+        }
+        return child;
+    });
+
+    return (
+        <div className={className}>
+            {label && (
+                <label className="block text-sm font-medium text-text-primary mb-2">
+                    {label}
+                </label>
+            )}
+            <div className={layoutClasses[layout]} role="group">
+                {checkboxes}
+            </div>
+            {error && (
+                <p className="mt-1.5 text-xs text-error" role="alert">
+                    {error}
+                </p>
+            )}
         </div>
     );
 };

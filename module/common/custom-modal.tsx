@@ -65,15 +65,11 @@ export const CustomModal: React.FC<CustomModalProps> = ({
                     {/* Header */}
                     <div className="modal-header">
                         <div className="flex-1">
-                            <Dialog.Title
-                                className="modal-title"
-                            >
+                            <Dialog.Title className="modal-title">
                                 {title}
                             </Dialog.Title>
                             {description && (
-                                <Dialog.Description
-                                    className="modal-description"
-                                >
+                                <Dialog.Description className="modal-description">
                                     {description}
                                 </Dialog.Description>
                             )}
@@ -99,9 +95,7 @@ export const CustomModal: React.FC<CustomModalProps> = ({
                     </div>
 
                     {/* Body */}
-                    <div
-                        className="modal-body"
-                    >
+                    <div className="modal-body">
                         {children}
                     </div>
 
@@ -114,6 +108,135 @@ export const CustomModal: React.FC<CustomModalProps> = ({
                 </Dialog.Content>
             </Dialog.Portal>
         </Dialog.Root>
+    );
+};
+
+// ModalButton Component - MISSING IN ORIGINAL
+export interface ModalButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+    children: React.ReactNode;
+}
+
+export const ModalButton: React.FC<ModalButtonProps> = ({
+    variant = 'primary',
+    children,
+    className = '',
+    ...props
+}) => {
+    const variantClasses = {
+        primary: 'modal-button modal-button-primary',
+        secondary: 'modal-button modal-button-secondary',
+        outline: 'modal-button bg-transparent text-text-primary border-2 border-border hover:bg-muted focus:ring-focus-ring/30',
+        ghost: 'modal-button bg-transparent text-text-primary hover:bg-muted focus:ring-focus-ring/30',
+        danger: 'modal-button modal-button-danger',
+    };
+
+    return (
+        <button
+            type="button"
+            className={`${variantClasses[variant]} ${className}`}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+};
+
+// AlertModal Component - MISSING IN ORIGINAL
+export interface AlertModalProps {
+    open?: boolean;
+    onOpenChange?: (open: boolean) => void;
+    title: string;
+    description: string;
+    confirmLabel?: string;
+    cancelLabel?: string;
+    onConfirm?: () => void;
+    onCancel?: () => void;
+    variant?: 'info' | 'warning' | 'danger' | 'success';
+}
+
+export const AlertModal: React.FC<AlertModalProps> = ({
+    open,
+    onOpenChange,
+    title,
+    description,
+    confirmLabel = 'Confirm',
+    cancelLabel = 'Cancel',
+    onConfirm,
+    onCancel,
+    variant = 'info',
+}) => {
+    const variantIcons = {
+        info: (
+            <svg className="w-12 h-12 text-info" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                <line x1="12" y1="16" x2="12" y2="12" strokeWidth="2" strokeLinecap="round" />
+                <circle cx="12" cy="8" r="1" fill="currentColor" />
+            </svg>
+        ),
+        warning: (
+            <svg className="w-12 h-12 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+        ),
+        danger: (
+            <svg className="w-12 h-12 text-destructive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                <line x1="15" y1="9" x2="9" y2="15" strokeWidth="2" strokeLinecap="round" />
+                <line x1="9" y1="9" x2="15" y2="15" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+        ),
+        success: (
+            <svg className="w-12 h-12 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
+            </svg>
+        ),
+    };
+
+    const handleConfirm = () => {
+        onConfirm?.();
+        onOpenChange?.(false);
+    };
+
+    const handleCancel = () => {
+        onCancel?.();
+        onOpenChange?.(false);
+    };
+
+    return (
+        <CustomModal
+            open={open}
+            onOpenChange={onOpenChange}
+            title={title}
+            description={description}
+            size="sm"
+            showCloseButton={false}
+            closeOnOverlayClick={false}
+        >
+            <div className="flex flex-col items-center text-center py-4">
+                <div className="mb-4">
+                    {variantIcons[variant]}
+                </div>
+            </div>
+
+            <div className="flex gap-3 mt-6">
+                <ModalButton
+                    variant="outline"
+                    onClick={handleCancel}
+                    className="flex-1"
+                >
+                    {cancelLabel}
+                </ModalButton>
+                <ModalButton
+                    variant={variant === 'danger' ? 'danger' : 'primary'}
+                    onClick={handleConfirm}
+                    className="flex-1"
+                >
+                    {confirmLabel}
+                </ModalButton>
+            </div>
+        </CustomModal>
     );
 };
 
@@ -138,26 +261,13 @@ export const ModalActions: React.FC<ModalActionsProps> = ({
     return (
         <div className="flex items-center justify-end gap-3">
             {onCancel && (
-                <button
-                    type="button"
-                    onClick={onCancel}
-                    disabled={isLoading}
-                    className="modal-button modal-button-secondary"
-                >
+                <ModalButton variant="secondary" onClick={onCancel} disabled={isLoading}>
                     {cancelText}
-                </button>
+                </ModalButton>
             )}
 
             {onConfirm && (
-                <button
-                    type="button"
-                    onClick={onConfirm}
-                    disabled={isLoading}
-                    className={`modal-button ${confirmVariant === 'danger'
-                        ? 'modal-button-danger'
-                        : 'modal-button-primary'
-                        }`}
-                >
+                <ModalButton variant={confirmVariant} onClick={onConfirm} disabled={isLoading}>
                     {isLoading ? (
                         <span className="flex items-center gap-2">
                             <svg
@@ -178,7 +288,7 @@ export const ModalActions: React.FC<ModalActionsProps> = ({
                     ) : (
                         confirmText
                     )}
-                </button>
+                </ModalButton>
             )}
         </div>
     );
@@ -236,9 +346,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
                 />
             }
         >
-            <p
-                className="text-leather-800 leading-relaxed"
-            >
+            <p className="text-text-primary leading-relaxed">
                 {message}
             </p>
         </CustomModal>

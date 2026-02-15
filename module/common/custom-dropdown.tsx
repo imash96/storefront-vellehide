@@ -1,12 +1,12 @@
 'use client';
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { Fragment } from 'react/jsx-runtime';
 
 import "@/css/dropdown.css"
 
 export interface DropdownMenuItem {
-    id: string;
+    id?: string;
+    type: 'item';
     label: string;
     icon?: React.ReactNode;
     shortcut?: string;
@@ -15,90 +15,430 @@ export interface DropdownMenuItem {
     variant?: 'default' | 'danger';
 }
 
-export interface DropdownMenuSection {
-    id: string;
-    label?: string;
-    items: DropdownMenuItem[];
+export interface DropdownMenuSeparator {
+    type: 'separator';
 }
+
+export interface DropdownMenuLabel {
+    type: 'label';
+    label: string;
+}
+
+export interface DropdownMenuCheckboxItem {
+    type: 'checkbox';
+    label: string;
+    checked?: boolean;
+    onCheckedChange?: (checked: boolean) => void;
+    disabled?: boolean;
+}
+
+export interface DropdownMenuRadioGroup {
+    type: 'radio-group';
+    value?: string;
+    onValueChange?: (value: string) => void;
+    items: Array<{
+        value: string;
+        label: string;
+        disabled?: boolean;
+    }>;
+}
+
+export type DropdownMenuItemType =
+    | DropdownMenuItem
+    | DropdownMenuSeparator
+    | DropdownMenuLabel
+    | DropdownMenuCheckboxItem
+    | DropdownMenuRadioGroup;
 
 export interface CustomDropdownMenuProps {
     trigger: React.ReactNode;
-    sections?: DropdownMenuSection[];
-    items?: DropdownMenuItem[];
+    items: DropdownMenuItemType[];
     align?: 'start' | 'center' | 'end';
+    side?: 'top' | 'right' | 'bottom' | 'left';
     sideOffset?: number;
     className?: string;
 }
 
 export const CustomDropdownMenu: React.FC<CustomDropdownMenuProps> = ({
     trigger,
-    sections,
     items,
     align = 'end',
+    side = 'bottom',
     sideOffset = 8,
     className = '',
 }) => {
-    // Normalize input - either sections or items
-    const normalizedSections: DropdownMenuSection[] = sections || (items ? [{ id: 'main', items }] : []);
+    const renderItem = (item: DropdownMenuItemType, index: number) => {
+        switch (item.type) {
+            case 'item':
+                return (
+                    <DropdownMenu.Item
+                        key={item.id || index}
+                        className={`dropdown-item ${item.variant === 'danger' ? 'dropdown-item-danger' : ''}`}
+                        onSelect={item.onSelect}
+                        disabled={item.disabled}
+                    >
+                        <div className="dropdown-item-content">
+                            {item.icon && (
+                                <span className="dropdown-item-icon">{item.icon}</span>
+                            )}
+                            <span className="dropdown-item-label">
+                                {item.label}
+                            </span>
+                        </div>
+                        {item.shortcut && (
+                            <span className="dropdown-item-shortcut">
+                                {item.shortcut}
+                            </span>
+                        )}
+                    </DropdownMenu.Item>
+                );
+
+            case 'separator':
+                return <DropdownMenu.Separator key={index} className="dropdown-separator" />;
+
+            case 'label':
+                return (
+                    <DropdownMenu.Label key={index} className="dropdown-label">
+                        {item.label}
+                    </DropdownMenu.Label>
+                );
+
+            case 'checkbox':
+                return (
+                    <DropdownMenu.CheckboxItem
+                        key={index}
+                        className="dropdown-item dropdown-checkbox-item"
+                        checked={item.checked}
+                        onCheckedChange={item.onCheckedChange}
+                        disabled={item.disabled}
+                    >
+                        <span className="dropdown-item-label">{item.label}</span>
+                        <DropdownMenu.ItemIndicator className="dropdown-item-indicator">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            >
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </DropdownMenu.ItemIndicator>
+                    </DropdownMenu.CheckboxItem>
+                );
+
+            case 'radio-group':
+                return (
+                    <DropdownMenu.RadioGroup
+                        key={index}
+                        value={item.value}
+                        onValueChange={item.onValueChange}
+                    >
+                        {item.items.map((radioItem, radioIndex) => (
+                            <DropdownMenu.RadioItem
+                                key={radioIndex}
+                                value={radioItem.value}
+                                className="dropdown-item dropdown-radio-item"
+                                disabled={radioItem.disabled}
+                            >
+                                <span className="dropdown-item-label">{radioItem.label}</span>
+                                <DropdownMenu.ItemIndicator className="dropdown-item-indicator">
+                                    <svg
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                    >
+                                        <circle cx="12" cy="12" r="6" />
+                                    </svg>
+                                </DropdownMenu.ItemIndicator>
+                            </DropdownMenu.RadioItem>
+                        ))}
+                    </DropdownMenu.RadioGroup>
+                );
+
+            default:
+                return null;
+        }
+    };
 
     return (
         <DropdownMenu.Root>
-            <DropdownMenu.Trigger asChild>
+            <DropdownMenu.Trigger asChild className={className}>
                 {trigger}
             </DropdownMenu.Trigger>
 
             <DropdownMenu.Portal>
                 <DropdownMenu.Content
-                    className={`dropdown-content ${className}`}
+                    className="dropdown-content"
                     align={align}
+                    side={side}
                     sideOffset={sideOffset}
                 >
-                    {normalizedSections.map((section, sectionIndex) => (
-                        <Fragment key={section.id}>
-                            {section.label && (
-                                <DropdownMenu.Label className="dropdown-label">
-                                    {section.label}
-                                </DropdownMenu.Label>
-                            )}
-
-                            {section.items.map((item) => (
-                                <DropdownMenu.Item
-                                    key={item.id}
-                                    className={`dropdown-item ${item.variant === 'danger' ? 'dropdown-item-danger' : ''
-                                        }`}
-                                    onSelect={item.onSelect}
-                                    disabled={item.disabled}
-                                >
-                                    <div className="dropdown-item-content">
-                                        {item.icon && (
-                                            <span className="dropdown-item-icon">{item.icon}</span>
-                                        )}
-                                        <span
-                                            className="dropdown-item-label"
-                                        >
-                                            {item.label}
-                                        </span>
-                                    </div>
-                                    {item.shortcut && (
-                                        <span
-                                            className="dropdown-item-shortcut"
-                                        >
-                                            {item.shortcut}
-                                        </span>
-                                    )}
-                                </DropdownMenu.Item>
-                            ))}
-
-                            {sectionIndex < normalizedSections.length - 1 && (
-                                <DropdownMenu.Separator className="dropdown-separator" />
-                            )}
-                        </Fragment>
-                    ))}
-
+                    {items.map((item, index) => renderItem(item, index))}
                     <DropdownMenu.Arrow className="dropdown-arrow" />
                 </DropdownMenu.Content>
             </DropdownMenu.Portal>
         </DropdownMenu.Root>
+    );
+};
+
+// UserMenu Component - MISSING IN ORIGINAL
+export interface UserMenuProps {
+    trigger?: React.ReactNode;
+    userName?: string;
+    userEmail?: string;
+    onProfile?: () => void;
+    onSettings?: () => void;
+    onBilling?: () => void;
+    onSupport?: () => void;
+    onSignOut?: () => void;
+    className?: string;
+}
+
+export const UserMenu: React.FC<UserMenuProps> = ({
+    trigger,
+    userName = 'User',
+    userEmail,
+    onProfile,
+    onSettings,
+    onBilling,
+    onSupport,
+    onSignOut,
+    className = '',
+}) => {
+    const defaultTrigger = (
+        <button
+            className="flex items-center gap-3 px-4 py-2 rounded-lg transition-all hover:bg-muted focus:outline-none focus:ring-4 focus:ring-focus-ring/20"
+        >
+            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold">
+                {userName.charAt(0).toUpperCase()}
+            </div>
+            <div className="flex flex-col items-start">
+                <span className="text-sm font-medium text-text-primary">{userName}</span>
+                {userEmail && (
+                    <span className="text-xs text-text-secondary">{userEmail}</span>
+                )}
+            </div>
+            <svg
+                className="w-4 h-4 text-text-secondary"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+            >
+                <polyline points="6 9 12 15 18 9" />
+            </svg>
+        </button>
+    );
+
+    const items: DropdownMenuItemType[] = [
+        {
+            type: 'label',
+            label: 'My Account',
+        },
+        {
+            type: 'item',
+            label: 'Profile',
+            icon: (
+                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+            ),
+            onSelect: onProfile,
+            shortcut: '⌘P',
+        },
+        {
+            type: 'item',
+            label: 'Settings',
+            icon: (
+                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3" />
+                </svg>
+            ),
+            onSelect: onSettings,
+            shortcut: '⌘S',
+        },
+        {
+            type: 'item',
+            label: 'Billing',
+            icon: (
+                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                    <line x1="1" y1="10" x2="23" y2="10" />
+                </svg>
+            ),
+            onSelect: onBilling,
+        },
+        {
+            type: 'separator',
+        },
+        {
+            type: 'item',
+            label: 'Support',
+            icon: (
+                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3m.08 4h.01" />
+                </svg>
+            ),
+            onSelect: onSupport,
+        },
+        {
+            type: 'separator',
+        },
+        {
+            type: 'item',
+            label: 'Sign Out',
+            icon: (
+                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 14l5-5-5-5m5 5H9" />
+                </svg>
+            ),
+            onSelect: onSignOut,
+            shortcut: '⇧⌘Q',
+        },
+    ];
+
+    return (
+        <CustomDropdownMenu
+            trigger={trigger || defaultTrigger}
+            items={items}
+            className={className}
+        />
+    );
+};
+
+// ActionsMenu Component - MISSING IN ORIGINAL
+export interface ActionsMenuProps {
+    trigger?: React.ReactNode;
+    actions: Array<{
+        label: string;
+        icon?: React.ReactNode;
+        onSelect: () => void;
+        disabled?: boolean;
+        variant?: 'default' | 'danger';
+    }>;
+    className?: string;
+}
+
+export const ActionsMenu: React.FC<ActionsMenuProps> = ({
+    trigger,
+    actions,
+    className = '',
+}) => {
+    const defaultTrigger = (
+        <button
+            className="p-2 rounded-lg transition-all text-text-secondary hover:text-text-primary hover:bg-muted focus:outline-none focus:ring-4 focus:ring-focus-ring/20"
+            aria-label="More actions"
+        >
+            <svg
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+            >
+                <circle cx="12" cy="12" r="1" fill="currentColor" />
+                <circle cx="12" cy="5" r="1" fill="currentColor" />
+                <circle cx="12" cy="19" r="1" fill="currentColor" />
+            </svg>
+        </button>
+    );
+
+    const items: DropdownMenuItemType[] = actions.map((action, index) => ({
+        type: 'item',
+        id: `action-${index}`,
+        label: action.label,
+        icon: action.icon,
+        onSelect: action.onSelect,
+        disabled: action.disabled,
+        variant: action.variant,
+    }));
+
+    return (
+        <CustomDropdownMenu
+            trigger={trigger || defaultTrigger}
+            items={items}
+            className={className}
+        />
+    );
+};
+
+// FilterMenu Component - MISSING IN ORIGINAL
+export interface FilterMenuProps {
+    trigger?: React.ReactNode;
+    selectedFilters?: string[];
+    onFiltersChange?: (filters: string[]) => void;
+    filters: Array<{
+        value: string;
+        label: string;
+    }>;
+    className?: string;
+}
+
+export const FilterMenu: React.FC<FilterMenuProps> = ({
+    trigger,
+    selectedFilters = [],
+    onFiltersChange,
+    filters,
+    className = '',
+}) => {
+    const defaultTrigger = (
+        <button
+            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border transition-all text-text-primary hover:border-primary hover:bg-primary-subtle focus:outline-none focus:ring-4 focus:ring-focus-ring/20"
+        >
+            <svg
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+            >
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+            </svg>
+            <span className="text-sm font-medium">Filters</span>
+            {selectedFilters.length > 0 && (
+                <span className="px-2 py-0.5 bg-primary text-primary-foreground text-xs rounded-full">
+                    {selectedFilters.length}
+                </span>
+            )}
+        </button>
+    );
+
+    const handleCheckedChange = (value: string, checked: boolean) => {
+        const newFilters = checked
+            ? [...selectedFilters, value]
+            : selectedFilters.filter((f) => f !== value);
+        onFiltersChange?.(newFilters);
+    };
+
+    const items: DropdownMenuItemType[] = [
+        {
+            type: 'label',
+            label: 'Filter by',
+        },
+        ...filters.map((filter) => ({
+            type: 'checkbox' as const,
+            label: filter.label,
+            checked: selectedFilters.includes(filter.value),
+            onCheckedChange: (checked: boolean) => handleCheckedChange(filter.value, checked),
+        })),
+    ];
+
+    return (
+        <CustomDropdownMenu
+            trigger={trigger || defaultTrigger}
+            items={items}
+            className={className}
+        />
     );
 };
 
@@ -137,9 +477,7 @@ export const DropdownCheckboxItem: React.FC<DropdownCheckboxItemProps> = ({
                     <polyline points="20 6 9 17 4 12" />
                 </svg>
             </DropdownMenu.ItemIndicator>
-            <span
-                className="dropdown-item-label"
-            >
+            <span className="dropdown-item-label">
                 {label}
             </span>
         </DropdownMenu.CheckboxItem>
@@ -181,9 +519,7 @@ export const DropdownRadioGroup: React.FC<DropdownRadioGroupProps> = ({
                             <circle cx="12" cy="12" r="6" />
                         </svg>
                     </DropdownMenu.ItemIndicator>
-                    <span
-                        className="dropdown-item-label"
-                    >
+                    <span className="dropdown-item-label">
                         {item.label}
                     </span>
                 </DropdownMenu.RadioItem>
@@ -195,7 +531,14 @@ export const DropdownRadioGroup: React.FC<DropdownRadioGroupProps> = ({
 // Sub Menu
 export interface DropdownSubMenuProps {
     trigger: string;
-    items: DropdownMenuItem[];
+    items: Array<{
+        id: string;
+        label: string;
+        icon?: React.ReactNode;
+        onSelect?: () => void;
+        disabled?: boolean;
+        variant?: 'default' | 'danger';
+    }>;
 }
 
 export const DropdownSubMenu: React.FC<DropdownSubMenuProps> = ({
@@ -205,9 +548,7 @@ export const DropdownSubMenu: React.FC<DropdownSubMenuProps> = ({
     return (
         <DropdownMenu.Sub>
             <DropdownMenu.SubTrigger className="dropdown-item dropdown-sub-trigger">
-                <span
-                    className="dropdown-item-label"
-                >
+                <span className="dropdown-item-label">
                     {trigger}
                 </span>
                 <svg
@@ -230,8 +571,7 @@ export const DropdownSubMenu: React.FC<DropdownSubMenuProps> = ({
                     {items.map((item) => (
                         <DropdownMenu.Item
                             key={item.id}
-                            className={`dropdown-item ${item.variant === 'danger' ? 'dropdown-item-danger' : ''
-                                }`}
+                            className={`dropdown-item ${item.variant === 'danger' ? 'dropdown-item-danger' : ''}`}
                             onSelect={item.onSelect}
                             disabled={item.disabled}
                         >
@@ -239,9 +579,7 @@ export const DropdownSubMenu: React.FC<DropdownSubMenuProps> = ({
                                 {item.icon && (
                                     <span className="dropdown-item-icon">{item.icon}</span>
                                 )}
-                                <span
-                                    className="dropdown-item-label"
-                                >
+                                <span className="dropdown-item-label">
                                     {item.label}
                                 </span>
                             </div>

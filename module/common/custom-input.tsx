@@ -88,7 +88,29 @@ export default function CustomInput({
                         setIsFocused(false);
                         props.onBlur?.(e);
                     }}
-                    className={`${sizeClasses[inputSize]} ${fullWidth ? 'w-full' : 'w-auto'} px-4 ${isPassword ? 'pr-12' : 'pr-4'} pt-5 pb-1 rounded-md border font-body transition-all outline-none ${variant === 'filled' ? 'bg-stone-100' : 'bg-white'} ${error ? 'border-semantic-error focus:border-semantic-error' : disabled ? 'border-stone-300 bg-stone-50 cursor-not-allowed' : isFocused ? 'border-gold-500 ring-4 ring-gold-500/15' : 'border-stone-300 hover:border-stone-400'} ${disabled ? 'text-stone-500' : 'text-leather-900'}`}
+                    className={`
+                        ${sizeClasses[inputSize]} 
+                        ${fullWidth ? 'w-full' : 'w-auto'} 
+                        px-4 
+                        ${isPassword ? 'pr-12' : 'pr-4'} 
+                        pt-5 pb-1 
+                        rounded-md 
+                        border 
+                        font-body 
+                        transition-all 
+                        duration-200
+                        outline-none 
+                        ${variant === 'filled' ? 'bg-input-background' : 'bg-surface'} 
+                        ${error
+                            ? 'border-error focus:border-error focus:ring-2 focus:ring-error/20'
+                            : disabled
+                                ? 'border-input-disabled-border bg-input-disabled-background cursor-not-allowed text-input-disabled-text'
+                                : isFocused
+                                    ? 'border-input-border-focus ring-2 ring-focus-ring/20'
+                                    : 'border-input-border hover:border-input-border-hover'
+                        } 
+                        ${disabled ? 'text-input-disabled-text' : 'text-input-text'}
+                    `}
                     aria-invalid={error ? 'true' : 'false'}
                     aria-describedby={error ? `${inputId}-error` : helperText ? `${inputId}-helper` : undefined}
                     {...props}
@@ -97,7 +119,27 @@ export default function CustomInput({
                 {/* Floating Label */}
                 <label
                     htmlFor={inputId}
-                    className={`absolute left-4 pointer-events-none transition-all font-body origin-left ${isFloating ? `${labelSizeClasses[inputSize].floating} ${labelSizeClasses[inputSize].floatingTop} scale-90` : `${labelSizeClasses[inputSize].default} ${labelSizeClasses[inputSize].top} scale-100`}   ${error ? 'text-semantic-error' : disabled ? 'text-stone-500' : isFloating ? 'text-gold-600' : 'text-stone-600'}`}>
+                    className={`
+                        absolute left-4 
+                        pointer-events-none 
+                        transition-all 
+                        duration-200
+                        font-body 
+                        origin-left 
+                        ${isFloating
+                            ? `${labelSizeClasses[inputSize].floating} ${labelSizeClasses[inputSize].floatingTop} scale-90`
+                            : `${labelSizeClasses[inputSize].default} ${labelSizeClasses[inputSize].top} scale-100`
+                        }   
+                        ${error
+                            ? 'text-error'
+                            : disabled
+                                ? 'text-input-disabled-text'
+                                : isFloating
+                                    ? 'text-primary'
+                                    : 'text-input-placeholder'
+                        }
+                    `}
+                >
                     {label}
                 </label>
 
@@ -107,17 +149,20 @@ export default function CustomInput({
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
                         disabled={disabled}
-                        className={`absolute right-3 top-2 -translate-y-1/ p-1.5 rounded transition-all ${disabled ? 'text-stone-400 cursor-not-allowed' : 'text-stone-600 hover:text-leather-900 hover:bg-stone-100'}              `}
+                        className={`
+                            absolute right-3 top-1/2 -translate-y-1/2
+                            p-1.5 rounded 
+                            transition-all 
+                            duration-200
+                            ${disabled
+                                ? 'text-input-disabled-text cursor-not-allowed'
+                                : 'text-text-secondary hover:text-text-primary hover:bg-muted'
+                            }
+                        `}
                         aria-label={showPassword ? 'Hide password' : 'Show password'}
                         tabIndex={-1}
                     >
-                        {showPassword ? (
-                            // Eye Off Icon
-                            <EyeOff />
-                        ) : (
-                            // Eye Icon
-                            <Eye />
-                        )}
+                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </button>
                 )}
             </div>
@@ -126,7 +171,12 @@ export default function CustomInput({
             {(error || helperText) && (
                 <p
                     id={error ? `${inputId}-error` : `${inputId}-helper`}
-                    className={`mt-1.5 text-xs font-body transition-colors ${error ? 'text-semantic-error' : 'text-stone-600'}`}
+                    className={`
+                        mt-1.5 text-xs font-body 
+                        transition-colors 
+                        duration-200
+                        ${error ? 'text-error' : 'text-text-secondary'}
+                    `}
                     role={error ? 'alert' : undefined}
                 >
                     {error || helperText}
@@ -134,4 +184,4 @@ export default function CustomInput({
             )}
         </div>
     );
-};
+}

@@ -4,7 +4,7 @@
      ============================================ */
 
     .dropdown-content {
-        @apply z-50 min-w-55 overflow-hidden rounded-lg border border-stone-300 bg-white shadow-lg p-1;
+        @apply z-50 min-w-55 overflow-hidden rounded-lg border border-border bg-white shadow-lg p-1;
         animation: dropdownIn 200ms cubic-bezier(0.16, 1, 0.3, 1);
         transform-origin: var(--radix-dropdown-menu-content-transform-origin);
     }
