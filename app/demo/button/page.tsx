@@ -72,18 +72,14 @@ export default function ButtonDemo() {
     };
 
     return (
-        <div className="min-h-screen bg-leather-50">
+        <div className="min-h-screen bg-background">
             {/* Header */}
-            <header className="bg-leather-900 text-leather-50 py-12 px-6">
+            <header className="bg-primary text-primary-foreground py-12 px-6">
                 <div className="max-w-6xl mx-auto">
-                    <h1
-                        className="text-4xl md:text-5xl font-display font-bold mb-3"
-                    >
+                    <h1 className="text-4xl md:text-5xl font-display font-bold mb-3">
                         Custom Button Component
                     </h1>
-                    <p
-                        className="text-lg text-leather-200 font-body"
-                    >
+                    <p className="text-lg text-primary-foreground/80 font-body">
                         Versatile button system with variants, icons, and polymorphic rendering
                     </p>
                 </div>
@@ -92,16 +88,14 @@ export default function ButtonDemo() {
             <main className="max-w-6xl mx-auto px-6 py-12 space-y-16">
 
                 {/* Button Variants */}
-                <section className="bg-white rounded-xl shadow-md p-8">
-                    <h2
-                        className="text-2xl font-display font-bold text-leather-900 mb-6"
-                    >
+                <section className="bg-surface rounded-xl shadow-md p-8">
+                    <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
                         Button Variants
                     </h2>
 
                     <div className="space-y-8">
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-4">All Variants</h3>
+                            <h3 className="text-lg font-semibold text-text-primary mb-4">All Variants</h3>
                             <div className="flex flex-wrap gap-4">
                                 <CustomButton variant="primary">Primary Button</CustomButton>
                                 <CustomButton variant="secondary">Secondary Button</CustomButton>
@@ -113,7 +107,7 @@ export default function ButtonDemo() {
                         </div>
 
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-4">Disabled State</h3>
+                            <h3 className="text-lg font-semibold text-text-primary mb-4">Disabled State</h3>
                             <div className="flex flex-wrap gap-4">
                                 <CustomButton variant="primary" disabled>Primary Disabled</CustomButton>
                                 <CustomButton variant="secondary" disabled>Secondary Disabled</CustomButton>
@@ -124,16 +118,14 @@ export default function ButtonDemo() {
                 </section>
 
                 {/* Button Sizes */}
-                <section className="bg-white rounded-xl shadow-md p-8">
-                    <h2
-                        className="text-2xl font-display font-bold text-leather-900 mb-6"
-                    >
+                <section className="bg-surface rounded-xl shadow-md p-8">
+                    <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
                         Button Sizes
                     </h2>
 
                     <div className="space-y-6">
                         <div>
-                            <h3 className="text-base font-semibold text-leather-900 mb-4">Primary Variant</h3>
+                            <h3 className="text-base font-semibold text-text-primary mb-4">Primary Variant</h3>
                             <div className="flex flex-wrap items-center gap-4">
                                 <CustomButton variant="primary" size="sm">Small</CustomButton>
                                 <CustomButton variant="primary" size="md">Medium</CustomButton>
@@ -143,7 +135,7 @@ export default function ButtonDemo() {
                         </div>
 
                         <div>
-                            <h3 className="text-base font-semibold text-leather-900 mb-4">Outline Variant</h3>
+                            <h3 className="text-base font-semibold text-text-primary mb-4">Outline Variant</h3>
                             <div className="flex flex-wrap items-center gap-4">
                                 <CustomButton variant="outline" size="sm">Small</CustomButton>
                                 <CustomButton variant="outline" size="md">Medium</CustomButton>
@@ -155,10 +147,8 @@ export default function ButtonDemo() {
                 </section>
 
                 {/* Button Shapes */}
-                <section className="bg-white rounded-xl shadow-md p-8">
-                    <h2
-                        className="text-2xl font-display font-bold text-leather-900 mb-6"
-                    >
+                <section className="bg-surface rounded-xl shadow-md p-8">
+                    <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
                         Button Shapes
                     </h2>
 
@@ -170,16 +160,14 @@ export default function ButtonDemo() {
                 </section>
 
                 {/* Buttons with Icons */}
-                <section className="bg-white rounded-xl shadow-md p-8">
-                    <h2
-                        className="text-2xl font-display font-bold text-leather-900 mb-6"
-                    >
+                <section className="bg-surface rounded-xl shadow-md p-8">
+                    <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
                         Buttons with Icons
                     </h2>
 
                     <div className="space-y-8">
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-4">Icon Left</h3>
+                            <h3 className="text-lg font-semibold text-text-primary mb-4">Icon Left</h3>
                             <div className="flex flex-wrap gap-4">
                                 <CustomButton variant="primary" icon={icons.cart} iconPosition="left">
                                     Add to Cart
@@ -194,7 +182,7 @@ export default function ButtonDemo() {
                         </div>
 
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-4">Icon Right</h3>
+                            <h3 className="text-lg font-semibold text-text-primary mb-4">Icon Right</h3>
                             <div className="flex flex-wrap gap-4">
                                 <CustomButton variant="primary" icon={icons.arrow} iconPosition="right">
                                     Continue
@@ -209,7 +197,7 @@ export default function ButtonDemo() {
                         </div>
 
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-4">Icon Only Buttons</h3>
+                            <h3 className="text-lg font-semibold text-text-primary mb-4">Icon Only Buttons</h3>
                             <div className="flex flex-wrap items-center gap-4">
                                 <IconButton
                                     variant="primary"
@@ -253,10 +241,8 @@ export default function ButtonDemo() {
                 </section>
 
                 {/* Loading State */}
-                <section className="bg-white rounded-xl shadow-md p-8">
-                    <h2
-                        className="text-2xl font-display font-bold text-leather-900 mb-6"
-                    >
+                <section className="bg-surface rounded-xl shadow-md p-8">
+                    <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
                         Loading State
                     </h2>
 
@@ -287,17 +273,15 @@ export default function ButtonDemo() {
                             />
                         </div>
 
-                        <p className="text-sm text-stone-600">
+                        <p className="text-sm text-text-secondary">
                             Click any button above to see the loading state animation
                         </p>
                     </div>
                 </section>
 
                 {/* Full Width Buttons */}
-                <section className="bg-white rounded-xl shadow-md p-8">
-                    <h2
-                        className="text-2xl font-display font-bold text-leather-900 mb-6"
-                    >
+                <section className="bg-surface rounded-xl shadow-md p-8">
+                    <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
                         Full Width Buttons
                     </h2>
 
@@ -315,16 +299,14 @@ export default function ButtonDemo() {
                 </section>
 
                 {/* Link Buttons (Anchor Elements) */}
-                <section className="bg-white rounded-xl shadow-md p-8">
-                    <h2
-                        className="text-2xl font-display font-bold text-leather-900 mb-6"
-                    >
+                <section className="bg-surface rounded-xl shadow-md p-8">
+                    <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
                         Link Buttons (Anchor Elements)
                     </h2>
 
                     <div className="space-y-6">
                         <div>
-                            <h3 className="text-base font-semibold text-leather-900 mb-4">Internal Links</h3>
+                            <h3 className="text-base font-semibold text-text-primary mb-4">Internal Links</h3>
                             <div className="flex flex-wrap gap-4">
                                 <CustomButton
                                     as='a'
@@ -342,7 +324,7 @@ export default function ButtonDemo() {
                         </div>
 
                         <div>
-                            <h3 className="text-base font-semibold text-leather-900 mb-4">External Links</h3>
+                            <h3 className="text-base font-semibold text-text-primary mb-4">External Links</h3>
                             <div className="flex flex-wrap gap-4">
                                 <CustomButton
                                     as='a'
@@ -370,21 +352,19 @@ export default function ButtonDemo() {
                 </section>
 
                 {/* Real-World Examples */}
-                <section className="bg-white rounded-xl shadow-md p-8">
-                    <h2
-                        className="text-2xl font-display font-bold text-leather-900 mb-6"
-                    >
+                <section className="bg-surface rounded-xl shadow-md p-8">
+                    <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
                         Real-World Examples
                     </h2>
 
                     <div className="space-y-8">
                         {/* Product Card */}
-                        <div className="border border-stone-200 rounded-lg p-6 max-w-sm">
-                            <div className="aspect-square bg-stone-200 rounded-lg mb-4" />
-                            <h3 className="text-xl font-display font-bold text-leather-900 mb-2">
+                        <div className="border border-border rounded-lg p-6 max-w-sm">
+                            <div className="aspect-square bg-muted rounded-lg mb-4" />
+                            <h3 className="text-xl font-display font-bold text-text-primary mb-2">
                                 Premium Leather Jacket
                             </h3>
-                            <p className="text-stone-600 mb-4">$599.00</p>
+                            <p className="text-text-secondary mb-4">$599.00</p>
                             <div className="space-y-2">
                                 <CustomButton
                                     variant="primary"
@@ -401,14 +381,14 @@ export default function ButtonDemo() {
                         </div>
 
                         {/* Form Actions */}
-                        <div className="border border-stone-200 rounded-lg p-6 max-w-md">
-                            <h3 className="text-xl font-display font-bold text-leather-900 mb-4">
+                        <div className="border border-border rounded-lg p-6 max-w-md">
+                            <h3 className="text-xl font-display font-bold text-text-primary mb-4">
                                 Contact Form
                             </h3>
                             <div className="space-y-4 mb-6">
-                                <div className="h-10 bg-stone-100 rounded" />
-                                <div className="h-10 bg-stone-100 rounded" />
-                                <div className="h-24 bg-stone-100 rounded" />
+                                <div className="h-10 bg-muted rounded" />
+                                <div className="h-10 bg-muted rounded" />
+                                <div className="h-24 bg-muted rounded" />
                             </div>
                             <div className="flex gap-3">
                                 <CustomButton variant="ghost" className="flex-1">
@@ -421,7 +401,7 @@ export default function ButtonDemo() {
                         </div>
 
                         {/* Toolbar */}
-                        <div className="border border-stone-200 rounded-lg p-4">
+                        <div className="border border-border rounded-lg p-4">
                             <div className="flex items-center justify-between">
                                 <IconButton
                                     variant="destructive"
@@ -434,10 +414,8 @@ export default function ButtonDemo() {
                 </section>
 
                 {/* Custom Styling */}
-                <section className="bg-white rounded-xl shadow-md p-8">
-                    <h2
-                        className="text-2xl font-display font-bold text-leather-900 mb-6"
-                    >
+                <section className="bg-surface rounded-xl shadow-md p-8">
+                    <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
                         Custom Styling
                     </h2>
 
@@ -465,11 +443,9 @@ export default function ButtonDemo() {
             </main>
 
             {/* Footer */}
-            <footer className="bg-leather-900 text-leather-200 py-8 px-6 mt-16">
+            <footer className="bg-primary text-primary-foreground py-8 px-6 mt-16">
                 <div className="max-w-6xl mx-auto text-center">
-                    <p
-                        className="text-sm font-body"
-                    >
+                    <p className="text-sm font-body">
                         Custom Button Component • Polymorphic • Interactive • Accessible
                     </p>
                 </div>

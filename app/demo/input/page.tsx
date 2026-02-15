@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import CustomRadio from '@module/common/custom-radio';
-import CustomCheckbox from '@module/common/custom-checkbox';
+import CustomRadio, { RadioGroup } from '@module/common/custom-radio';
+import CustomCheckbox, { CheckboxGroup } from '@module/common/custom-checkbox';
 import CustomInput from '@module/common/custom-input';
 import CustomSelect from '@module/common/custom-select';
 
@@ -253,7 +253,33 @@ export default function FormComponentsDemo() {
                                 <h3 className="text-base font-body font-semibold text-leather-900 mb-4">
                                     Shipping Method
                                 </h3>
-                                Radio Group
+                                <RadioGroup
+                                    name="shipping"
+                                    value={formData.shippingMethod}
+                                    onChange={(value) => setFormData({ ...formData, shippingMethod: value })}
+                                >
+                                    <CustomRadio
+                                        value="standard"
+                                        label="Standard Shipping"
+                                        description="Delivery in 5-7 business days • Free"
+                                    />
+                                    <CustomRadio
+                                        value="express"
+                                        label="Express Shipping"
+                                        description="Delivery in 2-3 business days • $15.00"
+                                    />
+                                    <CustomRadio
+                                        value="overnight"
+                                        label="Overnight Shipping"
+                                        description="Next day delivery • $35.00"
+                                    />
+                                    <CustomRadio
+                                        value="disabled"
+                                        label="International (Currently Unavailable)"
+                                        description="Estimated 10-14 business days"
+                                        disabled
+                                    />
+                                </RadioGroup>
                             </div>
 
                             {/* Radio Sizes */}
@@ -288,7 +314,14 @@ export default function FormComponentsDemo() {
                                 <h3 className="text-base font-body font-semibold text-leather-900 mb-4">
                                     Horizontal Layout
                                 </h3>
-                                RadioGroup
+                                <RadioGroup
+                                    name="color"
+                                    layout="horizontal"
+                                >
+                                    <CustomRadio value="black" label="Black" />
+                                    <CustomRadio value="brown" label="Brown" />
+                                    <CustomRadio value="tan" label="Tan" />
+                                </RadioGroup>
                             </div>
                         </div>
                     </section>
@@ -306,7 +339,32 @@ export default function FormComponentsDemo() {
                                 <h3 className="text-base font-body font-semibold text-leather-900 mb-4">
                                     Notification Preferences
                                 </h3>
-                                CheckboxGroup
+                                <CheckboxGroup
+                                    value={formData.notifications}
+                                    onChange={(value) => setFormData({ ...formData, notifications: value })}
+                                >
+                                    <CustomCheckbox
+                                        value="email"
+                                        label="Email Notifications"
+                                        description="Receive updates about your orders via email"
+                                    />
+                                    <CustomCheckbox
+                                        value="sms"
+                                        label="SMS Notifications"
+                                        description="Get text messages for order status updates"
+                                    />
+                                    <CustomCheckbox
+                                        value="push"
+                                        label="Push Notifications"
+                                        description="Browser notifications for special offers"
+                                    />
+                                    <CustomCheckbox
+                                        value="disabled"
+                                        label="Newsletter (Coming Soon)"
+                                        description="Weekly updates about new products"
+                                        disabled
+                                    />
+                                </CheckboxGroup>
                             </div>
 
                             {/* Single Checkbox */}
@@ -361,7 +419,11 @@ export default function FormComponentsDemo() {
                                 <h3 className="text-base font-body font-semibold text-leather-900 mb-4">
                                     Horizontal Layout
                                 </h3>
-                                CheckboxGroup
+                                <CheckboxGroup layout="horizontal">
+                                    <CustomCheckbox value="mon" label="Monday" />
+                                    <CustomCheckbox value="wed" label="Wednesday" />
+                                    <CustomCheckbox value="fri" label="Friday" />
+                                </CheckboxGroup>
                             </div>
                         </div>
                     </section>

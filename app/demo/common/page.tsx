@@ -65,7 +65,7 @@ export default function AdvancedComponentsDemo() {
             question: 'How can I track my order?',
             answer: (
                 <p>
-                    Once your order ships, youll receive a tracking number via email. You can also track your order by logging into your account and viewing your order history. For any issues with tracking, please contact our customer service team.
+                    Once your order ships, you will receive a tracking number via email. You can also track your order by logging into your account and viewing your order history. For any issues with tracking, please contact our customer service team.
                 </p>
             ),
         },
@@ -106,7 +106,7 @@ export default function AdvancedComponentsDemo() {
                     <p>Our jackets run true to size. For the best fit, we recommend measuring a jacket you already own and comparing to our size chart:</p>
                     <table className="w-full border-collapse">
                         <thead>
-                            <tr className="border-b">
+                            <tr className="border-b border-border">
                                 <th className="py-2 text-left">Size</th>
                                 <th className="py-2 text-left">Chest</th>
                                 <th className="py-2 text-left">Shoulder</th>
@@ -114,9 +114,9 @@ export default function AdvancedComponentsDemo() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="border-b"><td className="py-2">S</td><td>{`36-38"`}</td><td>{`17"`}</td><td>{`25"`}</td></tr>
-                            <tr className="border-b"><td className="py-2">M</td><td>{`38-40"`}</td><td>{`18"`}</td><td>{`26"`}</td></tr>
-                            <tr className="border-b"><td className="py-2">L</td><td>{`40-42"`}</td><td>{`19"`}</td><td>{`27"`}</td></tr>
+                            <tr className="border-b border-border"><td className="py-2">S</td><td>{`36-38"`}</td><td>{`17"`}</td><td>{`25"`}</td></tr>
+                            <tr className="border-b border-border"><td className="py-2">M</td><td>{`38-40"`}</td><td>{`18"`}</td><td>{`26"`}</td></tr>
+                            <tr className="border-b border-border"><td className="py-2">L</td><td>{`40-42"`}</td><td>{`19"`}</td><td>{`27"`}</td></tr>
                             <tr><td className="py-2">XL</td><td>{`42-44"`}</td><td>{`20"`}</td><td>{`28"`}</td></tr>
                         </tbody>
                     </table>
@@ -142,18 +142,14 @@ export default function AdvancedComponentsDemo() {
     };
 
     return (
-        <div className="min-h-screen bg-leather-50">
+        <div className="min-h-screen bg-background">
             {/* Header */}
-            <header className="bg-leather-900 text-leather-50 py-12 px-6">
+            <header className="bg-primary text-primary-foreground py-12 px-6">
                 <div className="max-w-6xl mx-auto">
-                    <h1
-                        className="text-4xl md:text-5xl font-display font-bold mb-3"
-                    >
+                    <h1 className="text-4xl md:text-5xl font-display font-bold mb-3">
                         Advanced Components
                     </h1>
-                    <p
-                        className="text-lg text-leather-200 font-body"
-                    >
+                    <p className="text-lg text-primary-foreground/80 font-body">
                         Modals, Accordions, and Dropdown Menus powered by Radix UI
                     </p>
                 </div>
@@ -162,17 +158,15 @@ export default function AdvancedComponentsDemo() {
             <main className="max-w-6xl mx-auto px-6 py-12 space-y-16">
 
                 {/* Modals Section */}
-                <section className="bg-white rounded-xl shadow-md p-8">
-                    <h2
-                        className="text-2xl font-display font-bold text-leather-900 mb-6"
-                    >
+                <section className="bg-surface rounded-xl shadow-md p-8">
+                    <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
                         Modals
                     </h2>
 
                     <div className="space-y-6">
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-3">Basic Modal</h3>
-                            <p className="text-sm text-stone-600 mb-4">
+                            <h3 className="text-lg font-semibold text-text-primary mb-3">Basic Modal</h3>
+                            <p className="text-sm text-text-secondary mb-4">
                                 A standard modal with title, description, and content area.
                             </p>
 
@@ -180,9 +174,7 @@ export default function AdvancedComponentsDemo() {
                                 open={basicModalOpen}
                                 onOpenChange={setBasicModalOpen}
                                 trigger={
-                                    <button
-                                        className="px-4 py-2.5 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-all font-semibold"
-                                    >
+                                    <button className="px-4 py-2.5 bg-button-primary text-button-primary-foreground rounded-lg hover:bg-button-primary-hover transition-all font-semibold">
                                         Open Basic Modal
                                     </button>
                                 }
@@ -201,10 +193,10 @@ export default function AdvancedComponentsDemo() {
                                 }
                             >
                                 <div className="space-y-4">
-                                    <p className="text-stone-700">
+                                    <p className="text-text-primary">
                                         Our collection features handcrafted leather jackets, coats, and accessories made from the finest materials. Each piece is designed to last a lifetime.
                                     </p>
-                                    <p className="text-stone-700">
+                                    <p className="text-text-primary">
                                         Explore our catalog to find your perfect leather companion.
                                     </p>
                                 </div>
@@ -212,8 +204,8 @@ export default function AdvancedComponentsDemo() {
                         </div>
 
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-3">Form Modal</h3>
-                            <p className="text-sm text-stone-600 mb-4">
+                            <h3 className="text-lg font-semibold text-text-primary mb-3">Form Modal</h3>
+                            <p className="text-sm text-text-secondary mb-4">
                                 Modal with form inputs for collecting user data.
                             </p>
 
@@ -221,9 +213,7 @@ export default function AdvancedComponentsDemo() {
                                 open={formModalOpen}
                                 onOpenChange={setFormModalOpen}
                                 trigger={
-                                    <button
-                                        className="px-4 py-2.5 bg-leather-700 text-white rounded-lg hover:bg-leather-800 transition-all font-semibold"
-                                    >
+                                    <button className="px-4 py-2.5 bg-button-secondary text-button-secondary-foreground rounded-lg hover:bg-button-secondary-hover transition-all font-semibold">
                                         Open Form Modal
                                     </button>
                                 }
@@ -260,15 +250,15 @@ export default function AdvancedComponentsDemo() {
                         </div>
 
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-3">Alert Modals</h3>
-                            <p className="text-sm text-stone-600 mb-4">
+                            <h3 className="text-lg font-semibold text-text-primary mb-3">Alert Modals</h3>
+                            <p className="text-sm text-text-secondary mb-4">
                                 Pre-configured modals for confirmations and alerts.
                             </p>
 
                             <div className="flex flex-wrap gap-3">
                                 <button
                                     onClick={() => setAlertModalOpen(true)}
-                                    className="px-4 py-2.5 bg-semantic-info text-white rounded-lg hover:opacity-90 transition-all font-semibold"
+                                    className="px-4 py-2.5 bg-info text-info-foreground rounded-lg hover:bg-info-hover transition-all font-semibold"
                                 >
                                     Info Alert
                                 </button>
@@ -285,7 +275,7 @@ export default function AdvancedComponentsDemo() {
 
                                 <button
                                     onClick={() => setDeleteAlertOpen(true)}
-                                    className="px-4 py-2.5 bg-semantic-error text-white rounded-lg hover:opacity-90 transition-all font-semibold"
+                                    className="px-4 py-2.5 bg-error text-error-foreground rounded-lg hover:bg-error-hover transition-all font-semibold"
                                 >
                                     Danger Alert
                                 </button>
@@ -304,13 +294,13 @@ export default function AdvancedComponentsDemo() {
                         </div>
 
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-3">Modal Sizes</h3>
+                            <h3 className="text-lg font-semibold text-text-primary mb-3">Modal Sizes</h3>
                             <div className="flex flex-wrap gap-3">
                                 {(['sm', 'md', 'lg', 'xl'] as const).map((size) => (
                                     <CustomModal
                                         key={size}
                                         trigger={
-                                            <button className="px-4 py-2 border-2 border-border rounded-lg hover:border-gold-500 transition-all font-semibold">
+                                            <button className="px-4 py-2 border-2 border-border text-text-primary rounded-lg hover:border-primary transition-all font-semibold">
                                                 {size.toUpperCase()} Modal
                                             </button>
                                         }
@@ -318,7 +308,7 @@ export default function AdvancedComponentsDemo() {
                                         description="This modal demonstrates different size options"
                                         size={size}
                                     >
-                                        <p className="text-stone-700">
+                                        <p className="text-text-primary">
                                             This is a {size} sized modal. Content adapts to the available space.
                                         </p>
                                     </CustomModal>
@@ -329,30 +319,28 @@ export default function AdvancedComponentsDemo() {
                 </section>
 
                 {/* Accordions Section */}
-                <section className="bg-white rounded-xl shadow-md p-8">
-                    <h2
-                        className="text-2xl font-display font-bold text-leather-900 mb-6"
-                    >
+                <section className="bg-surface rounded-xl shadow-md p-8">
+                    <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
                         Accordions
                     </h2>
 
                     <div className="space-y-8">
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-4">FAQ Accordion</h3>
+                            <h3 className="text-lg font-semibold text-text-primary mb-4">FAQ Accordion</h3>
                             <FAQAccordion items={faqItems} />
                         </div>
 
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-4">Product Details Accordion</h3>
+                            <h3 className="text-lg font-semibold text-text-primary mb-4">Product Details Accordion</h3>
                             <ProductDetailsAccordion sections={productDetails} />
                         </div>
 
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-4">Accordion Variants</h3>
+                            <h3 className="text-lg font-semibold text-text-primary mb-4">Accordion Variants</h3>
 
                             <div className="space-y-6">
                                 <div>
-                                    <p className="text-sm text-stone-600 mb-3">Default Variant</p>
+                                    <p className="text-sm text-text-secondary mb-3">Default Variant</p>
                                     <CustomAccordion
                                         items={[
                                             { value: '1', title: 'Free Shipping', content: 'On orders over $200' },
@@ -364,7 +352,7 @@ export default function AdvancedComponentsDemo() {
                                 </div>
 
                                 <div>
-                                    <p className="text-sm text-stone-600 mb-3">Separated Variant</p>
+                                    <p className="text-sm text-text-secondary mb-3">Separated Variant</p>
                                     <CustomAccordion
                                         items={[
                                             { value: '1', title: 'Craftsmanship', content: 'Handmade by skilled artisans' },
@@ -376,7 +364,7 @@ export default function AdvancedComponentsDemo() {
                                 </div>
 
                                 <div>
-                                    <p className="text-sm text-stone-600 mb-3">Bordered Variant</p>
+                                    <p className="text-sm text-text-secondary mb-3">Bordered Variant</p>
                                     <CustomAccordion
                                         items={[
                                             { value: '1', title: 'Lifetime Guarantee', content: 'We stand behind our products' },
@@ -392,16 +380,14 @@ export default function AdvancedComponentsDemo() {
                 </section>
 
                 {/* Dropdown Menus Section */}
-                <section className="bg-white rounded-xl shadow-md p-8">
-                    <h2
-                        className="text-2xl font-display font-bold text-leather-900 mb-6"
-                    >
+                <section className="bg-surface rounded-xl shadow-md p-8">
+                    <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
                         Dropdown Menus
                     </h2>
 
                     <div className="space-y-8">
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-4">User Menu</h3>
+                            <h3 className="text-lg font-semibold text-text-primary mb-4">User Menu</h3>
                             <UserMenu
                                 userName="John Smith"
                                 userEmail="john@example.com"
@@ -414,7 +400,7 @@ export default function AdvancedComponentsDemo() {
                         </div>
 
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-4">Actions Menu</h3>
+                            <h3 className="text-lg font-semibold text-text-primary mb-4">Actions Menu</h3>
                             <ActionsMenu
                                 actions={[
                                     {
@@ -464,7 +450,7 @@ export default function AdvancedComponentsDemo() {
                         </div>
 
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-4">Filter Menu</h3>
+                            <h3 className="text-lg font-semibold text-text-primary mb-4">Filter Menu</h3>
                             <div className="flex items-center gap-4">
                                 <FilterMenu
                                     selectedFilters={selectedFilters}
@@ -477,7 +463,7 @@ export default function AdvancedComponentsDemo() {
                                     ]}
                                 />
                                 {selectedFilters.length > 0 && (
-                                    <p className="text-sm text-stone-600">
+                                    <p className="text-sm text-text-secondary">
                                         Selected: {selectedFilters.join(', ')}
                                     </p>
                                 )}
@@ -485,10 +471,10 @@ export default function AdvancedComponentsDemo() {
                         </div>
 
                         <div>
-                            <h3 className="text-lg font-semibold text-leather-900 mb-4">Custom Dropdown</h3>
+                            <h3 className="text-lg font-semibold text-text-primary mb-4">Custom Dropdown</h3>
                             <CustomDropdownMenu
                                 trigger={
-                                    <button className="px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-all font-semibold">
+                                    <button className="px-4 py-2 bg-button-primary text-button-primary-foreground rounded-lg hover:bg-button-primary-hover transition-all font-semibold">
                                         Custom Menu
                                     </button>
                                 }
@@ -517,11 +503,9 @@ export default function AdvancedComponentsDemo() {
             </main>
 
             {/* Footer */}
-            <footer className="bg-leather-900 text-leather-200 py-8 px-6 mt-16">
+            <footer className="bg-primary text-primary-foreground py-8 px-6 mt-16">
                 <div className="max-w-6xl mx-auto text-center">
-                    <p
-                        className="text-sm font-body"
-                    >
+                    <p className="text-sm font-body">
                         Advanced Components • Built with Radix UI & Tailwind CSS • Next.js 16+
                     </p>
                 </div>

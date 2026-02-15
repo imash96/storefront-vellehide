@@ -121,7 +121,7 @@ export default function CustomRadio({
     );
 }
 
-// RadioGroup Component - MISSING IN ORIGINAL
+// RadioGroup Component with proper TypeScript typing
 export interface RadioGroupProps {
     name: string;
     value?: string;
@@ -155,16 +155,26 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
         horizontal: 'flex flex-row flex-wrap gap-4',
     };
 
-    // Clone children and inject name, checked, and onChange props
+    // Clone children and inject name, checked, and onChange props with proper typing
     const radioButtons = React.Children.map(children, (child) => {
+        // Type guard to check if child is a valid React element
         if (React.isValidElement(child)) {
-            const radioValue = child.props.value;
-            return React.cloneElement(child, {
-                name,
-                checked: (value !== undefined ? value : internalValue) === radioValue,
-                onChange: () => handleChange(radioValue),
-                error: !!error,
-            } as any);
+            // Extract props safely with proper typing
+            const childProps = child.props as { value?: string };
+            const radioValue = childProps.value;
+
+            if (radioValue !== undefined) {
+                // Clone element with injected props
+                return React.cloneElement(
+                    child as React.ReactElement<CustomRadioProps>,
+                    {
+                        name,
+                        checked: (value !== undefined ? value : internalValue) === radioValue,
+                        onChange: () => handleChange(radioValue),
+                        error: !!error,
+                    }
+                );
+            }
         }
         return child;
     });

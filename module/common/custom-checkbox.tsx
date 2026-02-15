@@ -159,7 +159,7 @@ export default function CustomCheckbox({
     );
 }
 
-// CheckboxGroup Component - MISSING IN ORIGINAL
+// CheckboxGroup Component with proper TypeScript typing
 export interface CheckboxGroupProps {
     value?: string[];
     onChange?: (value: string[]) => void;
@@ -195,18 +195,28 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
         horizontal: 'flex flex-row flex-wrap gap-4',
     };
 
-    // Clone children and inject checked and onChange props
+    // Clone children and inject checked and onChange props with proper typing
     const checkboxes = React.Children.map(children, (child) => {
+        // Type guard to check if child is a valid React element
         if (React.isValidElement(child)) {
-            const checkboxValue = child.props.value;
-            const currentValue = value.length > 0 ? value : internalValue;
-            return React.cloneElement(child, {
-                checked: currentValue.includes(checkboxValue),
-                onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                    handleChange(checkboxValue, e.target.checked);
-                },
-                error: !!error,
-            } as any);
+            // Extract props safely with proper typing
+            const childProps = child.props as { value?: string };
+            const checkboxValue = childProps.value;
+
+            if (checkboxValue !== undefined) {
+                const currentValue = value.length > 0 ? value : internalValue;
+                // Clone element with injected props
+                return React.cloneElement(
+                    child as React.ReactElement<CustomCheckboxProps>,
+                    {
+                        checked: currentValue.includes(checkboxValue),
+                        onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                            handleChange(checkboxValue, e.target.checked);
+                        },
+                        error: !!error,
+                    }
+                );
+            }
         }
         return child;
     });
