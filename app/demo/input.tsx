@@ -6,7 +6,7 @@ import CustomCheckbox, { CheckboxGroup } from '@module/common/custom-checkbox';
 import CustomInput from '@module/common/custom-input';
 import CustomSelect from '@module/common/custom-select';
 
-export default function FormComponentsDemo() {
+export default function InputTab() {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
