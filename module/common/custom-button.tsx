@@ -34,6 +34,24 @@ interface AnchorElementProps extends BaseButtonProps, AnchorHTMLAttributes<HTMLA
 
 export type CustomButtonProps = ButtonElementProps | AnchorElementProps;
 
+// Size classes
+const sizeClasses = {
+    sm: 'px-3 py-1.5 text-xs sm:text-sm min-h-[36px] sm:min-h-[32px]',
+    md: 'px-4 py-2 text-sm sm:text-base min-h-[44px] sm:min-h-[40px]',
+    lg: 'px-6 py-3 text-base sm:text-lg min-h-[48px] sm:min-h-[44px]',
+    xl: 'px-8 py-4 text-lg sm:text-xl min-h-[52px] sm:min-h-[48px]',
+};
+
+// Variant classes using CSS variables
+const variantClasses = {
+    primary: 'bg-button-primary text-button-primary-foreground hover:bg-button-primary-hover active:bg-button-primary-active disabled:bg-muted disabled:text-text-disabled',
+    secondary: 'bg-button-secondary text-button-secondary-foreground hover:bg-button-secondary-hover active:bg-button-secondary-active disabled:bg-muted disabled:text-text-disabled',
+    outline: 'bg-transparent text-text-primary border-2 border-border hover:bg-muted hover:border-primary active:bg-muted-hover disabled:border-border-subtle disabled:text-text-disabled',
+    ghost: 'bg-transparent text-text-primary hover:bg-button-ghost-hover active:bg-button-ghost-active disabled:text-text-disabled',
+    destructive: 'bg-button-destructive text-button-destructive-foreground hover:bg-button-destructive-hover active:bg-button-destructive-active disabled:bg-muted disabled:text-text-disabled',
+    accent: 'bg-button-accent text-button-accent-foreground hover:bg-button-accent-hover active:bg-button-accent-active disabled:bg-muted disabled:text-text-disabled',
+};
+
 // Loading spinner component
 function LoadingSpinner({ size }: { size: Size }) {
     const sizeMap = { sm: 12, md: 16, lg: 20, xl: 24 };
@@ -61,13 +79,7 @@ export default function CustomButton({
     children,
     ...rest
 }: CustomButtonProps) {
-    // Size classes
-    const sizeClasses = {
-        sm: 'px-3 py-1.5 text-sm gap-1.5',
-        md: 'px-4 py-2.5 text-base gap-2',
-        lg: 'px-6 py-3 text-lg gap-2.5',
-        xl: 'px-8 py-4 text-xl gap-3',
-    };
+
 
     // Icon-only size adjustments
     const iconOnlySizeClasses = {
@@ -82,16 +94,6 @@ export default function CustomButton({
         rounded: 'rounded-lg',
         square: 'rounded-none',
         pill: 'rounded-full',
-    };
-
-    // Variant classes using CSS variables
-    const variantClasses = {
-        primary: 'bg-button-primary text-button-primary-foreground border-2 border-button-primary hover:bg-button-primary-hover hover:border-button-primary-hover active:bg-button-primary-active focus:ring-primary/30',
-        secondary: 'bg-button-secondary text-button-secondary-foreground border-2 border-button-secondary hover:bg-button-secondary-hover active:bg-button-secondary-active focus:ring-primary/30',
-        accent: 'bg-button-accent text-button-accent-foreground border-2 border-button-accent hover:bg-button-accent-hover active:bg-button-accent-active focus:ring-accent/30',
-        ghost: 'bg-transparent text-button-ghost-foreground border-2 border-transparent hover:bg-button-ghost-hover active:bg-button-ghost-active focus:ring-primary/15',
-        destructive: 'bg-button-destructive text-button-destructive-foreground border-2 border-button-destructive hover:bg-button-destructive-hover active:bg-button-destructive-active focus:ring-destructive/30',
-        outline: 'bg-transparent text-button-outline-foreground border-2 border-button-outline-border hover:border-primary hover:bg-primary-subtle focus:ring-primary/15',
     };
 
     // Check if button has only icon (no text)

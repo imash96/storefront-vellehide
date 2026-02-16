@@ -1,9 +1,9 @@
 'use client';
 
 import * as Accordion from '@radix-ui/react-accordion';
+import { ChevronDown } from 'lucide-react';
 
 import "@/css/accordion.css"
-import { ChevronDown } from 'lucide-react';
 
 export interface AccordionItemData {
     id?: string;
@@ -34,12 +34,12 @@ const AccordionItemComponent = ({ value, title, content, disabled }: AccordionIt
     <Accordion.Item value={value} disabled={disabled} className="accordion-item">
         <Accordion.Header className="accordion-header">
             <Accordion.Trigger className="accordion-trigger">
-                <span className="accordion-trigger-text">{title}</span>
-                <ChevronDown />
+                <span className="accordion-trigger-text text-sm sm:text-base">{title}</span>
+                <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5" />
             </Accordion.Trigger>
         </Accordion.Header>
         <Accordion.Content className="accordion-content">
-            <div className="accordion-content-inner">{content}</div>
+            <div className="accordion-content-inner text-sm sm:text-base">{content}</div>
         </Accordion.Content>
     </Accordion.Item>
 );
@@ -106,7 +106,7 @@ export const FAQAccordion: React.FC<FAQAccordionProps> = ({
         value: `faq-${index}`,
         title: item.question,
         content: typeof item.answer === 'string'
-            ? <p className="text-text-primary leading-relaxed">{item.answer}</p>
+            ? <p className="text-text-primary leading-relaxed text-sm sm:text-base">{item.answer}</p>
             : item.answer,
     }));
 
@@ -117,7 +117,7 @@ export const FAQAccordion: React.FC<FAQAccordionProps> = ({
     );
 };
 
-// ProductDetailsAccordion Component - MISSING IN ORIGINAL
+// ProductDetailsAccordion Component
 export interface ProductDetailsSection {
     title: string;
     content: React.ReactNode;
@@ -167,12 +167,12 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
         <Accordion.Item value={value} disabled={disabled} className="accordion-item">
             <Accordion.Header className="accordion-header">
                 <Accordion.Trigger className="accordion-trigger">
-                    <span className="accordion-trigger-text">{title}</span>
-                    <ChevronDown />
+                    <span className="accordion-trigger-text text-sm sm:text-base">{title}</span>
+                    <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5" />
                 </Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Content className="accordion-content">
-                <div className="accordion-content-inner">{children}</div>
+                <div className="accordion-content-inner text-sm sm:text-base">{children}</div>
             </Accordion.Content>
         </Accordion.Item>
     );

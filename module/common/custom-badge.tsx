@@ -6,37 +6,32 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
     dot?: boolean;
 }
 
-export function Badge({ variant = 'default', size = 'md', dot = false, className = '', children, ...props }: BadgeProps) {
+const variantClasses = {
+    default: 'bg-muted text-text-primary',
+    new: 'bg-badge-new text-badge-new-foreground',
+    sale: 'bg-badge-sale text-badge-sale-foreground',
+    limited: 'bg-badge-limited text-badge-limited-foreground',
+    success: 'bg-success text-success-foreground',
+    error: 'bg-error text-error-foreground',
+    warning: 'bg-warning text-warning-foreground',
+    info: 'bg-info text-info-foreground',
+    outline: 'bg-transparent border-2 border-border text-text-primary',
+};
 
-    const variantClasses = {
-        default: 'bg-muted text-text-primary',
-        new: 'bg-badge-new text-badge-new-foreground',
-        sale: 'bg-badge-sale text-badge-sale-foreground',
-        limited: 'bg-badge-limited text-badge-limited-foreground',
-        success: 'bg-success text-success-foreground',
-        error: 'bg-error text-error-foreground',
-        warning: 'bg-warning text-warning-foreground',
-        info: 'bg-info text-info-foreground',
-        outline: 'bg-transparent border-2 border-border text-text-primary',
-    };
+const sizeClasses = {
+    sm: 'px-1.5 py-0.5 text-xs',
+    md: 'px-2 py-1 text-xs sm:text-sm',
+    lg: 'px-3 py-1.5 text-sm sm:text-base',
+};
 
-    const sizeClasses = {
-        sm: 'px-2 py-0.5 text-xs',
-        md: 'px-2.5 py-1 text-sm',
-        lg: 'px-3 py-1.5 text-base',
-    };
+export default function Badge({ variant = 'default', size = 'md', dot = false, className = '', children, ...props }: BadgeProps) {
 
     return (
         <span className={` inline-flex items-center gap-1.5 font-medium rounded-full ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
             {...props}
         >
             {dot && (
-                <span
-                    className={`
-                            w-1.5 h-1.5 rounded-full
-                            ${variant === 'outline' ? 'bg-text-primary' : 'bg-current'}
-                        `}
-                />
+                <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${variant === 'outline' ? 'bg-text-primary' : 'bg-current'}`} />
             )}
             {children}
         </span>
@@ -44,12 +39,14 @@ export function Badge({ variant = 'default', size = 'md', dot = false, className
 };
 
 // Notification Badge (for cart count, etc.)
-export interface NotificationBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface NotificationBadgeProps {
     count: number;
     max?: number;
     showZero?: boolean;
+    size?: 'sm' | 'md';
     variant?: 'default' | 'error' | 'success';
     position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+    className?: string;
 }
 
 export const NotificationBadge: React.FC<NotificationBadgeProps> = ({
@@ -58,12 +55,12 @@ export const NotificationBadge: React.FC<NotificationBadgeProps> = ({
     showZero = false,
     variant = 'error',
     position = 'top-right',
-    className = '',
-    ...props
+    size = 'md',
+    className = ''
 }) => {
-    const displayCount = count > max ? `${max}+` : count;
-
     if (count === 0 && !showZero) return null;
+
+    const displayCount = count > max ? `${max}+` : count;
 
     const variantClasses = {
         default: 'bg-primary text-primary-foreground',
@@ -80,8 +77,7 @@ export const NotificationBadge: React.FC<NotificationBadgeProps> = ({
 
     return (
         <span
-            className={`absolute inline-flex items-center justify-center min-w-5 h-5 px-1 text-xs font-bold rounded-full ${variantClasses[variant]} ${positionClasses[position]} ${className}`}
-            {...props}
+            className={`absolute inline-flex items-center justify-center min-w-4.5 min-h-4.5 sm:min-w-5 sm:min-h-5 ${size === 'sm' ? 'text-2xs' : 'text-xs'} px-1 font-bold rounded-full ${variantClasses[variant]} ${positionClasses[position]} ${className}`}
         >
             {displayCount}
         </span>
@@ -89,81 +85,36 @@ export const NotificationBadge: React.FC<NotificationBadgeProps> = ({
 };
 
 // Status Badge (for order status, stock status, etc.)
-export interface StatusBadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface StatusBadgeProps {
     status: 'in-stock' | 'low-stock' | 'out-of-stock' | 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+    dot?: boolean;
     size?: 'sm' | 'md' | 'lg';
+    className?: string;
 }
+
+const statusConfig = {
+    'in-stock': { label: 'In Stock', variant: 'success' as const },
+    'low-stock': { label: 'Low Stock', variant: 'warning' as const },
+    'out-of-stock': { label: 'Out of Stock', variant: 'error' as const },
+    pending: { label: 'Pending', variant: 'warning' as const },
+    processing: { label: 'Processing', variant: 'info' as const },
+    shipped: { label: 'Shipped', variant: 'info' as const },
+    delivered: { label: 'Delivered', variant: 'success' as const },
+    cancelled: { label: 'Cancelled', variant: 'error' as const },
+};
 
 export const StatusBadge = ({
     status,
+    dot = false,
     size = 'md',
     className = '',
-    ...props
 }: StatusBadgeProps) => {
-    const statusConfig = {
-        'in-stock': {
-            label: 'In Stock',
-            color: 'bg-success text-success-foreground',
-            dotColor: 'bg-success',
-        },
-        'low-stock': {
-            label: 'Low Stock',
-            color: 'bg-warning text-warning-foreground',
-            dotColor: 'bg-warning',
-        },
-        'out-of-stock': {
-            label: 'Out of Stock',
-            color: 'bg-error text-error-foreground',
-            dotColor: 'bg-error',
-        },
-        'pending': {
-            label: 'Pending',
-            color: 'bg-warning text-warning-foreground',
-            dotColor: 'bg-warning',
-        },
-        'processing': {
-            label: 'Processing',
-            color: 'bg-info text-info-foreground',
-            dotColor: 'bg-info',
-        },
-        'shipped': {
-            label: 'Shipped',
-            color: 'bg-info text-info-foreground',
-            dotColor: 'bg-info',
-        },
-        'delivered': {
-            label: 'Delivered',
-            color: 'bg-success text-success-foreground',
-            dotColor: 'bg-success',
-        },
-        'cancelled': {
-            label: 'Cancelled',
-            color: 'bg-error text-error-foreground',
-            dotColor: 'bg-error',
-        },
-    };
-
     const config = statusConfig[status];
 
-    const sizeClasses = {
-        sm: 'px-2 py-1 text-xs',
-        md: 'px-3 py-1.5 text-sm',
-        lg: 'px-4 py-2 text-base',
-    };
-
     return (
-        <div
-            className={`
-                inline-flex items-center gap-2 rounded-full font-medium
-                ${config.color}
-                ${sizeClasses[size]}
-                ${className}
-            `}
-            {...props}
-        >
-            <span className={`w-2 h-2 rounded-full ${config.dotColor} animate-pulse`} />
+        <Badge variant={config.variant} size={size} dot={dot} className={className}>
             {config.label}
-        </div>
+        </Badge>
     );
 };
 
@@ -174,21 +125,21 @@ export interface SizeBadgeProps extends React.ButtonHTMLAttributes<HTMLButtonEle
     disabled?: boolean;
 }
 
-export const SizeBadge = ({
+export const SizeBadge: React.FC<SizeBadgeProps> = ({
     size: sizeLabel,
     selected = false,
     disabled = false,
     className = '',
     ...props
-}: SizeBadgeProps) => {
+}) => {
     return (
         <button
             type="button"
             disabled={disabled}
             className={`
-                min-w-10 h-10 px-3
+                min-w-10 min-h-10 sm:min-w-9 sm:min-h-9 px-2 sm:px-3
                 border-2 rounded-lg
-                font-semibold text-sm
+                font-semibold text-xs sm:text-sm
                 transition-all duration-200
                 ${selected
                     ? 'border-primary bg-primary text-primary-foreground'
@@ -214,20 +165,20 @@ export interface ColorBadgeProps extends React.ButtonHTMLAttributes<HTMLButtonEl
     disabled?: boolean;
 }
 
-export const ColorBadge = ({
+export const ColorBadge: React.FC<ColorBadgeProps> = ({
     color,
     colorName,
     selected = false,
     disabled = false,
     className = '',
     ...props
-}: ColorBadgeProps) => {
+}) => {
     return (
         <button
             type="button"
             disabled={disabled}
             className={`
-                relative w-10 h-10 rounded-full
+                relative w-10 h-10 sm:w-11 sm:h-11 rounded-full
                 border-2 transition-all duration-200
                 ${selected
                     ? 'border-primary ring-4 ring-primary/20'
@@ -239,6 +190,7 @@ export const ColorBadge = ({
                 ${className}
             `}
             title={colorName}
+            aria-label={colorName}
             {...props}
         >
             <span
@@ -247,7 +199,7 @@ export const ColorBadge = ({
             />
             {selected && (
                 <svg
-                    className="absolute inset-0 m-auto w-5 h-5 text-white drop-shadow-lg"
+                    className="absolute inset-0 m-auto w-4 h-4 sm:w-5 sm:h-5 text-white drop-shadow-lg"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="3"

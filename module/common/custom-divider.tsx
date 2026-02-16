@@ -1,7 +1,5 @@
 'use client';
 
-import { forwardRef } from 'react';
-
 export interface DividerProps extends React.HTMLAttributes<HTMLHRElement> {
     orientation?: 'horizontal' | 'vertical';
     variant?: 'solid' | 'dashed' | 'dotted';
@@ -11,84 +9,81 @@ export interface DividerProps extends React.HTMLAttributes<HTMLHRElement> {
     labelPosition?: 'left' | 'center' | 'right';
 }
 
-export const Divider = forwardRef<HTMLHRElement, DividerProps>(
-    ({
-        orientation = 'horizontal',
-        variant = 'solid',
-        thickness = 'thin',
-        spacing = 'md',
-        label,
-        labelPosition = 'center',
-        className = '',
-        ...props
-    }, ref) => {
-        const thicknessClasses = {
-            thin: orientation === 'horizontal' ? 'h-px' : 'w-px',
-            medium: orientation === 'horizontal' ? 'h-0.5' : 'w-0.5',
-            thick: orientation === 'horizontal' ? 'h-1' : 'w-1',
+export default function Divider({
+    orientation = 'horizontal',
+    variant = 'solid',
+    thickness = 'thin',
+    spacing = 'md',
+    label,
+    labelPosition = 'center',
+    className = '',
+    ...props
+}: DividerProps) {
+    const thicknessClasses = {
+        thin: orientation === 'horizontal' ? 'h-px' : 'w-px',
+        medium: orientation === 'horizontal' ? 'h-0.5' : 'w-0.5',
+        thick: orientation === 'horizontal' ? 'h-1' : 'w-1',
+    };
+
+    const spacingClasses = {
+        sm: orientation === 'horizontal' ? 'my-2' : 'mx-2',
+        md: orientation === 'horizontal' ? 'my-4' : 'mx-4',
+        lg: orientation === 'horizontal' ? 'my-6' : 'mx-6',
+    };
+
+    const variantClasses = {
+        solid: 'border-solid',
+        dashed: 'border-dashed',
+        dotted: 'border-dotted',
+    };
+
+    if (label && orientation === 'horizontal') {
+        const labelAlignClasses = {
+            left: 'justify-start',
+            center: 'justify-center',
+            right: 'justify-end',
         };
 
-        const spacingClasses = {
-            sm: orientation === 'horizontal' ? 'my-2' : 'mx-2',
-            md: orientation === 'horizontal' ? 'my-4' : 'mx-4',
-            lg: orientation === 'horizontal' ? 'my-6' : 'mx-6',
-        };
-
-        const variantClasses = {
-            solid: 'border-solid',
-            dashed: 'border-dashed',
-            dotted: 'border-dotted',
-        };
-
-        if (label && orientation === 'horizontal') {
-            const labelAlignClasses = {
-                left: 'justify-start',
-                center: 'justify-center',
-                right: 'justify-end',
-            };
-
-            return (
-                <div
-                    className={`
+        return (
+            <div
+                className={`
                         flex items-center gap-4
                         ${spacingClasses[spacing]}
                         ${labelAlignClasses[labelPosition]}
                         ${className}
                     `}
-                >
-                    {labelPosition !== 'left' && (
-                        <hr
-                            ref={ref}
-                            className={`
+            >
+                {labelPosition !== 'left' && (
+                    <hr
+                        className={`
                                 flex-1 border-t bg-divider
                                 ${thicknessClasses[thickness]}
                                 ${variantClasses[variant]}
                             `}
-                            {...props}
-                        />
-                    )}
+                        {...props}
+                    />
+                )}
 
-                    <span className="text-sm text-text-secondary font-medium whitespace-nowrap">
-                        {label}
-                    </span>
+                <span className="text-sm text-text-secondary font-medium whitespace-nowrap">
+                    {label}
+                </span>
 
-                    {labelPosition !== 'right' && (
-                        <hr
-                            className={`
+                {labelPosition !== 'right' && (
+                    <hr
+                        className={`
                                 flex-1 border-t bg-divider
                                 ${thicknessClasses[thickness]}
                                 ${variantClasses[variant]}
                             `}
-                        />
-                    )}
-                </div>
-            );
-        }
+                    />
+                )}
+            </div>
+        );
+    }
 
-        return (
-            <hr
-                ref={ref}
-                className={`
+    return (
+        <hr
+            className={`
                     ${orientation === 'horizontal' ? 'w-full border-t' : 'h-full border-l'}
                     bg-divider
                     ${thicknessClasses[thickness]}
@@ -96,11 +91,10 @@ export const Divider = forwardRef<HTMLHRElement, DividerProps>(
                     ${variantClasses[variant]}
                     ${className}
                 `}
-                {...props}
-            />
-        );
-    }
-);
+            {...props}
+        />
+    );
+};
 
 Divider.displayName = 'Divider';
 

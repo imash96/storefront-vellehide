@@ -2,15 +2,15 @@
 
 import { useState } from 'react';
 import Card, { ProductCard, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/module/common/custom-card';
-import { Badge, NotificationBadge, StatusBadge, SizeBadge, ColorBadge } from '@/module/common/custom-badge';
+import Badge, { NotificationBadge, StatusBadge, SizeBadge, ColorBadge } from '@/module/common/custom-badge';
 import { Chip, FilterChip, TagInput, CategoryTag } from '@/module/common/custom-chips';
 import { Avatar, AvatarGroup } from '@/module/common/custom-avatar';
 import { Price, PriceRange, PriceWithDiscount, InstallmentPrice, SavingsDisplay } from '@/module/common/product-price';
 import { RangeSlider, PriceRangeSlider } from '@/module/common/custom-range';
 import { QuantitySelector, CompactQuantitySelector } from '@/module/common/product-quantity';
 import { ProgressBar, SteppedProgress, CircularProgress } from '@/module/common/custom-progress';
-import { Divider, SectionDivider, ContentDivider } from '@/module/common/custom-divider';
-import { Alert, BannerAlert, InlineAlert } from '@/module/common/custom-alert';
+import Divider, { SectionDivider, ContentDivider } from '@/module/common/custom-divider';
+import Alert, { BannerAlert, InlineAlert } from '@/module/common/custom-alert';
 import { ImageGallery, Carousel } from '@/module/common/product-gallery';
 import { ShareButtons } from '@/module/common/custom-share';
 import { ImageZoom, LensMagnifier, SideBySideZoom } from '@/module/common/product-zoom';
@@ -222,10 +222,10 @@ export default function CustomTab() {
                                 <div className="space-y-3">
                                     <StatusBadge status="in-stock" />
                                     <StatusBadge status="low-stock" />
-                                    <StatusBadge status="out-of-stock" />
+                                    <StatusBadge dot status="out-of-stock" />
                                     <StatusBadge status="pending" />
                                     <StatusBadge status="processing" />
-                                    <StatusBadge status="shipped" />
+                                    <StatusBadge dot status="shipped" />
                                     <StatusBadge status="delivered" />
                                     <StatusBadge status="cancelled" />
                                 </div>
@@ -402,10 +402,10 @@ export default function CustomTab() {
                             </CardHeader>
                             <CardContent>
                                 <div className="flex gap-4">
-                                    <Avatar name="Online User" status="online" showStatus size="lg" />
-                                    <Avatar name="Away User" status="away" showStatus size="lg" />
-                                    <Avatar name="Busy User" status="busy" showStatus size="lg" />
-                                    <Avatar name="Offline User" status="offline" showStatus size="lg" />
+                                    <Avatar name="Online User" status="online" size="lg" />
+                                    <Avatar name="Away User" status="away" size="lg" />
+                                    <Avatar name="Busy User" status="busy" size="lg" />
+                                    <Avatar name="Offline User" status="offline" size="lg" />
                                 </div>
                             </CardContent>
                         </Card>
