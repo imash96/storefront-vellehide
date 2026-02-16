@@ -9,6 +9,33 @@ export interface CustomRadioProps extends Omit<React.InputHTMLAttributes<HTMLInp
     radioSize?: 'sm' | 'md' | 'lg';
 }
 
+const sizeClasses = {
+    sm: {
+        radio: 'w-4 h-4',
+        dot: 'w-1.5 h-1.5',
+        label: 'text-sm',
+        description: 'text-xs',
+    },
+    md: {
+        radio: 'w-5 h-5',
+        dot: 'w-2 h-2',
+        label: 'text-base',
+        description: 'text-sm',
+    },
+    lg: {
+        radio: 'w-6 h-6',
+        dot: 'w-2.5 h-2.5',
+        label: 'text-lg',
+        description: 'text-base',
+    },
+};
+
+const RadioDot = ({ size, checked, disabled }: { size: string; checked?: boolean; disabled?: boolean }) => (
+    <span
+        className={`${size} rounded-full bg-primary transition-all ${checked ? 'scale-100 opacity-100' : 'scale-0 opacity-0'} ${disabled && 'bg-text-disabled'}`}
+    />
+);
+
 export default function CustomRadio({
     label,
     description,
@@ -21,27 +48,6 @@ export default function CustomRadio({
 }: CustomRadioProps) {
     const id = useId();
     const radioId = props.id || id;
-
-    const sizeClasses = {
-        sm: {
-            radio: 'w-4 h-4',
-            dot: 'w-1.5 h-1.5',
-            label: 'text-sm',
-            description: 'text-xs',
-        },
-        md: {
-            radio: 'w-5 h-5',
-            dot: 'w-2 h-2',
-            label: 'text-base',
-            description: 'text-sm',
-        },
-        lg: {
-            radio: 'w-6 h-6',
-            dot: 'w-2.5 h-2.5',
-            label: 'text-lg',
-            description: 'text-base',
-        },
-    };
 
     return (
         <div className={`flex items-start ${className}`}>
@@ -59,30 +65,10 @@ export default function CustomRadio({
                 {/* Custom Radio Button */}
                 <label
                     htmlFor={radioId}
-                    className={`
-                        ${sizeClasses[radioSize].radio} 
-                        relative flex items-center justify-center rounded-full border-2 transition-all cursor-pointer 
-                        ${disabled
-                            ? 'border-border-subtle bg-input-disabled-background cursor-not-allowed'
-                            : error
-                                ? 'border-error'
-                                : 'border-border'
-                        } 
-                        peer-checked:border-primary peer-checked:bg-primary-subtle 
-                        peer-focus-visible:ring-4 peer-focus-visible:ring-focus-ring/20 
-                        peer-disabled:border-border-subtle peer-disabled:bg-input-disabled-background peer-disabled:cursor-not-allowed 
-                        ${!disabled && !error && 'hover:border-primary hover:bg-primary-subtle/50'}
-                    `}
+                    className={`${sizeClasses[radioSize].radio} relative flex items-center justify-center rounded-full border-2 transition-all cursor-pointer ${disabled ? 'border-border-subtle bg-input-disabled-background cursor-not-allowed' : error ? 'border-error' : 'border-border'} peer-checked:border-primary peer-checked:bg-primary-subtle peer-focus-visible:ring-4 peer-focus-visible:ring-focus-ring/20 peer-disabled:border-border-subtle peer-disabled:bg-input-disabled-background peer-disabled:cursor-not-allowed ${!disabled && !error && 'hover:border-primary hover:bg-primary-subtle/50'}`}
                 >
                     {/* Inner dot */}
-                    <span
-                        className={`
-                            ${sizeClasses[radioSize].dot} 
-                            rounded-full bg-primary transition-all 
-                            ${checked ? 'scale-100 opacity-100' : 'scale-0 opacity-0'} 
-                            ${disabled && 'bg-text-disabled'}
-                        `}
-                    />
+                    <RadioDot size={sizeClasses[radioSize].dot} checked={checked} disabled={disabled} />
                 </label>
             </div>
 
@@ -90,29 +76,13 @@ export default function CustomRadio({
             <div className="ml-3 flex-1">
                 <label
                     htmlFor={radioId}
-                    className={`
-                        ${sizeClasses[radioSize].label} 
-                        font-body font-medium block cursor-pointer transition-colors 
-                        ${disabled
-                            ? 'text-text-disabled cursor-not-allowed'
-                            : error
-                                ? 'text-error'
-                                : 'text-text-primary'
-                        } 
-                        ${!disabled && 'hover:text-primary'}
-                    `}
+                    className={`${sizeClasses[radioSize].label} font-body font-medium block cursor-pointer transition-colors ${disabled ? 'text-text-disabled cursor-not-allowed' : error ? 'text-error' : 'text-text-primary'} ${!disabled && 'hover:text-primary'}`}
                 >
                     {label}
                 </label>
 
                 {description && (
-                    <p
-                        className={`
-                            ${sizeClasses[radioSize].description} 
-                            mt-0.5 font-body transition-colors 
-                            ${disabled ? 'text-text-disabled' : 'text-text-secondary'}
-                        `}
-                    >
+                    <p className={`${sizeClasses[radioSize].description} mt-0.5 font-body transition-colors ${disabled ? 'text-text-disabled' : 'text-text-secondary'}`}>
                         {description}
                     </p>
                 )}
@@ -133,6 +103,11 @@ export interface RadioGroupProps {
     className?: string;
 }
 
+const layoutClasses = {
+    vertical: 'flex flex-col gap-3',
+    horizontal: 'flex flex-row flex-wrap gap-4',
+};
+
 export const RadioGroup: React.FC<RadioGroupProps> = ({
     name,
     value,
@@ -148,11 +123,6 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
     const handleChange = (newValue: string) => {
         setInternalValue(newValue);
         onChange?.(newValue);
-    };
-
-    const layoutClasses = {
-        vertical: 'flex flex-col gap-3',
-        horizontal: 'flex flex-row flex-wrap gap-4',
     };
 
     // Clone children and inject name, checked, and onChange props with proper typing

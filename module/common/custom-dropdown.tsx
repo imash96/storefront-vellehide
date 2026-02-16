@@ -36,19 +36,67 @@ export interface DropdownMenuRadioGroup {
     type: 'radio-group';
     value?: string;
     onValueChange?: (value: string) => void;
-    items: Array<{
+    items: {
         value: string;
         label: string;
         disabled?: boolean;
-    }>;
+    }[];
 }
 
-export type DropdownMenuItemType =
-    | DropdownMenuItem
-    | DropdownMenuSeparator
-    | DropdownMenuLabel
-    | DropdownMenuCheckboxItem
-    | DropdownMenuRadioGroup;
+export type DropdownMenuItemType = DropdownMenuItem | DropdownMenuSeparator | DropdownMenuLabel | DropdownMenuCheckboxItem | DropdownMenuRadioGroup;
+
+const CheckIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <polyline points="20 6 9 17 4 12" />
+    </svg>
+);
+
+const RadioIcon = () => (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="12" cy="12" r="6" />
+    </svg>
+);
+
+const MenuItem = ({ label, icon, shortcut, onSelect, disabled, variant }: DropdownMenuItem) => (
+    <DropdownMenu.Item
+        className={`dropdown-item ${variant === 'danger' ? 'dropdown-item-danger' : ''}`}
+        onSelect={onSelect}
+        disabled={disabled}
+    >
+        <div className="dropdown-item-content">
+            {icon && <span className="dropdown-item-icon">{icon}</span>}
+            <span className="dropdown-item-label">{label}</span>
+        </div>
+        {shortcut && <span className="dropdown-item-shortcut">{shortcut}</span>}
+    </DropdownMenu.Item>
+);
+
+const CheckboxItem = ({ label, checked, onCheckedChange, disabled }: DropdownMenuCheckboxItem) => (
+    <DropdownMenu.CheckboxItem
+        className="dropdown-item dropdown-checkbox-item"
+        checked={checked}
+        onCheckedChange={onCheckedChange}
+        disabled={disabled}
+    >
+        <span className="dropdown-item-label">{label}</span>
+        <DropdownMenu.ItemIndicator className="dropdown-item-indicator">
+            <CheckIcon />
+        </DropdownMenu.ItemIndicator>
+    </DropdownMenu.CheckboxItem>
+);
+
+const RadioItem = ({ value, label, disabled }: { value: string; label: string; disabled?: boolean }) => (
+    <DropdownMenu.RadioItem
+        value={value}
+        className="dropdown-item dropdown-radio-item"
+        disabled={disabled}
+    >
+        <span className="dropdown-item-label">{label}</span>
+        <DropdownMenu.ItemIndicator className="dropdown-item-indicator">
+            <RadioIcon />
+        </DropdownMenu.ItemIndicator>
+    </DropdownMenu.RadioItem>
+);
 
 export interface CustomDropdownMenuProps {
     trigger: React.ReactNode;
@@ -70,96 +118,21 @@ export const CustomDropdownMenu: React.FC<CustomDropdownMenuProps> = ({
     const renderItem = (item: DropdownMenuItemType, index: number) => {
         switch (item.type) {
             case 'item':
-                return (
-                    <DropdownMenu.Item
-                        key={item.id || index}
-                        className={`dropdown-item ${item.variant === 'danger' ? 'dropdown-item-danger' : ''}`}
-                        onSelect={item.onSelect}
-                        disabled={item.disabled}
-                    >
-                        <div className="dropdown-item-content">
-                            {item.icon && (
-                                <span className="dropdown-item-icon">{item.icon}</span>
-                            )}
-                            <span className="dropdown-item-label">
-                                {item.label}
-                            </span>
-                        </div>
-                        {item.shortcut && (
-                            <span className="dropdown-item-shortcut">
-                                {item.shortcut}
-                            </span>
-                        )}
-                    </DropdownMenu.Item>
-                );
-
+                return <MenuItem key={item.id || index} {...item} />;
             case 'separator':
                 return <DropdownMenu.Separator key={index} className="dropdown-separator" />;
-
             case 'label':
-                return (
-                    <DropdownMenu.Label key={index} className="dropdown-label">
-                        {item.label}
-                    </DropdownMenu.Label>
-                );
-
+                return <DropdownMenu.Label key={index} className="dropdown-label">{item.label}</DropdownMenu.Label>;
             case 'checkbox':
-                return (
-                    <DropdownMenu.CheckboxItem
-                        key={index}
-                        className="dropdown-item dropdown-checkbox-item"
-                        checked={item.checked}
-                        onCheckedChange={item.onCheckedChange}
-                        disabled={item.disabled}
-                    >
-                        <span className="dropdown-item-label">{item.label}</span>
-                        <DropdownMenu.ItemIndicator className="dropdown-item-indicator">
-                            <svg
-                                width="16"
-                                height="16"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <polyline points="20 6 9 17 4 12" />
-                            </svg>
-                        </DropdownMenu.ItemIndicator>
-                    </DropdownMenu.CheckboxItem>
-                );
-
+                return <CheckboxItem key={index} {...item} />;
             case 'radio-group':
                 return (
-                    <DropdownMenu.RadioGroup
-                        key={index}
-                        value={item.value}
-                        onValueChange={item.onValueChange}
-                    >
+                    <DropdownMenu.RadioGroup key={index} value={item.value} onValueChange={item.onValueChange}>
                         {item.items.map((radioItem, radioIndex) => (
-                            <DropdownMenu.RadioItem
-                                key={radioIndex}
-                                value={radioItem.value}
-                                className="dropdown-item dropdown-radio-item"
-                                disabled={radioItem.disabled}
-                            >
-                                <span className="dropdown-item-label">{radioItem.label}</span>
-                                <DropdownMenu.ItemIndicator className="dropdown-item-indicator">
-                                    <svg
-                                        width="12"
-                                        height="12"
-                                        viewBox="0 0 24 24"
-                                        fill="currentColor"
-                                    >
-                                        <circle cx="12" cy="12" r="6" />
-                                    </svg>
-                                </DropdownMenu.ItemIndicator>
-                            </DropdownMenu.RadioItem>
+                            <RadioItem key={radioIndex} {...radioItem} />
                         ))}
                     </DropdownMenu.RadioGroup>
                 );
-
             default:
                 return null;
         }
@@ -211,56 +184,33 @@ export const UserMenu: React.FC<UserMenuProps> = ({
     className = '',
 }) => {
     const defaultTrigger = (
-        <button
-            className="flex items-center gap-3 px-4 py-2 rounded-lg transition-all hover:bg-muted focus:outline-none focus:ring-4 focus:ring-focus-ring/20"
-        >
+        <button className="flex items-center gap-3 px-4 py-2 rounded-lg transition-all hover:bg-muted focus:outline-none focus:ring-4 focus:ring-focus-ring/20">
             <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold">
                 {userName.charAt(0).toUpperCase()}
             </div>
             <div className="flex flex-col items-start">
                 <span className="text-sm font-medium text-text-primary">{userName}</span>
-                {userEmail && (
-                    <span className="text-xs text-text-secondary">{userEmail}</span>
-                )}
+                {userEmail && <span className="text-xs text-text-secondary">{userEmail}</span>}
             </div>
-            <svg
-                className="w-4 h-4 text-text-secondary"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-            >
+            <svg className="w-4 h-4 text-text-secondary" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <polyline points="6 9 12 15 18 9" />
             </svg>
         </button>
     );
 
     const items: DropdownMenuItemType[] = [
-        {
-            type: 'label',
-            label: 'My Account',
-        },
+        { type: 'label', label: 'My Account' },
         {
             type: 'item',
             label: 'Profile',
-            icon: (
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                </svg>
-            ),
+            icon: <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>,
             onSelect: onProfile,
             shortcut: '⌘P',
         },
         {
             type: 'item',
             label: 'Settings',
-            icon: (
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="3" />
-                    <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3" />
-                </svg>
-            ),
+            icon: <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" /><path d="M12 1v6m0 6v6m9-9h-6m-6 0H3" /></svg>,
             onSelect: onSettings,
             shortcut: '⌘S',
         },
@@ -327,24 +277,14 @@ export interface ActionsMenuProps {
     className?: string;
 }
 
-export const ActionsMenu: React.FC<ActionsMenuProps> = ({
+export const ActionsMenu = ({
     trigger,
     actions,
     className = '',
-}) => {
+}: ActionsMenuProps) => {
     const defaultTrigger = (
-        <button
-            className="p-2 rounded-lg transition-all text-text-secondary hover:text-text-primary hover:bg-muted focus:outline-none focus:ring-4 focus:ring-focus-ring/20"
-            aria-label="More actions"
-        >
-            <svg
-                width="20"
-                height="20"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-            >
+        <button className="p-2 rounded-lg transition-all text-text-secondary hover:text-text-primary hover:bg-muted focus:outline-none focus:ring-4 focus:ring-focus-ring/20" aria-label="More actions">
+            <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="1" fill="currentColor" />
                 <circle cx="12" cy="5" r="1" fill="currentColor" />
                 <circle cx="12" cy="19" r="1" fill="currentColor" />
@@ -355,11 +295,7 @@ export const ActionsMenu: React.FC<ActionsMenuProps> = ({
     const items: DropdownMenuItemType[] = actions.map((action, index) => ({
         type: 'item',
         id: `action-${index}`,
-        label: action.label,
-        icon: action.icon,
-        onSelect: action.onSelect,
-        disabled: action.disabled,
-        variant: action.variant,
+        ...action,
     }));
 
     return (
@@ -391,17 +327,8 @@ export const FilterMenu: React.FC<FilterMenuProps> = ({
     className = '',
 }) => {
     const defaultTrigger = (
-        <button
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border transition-all text-text-primary hover:border-primary hover:bg-primary-subtle focus:outline-none focus:ring-4 focus:ring-focus-ring/20"
-        >
-            <svg
-                width="16"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-            >
+        <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border transition-all text-text-primary hover:border-primary hover:bg-primary-subtle focus:outline-none focus:ring-4 focus:ring-focus-ring/20">
+            <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
             </svg>
             <span className="text-sm font-medium">Filters</span>
@@ -421,10 +348,7 @@ export const FilterMenu: React.FC<FilterMenuProps> = ({
     };
 
     const items: DropdownMenuItemType[] = [
-        {
-            type: 'label',
-            label: 'Filter by',
-        },
+        { type: 'label', label: 'Filter by', },
         ...filters.map((filter) => ({
             type: 'checkbox' as const,
             label: filter.label,

@@ -3,6 +3,7 @@
 import * as Accordion from '@radix-ui/react-accordion';
 
 import "@/css/accordion.css"
+import { ChevronDown } from 'lucide-react';
 
 export interface AccordionItemData {
     id?: string;
@@ -23,7 +24,27 @@ export interface CustomAccordionProps {
     className?: string;
 }
 
-export const CustomAccordion: React.FC<CustomAccordionProps> = ({
+const variantClasses = {
+    default: 'accordion-default',
+    bordered: 'accordion-bordered',
+    separated: 'accordion-separated',
+};
+
+const AccordionItemComponent = ({ value, title, content, disabled }: AccordionItemData) => (
+    <Accordion.Item value={value} disabled={disabled} className="accordion-item">
+        <Accordion.Header className="accordion-header">
+            <Accordion.Trigger className="accordion-trigger">
+                <span className="accordion-trigger-text">{title}</span>
+                <ChevronDown />
+            </Accordion.Trigger>
+        </Accordion.Header>
+        <Accordion.Content className="accordion-content">
+            <div className="accordion-content-inner">{content}</div>
+        </Accordion.Content>
+    </Accordion.Item>
+);
+
+export default function CustomAccordion({
     items,
     type = 'single',
     defaultValue,
@@ -32,10 +53,7 @@ export const CustomAccordion: React.FC<CustomAccordionProps> = ({
     collapsible = true,
     variant = 'default',
     className = '',
-}) => {
-    // Type-safe wrapper for Accordion.Root
-    const AccordionRoot = type === 'single' ? Accordion.Root : Accordion.Root;
-
+}: CustomAccordionProps) {
     const rootProps = type === 'single'
         ? {
             type: 'single' as const,
@@ -51,55 +69,18 @@ export const CustomAccordion: React.FC<CustomAccordionProps> = ({
             onValueChange: onValueChange as (value: string[]) => void,
         };
 
-    const variantClasses = {
-        default: 'accordion-default',
-        bordered: 'accordion-bordered',
-        separated: 'accordion-separated',
-    };
-
     return (
-        <AccordionRoot
-            {...rootProps}
-            className={`accordion-root ${variantClasses[variant]} ${className}`}
-        >
+        <Accordion.Root {...rootProps} className={`accordion-root ${variantClasses[variant]} ${className}`}>
             {items.map((item) => (
-                <Accordion.Item
+                <AccordionItemComponent
                     key={item.id || item.value}
                     value={item.value}
+                    title={item.title}
+                    content={item.content}
                     disabled={item.disabled}
-                    className="accordion-item"
-                >
-                    <Accordion.Header className="accordion-header">
-                        <Accordion.Trigger className="accordion-trigger">
-                            <span className="accordion-trigger-text">
-                                {item.title}
-                            </span>
-
-                            <svg
-                                className="accordion-chevron"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                aria-hidden
-                            >
-                                <polyline points="6 9 12 15 18 9" />
-                            </svg>
-                        </Accordion.Trigger>
-                    </Accordion.Header>
-
-                    <Accordion.Content className="accordion-content">
-                        <div className="accordion-content-inner">
-                            {item.content}
-                        </div>
-                    </Accordion.Content>
-                </Accordion.Item>
+                />
             ))}
-        </AccordionRoot>
+        </Accordion.Root>
     );
 };
 
@@ -131,12 +112,7 @@ export const FAQAccordion: React.FC<FAQAccordionProps> = ({
 
     return (
         <div className={className}>
-            <CustomAccordion
-                items={accordionItems}
-                type="single"
-                collapsible
-                variant={variant}
-            />
+            <CustomAccordion items={accordionItems} type="single" collapsible variant={variant} />
         </div>
     );
 };
@@ -191,31 +167,12 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
         <Accordion.Item value={value} disabled={disabled} className="accordion-item">
             <Accordion.Header className="accordion-header">
                 <Accordion.Trigger className="accordion-trigger">
-                    <span className="accordion-trigger-text">
-                        {title}
-                    </span>
-
-                    <svg
-                        className="accordion-chevron"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden
-                    >
-                        <polyline points="6 9 12 15 18 9" />
-                    </svg>
+                    <span className="accordion-trigger-text">{title}</span>
+                    <ChevronDown />
                 </Accordion.Trigger>
             </Accordion.Header>
-
             <Accordion.Content className="accordion-content">
-                <div className="accordion-content-inner">
-                    {children}
-                </div>
+                <div className="accordion-content-inner">{children}</div>
             </Accordion.Content>
         </Accordion.Item>
     );

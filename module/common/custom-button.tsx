@@ -35,34 +35,14 @@ interface AnchorElementProps extends BaseButtonProps, AnchorHTMLAttributes<HTMLA
 export type CustomButtonProps = ButtonElementProps | AnchorElementProps;
 
 // Loading spinner component
-const LoadingSpinner: React.FC<{ size: 'sm' | 'md' | 'lg' | 'xl' }> = ({ size }) => {
-    const sizeClasses = {
-        sm: 'w-3 h-3',
-        md: 'w-4 h-4',
-        lg: 'w-5 h-5',
-        xl: 'w-6 h-6',
-    };
+function LoadingSpinner({ size }: { size: Size }) {
+    const sizeMap = { sm: 12, md: 16, lg: 20, xl: 24 };
+    const s = sizeMap[size];
 
     return (
-        <svg
-            className={`${sizeClasses[size]} animate-spin`}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-        >
-            <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-            />
-            <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            />
+        <svg className="animate-spin" width={s} height={s} viewBox="0 0 24 24" fill="none">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
         </svg>
     );
 };
@@ -106,112 +86,31 @@ export default function CustomButton({
 
     // Variant classes using CSS variables
     const variantClasses = {
-        primary: `
-            bg-button-primary text-button-primary-foreground
-            border-2 border-button-primary
-            hover:bg-button-primary-hover hover:border-button-primary-hover
-            active:bg-button-primary-active active:border-button-primary-active
-            focus:ring-focus-ring/30
-            disabled:opacity-60 disabled:cursor-not-allowed
-        `,
-        secondary: `
-            bg-button-secondary text-button-secondary-foreground
-            border-2 border-button-secondary
-            hover:bg-button-secondary-hover hover:border-button-secondary-hover
-            active:bg-button-secondary-active active:border-button-secondary-active
-            focus:ring-focus-ring/30
-            disabled:opacity-60 disabled:cursor-not-allowed
-        `,
-        accent: `
-            bg-button-accent text-button-accent-foreground
-            border-2 border-button-accent
-            hover:bg-button-accent-hover hover:border-button-accent-hover
-            active:bg-button-accent-active active:border-button-accent-active
-            focus:ring-focus-ring/30
-            disabled:opacity-60 disabled:cursor-not-allowed
-        `,
-        ghost: `
-            bg-button-ghost text-button-ghost-foreground
-            border-2 border-transparent
-            hover:bg-button-ghost-hover
-            active:bg-button-ghost-active
-            focus:ring-focus-ring/15
-            disabled:opacity-60 disabled:cursor-not-allowed
-            disabled:hover:bg-transparent
-        `,
-        destructive: `
-            bg-button-destructive text-button-destructive-foreground
-            border-2 border-button-destructive
-            hover:bg-button-destructive-hover hover:border-button-destructive-hover
-            active:bg-button-destructive-active active:border-button-destructive-active
-            focus:ring-destructive/30
-            disabled:opacity-60 disabled:cursor-not-allowed
-        `,
-        outline: `
-            bg-button-outline text-button-outline-foreground
-            border-2 border-button-outline-border
-            hover:border-primary hover:text-primary-foreground hover:bg-primary-subtle
-            active:bg-primary
-            focus:ring-focus-ring/15
-            disabled:opacity-60 disabled:cursor-not-allowed
-            disabled:hover:bg-transparent disabled:hover:border-button-outline-border
-        `,
+        primary: 'bg-button-primary text-button-primary-foreground border-2 border-button-primary hover:bg-button-primary-hover hover:border-button-primary-hover active:bg-button-primary-active focus:ring-primary/30',
+        secondary: 'bg-button-secondary text-button-secondary-foreground border-2 border-button-secondary hover:bg-button-secondary-hover active:bg-button-secondary-active focus:ring-primary/30',
+        accent: 'bg-button-accent text-button-accent-foreground border-2 border-button-accent hover:bg-button-accent-hover active:bg-button-accent-active focus:ring-accent/30',
+        ghost: 'bg-transparent text-button-ghost-foreground border-2 border-transparent hover:bg-button-ghost-hover active:bg-button-ghost-active focus:ring-primary/15',
+        destructive: 'bg-button-destructive text-button-destructive-foreground border-2 border-button-destructive hover:bg-button-destructive-hover active:bg-button-destructive-active focus:ring-destructive/30',
+        outline: 'bg-transparent text-button-outline-foreground border-2 border-button-outline-border hover:border-primary hover:bg-primary-subtle focus:ring-primary/15',
     };
 
     // Check if button has only icon (no text)
     const isIconOnly = icon && !children;
 
     // Base classes
-    const baseClasses = `
-        inline-flex items-center justify-center 
-        font-body font-semibold 
-        transition-all duration-200
-        focus:outline-none focus:ring-4 
-        active:scale-95 
-        disabled:active:scale-100
-        ${fullWidth ? 'w-full' : 'w-auto'} 
-        ${isIconOnly ? iconOnlySizeClasses[size] : sizeClasses[size]} 
-        ${shapeClasses[shape]} 
-        ${variantClasses[variant]} 
-        ${isLoading || disabled ? 'pointer-events-none' : ''} 
-        ${className}
-    `;
+    const baseClasses = `inline-flex items-center justify-center  font-body font-semibold  transition-all duration-200 focus:outline-none focus:ring-4  disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 ${!disabled && !isLoading ? 'active:scale-95' : ''} ${fullWidth ? 'w-full' : 'w-auto'}  ${isIconOnly ? iconOnlySizeClasses[size] : sizeClasses[size]}  ${shapeClasses[shape]}  ${variantClasses[variant]}  ${className}`;
 
     // Render icon with text or icon only
-    const renderContent = () => {
-        if (isLoading) {
-            return (
-                <>
-                    <LoadingSpinner size={size} />
-                    {!isIconOnly && <span className="opacity-70">{children}</span>}
-                </>
-            );
-        }
-
-        if (isIconOnly) {
-            return icon;
-        }
-
-        if (icon && iconPosition === 'left') {
-            return (
-                <>
-                    {icon}
-                    <span>{children}</span>
-                </>
-            );
-        }
-
-        if (icon && iconPosition === 'right') {
-            return (
-                <>
-                    <span>{children}</span>
-                    {icon}
-                </>
-            );
-        }
-
-        return <span>{children}</span>;
-    };
+    const content = isLoading ? (
+        <>
+            <LoadingSpinner size={size} />
+            {!isIconOnly && <span className="opacity-70">{children}</span>}
+        </>
+    ) : isIconOnly ? icon : icon && iconPosition === 'left' ? (
+        <>{icon}<span>{children}</span></>
+    ) : icon && iconPosition === 'right' ? (
+        <><span>{children}</span>{icon}</>
+    ) : <span>{children}</span>;
 
     // Common props for both button and anchor
     const commonProps = {
@@ -224,7 +123,7 @@ export default function CustomButton({
         const anchorProps = rest as Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof BaseButtonProps>;
         return (
             <a {...commonProps} {...anchorProps}>
-                {renderContent()}
+                {content}
             </a>
         );
     }
@@ -237,7 +136,7 @@ export default function CustomButton({
             {...commonProps}
             {...buttonProps}
         >
-            {renderContent()}
+            {content}
         </button>
     );
 }
