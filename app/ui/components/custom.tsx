@@ -7,7 +7,7 @@ import { Chip, FilterChip, TagInput, CategoryTag } from '@/module/common/custom-
 import { Avatar, AvatarGroup } from '@/module/common/custom-avatar';
 import { Price, PriceRange, PriceWithDiscount, InstallmentPrice, SavingsDisplay } from '@/module/common/product-price';
 import { RangeSlider, PriceRangeSlider } from '@/module/common/custom-range';
-import { QuantitySelector, CompactQuantitySelector } from '@/module/common/product-quantity';
+import QuantitySelector, { CompactQuantitySelector } from '@/module/common/product-quantity';
 import { ProgressBar, SteppedProgress, CircularProgress } from '@/module/common/custom-progress';
 import Divider, { SectionDivider, ContentDivider } from '@/module/common/custom-divider';
 import Alert, { BannerAlert, InlineAlert } from '@/module/common/custom-alert';
@@ -362,10 +362,10 @@ export default function CustomTab() {
                         </CardHeader>
                         <CardContent>
                             <div className="flex flex-wrap gap-3">
-                                <CategoryTag label="Leather Jackets" onClick={() => console.log('Jackets')} />
-                                <CategoryTag label="Winter Coats" onClick={() => console.log('Coats')} />
-                                <CategoryTag label="Formal Blazers" onClick={() => console.log('Blazers')} />
-                                <CategoryTag label="Casual Wear" onClick={() => console.log('Casual')} />
+                                <CategoryTag category="Leather Jackets" onClick={() => console.log('Jackets')} />
+                                <CategoryTag category="Winter Coats" onClick={() => console.log('Coats')} />
+                                <CategoryTag category="Formal Blazers" onClick={() => console.log('Blazers')} />
+                                <CategoryTag category="Casual Wear" onClick={() => console.log('Casual')} />
                             </div>
                         </CardContent>
                     </Card>
@@ -471,8 +471,7 @@ export default function CustomTab() {
                                     originalPrice={399.99}
                                     salePrice={299.99}
                                     size="lg"
-                                    showDiscount
-                                    discountBadge
+                                    showPercentage
                                 />
                                 <div className="mt-3">
                                     <SavingsDisplay
@@ -761,7 +760,7 @@ export default function CustomTab() {
                                     src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600"
                                     width={600}
                                     alt="Leather Jacket"
-                                    zoomScale={2}
+                                    zoomLevel={2}
                                     className="aspect-square"
                                 />
                             </CardContent>
@@ -778,7 +777,7 @@ export default function CustomTab() {
                                     width={600}
                                     alt="Leather Coat"
                                     lensSize={150}
-                                    zoomLevel={2.5}
+                                    magnification={2.5}
                                     className="aspect-square"
                                 />
                             </CardContent>
@@ -793,7 +792,7 @@ export default function CustomTab() {
                                 <SideBySideZoom
                                     src="https://images.unsplash.com/photo-1727515546577-f7d82a47b51d?w=600"
                                     alt="Leather Blazer"
-                                    zoomScale={2}
+                                    magnification={2}
                                 />
                             </CardContent>
                         </Card>
@@ -825,13 +824,13 @@ export default function CustomTab() {
 
                         <Card>
                             <CardHeader>
-                                <CardTitle>Dropdown Menu</CardTitle>
+                                <CardTitle>Button</CardTitle>
                             </CardHeader>
                             <CardContent>
                                 <ShareButtons
                                     url="https://vellehide.com/products/leather-jacket"
                                     title="Classic Leather Jacket"
-                                    variant="dropdown"
+                                    variant="buttons"
                                     platforms={['facebook', 'twitter', 'email', 'copy']}
                                 />
                             </CardContent>

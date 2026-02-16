@@ -1,17 +1,33 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
 
-export interface ChipProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ChipProps {
     label: string;
-    onRemove?: () => void;
     variant?: 'default' | 'primary' | 'success' | 'error' | 'warning' | 'outline';
     size?: 'sm' | 'md' | 'lg';
+    onRemove?: () => void;
     icon?: React.ReactNode;
-    avatar?: string;
-    clickable?: boolean;
+    avatar?: React.ReactNode;
+    className?: string;
+    clickable?: boolean
+    onClick?: () => void;
 }
+
+const variantClasses = {
+    default: 'bg-muted text-text-primary hover:bg-muted-hover',
+    primary: 'bg-primary-subtle text-primary hover:bg-primary-subtle',
+    success: 'bg-success-subtle text-success',
+    error: 'bg-error-subtle text-error',
+    warning: 'bg-warning-subtle text-warning',
+    outline: 'bg-transparent border-2 border-border text-text-primary hover:bg-muted',
+};
+
+const sizeClasses = {
+    sm: 'h-6 sm:h-7 px-2 sm:px-2.5 text-xs gap-1',
+    md: 'h-8 sm:h-9 px-2.5 sm:px-3 text-xs sm:text-sm gap-1.5',
+    lg: 'h-10 sm:h-11 px-3 sm:px-4 text-sm sm:text-base gap-2',
+};
 
 export const Chip = ({
     label,
@@ -20,25 +36,11 @@ export const Chip = ({
     size = 'md',
     icon,
     avatar,
-    clickable = false,
-    className = '',
+    clickable,
     onClick,
+    className = '',
     ...props
 }: ChipProps) => {
-    const variantClasses = {
-        default: 'bg-muted text-text-primary border-border',
-        primary: 'bg-primary text-primary-foreground border-primary',
-        success: 'bg-success text-success-foreground border-success',
-        error: 'bg-error text-error-foreground border-error',
-        warning: 'bg-warning text-warning-foreground border-warning',
-        outline: 'bg-transparent text-text-primary border-border',
-    };
-
-    const sizeClasses = {
-        sm: 'h-6 px-2 text-xs gap-1',
-        md: 'h-8 px-3 text-sm gap-1.5',
-        lg: 'h-10 px-4 text-base gap-2',
-    };
 
     return (
         <div
@@ -56,26 +58,13 @@ export const Chip = ({
             {...props}
         >
             {/* Avatar */}
-            {avatar && (
-                <Image
-                    src={avatar}
-                    alt=""
-                    className={`
-                            rounded-full object-cover
-                            ${size === 'sm' ? 'w-4 h-4 -ml-1' : size === 'md' ? 'w-5 h-5 -ml-1.5' : 'w-6 h-6 -ml-2'}
-                        `}
-                />
-            )}
+            {avatar && <span className="shrink-0">{avatar}</span>}
 
             {/* Icon */}
-            {icon && !avatar && (
-                <span className={size === 'sm' ? 'w-3 h-3' : size === 'md' ? 'w-4 h-4' : 'w-5 h-5'}>
-                    {icon}
-                </span>
-            )}
+            {icon && <span className="shrink-0">{icon}</span>}
 
             {/* Label */}
-            <span>{label}</span>
+            <span className="truncate">{label}</span>
 
             {/* Remove Button */}
             {onRemove && (
@@ -127,26 +116,21 @@ export function FilterChip({
             type="button"
             onClick={onClick}
             className={`
-                inline-flex items-center gap-2
-                h-10 px-4 rounded-full
-                border-2 font-medium text-sm
-                transition-all
-                ${active
-                    ? 'border-primary bg-primary text-primary-foreground'
-                    : 'border-border bg-transparent text-text-primary hover:border-primary hover:bg-primary-subtle'
-                }
+                inline-flex items-center gap-1.5 sm:gap-2
+                h-10 px-4 rounded-full font-medium
+                transition-all duration-200
+                active:scale-95
+                ${active ? 'bg-primary text-primary-foreground hover:bg-primary-hover' : 'border-border border-2 bg-transparent text-text-primary hover:bg-muted'}
                 ${className}
             `}
             {...props}
         >
-            <span>{label}</span>
+            <span className="truncate">{label}</span>
             {count !== undefined && (
-                <span
-                    className={`
-                        px-1.5 py-0.5 rounded-full text-xs font-bold
-                        ${active ? 'bg-primary-foreground text-primary' : 'bg-muted text-text-secondary'}
-                    `}
-                >
+                <span className={`
+                    text-xs px-1.5 py-0.5 rounded-full
+                    ${active ? 'bg-primary-foreground/20' : 'bg-muted'}
+                `}>
                     {count}
                 </span>
             )}
@@ -162,6 +146,7 @@ export interface TagInputProps {
     placeholder?: string;
     maxTags?: number;
     className?: string;
+    size?: 'sm' | 'md' | 'lg';
 }
 
 export const TagInput: React.FC<TagInputProps> = ({
@@ -170,6 +155,7 @@ export const TagInput: React.FC<TagInputProps> = ({
     onRemove,
     placeholder = 'Add tag...',
     maxTags,
+    size = 'sm',
     className = '',
 }) => {
     const [inputValue, setInputValue] = useState('');
@@ -189,10 +175,12 @@ export const TagInput: React.FC<TagInputProps> = ({
     return (
         <div
             className={`
-                flex flex-wrap items-center gap-2
-                p-3 rounded-lg border border-border
+                flex flex-wrap items-center gap-1.5 sm:gap-2
+                p-2 sm:p-2.5 rounded-lg
+                border-2 border-input-border
                 bg-input-background
-                focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20
+                focus-within:border-input-border-focus
+                focus-within:ring-4 focus-within:ring-input-focus/20
                 transition-all
                 ${className}
             `}
@@ -201,8 +189,9 @@ export const TagInput: React.FC<TagInputProps> = ({
                 <Chip
                     key={index}
                     label={tag}
-                    size="sm"
+                    size={size}
                     onRemove={() => onRemove?.(index)}
+                    variant="primary"
                 />
             ))}
 
@@ -212,8 +201,14 @@ export const TagInput: React.FC<TagInputProps> = ({
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder={placeholder}
-                    className="flex-1 min-w-30 outline-none bg-transparent text-text-primary placeholder:text-text-tertiary"
+                    placeholder={tags.length === 0 ? placeholder : ''}
+                    disabled={maxTags ? tags.length >= maxTags : false}
+                    className={`
+                    flex-1 min-w-30 outline-none bg-transparent
+                    text-input-text placeholder:text-input-placeholder
+                    disabled:cursor-not-allowed disabled:opacity-50
+                    ${size === 'sm' ? 'text-xs sm:text-sm min-h-8' : size === 'lg' ? 'text-base min-h-10' : 'text-sm sm:text-base min-h-9'}
+                `}
                 />
             )}
         </div>
@@ -222,48 +217,37 @@ export const TagInput: React.FC<TagInputProps> = ({
 
 // Category Tag (for product categories)
 export interface CategoryTagProps {
-    label: string;
-    icon?: React.ReactNode;
-    href?: string;
+    category: string;
     onClick?: () => void;
+    icon?: React.ReactNode;
+    size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
 
-export const CategoryTag: React.FC<CategoryTagProps> = ({
-    label,
-    icon,
-    href,
+export function CategoryTag({
+    category,
     onClick,
+    icon,
+    size = 'md',
     className = '',
-}) => {
-    const content = (
-        <span className="flex items-center gap-2">
-            {icon && <span className="w-4 h-4">{icon}</span>}
-            <span>{label}</span>
-        </span>
-    );
-
-    const baseClasses = `
-        inline-flex items-center gap-2
-        px-4 py-2 rounded-lg
-        bg-surface border border-border
-        text-sm font-medium text-text-primary
-        hover:border-primary hover:bg-primary-subtle
-        transition-all
-        ${className}
-    `;
-
-    if (href) {
-        return (
-            <a href={href} className={baseClasses}>
-                {content}
-            </a>
-        );
-    }
+}: CategoryTagProps) {
+    const Component = onClick ? 'button' : 'span';
 
     return (
-        <button type="button" onClick={onClick} className={baseClasses}>
-            {content}
-        </button>
+        <Component
+            type={onClick ? 'button' : undefined}
+            onClick={onClick}
+            className={`
+                inline-flex items-center gap-1.5
+                font-medium rounded-lg
+                ${variantClasses.outline}
+                ${sizeClasses[size]}
+                ${onClick ? 'cursor-pointer active:scale-95' : ''}
+                ${className}
+            `}
+        >
+            {icon && <span className="shrink-0">{icon}</span>}
+            <span className="truncate">{category}</span>
+        </Component>
     );
-};
+}

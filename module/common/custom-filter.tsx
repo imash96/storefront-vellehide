@@ -28,15 +28,14 @@ export interface FilterPanelProps {
     className?: string;
 }
 
-export const FilterPanel: React.FC<FilterPanelProps> = ({
+export function FilterPanel({
     sections,
     values,
     onChange,
     onReset,
     showReset = true,
-    variant = 'sidebar',
     className = '',
-}) => {
+}: FilterPanelProps) {
     const [expandedSections, setExpandedSections] = useState<Set<string>>(
         new Set(sections.map((s) => s.id))
     );
@@ -61,201 +60,170 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
         onChange(sectionId, newValues);
     };
 
-    const renderSection = (section: FilterSection) => {
-        const isExpanded = expandedSections.has(section.id);
-
-        return (
-            <div key={section.id} className="border-b border-border last:border-b-0">
-                {/* Section Header */}
-                <button
-                    onClick={() => toggleSection(section.id)}
-                    className="w-full flex items-center justify-between py-4 text-left"
-                >
-                    <span className="font-semibold text-text-primary">{section.title}</span>
-                    <svg
-                        className={`w-5 h-5 text-text-secondary transition-transform ${isExpanded ? 'rotate-180' : ''
-                            }`}
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
-                    >
-                        <polyline points="6 9 12 15 18 9" />
-                    </svg>
-                </button>
-
-                {/* Section Content */}
-                {isExpanded && (
-                    <div className="pb-4">
-                        {section.type === 'checkbox' && section.options && (
-                            <div className="space-y-2">
-                                {section.options.map((option) => (
-                                    <label
-                                        key={option.value}
-                                        className="flex items-center gap-3 cursor-pointer group"
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            checked={(values[section.id] || []).includes(option.value)}
-                                            onChange={() => handleCheckboxChange(section.id, option.value)}
-                                            className="w-4 h-4 rounded border-border text-primary focus:ring-2 focus:ring-primary/20"
-                                        />
-                                        <span className="flex-1 text-text-secondary group-hover:text-text-primary transition-colors">
-                                            {option.label}
-                                        </span>
-                                        {option.count !== undefined && (
-                                            <span className="text-sm text-text-tertiary">
-                                                ({option.count})
-                                            </span>
-                                        )}
-                                    </label>
-                                ))}
-                            </div>
-                        )}
-
-                        {section.type === 'radio' && section.options && (
-                            <div className="space-y-2">
-                                {section.options.map((option) => (
-                                    <label
-                                        key={option.value}
-                                        className="flex items-center gap-3 cursor-pointer group"
-                                    >
-                                        <input
-                                            type="radio"
-                                            name={section.id}
-                                            checked={values[section.id] === option.value}
-                                            onChange={() => onChange(section.id, option.value)}
-                                            className="w-4 h-4 border-border text-primary focus:ring-2 focus:ring-primary/20"
-                                        />
-                                        <span className="flex-1 text-text-secondary group-hover:text-text-primary transition-colors">
-                                            {option.label}
-                                        </span>
-                                        {option.count !== undefined && (
-                                            <span className="text-sm text-text-tertiary">
-                                                ({option.count})
-                                            </span>
-                                        )}
-                                    </label>
-                                ))}
-                            </div>
-                        )}
-
-                        {section.type === 'range' && section.min !== undefined && section.max !== undefined && (
-                            <div className="space-y-4">
-                                <div className="flex items-center justify-between text-sm">
-                                    <span className="text-text-secondary">
-                                        ${values[section.id]?.[0] || section.min}
-                                    </span>
-                                    <span className="text-text-secondary">
-                                        ${values[section.id]?.[1] || section.max}
-                                    </span>
-                                </div>
-                                <input
-                                    type="range"
-                                    min={section.min}
-                                    max={section.max}
-                                    value={values[section.id]?.[1] || section.max}
-                                    onChange={(e) =>
-                                        onChange(section.id, [
-                                            values[section.id]?.[0] || section.min,
-                                            Number(e.target.value),
-                                        ])
-                                    }
-                                    className="w-full"
-                                />
-                            </div>
-                        )}
-
-                        {section.type === 'color' && section.colors && (
-                            <div className="flex flex-wrap gap-2">
-                                {section.colors.map((color) => (
-                                    <button
-                                        key={color.value}
-                                        onClick={() => {
-                                            const currentValues = values[section.id] || [];
-                                            const newValues = currentValues.includes(color.value)
-                                                ? currentValues.filter((v: string) => v !== color.value)
-                                                : [...currentValues, color.value];
-                                            onChange(section.id, newValues);
-                                        }}
-                                        className={`
-                                            relative w-10 h-10 rounded-full border-2 transition-all
-                                            ${(values[section.id] || []).includes(color.value)
-                                                ? 'border-primary ring-4 ring-primary/20'
-                                                : 'border-border hover:border-primary'
-                                            }
-                                        `}
-                                        title={color.name}
-                                    >
-                                        <span
-                                            className="absolute inset-1 rounded-full"
-                                            style={{ backgroundColor: color.hex }}
-                                        />
-                                        {(values[section.id] || []).includes(color.value) && (
-                                            <svg
-                                                className="absolute inset-0 m-auto w-5 h-5 text-white drop-shadow-lg"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth="3"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <polyline points="20 6 9 17 4 12" />
-                                            </svg>
-                                        )}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                )}
-            </div>
-        );
-    };
-
-    if (variant === 'horizontal') {
-        return (
-            <div className={`flex flex-wrap gap-4 ${className}`}>
-                {sections.map((section) => (
-                    <div key={section.id} className="min-w-50">
-                        {renderSection(section)}
-                    </div>
-                ))}
-                {showReset && onReset && (
-                    <button
-                        onClick={onReset}
-                        className="px-4 py-2 text-sm font-medium text-error hover:underline"
-                    >
-                        Reset Filters
-                    </button>
-                )}
-            </div>
-        );
-    }
-
     return (
-        <div className={`bg-surface rounded-lg border border-border ${className}`}>
+        <div className={`${className}`}>
             {/* Header */}
-            <div className="flex items-center justify-between px-4 py-4 border-b border-border">
-                <h3 className="font-display font-semibold text-text-primary">Filters</h3>
-                {showReset && onReset && (
-                    <button
-                        onClick={onReset}
-                        className="text-sm font-medium text-error hover:underline"
-                    >
-                        Reset
-                    </button>
-                )}
-            </div>
+            {showReset && (
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
+                    <h3 className="text-base sm:text-lg font-semibold text-text-primary">Filters</h3>
+                    {onReset && (
+                        <button
+                            onClick={onReset}
+                            className="text-xs sm:text-sm text-primary hover:text-primary-hover font-semibold min-h-11 sm:min-h-0 px-2"
+                        >
+                            Clear All
+                        </button>
+                    )}
+                </div>
+            )}
 
             {/* Sections */}
-            <div className="px-4">
-                {sections.map(renderSection)}
+            <div className="space-y-4 sm:space-y-6">
+                {sections.map((section) => {
+                    const isExpanded = expandedSections.has(section.id);
+
+                    return (
+                        <div key={section.id} className="border-b border-border last:border-b-0 pb-4 sm:pb-6">
+                            {/* Section Header */}
+                            <button
+                                onClick={() => toggleSection(section.id)}
+                                className="w-full flex items-center justify-between py-2 text-left min-h-11 sm:min-h-0"
+                            >
+                                <span className="font-semibold text-sm sm:text-base text-text-primary">{section.title}</span>
+                                <svg
+                                    className={`w-5 h-5 text-text-secondary transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <polyline points="6 9 12 15 18 9" />
+                                </svg>
+                            </button>
+
+                            {/* Section Content */}
+                            {isExpanded && (
+                                <div className="pt-3 sm:pt-4">
+                                    {section.type === 'checkbox' && section.options && (
+                                        <div className="space-y-2 sm:space-y-3">
+                                            {section.options.map((option) => (
+                                                <label
+                                                    key={option.value}
+                                                    className="flex items-center gap-2 sm:gap-3 cursor-pointer group min-h-11 sm:min-h-0"
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={(values[section.id] || []).includes(option.value)}
+                                                        onChange={() => handleCheckboxChange(section.id, option.value)}
+                                                        className="w-4 h-4 rounded border-border text-primary focus:ring-2 focus:ring-primary/20"
+                                                    />
+                                                    <span className="flex-1 text-xs sm:text-sm text-text-secondary group-hover:text-text-primary transition-colors">
+                                                        {option.label}
+                                                    </span>
+                                                    {option.count !== undefined && (
+                                                        <span className="text-xs text-text-tertiary">
+                                                            ({option.count})
+                                                        </span>
+                                                    )}
+                                                </label>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {section.type === 'radio' && section.options && (
+                                        <div className="space-y-2 sm:space-y-3">
+                                            {section.options.map((option) => (
+                                                <label
+                                                    key={option.value}
+                                                    className="flex items-center gap-2 sm:gap-3 cursor-pointer group min-h-11 sm:min-h-0"
+                                                >
+                                                    <input
+                                                        type="radio"
+                                                        name={section.id}
+                                                        checked={values[section.id] === option.value}
+                                                        onChange={() => onChange(section.id, option.value)}
+                                                        className="w-4 h-4 border-border text-primary focus:ring-2 focus:ring-primary/20"
+                                                    />
+                                                    <span className="flex-1 text-xs sm:text-sm text-text-secondary group-hover:text-text-primary transition-colors">
+                                                        {option.label}
+                                                    </span>
+                                                    {option.count !== undefined && (
+                                                        <span className="text-xs text-text-tertiary">
+                                                            ({option.count})
+                                                        </span>
+                                                    )}
+                                                </label>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {section.type === 'color' && section.colors && (
+                                        <div className="flex flex-wrap gap-2 sm:gap-3">
+                                            {section.colors.map((color) => (
+                                                <button
+                                                    key={color.value}
+                                                    onClick={() => {
+                                                        const currentValues = values[section.id] || [];
+                                                        const newValues = currentValues.includes(color.value)
+                                                            ? currentValues.filter((v: string) => v !== color.value)
+                                                            : [...currentValues, color.value];
+                                                        onChange(section.id, newValues);
+                                                    }}
+                                                    className={`
+                                                        relative w-8 h-8 sm:w-10 sm:h-10 rounded-full
+                                                        border-2 transition-all
+                                                        ${(values[section.id] || []).includes(color.value)
+                                                            ? 'border-primary ring-4 ring-primary/20'
+                                                            : 'border-border hover:border-primary'
+                                                        }
+                                                    `}
+                                                    title={color.name}
+                                                    aria-label={color.name}
+                                                >
+                                                    <span
+                                                        className="absolute inset-1 rounded-full"
+                                                        style={{ backgroundColor: color.hex }}
+                                                    />
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {section.type === 'range' && section.min !== undefined && section.max !== undefined && (
+                                        <div className="space-y-3 sm:space-y-4">
+                                            <div className="flex items-center justify-between text-xs sm:text-sm">
+                                                <span className="text-text-secondary">
+                                                    ${values[section.id]?.[0] || section.min}
+                                                </span>
+                                                <span className="text-text-secondary">
+                                                    ${values[section.id]?.[1] || section.max}
+                                                </span>
+                                            </div>
+                                            <input
+                                                type="range"
+                                                min={section.min}
+                                                max={section.max}
+                                                value={values[section.id]?.[1] || section.max}
+                                                onChange={(e) =>
+                                                    onChange(section.id, [
+                                                        values[section.id]?.[0] || section.min,
+                                                        Number(e.target.value),
+                                                    ])
+                                                }
+                                                className="w-full"
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );
-};
+}
 
-// Active Filters Display
 export interface ActiveFiltersProps {
     filters: Record<string, any>;
     sections: FilterSection[];
@@ -264,43 +232,40 @@ export interface ActiveFiltersProps {
     className?: string;
 }
 
-export const ActiveFilters: React.FC<ActiveFiltersProps> = ({
+export function ActiveFilters({
     filters,
     sections,
     onRemove,
     onClearAll,
     className = '',
-}) => {
-    const getFilterLabel = (sectionId: string, value: any) => {
-        const section = sections.find((s) => s.id === sectionId);
-        if (!section) return value;
+}: ActiveFiltersProps) {
+    const activeFilters: Array<{ sectionId: string; label: string; value: any }> = [];
 
-        if (section.type === 'color') {
-            const color = section.colors?.find((c) => c.value === value);
-            return color?.name || value;
-        }
+    sections.forEach((section) => {
+        const sectionValues = filters[section.id];
+        if (!sectionValues) return;
 
-        const option = section.options?.find((o) => o.value === value);
-        return option?.label || value;
-    };
-
-    const activeFilters: Array<{ sectionId: string; value: any; label: string }> = [];
-
-    Object.entries(filters).forEach(([sectionId, value]) => {
-        if (Array.isArray(value)) {
-            value.forEach((v) => {
+        if (Array.isArray(sectionValues) && sectionValues.length > 0) {
+            sectionValues.forEach((value) => {
+                const option = section.options?.find((opt) => opt.value === value) ||
+                    section.colors?.find((col) => col.value === value);
+                if (option) {
+                    activeFilters.push({
+                        sectionId: section.id,
+                        label: 'label' in option ? option.label : option.name,
+                        value,
+                    });
+                }
+            });
+        } else if (sectionValues && !Array.isArray(sectionValues)) {
+            const option = section.options?.find((opt) => opt.value === sectionValues);
+            if (option) {
                 activeFilters.push({
-                    sectionId,
-                    value: v,
-                    label: getFilterLabel(sectionId, v),
+                    sectionId: section.id,
+                    label: option.label,
+                    value: sectionValues,
                 });
-            });
-        } else if (value) {
-            activeFilters.push({
-                sectionId,
-                value,
-                label: getFilterLabel(sectionId, value),
-            });
+            }
         }
     });
 
@@ -308,15 +273,15 @@ export const ActiveFilters: React.FC<ActiveFiltersProps> = ({
 
     return (
         <div className={`flex flex-wrap items-center gap-2 ${className}`}>
-            <span className="text-sm text-text-secondary">Active filters:</span>
+            <span className="text-xs sm:text-sm text-text-secondary whitespace-nowrap">Active filters:</span>
             {activeFilters.map((filter, index) => (
                 <button
-                    key={index}
+                    key={`${filter.sectionId}-${filter.value}-${index}`}
                     onClick={() => onRemove(filter.sectionId, filter.value)}
-                    className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary text-primary-foreground rounded-full text-sm font-medium hover:bg-primary-hover transition-colors"
+                    className="inline-flex items-center gap-1.5 px-2 sm:px-3 py-1 bg-primary-subtle text-primary rounded-full text-xs sm:text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors min-h-8"
                 >
                     <span>{filter.label}</span>
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <line x1="18" y1="6" x2="6" y2="18" />
                         <line x1="6" y1="6" x2="18" y2="18" />
                     </svg>
@@ -325,11 +290,13 @@ export const ActiveFilters: React.FC<ActiveFiltersProps> = ({
             {onClearAll && (
                 <button
                     onClick={onClearAll}
-                    className="text-sm font-medium text-error hover:underline ml-2"
+                    className="text-xs sm:text-sm text-error hover:text-error-hover font-semibold min-h-8 px-2"
                 >
-                    Clear all
+                    Clear All
                 </button>
             )}
         </div>
     );
-};
+}
+
+export default FilterPanel;

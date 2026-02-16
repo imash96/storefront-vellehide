@@ -1,219 +1,223 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useRef, MouseEvent } from 'react';
+import { useState, useRef } from 'react';
 
 export interface ImageZoomProps {
     src: string;
     alt: string;
-    width: number;
-    zoomScale?: number;
-    className?: string;
-}
-
-export const ImageZoom: React.FC<ImageZoomProps> = ({
-    width,
-    src,
-    alt,
-    zoomScale = 2,
-    className = '',
-}) => {
-    const [isZoomed, setIsZoomed] = useState(false);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const imageRef = useRef<HTMLDivElement>(null);
-
-    const handleMouseEnter = () => {
-        setIsZoomed(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsZoomed(false);
-    };
-
-    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        if (!imageRef.current) return;
-
-        const rect = imageRef.current.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-        setPosition({ x, y });
-    };
-
-    return (
-        <div
-            ref={imageRef}
-            className={`relative overflow-hidden rounded-lg bg-muted cursor-zoom-in ${className}`}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onMouseMove={handleMouseMove}
-        >
-            <Image
-                width={width}
-                height={900}
-                src={src}
-                alt={alt}
-                className="w-full h-full object-cover"
-            />
-
-            {/* Zoomed View */}
-            {isZoomed && (
-                <div
-                    className="absolute inset-0 bg-background"
-                    style={{
-                        backgroundImage: `url(${src})`,
-                        backgroundSize: `${zoomScale * 100}%`,
-                        backgroundPosition: `${position.x}% ${position.y}%`,
-                        backgroundRepeat: 'no-repeat',
-                    }}
-                />
-            )}
-        </div>
-    );
-};
-
-// Lens Magnifier (shows zoomed portion in a separate lens)
-export interface LensMagnifierProps {
-    src: string;
-    alt: string;
-    width: number;
-    lensSize?: number;
+    width?: number;
+    height?: number;
     zoomLevel?: number;
     className?: string;
 }
 
-export const LensMagnifier: React.FC<LensMagnifierProps> = ({
+export const ImageZoom: React.FC<ImageZoomProps> = ({
     src,
     alt,
-    width,
-    lensSize = 150,
-    zoomLevel = 2.5,
+    width = 800,
+    height = 800,
+    zoomLevel = 2,
     className = '',
 }) => {
-    const [showLens, setShowLens] = useState(false);
-    const [lensPosition, setLensPosition] = useState({ x: 0, y: 0 });
-    const [backgroundPosition, setBackgroundPosition] = useState({ x: 0, y: 0 });
-    const imageRef = useRef<HTMLDivElement>(null);
+    const [isZoomed, setIsZoomed] = useState(false);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const containerRef = useRef<HTMLDivElement>(null);
 
-    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        if (!imageRef.current) return;
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!containerRef.current || !isZoomed) return;
 
-        const rect = imageRef.current.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
 
-        // Lens position (centered on cursor)
-        const lensX = Math.max(0, Math.min(x - lensSize / 2, rect.width - lensSize));
-        const lensY = Math.max(0, Math.min(y - lensSize / 2, rect.height - lensSize));
-
-        // Background position for zoomed image
-        const bgX = (x / rect.width) * 100;
-        const bgY = (y / rect.height) * 100;
-
-        setLensPosition({ x: lensX, y: lensY });
-        setBackgroundPosition({ x: bgX, y: bgY });
+        setMousePosition({ x, y });
     };
 
     return (
         <div
-            ref={imageRef}
-            className={`relative overflow-hidden rounded-lg bg-muted ${className}`}
-            onMouseEnter={() => setShowLens(true)}
-            onMouseLeave={() => setShowLens(false)}
+            ref={containerRef}
+            className={`relative overflow-hidden cursor-zoom-in rounded-lg ${className}`}
+            onMouseEnter={() => setIsZoomed(true)}
+            onMouseLeave={() => setIsZoomed(false)}
             onMouseMove={handleMouseMove}
         >
             <Image
-                width={width}
-                height={900}
                 src={src}
                 alt={alt}
-                className="w-full h-full object-cover"
+                width={width}
+                height={height}
+                className="w-full h-full object-cover transition-transform duration-200"
+                style={{
+                    transform: isZoomed ? `scale(${zoomLevel})` : 'scale(1)',
+                    transformOrigin: `${mousePosition.x}% ${mousePosition.y}%`,
+                }}
             />
 
-            {/* Lens */}
-            {showLens && (
-                <div
-                    className="absolute border-2 border-primary rounded-full pointer-events-none"
-                    style={{
-                        width: lensSize,
-                        height: lensSize,
-                        left: lensPosition.x,
-                        top: lensPosition.y,
-                        backgroundImage: `url(${src})`,
-                        backgroundSize: `${zoomLevel * 100}%`,
-                        backgroundPosition: `${backgroundPosition.x}% ${backgroundPosition.y}%`,
-                        backgroundRepeat: 'no-repeat',
-                    }}
-                />
+            {isZoomed && (
+                <div className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-surface/80 backdrop-blur-sm px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs sm:text-sm text-text-primary">
+                    {zoomLevel}x Zoom
+                </div>
             )}
         </div>
     );
 };
 
 // Side-by-Side Zoom (shows zoomed image next to original)
-export interface SideBySideZoomProps {
+export interface LensMagnifierProps {
     src: string;
     alt: string;
-    zoomScale?: number;
+    width?: number;
+    height?: number;
+    lensSize?: number;
+    magnification?: number;
     className?: string;
 }
 
-export const SideBySideZoom: React.FC<SideBySideZoomProps> = ({
+export function LensMagnifier({
     src,
     alt,
-    zoomScale = 2,
+    width = 800,
+    height = 800,
+    lensSize = 150,
+    magnification = 2.5,
     className = '',
-}) => {
-    const [position, setPosition] = useState({ x: 50, y: 50 });
-    const imageRef = useRef<HTMLDivElement>(null);
+}: LensMagnifierProps) {
+    const [showLens, setShowLens] = useState(false);
+    const [lensPosition, setLensPosition] = useState({ x: 0, y: 0 });
+    const containerRef = useRef<HTMLDivElement>(null);
 
-    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        if (!imageRef.current) return;
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!containerRef.current) return;
 
-        const rect = imageRef.current.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left - lensSize / 2;
+        const y = e.clientY - rect.top - lensSize / 2;
 
-        setPosition({ x, y });
+        // Constrain lens within bounds
+        const constrainedX = Math.max(0, Math.min(x, rect.width - lensSize));
+        const constrainedY = Math.max(0, Math.min(y, rect.height - lensSize));
+
+        setLensPosition({ x: constrainedX, y: constrainedY });
     };
 
     return (
-        <div className={`grid grid-cols-2 gap-4 ${className}`}>
+        <div
+            ref={containerRef}
+            className={`relative overflow-hidden cursor-crosshair rounded-lg ${className}`}
+            onMouseEnter={() => setShowLens(true)}
+            onMouseLeave={() => setShowLens(false)}
+            onMouseMove={handleMouseMove}
+        >
+            <Image
+                src={src}
+                alt={alt}
+                width={width}
+                height={height}
+                className="w-full h-full object-cover"
+            />
+
+            {showLens && (
+                <div
+                    className="absolute border-2 border-primary rounded-full pointer-events-none overflow-hidden shadow-lg ring-2 ring-primary/20"
+                    style={{
+                        width: `${lensSize}px`,
+                        height: `${lensSize}px`,
+                        left: `${lensPosition.x}px`,
+                        top: `${lensPosition.y}px`,
+                    }}
+                >
+                    <div
+                        className="absolute inset-0"
+                        style={{
+                            backgroundImage: `url(${src})`,
+                            backgroundSize: `${width * magnification}px ${height * magnification}px`,
+                            backgroundPosition: `-${lensPosition.x * magnification}px -${lensPosition.y * magnification}px`,
+                        }}
+                    />
+                </div>
+            )}
+        </div>
+    );
+}
+
+export interface SideBySideZoomProps {
+    src: string;
+    alt: string;
+    width?: number;
+    height?: number;
+    magnification?: number;
+    className?: string;
+}
+
+export function SideBySideZoom({
+    src,
+    alt,
+    width = 600,
+    height = 600,
+    magnification = 2,
+    className = '',
+}: SideBySideZoomProps) {
+    const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+    const [isHovering, setIsHovering] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!containerRef.current) return;
+
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+        setMousePosition({ x, y });
+    };
+
+    return (
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-4 ${className}`}>
             {/* Original Image */}
             <div
-                ref={imageRef}
-                className="relative aspect-square overflow-hidden rounded-lg bg-muted cursor-crosshair"
+                ref={containerRef}
+                className="relative aspect-square overflow-hidden rounded-lg cursor-crosshair"
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
                 onMouseMove={handleMouseMove}
             >
                 <Image
                     src={src}
-                    width={600}
-                    height={900}
                     alt={alt}
+                    width={width}
+                    height={height}
                     className="w-full h-full object-cover"
                 />
 
-                {/* Position Indicator */}
-                <div
-                    className="absolute w-2 h-2 bg-primary rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                    style={{
-                        left: `${position.x}%`,
-                        top: `${position.y}%`,
-                    }}
-                />
+                {isHovering && (
+                    <div
+                        className="absolute w-24 h-24 sm:w-32 sm:h-32 border-2 border-primary pointer-events-none"
+                        style={{
+                            left: `${mousePosition.x}%`,
+                            top: `${mousePosition.y}%`,
+                            transform: 'translate(-50%, -50%)',
+                        }}
+                    />
+                )}
             </div>
 
             {/* Zoomed View */}
-            <div className="relative aspect-square overflow-hidden rounded-lg bg-background border border-border">
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        backgroundImage: `url(${src})`,
-                        backgroundSize: `${zoomScale * 100}%`,
-                        backgroundPosition: `${position.x}% ${position.y}%`,
-                        backgroundRepeat: 'no-repeat',
-                    }}
-                />
+            <div className="relative aspect-square overflow-hidden rounded-lg bg-muted hidden lg:block">
+                {isHovering ? (
+                    <div
+                        className="absolute inset-0"
+                        style={{
+                            backgroundImage: `url(${src})`,
+                            backgroundSize: `${width * magnification}px ${height * magnification}px`,
+                            backgroundPosition: `-${(mousePosition.x / 100) * width * magnification - width / 2}px -${(mousePosition.y / 100) * height * magnification - height / 2}px`,
+                        }}
+                    />
+                ) : (
+                    <div className="flex items-center justify-center h-full text-text-secondary text-sm sm:text-base">
+                        Hover over the image to zoom
+                    </div>
+                )}
             </div>
         </div>
     );

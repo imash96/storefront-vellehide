@@ -1,153 +1,124 @@
 'use client';
 
-export interface DividerProps extends React.HTMLAttributes<HTMLHRElement> {
+export interface DividerProps {
     orientation?: 'horizontal' | 'vertical';
-    variant?: 'solid' | 'dashed' | 'dotted';
-    thickness?: 'thin' | 'medium' | 'thick';
-    spacing?: 'sm' | 'md' | 'lg';
+    variant?: 'default' | 'strong' | 'dashed' | 'dotted';
+    spacing?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
     label?: string;
-    labelPosition?: 'left' | 'center' | 'right';
+    className?: string;
 }
+
+const spacingClasses = {
+    horizontal: {
+        none: '',
+        sm: 'my-2',
+        md: 'my-4',
+        lg: 'my-6 sm:my-8',
+        xl: 'my-8 sm:my-12',
+    },
+    vertical: {
+        none: '',
+        sm: 'mx-2',
+        md: 'mx-4',
+        lg: 'mx-6 sm:mx-8',
+        xl: 'mx-8 sm:mx-12',
+    },
+};
+
+const variantClasses = {
+    default: 'border-divider',
+    strong: 'border-divider-strong',
+    dashed: 'border-divider border-dashed',
+    dotted: 'border-divider border-dotted',
+};
 
 export default function Divider({
     orientation = 'horizontal',
-    variant = 'solid',
-    thickness = 'thin',
+    variant = 'default',
     spacing = 'md',
     label,
-    labelPosition = 'center',
     className = '',
-    ...props
 }: DividerProps) {
-    const thicknessClasses = {
-        thin: orientation === 'horizontal' ? 'h-px' : 'w-px',
-        medium: orientation === 'horizontal' ? 'h-0.5' : 'w-0.5',
-        thick: orientation === 'horizontal' ? 'h-1' : 'w-1',
-    };
+    if (label) {
+        return (
+            <div className={`flex items-center ${spacingClasses.horizontal[spacing]} ${className}`}>
+                <div className={`flex-1 border-t ${variantClasses[variant]}`} />
+                <span className="px-3 sm:px-4 text-xs sm:text-sm text-text-secondary whitespace-nowrap">{label}</span>
+                <div className={`flex-1 border-t ${variantClasses[variant]}`} />
+            </div>
+        );
+    }
 
-    const spacingClasses = {
-        sm: orientation === 'horizontal' ? 'my-2' : 'mx-2',
-        md: orientation === 'horizontal' ? 'my-4' : 'mx-4',
-        lg: orientation === 'horizontal' ? 'my-6' : 'mx-6',
-    };
-
-    const variantClasses = {
-        solid: 'border-solid',
-        dashed: 'border-dashed',
-        dotted: 'border-dotted',
-    };
-
-    if (label && orientation === 'horizontal') {
-        const labelAlignClasses = {
-            left: 'justify-start',
-            center: 'justify-center',
-            right: 'justify-end',
-        };
-
+    if (orientation === 'vertical') {
         return (
             <div
                 className={`
-                        flex items-center gap-4
-                        ${spacingClasses[spacing]}
-                        ${labelAlignClasses[labelPosition]}
-                        ${className}
-                    `}
-            >
-                {labelPosition !== 'left' && (
-                    <hr
-                        className={`
-                                flex-1 border-t bg-divider
-                                ${thicknessClasses[thickness]}
-                                ${variantClasses[variant]}
-                            `}
-                        {...props}
-                    />
-                )}
-
-                <span className="text-sm text-text-secondary font-medium whitespace-nowrap">
-                    {label}
-                </span>
-
-                {labelPosition !== 'right' && (
-                    <hr
-                        className={`
-                                flex-1 border-t bg-divider
-                                ${thicknessClasses[thickness]}
-                                ${variantClasses[variant]}
-                            `}
-                    />
-                )}
-            </div>
+                    inline-block h-full border-l
+                    ${variantClasses[variant]}
+                    ${spacingClasses.vertical[spacing]}
+                    ${className}
+                `}
+            />
         );
     }
 
     return (
         <hr
             className={`
-                    ${orientation === 'horizontal' ? 'w-full border-t' : 'h-full border-l'}
-                    bg-divider
-                    ${thicknessClasses[thickness]}
-                    ${spacingClasses[spacing]}
-                    ${variantClasses[variant]}
-                    ${className}
-                `}
-            {...props}
+                w-full border-t
+                ${variantClasses[variant]}
+                ${spacingClasses.horizontal[spacing]}
+                ${className}
+            `}
         />
     );
-};
-
-Divider.displayName = 'Divider';
+}
 
 // Section Divider (with gradient)
-export interface SectionDividerProps extends React.HTMLAttributes<HTMLDivElement> {
-    spacing?: 'sm' | 'md' | 'lg' | 'xl';
+export interface SectionDividerProps {
+    spacing?: 'sm' | 'md' | 'lg';
     gradient?: boolean;
+    className?: string;
 }
 
 export const SectionDivider: React.FC<SectionDividerProps> = ({
-    spacing = 'lg',
+    spacing = 'md',
     gradient = false,
     className = '',
-    ...props
 }) => {
-    const spacingClasses = {
-        sm: 'my-6',
-        md: 'my-8',
-        lg: 'my-12',
-        xl: 'my-16',
+    const spacingMap = {
+        sm: 'my-6 sm:my-8',
+        md: 'my-8 sm:my-12',
+        lg: 'my-12 sm:my-16',
     };
 
     return (
-        <div className={`${spacingClasses[spacing]} ${className}`} {...props}>
-            <div
-                className={`
-                    h-px w-full
-                    ${gradient
-                        ? 'bg-linear-to-r from-transparent via-divider to-transparent'
-                        : 'bg-divider'
-                    }
-                `}
-            />
+        <div className={`${spacingMap[spacing]} ${className}`}>
+            {gradient ? (
+                <div className="h-px bg-linear-to-r from-transparent via-divider to-transparent" />
+            ) : (
+                <hr className="border-t border-divider" />
+            )}
         </div>
     );
 };
 
 // Content Divider (with icon or ornament)
-export interface ContentDividerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ContentDividerProps {
     icon?: React.ReactNode;
     spacing?: 'sm' | 'md' | 'lg';
+    className?: string;
 }
 
 export const ContentDivider: React.FC<ContentDividerProps> = ({
     icon,
     spacing = 'md',
     className = '',
-    ...props
 }) => {
-    const spacingClasses = {
-        sm: 'my-4',
-        md: 'my-6',
-        lg: 'my-8',
+    const spacingMap = {
+        sm: 'my-6 sm:my-8',
+        md: 'my-8 sm:my-12',
+        lg: 'my-12 sm:my-16',
     };
 
     const defaultIcon = (
@@ -163,9 +134,9 @@ export const ContentDivider: React.FC<ContentDividerProps> = ({
     );
 
     return (
-        <div className={`flex items-center ${spacingClasses[spacing]} ${className}`} {...props}>
+        <div className={`flex items-center ${spacingMap[spacing]} ${className}`}>
             <div className="flex-1 h-px bg-divider" />
-            <div className="px-4">{icon || defaultIcon}</div>
+            <span className="bg-background px-3 sm:px-4 text-xs sm:text-sm text-text-secondary flex items-center gap-2">{icon || defaultIcon}</span>
             <div className="flex-1 h-px bg-divider" />
         </div>
     );
