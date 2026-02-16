@@ -47,8 +47,9 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
                 <Image
                     src={images[selectedIndex].src}
                     alt={images[selectedIndex].alt}
-                    className={`w-full h-full object-cover transition-transform duration-300 ${isZoomed ? 'scale-150 cursor-zoom-out' : 'cursor-zoom-in'
-                        }`}
+                    width={800}
+                    height={1200}
+                    className={`w-full h-full object-cover transition-transform duration-300 ${isZoomed ? 'scale-150 cursor-zoom-out' : 'cursor-zoom-in'}`}
                     onClick={() => setIsZoomed(!isZoomed)}
                 />
 
@@ -103,6 +104,8 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
                             <Image
                                 src={image.thumbnail || image.src}
                                 alt={image.alt}
+                                width={800}
+                                height={1200}
                                 className="w-full h-full object-cover"
                             />
                         </button>

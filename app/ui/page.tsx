@@ -19,6 +19,7 @@ import ButtonTab from './components/button';
 import ExtraTab from './components/extra';
 import DrawerTab from './components/drawer';
 import PaginationTab from './components/pagination';
+import CustomTab from './components/custom';
 
 export default function InteractiveTestPage() {
     const [activeTab, setActiveTab] = useState<Tabs>('colors');
@@ -51,6 +52,7 @@ export default function InteractiveTestPage() {
                             <NavButton activeTab={activeTab} currentTab='extra' onClick={() => setActiveTab('extra')} name='Extra' />
                             <NavButton activeTab={activeTab} currentTab='drawer' onClick={() => setActiveTab('drawer')} name='Drawer' />
                             <NavButton activeTab={activeTab} currentTab='pagination' onClick={() => setActiveTab('pagination')} name='Pagination' />
+                            <NavButton activeTab={activeTab} currentTab='custom' onClick={() => setActiveTab('custom')} name='Custom' />
                         </div>
                         <button onClick={() => {
                             setTheme((prevTheme) => {
@@ -79,7 +81,8 @@ export default function InteractiveTestPage() {
                             <TabButton activeTab={activeTab} currentTab='input' onClick={() => { setActiveTab('input'); setMobileMenuOpen(false); }} name='Input' />
                             <TabButton activeTab={activeTab} currentTab='extra' onClick={() => { setActiveTab('extra'); setMobileMenuOpen(false); }} name='Extra' />
                             <TabButton activeTab={activeTab} currentTab='drawer' onClick={() => { setActiveTab('drawer'); setMobileMenuOpen(false); }} name='Drawer' />
-                            <NavButton activeTab={activeTab} currentTab='pagination' onClick={() => { setActiveTab('pagination'); setMobileMenuOpen(false); }} name='Pagination' />
+                            <TabButton activeTab={activeTab} currentTab='pagination' onClick={() => { setActiveTab('pagination'); setMobileMenuOpen(false); }} name='Pagination' />
+                            <TabButton activeTab={activeTab} currentTab='custom' onClick={() => { setActiveTab('custom'); setMobileMenuOpen(false); }} name='Custom' />
                         </div>
                     )}
                 </div>
@@ -121,6 +124,9 @@ export default function InteractiveTestPage() {
 
                 {/* Drawer Tab */}
                 {activeTab === 'pagination' && (<PaginationTab />)}
+
+                {/* Drawer Tab */}
+                {activeTab === 'custom' && (<CustomTab />)}
             </section>
         </main>
     )

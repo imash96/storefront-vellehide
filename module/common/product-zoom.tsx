@@ -6,11 +6,13 @@ import { useState, useRef, MouseEvent } from 'react';
 export interface ImageZoomProps {
     src: string;
     alt: string;
+    width: number;
     zoomScale?: number;
     className?: string;
 }
 
 export const ImageZoom: React.FC<ImageZoomProps> = ({
+    width,
     src,
     alt,
     zoomScale = 2,
@@ -47,6 +49,8 @@ export const ImageZoom: React.FC<ImageZoomProps> = ({
             onMouseMove={handleMouseMove}
         >
             <Image
+                width={width}
+                height={900}
                 src={src}
                 alt={alt}
                 className="w-full h-full object-cover"
@@ -72,6 +76,7 @@ export const ImageZoom: React.FC<ImageZoomProps> = ({
 export interface LensMagnifierProps {
     src: string;
     alt: string;
+    width: number;
     lensSize?: number;
     zoomLevel?: number;
     className?: string;
@@ -80,6 +85,7 @@ export interface LensMagnifierProps {
 export const LensMagnifier: React.FC<LensMagnifierProps> = ({
     src,
     alt,
+    width,
     lensSize = 150,
     zoomLevel = 2.5,
     className = '',
@@ -117,6 +123,8 @@ export const LensMagnifier: React.FC<LensMagnifierProps> = ({
             onMouseMove={handleMouseMove}
         >
             <Image
+                width={width}
+                height={900}
                 src={src}
                 alt={alt}
                 className="w-full h-full object-cover"
@@ -179,6 +187,8 @@ export const SideBySideZoom: React.FC<SideBySideZoomProps> = ({
             >
                 <Image
                     src={src}
+                    width={600}
+                    height={900}
                     alt={alt}
                     className="w-full h-full object-cover"
                 />

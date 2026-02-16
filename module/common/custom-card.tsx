@@ -87,6 +87,7 @@ export function CardFooter({ className = '', children, ...props }: React.HTMLAtt
 // Product Card - Specialized for e-commerce
 export interface ProductCardProps {
     image: string;
+    width: number;
     imageAlt: string;
     title: string;
     price: number;
@@ -101,6 +102,7 @@ export interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({
     image,
+    width,
     imageAlt,
     title,
     price,
@@ -127,6 +129,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 <Image
                     src={image}
                     alt={imageAlt}
+                    width={width}
+                    height={700}
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 />
 
