@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
-  typedRoutes: true,
+  // typedRoutes: true,
   reactCompiler: true,
   experimental: {
     browserDebugInfoInTerminal: {

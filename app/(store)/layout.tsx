@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import Announcement from "@/layout/home/templates/announcement";
+import { announcements } from "@lib/constant/announcement";
+import Header from "@/layout/home/templates/header";
+import { DrawerProvider } from "@lib/context/drawer-context";
 
 export default function StoreLayout({ children }: LayoutProps<"/">) {
     return (
-        <>
-            <Announcement />
+        <DrawerProvider>
+            <Announcement items={announcements} />
+            <Header />
             {children}
-        </>
+        </DrawerProvider>
     );
 }
 

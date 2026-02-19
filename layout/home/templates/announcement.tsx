@@ -1,77 +1,76 @@
 "use client"
 
-import Autoplay from "embla-carousel-autoplay";
+import { useCallback, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { useCallback, useEffect, useState } from "react";
-import type { EmblaOptionsType } from "embla-carousel";
+import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Container from '@/module/common/create-section';
-import { announcements } from "@lib/constant/announcement";
+import type { AnnouncementItem } from '@/types/homepage';
+import Link from "next/link";
 
-const options: EmblaOptionsType = { loop: true }
+export default function AnnouncementBar({ items }: { items: AnnouncementItem[] }) {
+    const autoplay = useRef(Autoplay({ stopOnInteraction: false, delay: 4000 }))
 
-export default function Announcement() {
-    const [emblaRef, emblaApi] = useEmblaCarousel(options, [Autoplay({ stopOnInteraction: false, delay: 3000 })])
-    const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
-    const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay.current])
 
     const scrollPrev = useCallback(() => {
-        if (!emblaApi) return;
-        emblaApi.scrollPrev();
-        emblaApi.plugins().autoplay?.reset();
-    }, [emblaApi]);
+        if (!emblaApi) return
+        emblaApi.scrollPrev()
+        autoplay.current.reset()
+    }, [emblaApi])
 
     const scrollNext = useCallback(() => {
-        if (!emblaApi) return;
-        emblaApi.scrollNext();
-        emblaApi.plugins().autoplay?.reset();
-    }, [emblaApi]);
+        if (!emblaApi) return
+        emblaApi.scrollNext()
+        autoplay.current.reset()
+    }, [emblaApi])
 
-    const onSelect = useCallback(() => {
-        if (!emblaApi) return;
-        setPrevBtnDisabled(!emblaApi.canScrollPrev());
-        setNextBtnDisabled(!emblaApi.canScrollNext());
-    }, [emblaApi]);
-
-    useEffect(() => {
-        if (!emblaApi) return;
-
-        onSelect();
-        emblaApi.on('select', onSelect);
-        emblaApi.on('reInit', onSelect);
-
-        return () => {
-            emblaApi.off('select', onSelect);
-            emblaApi.off('reInit', onSelect);
-        };
-    }, [emblaApi, onSelect]);
+    if (!items?.length) return null
 
 
     return (
-        <div className="bg-primary text-primary-foreground select-none">
+        <div
+            className="bg-primary text-primary-foreground select-none"
+            aria-label="Store announcements"
+            aria-roledescription="carousel"
+            aria-live="polite"
+            role="region"
+        >
             <Container width={7}>
                 <div className="flex items-center justify-between h-9 gap-2">
                     <AnnouncementButton
                         onClick={scrollPrev}
-                        disabled={prevBtnDisabled}
                         direction="prev"
                         label="Previous announcement"
                     />
-                    <div className="overflow-hidden flex-1 text-xs font-body" ref={emblaRef}>
+                    <div className="overflow-hidden flex-1" ref={emblaRef}>
                         <div className="flex">
-                            {announcements.map((text, index) => (
-                                <span
-                                    className="flex-[0_0_100%] size-full my-auto tracking-wide text-center"
-                                    key={index}
-                                >
-                                    {text}
-                                </span>
-                            ))}
+                            {items.map((item, index) => {
+                                const baseClass =
+                                    "flex-[0_0_100%] flex items-center justify-center text-center text-xs text-primary-foreground font-body tracking-wide uppercase"
+
+                                if (item.link) {
+                                    return (
+                                        <Link
+                                            key={index}
+                                            href={item.link}
+                                            className={`${baseClass} hover:opacity-90 transition-opacity`}
+                                        >
+                                            {item.message}
+                                        </Link>
+                                    )
+                                }
+
+                                return (
+                                    <span key={index} className={baseClass}>
+                                        {item.message}
+                                    </span>
+                                )
+                            })}
                         </div>
                     </div>
                     <AnnouncementButton
                         onClick={scrollNext}
-                        disabled={nextBtnDisabled}
                         direction="next"
                         label="Next announcement"
                     />
@@ -81,16 +80,12 @@ export default function Announcement() {
     )
 }
 
-const AnnouncementButton = ({ onClick, disabled, direction, label }: AnnouncementButtonProps) => {
+const AnnouncementButton = ({ onClick, direction, label }: AnnouncementButtonProps) => {
     return (
         <button
             onClick={onClick}
-            disabled={disabled}
             aria-label={label}
-            className={`
-            p-1.5 rounded-sm transition-all duration-200
-            ${disabled ? 'opacity-30 cursor-not-allowed' : 'opacity-70 hover:opacity-100 hover:bg-primary-foreground/10'}
-        `}
+            className="p-1.5 hidden sm:block rounded-sm opacity-70 hover:opacity-100 hover:bg-primary-foreground/10 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
         >
             {direction === 'prev' ? (
                 <ChevronLeft className="h-4 w-4 shrink-0" />
@@ -103,7 +98,6 @@ const AnnouncementButton = ({ onClick, disabled, direction, label }: Announcemen
 
 type AnnouncementButtonProps = {
     onClick: () => void;
-    disabled: boolean;
     direction: 'prev' | 'next';
     label: string;
 }

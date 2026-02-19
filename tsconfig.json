@@ -20,7 +20,8 @@
       "@/layout/*": [ "./layout/*" ],
       "@lib/*": [ "./lib/*" ],
       "@/module/*": [ "./module/*" ],
-      "@/types/*": [ "./types/*" ]
+      "@/types/*": [ "./types/*" ],
+      "@/ui/*": [ "./ui/*" ]
     }
   },
   "include": [
