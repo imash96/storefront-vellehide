@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import CustomRadio, { RadioGroup } from '@/module/common/custom-radio';
 import CustomCheckbox, { CheckboxGroup } from '@/module/common/custom-checkbox';
-import CustomInput from '@/module/common/custom-input';
+import CustomInput from '@/ui/input';
 import CustomSelect from '@/module/common/custom-select';
 
 export default function InputTab() {
@@ -150,18 +150,13 @@ export default function InputTab() {
                             </h3>
                             <div className="space-y-4">
                                 <CustomInput
-                                    label="Small Input"
-                                    inputSize="sm"
+                                    label="Input default"
+                                    variant='default'
                                     fullWidth
                                 />
                                 <CustomInput
-                                    label="Medium Input (Default)"
-                                    inputSize="md"
-                                    fullWidth
-                                />
-                                <CustomInput
-                                    label="Large Input"
-                                    inputSize="lg"
+                                    label="Input filled"
+                                    variant='filled'
                                     fullWidth
                                 />
                             </div>

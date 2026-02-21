@@ -572,7 +572,7 @@
     }
 
     /* INPUT FIELD */
-    .input {
+    input {
         @apply bg-input-background text-input-text border border-input-border hover:border-input-border-hover focus:border-input-border-focus focus:ring-2 focus:ring-focus-ring/20 placeholder:text-input-placeholder disabled:bg-input-disabled-background disabled:text-input-disabled-text disabled:border-input-disabled-border disabled:cursor-not-allowed px-4 py-2.5 rounded-md transition-all duration-200 outline-none;
         font-family: var(--font-family-body);
     }
