@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CustomButton, { IconButton } from '@/module/common/custom-button';
+import CustomButton, { IconButton } from '@/ui/button';
 
 export default function ButtonTab() {
     const [isLoading, setIsLoading] = useState(false);

@@ -1,9 +1,9 @@
 "use client"
 
 import type { StoreCart } from "@medusajs/types"
-// import Button from "@module/common/custom-button"
 import { convertToLocale } from "@lib/util/money"
 import { useDrawer } from "@lib/context/drawer-context";
+import Button from "@/ui/button";
 
 export default function CartFooter({ cart }: { cart: StoreCart }) {
     const { toggleCartDrawer } = useDrawer();
@@ -21,14 +21,14 @@ export default function CartFooter({ cart }: { cart: StoreCart }) {
 
             <p className="text-xs mt-2 text-foreground-muted">Shipping, taxes, and discounts calculated at checkout.</p>
 
-            <button
-                // variant="solid"
-                // onClick={toggleCartDrawer}
-                // href="/cart"
+            <Button
+                variant="primary"
+                onClick={toggleCartDrawer}
+                href="/cart"
                 className="w-full mt-6"
             >
                 Go to Cart
-            </button>
+            </Button>
         </div>
     )
 }

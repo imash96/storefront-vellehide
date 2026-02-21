@@ -1,5 +1,5 @@
 import CartEmpty from "@/icon/empty-cart";
-// import Button from "@module/common/custom-button";
+import Button from "./button";
 
 export default function EmptyCart({ className = "" }: { className?: string }) {
     return (
@@ -11,13 +11,13 @@ export default function EmptyCart({ className = "" }: { className?: string }) {
             <p className="text-sm tracking-wide font-light text-foreground-muted max-w-xs">
                 Looks like you haven’t added anything yet.
             </p>
-            <button
-                // href={"/"}
-                // variant="outline"
+            <Button
+                href={"/"}
+                variant="outline"
                 className="tracking-wide text-xs font-medium uppercase"
             >
                 Continue Shopping
-            </button>
+            </Button>
         </div>
     )
 }
