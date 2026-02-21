@@ -10,7 +10,6 @@ import { ProductCategory } from "@/types/common";
 import { Drawer } from "@/ui/drawer";
 import MobileMenuPromotion from "../components/mobile-menu-promotion";
 import { product_categories } from "@lib/constant/category";
-import { MEGA_MENU } from "@lib/constant/header";
 
 export default function MobileDrawer() {
     const { isMobileDrawerOpen, toggleMobileDrawer } = useDrawer();
@@ -34,146 +33,128 @@ export default function MobileDrawer() {
         }
     };
 
-    const handleBack = () =>
-        navigationStack.length > 1 &&
-        setNavigationStack((prev) => prev.slice(0, -1));
+    const handleBack = () => {
+        if (navigationStack.length > 1) {
+            setNavigationStack((prev) => prev.slice(0, -1));
+        }
+    };
 
     const handleClose = () => {
         setNavigationStack([{ level: 0, category: null, breadcrumb: [] }]);
         toggleMobileDrawer();
     };
 
-    const getCurrentCategories = () =>
-        currentNav.level === 0
-            ? product_categories
-            : currentNav.category?.category_children || [];
-
-    // Show feature collections only for level 1 (parent > child, not deeper)
-    const shouldShowFeatureCollections = () => currentNav.level === 1 && currentNav.category && MEGA_MENU.includes(currentNav.category.name);
-
-    const contentVariants = {
-        hidden: { opacity: 0, x: 30 },
-        visible: { opacity: 1, x: 0 },
-        exit: { opacity: 0, x: -30 },
-    };
+    const getCurrentCategories = () => currentNav.level === 0 ? product_categories : currentNav.category?.category_children || [];
 
     return (
         <Drawer
             isOpen={isMobileDrawerOpen}
-            onClose={toggleMobileDrawer}
+            onClose={handleClose}
             direction="left"
+            size="sm"
+            showCloseButton={false}
         >
-            <div className="flex flex-col h-full w-full bg-background border-divider text-foreground">
-                {" "}
-                {/* bg-modile-drawe bg-scroll */}
-                <div className="flex items-center justify-between p-4 border-b shrink-0">
-                    {currentNav.level > 0 && (
+            <div className="flex flex-col h-full">
+                {/* Header */}
+                <Div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2, delay: 0.1 }}
+                    className="flex items-center justify-between px-4 py-4 border-b border-divider shrink-0 bg-surface"
+                >
+                    {navigationStack.length > 1 ? (
                         <button
                             onClick={handleBack}
-                            className="flex items-center text-sm hover:text-foreground-muted"
-                            aria-label="Back"
+                            className="flex items-center gap-2 px-3 py-2 rounded-md text-foreground hover:bg-muted transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                            aria-label="Go back"
                         >
-                            <ChevronLeft size={20} strokeWidth={1.5} className="mr-1" />
-                            Back
+                            <ChevronLeft className="w-5 h-5" strokeWidth={2} />
+                            <span className="font-medium text-sm">Back</span>
                         </button>
+                    ) : (
+                        <h2 className="font-heading font-semibold text-lg text-foreground tracking-tight">
+                            Menu
+                        </h2>
                     )}
-                    {/* <h2 className="text-base font-semibold truncate">
-            {currentNav.level === 0 ? "Menu" : currentNav.category?.name}
-          </h2> */}
-                    <h2 className="text-lg font-semibold text-text-primary font-heading">
-                        {currentNav.level === 0 ? "Menu" : null}
-                    </h2>
+
                     <button
-                        className="ml-auto p-2 rounded-sm text-muted-foreground hover:bg-muted-hover hover:text-foreground transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-focus-ring"
-                        aria-label="Close drawer"
                         onClick={handleClose}
+                        className="p-2 rounded-md text-foreground-secondary hover:bg-muted hover:text-foreground transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-focus-ring hover:scale-110 active:scale-95"
+                        aria-label="Close menu"
                     >
-                        <X size={20} strokeWidth={1.5} />
+                        <X className="w-6 h-6" strokeWidth={2} />
                     </button>
-                </div>
-                {/* Breadcrumb - Fixed Height when present */}
-                {/* {currentNav.breadcrumb.length > 0 && (
-          <div className="px-4 py-2 text-sm text-secondary-foreground bg-secondary flex items-center overflow-x-auto whitespace-nowrap">
-            {currentNav.breadcrumb.map((item, i) => (
-              <div key={item.id} className="flex items-center">
-                <span
-                  className={
-                    i === currentNav.breadcrumb.length - 1 ? "font-medium" : ""
-                  }
-                >
-                  {item.name}
-                </span>
-                <ChevronRight className="w-4 h-4 mx-1" />
-              </div>
-            ))}
-          </div>
-        )} */}
+                </Div>
+
+                {/* Breadcrumb */}
+                {currentNav.breadcrumb.length > 0 && (
+                    <Div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="px-4 py-3 border-b border-divider bg-muted/30"
+                    >
+                        <div className="flex items-center gap-2 text-sm text-foreground-secondary">
+                            <span>Shop</span>
+                            {currentNav.breadcrumb.map((cat, index) => (
+                                <div key={cat.id} className="flex items-center gap-2">
+                                    <ChevronRight className="w-4 h-4" strokeWidth={1.5} />
+                                    <span className={index === currentNav.breadcrumb.length - 1 ? "text-foreground font-medium" : ""}>
+                                        {cat.name}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </Div>
+                )}
                 {/* Content - Scrollable */}
                 <div className="flex-1 overflow-y-auto ">
                     <AnimatePresence mode="wait">
                         <Div
-                            key={`${currentNav.level}-${currentNav.category?.id || "root"}`}
-                            variants={contentVariants}
-                            initial="hidden"
-                            animate="visible"
-                            exit="exit"
-                            transition={{ duration: 0.25 }}
+                            key={currentNav.level}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            transition={{ duration: 0.2 }}
+                            className="p-4 space-y-1"
                         >
-                            {/* <h4 className="text-lg font-semibold mb-2">
-                    Featured Collections
-                  </h4> */}
                             {(currentNav.category && currentNav.level === 1) && <MobileMenuPromotion name={currentNav.category.name} thumbnail={currentNav.category.metadata?.thumbnail as string} />}
-                            {getCurrentCategories().map((cat, index) => (
-                                <Div
-                                    key={cat.id}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.04 }}
-                                >
-                                    {cat.category_children?.length ? (
-                                        <button
-                                            onClick={() => handleCategoryClick(cat)}
-                                            className="p-5 text-[15px] border-b flex items-center justify-between cursor-pointer w-full"
-                                        >
-                                            <span className="font-light text-[15px]">
+                            {getCurrentCategories().map((cat, index) => {
+                                const hasChildren = cat.category_children && cat.category_children.length > 0;
+                                const href = `/${cat.handle}`;
+
+                                return (
+                                    <Div
+                                        key={cat.id}
+                                        initial={{ opacity: 0, x: 10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.05 }}
+                                    >
+                                        {hasChildren ? (
+                                            <button
+                                                onClick={() => handleCategoryClick(cat)}
+                                                className="w-full flex items-center justify-between px-4 py-3.5 rounded-md text-foreground font-medium hover:bg-muted transition-all duration-200 group"
+                                            >
+                                                <span>{cat.name}</span>
+                                                <ChevronRight
+                                                    className="w-5 h-5 text-foreground-tertiary  group-hover:text-accent  group-hover:translate-x-1 transition-all duration-200"
+                                                    strokeWidth={1.5}
+                                                />
+                                            </button>
+                                        ) : (
+                                            <Link
+                                                href={href}
+                                                onClick={handleClose}
+                                                className="block w-full px-4 py-3.5 rounded-md text-foreground font-medium hover:bg-muted transition-all duration-200"
+                                            >
                                                 {cat.name}
-                                            </span>
-                                            <ChevronRight className="w-4 h-4" />
-                                        </button>
-                                    ) : (
-                                        <Link
-                                            href={`/category/${cat.handle}`}
-                                            className="p-5 text-[15px] border-b flex items-center justify-between cursor-pointer"
-                                            onClick={handleClose}
-                                        >
-                                            {cat.name}
-                                        </Link>
-                                    )}
-                                </Div>
-                            ))}
+                                            </Link>
+                                        )}
+                                    </Div>
+                                )
+                            })}
                         </Div>
                     </AnimatePresence>
-
-                    {/* Additional Bottom Contact Section */}
-                    {/* {currentNav.breadcrumb.length === 0 && (
-            <Div
-              variants={contentVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              transition={{ duration: 0.2 }}
-              className="flex flex-col gap-y-1 mt-6"
-            >
-              <MobileDrawerContact />
-            </Div>
-          )} */}
                 </div>
-                {/* <div className="flex items-center justify-between px-4 py-3 border-t">
-          <button className="p-2 rounded-full hover:bg-accent hover:text-accent-foreground">
-            <Search className="w-5 h-5" />
-            <span className="sr-only">Search</span>
-          </button>
-        </div> */}
             </div>
         </Drawer>
     );

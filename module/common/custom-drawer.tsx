@@ -2,9 +2,8 @@
 
 import { useEffect } from 'react';
 import { X } from 'lucide-react';
-import { AnimatePresence, motion, type Transition } from 'motion/react';
-
-import "@/css/drawer.css"
+import { div as Div } from 'motion/react-client';
+import { AnimatePresence, type Transition } from 'motion/react';
 
 export type DrawerDirection = 'left' | 'right';
 export type DrawerSize = 'sm' | 'md' | 'lg' | 'full';
@@ -86,7 +85,7 @@ export function Drawer({
         <AnimatePresence mode="wait">
             <>
                 {/* Overlay */}
-                <motion.div
+                <Div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -96,7 +95,7 @@ export function Drawer({
                     aria-hidden="true"
                 />
                 {/* Drawer */}
-                <motion.div
+                <Div
                     variants={slideVariants[direction]}
                     initial="hidden"
                     animate="visible"
@@ -130,16 +129,16 @@ export function Drawer({
 
                         {/* Content */}
                         <div className="flex-1 overflow-y-auto">
-                            <motion.div
+                            <Div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1, duration: 0.4 }}
                             >
                                 {children}
-                            </motion.div>
+                            </Div>
                         </div>
                     </div>
-                </motion.div>
+                </Div>
             </>
         </AnimatePresence>
     );
