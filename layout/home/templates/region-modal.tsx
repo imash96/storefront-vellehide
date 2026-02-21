@@ -8,7 +8,7 @@ import {
     DialogDescription,
     DialogClose,
     DialogTrigger,
-} from "@module/common/custom-modal";
+} from "@/ui/modal";
 import { createElement, useMemo, useState, useTransition } from "react"
 import { X } from "lucide-react";
 import { updateRegion } from "@lib/action/cart";
@@ -17,7 +17,7 @@ import Button from "@/ui/button";
 import NativeSelect from "@/ui/native-select";
 import Input from "@/ui/input";
 
-export default function RegionModal({ countryCode, className = "" }: RegionModalProps) {
+export default function RegionModal({ countryCode }: RegionModalProps) {
     const [showModal, setShowModal] = useState(!countryCode)
     const [isPending, startTransition] = useTransition();
 
@@ -30,13 +30,15 @@ export default function RegionModal({ countryCode, className = "" }: RegionModal
         }))
     ).sort((a, b) => a.label.localeCompare(b.label)), [])
 
-    const fallback = {
-        value: "us",
-        label: "United States",
-        currency: "USD",
-    }
 
-    const current = useMemo(() => countryOptions.find(o => o.value === countryCode) ?? fallback, [countryOptions, countryCode])
+    const current = useMemo(() => {
+        const fallback = {
+            value: "us",
+            label: "United States",
+            currency: "USD",
+        }
+        return countryOptions.find(o => o.value === countryCode) ?? fallback
+    }, [countryOptions, countryCode])
 
     const [selected, setSelected] = useState<CurrentRegion>(current)
 
@@ -49,7 +51,7 @@ export default function RegionModal({ countryCode, className = "" }: RegionModal
     }
 
     return (
-        <Dialog open={showModal} onOpenChange={setShowModal} className={className}>
+        <Dialog open={showModal} onOpenChange={setShowModal}>
             <DialogTrigger asChild>
                 <button
                     className="border rounded-md px-3 py-2 text-left hover:bg-background-muted/30 transition"

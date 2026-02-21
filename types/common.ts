@@ -3,6 +3,8 @@ import React from "react";
 
 export type IconProp = React.ComponentPropsWithoutRef<'svg'>
 
+export type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full'
+
 export type FeaturesType = {
     [key: string]: {
         id: string,

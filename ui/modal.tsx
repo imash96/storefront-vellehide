@@ -1,16 +1,16 @@
 'use client';
 
+import { ModalSize } from "@/types/common";
 import { Dialog, DialogPortal, DialogTrigger, DialogClose as DialogClosePri, DialogOverlay as DialogOverlayPri, DialogContent as DialogContentPri, DialogTitle as DialogTitlePri, DialogDescription as DialogDescriptionPri } from "@radix-ui/react-dialog"
 import { X } from "lucide-react";
 
-const sizeClasses = {
+const sizeClasses: Record<ModalSize, string> = {
     sm: 'max-w-sm',
     md: 'max-w-md',
     lg: 'max-w-lg',
     xl: 'max-w-xl',
     full: 'max-w-full mx-4',
 };
-
 
 function DialogOverlay(props: React.ComponentPropsWithoutRef<typeof DialogOverlayPri>) {
     return (
@@ -21,7 +21,7 @@ function DialogOverlay(props: React.ComponentPropsWithoutRef<typeof DialogOverla
     )
 }
 
-function DialogContent({ className = "", children, size = 'md', rounded = true, ...props }: React.ComponentPropsWithoutRef<typeof DialogContentPri> & { position?: "default" | "bottom", rounded?: boolean }) {
+function DialogContent({ className = "", children, size = 'md', rounded = true, ...props }: React.ComponentPropsWithoutRef<typeof DialogContentPri> & { size?: ModalSize, rounded?: boolean }) {
     return (
         <DialogPortal>
             <DialogOverlay />

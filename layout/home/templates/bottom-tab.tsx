@@ -1,0 +1,68 @@
+"use client"
+
+import { usePathname } from "next/navigation"
+import { House, Menu, Search, ShoppingBag, User } from "lucide-react"
+import { useDrawer } from "@lib/context/drawer-context"
+import Link from "next/link"
+import type { Route } from "next"
+
+type Tab =
+    | { type: "link"; href: Route; label: string; Icon: typeof House }
+    | { type: "button"; onClick: () => void; label: string; Icon: typeof House }
+
+export default function BottomTabs() {
+    const pathname = usePathname()
+    const { toggleCartDrawer, toggleMobileDrawer } = useDrawer()
+
+    // Hide on product pages
+    if (pathname.includes("/product")) return null
+
+    const isActive = (path: string) => pathname === path
+
+    const tabs: Tab[] = [
+        { type: "link", href: "/", label: "Home", Icon: House },
+        { type: "button", onClick: toggleMobileDrawer, label: "Menu", Icon: Menu },
+        { type: "button", onClick: toggleMobileDrawer, label: "Search", Icon: Search },
+        { type: "button", onClick: toggleCartDrawer, label: "Cart", Icon: ShoppingBag },
+        { type: "link", href: "/account", label: "Account", Icon: User },
+    ]
+
+    const commonClasses =
+        "grid gap-1 place-content-center place-items-center transition active:scale-95 active:bg-accent/20 focus:outline-none focus:ring-0"
+
+    return (
+        <nav className="lg:hidden h-16.25 fixed bottom-0 left-0 z-20 w-full border-t border-border bg-background-elevated shadow-lg rounded-t-2xl grid grid-cols-5 select-none">
+            {tabs.map((tab) => {
+                if (tab.type === "link") {
+                    const active = isActive(tab.href)
+                    return (
+                        <Link
+                            key={tab.label}
+                            href={tab.href}
+                            aria-label={tab.label}
+                            className={`${commonClasses} ${active ? "text-primary font-medium" : ""}`}
+                        >
+                            <tab.Icon
+                                size={22}
+                                strokeWidth={active ? 2.5 : 1.5}
+                                className={active ? "text-primary" : "text-foreground-muted"}
+                            />
+                            <span className="text-xs font-light tracking-wide">{tab.label}</span>
+                        </Link>
+                    )
+                }
+                return (
+                    <button
+                        key={tab.label}
+                        onClick={tab.onClick}
+                        aria-label={tab.label}
+                        className={commonClasses}
+                    >
+                        <tab.Icon size={22} strokeWidth={1.5} className="text-foreground-muted" />
+                        <span className="text-xs font-light tracking-wide">{tab.label}</span>
+                    </button>
+                )
+            })}
+        </nav>
+    )
+}

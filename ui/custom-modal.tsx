@@ -1,4 +1,5 @@
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "./modal";
+import { ModalSize } from "@/types/common";
 
 export interface CustomModalProps {
     open?: boolean;
@@ -8,7 +9,7 @@ export interface CustomModalProps {
     description?: string;
     children: React.ReactNode;
     footer?: React.ReactNode;
-    size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+    size?: ModalSize;
     showClose?: boolean;
     closeOnOverlayClick?: boolean;
     className?: string;
@@ -25,7 +26,6 @@ export default function CustomModal({
     size = 'md',
     showClose = true,
     closeOnOverlayClick = true,
-    className = '',
 }: CustomModalProps) {
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
@@ -33,6 +33,7 @@ export default function CustomModal({
 
 
             <DialogContent
+                size={size}
                 onPointerDownOutside={(e) => {
                     if (!closeOnOverlayClick) {
                         e.preventDefault();
@@ -74,30 +75,5 @@ export default function CustomModal({
                 )}
             </DialogContent>
         </Dialog>
-    );
-}
-
-export interface ModalButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
-    children: React.ReactNode;
-}
-
-const variantClasses = {
-    primary: 'bg-button-primary text-button-primary-foreground hover:bg-button-primary-hover',
-    secondary: 'bg-button-secondary text-button-secondary-foreground hover:bg-button-secondary-hover',
-    outline: 'bg-transparent text-text-primary border-2 border-border hover:bg-muted',
-    ghost: 'bg-transparent text-text-primary hover:bg-muted',
-    danger: 'bg-button-destructive text-button-destructive-foreground hover:bg-button-destructive-hover',
-};
-
-export function ModalButton({ variant = 'primary', children, className = '', ...props }: ModalButtonProps) {
-    return (
-        <button
-            type="button"
-            className={`px-4 py-2 rounded-lg font-semibold transition-all min-h-11 sm:min-h-10 text-sm sm:text-base ${variantClasses[variant]} ${className}`}
-            {...props}
-        >
-            {children}
-        </button>
     );
 }
