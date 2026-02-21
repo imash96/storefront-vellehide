@@ -1,0 +1,54 @@
+import Image from "next/image";
+
+export default function MobileMenuPromotion({
+    name,
+    thumbnail
+}: {
+    name?: string;
+    isMegaMenu?: boolean;
+    thumbnail?: string
+}) {
+    if (!name) return null;
+    return (
+        <div className="">
+            <div className="relative h-60">
+                <Image
+                    src={thumbnail || '/svg/placeholder.svg'}
+                    alt="submenu banner"
+                    height={400}
+                    width={600}
+                    className="h-full w-full object-cover"
+                />
+            </div>
+            <div className="bg-primary mb-2 text-sm w-[80%] text-white mx-auto px-2 py-2.5 text-center -mt-6 relative">
+                {name}
+            </div>
+
+            {/* {(features as FeaturesType)[name].map((item) => (
+        <Link
+          key={item.id}
+          href={`/collection/${item.handle}`}
+          className={`group/promo relative overflow-clip rounded-md bg-secondary border border-divider ${
+            isMegaMenu ? "aspect-[3/4] xl:aspect-[9/10]" : "aspect-square"
+          }`}
+        >
+          <Image
+            src={item.thumbnail}
+            alt={item.alt}
+            width={200}
+            height={300}
+            className="object-cover object-center group-hover/promo:scale-105 group-hover/promo:rotate-2 transition-transform ease-in-out duration-300 h-full w-full"
+          />
+          <div className="flex absolute bottom-0 sm:text-sm text-accent-foreground flex-col w-full justify-end">
+            <div className="p-4 bg-accent opacity-90 text-sm">
+              <span className="font-medium text-base">{item.name}</span>
+              <p aria-hidden="true" className="mt-0.5 sm:mt-1">
+                Shop now
+              </p>
+            </div>
+          </div>
+        </Link>
+      ))} */}
+        </div>
+    );
+}

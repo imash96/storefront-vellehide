@@ -3,12 +3,14 @@ import Announcement from "@/layout/home/templates/announcement";
 import { announcements } from "@lib/constant/announcement";
 import Header from "@/layout/home/templates/header";
 import { DrawerProvider } from "@lib/context/drawer-context";
+import CartDrawer from "@/layout/home/templates/cart-drawer";
 
 export default function StoreLayout({ children }: LayoutProps<"/">) {
     return (
         <DrawerProvider>
             <Announcement items={announcements} />
             <Header />
+            <CartDrawer />
             {children}
         </DrawerProvider>
     );

@@ -6,8 +6,8 @@ import { useToggleState } from "../hook/use-toggle-state";
 type DrawerContextValue = {
     isCartDrawerOpen: boolean;
     toggleCartDrawer: () => void;
-    isMenuDrawerOpen: boolean;
-    toggleMenuDrawer: () => void;
+    isMobileDrawerOpen: boolean;
+    toggleMobileDrawer: () => void;
     activeCategory: string | null;
     setActiveCategory: React.Dispatch<React.SetStateAction<string | null>>;
 };
@@ -22,14 +22,14 @@ export const useDrawer = (): DrawerContextValue => {
 
 export const DrawerProvider = ({ children }: React.PropsWithChildren) => {
     const { state: isCartDrawerOpen, toggle: toggleCartDrawer } = useToggleState();
-    const { state: isMenuDrawerOpen, toggle: toggleMenuDrawer } = useToggleState();
+    const { state: isMobileDrawerOpen, toggle: toggleMobileDrawer } = useToggleState();
     const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
     const value: DrawerContextValue = {
         isCartDrawerOpen,
         toggleCartDrawer,
-        isMenuDrawerOpen,
-        toggleMenuDrawer,
+        isMobileDrawerOpen,
+        toggleMobileDrawer,
         activeCategory,
         setActiveCategory,
     };

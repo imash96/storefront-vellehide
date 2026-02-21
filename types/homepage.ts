@@ -9,10 +9,14 @@ export interface AnnouncementItem {
     link?: string;
 }
 
-export interface NavLink {
+export type NavLink = {
     label: string;
-    href?: string;
-    megaMenu?: MegaMenuData;
+    href: string;
+    megaMenu?: never; // prevents coexistence
+} | {
+    label: string;
+    megaMenu: MegaMenuData;
+    href?: never; // prevents coexistence
 }
 
 export interface MegaMenuData {

@@ -89,16 +89,20 @@ export const navLinks: NavLink[] = [
         },
     },
     {
-        label: 'Footwear',
-        href: '/sale',
+        label: 'Kids',
+        href: '/category/kids',
     },
     {
         label: 'Accessories',
-        href: '/about',
+        href: '/category/accessories',
     },
     {
         label: 'Home Decor',
-        href: '/about',
+        href: '/category/home-decor',
+    },
+    {
+        label: 'Gifting',
+        href: '/category/gifting',
     },
 ];
 

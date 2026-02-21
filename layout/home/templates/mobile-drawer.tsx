@@ -1,0 +1,186 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { AnimatePresence } from "motion/react";
+import { div as Div } from "motion/react-client";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useDrawer } from "@lib/context/drawer-context";
+import { ProductCategory } from "@/types/common";
+import { Drawer } from "@/ui/drawer";
+import MobileMenuPromotion from "../components/mobile-menu-promotion";
+import { product_categories } from "@lib/constant/category";
+import { MEGA_MENU } from "@lib/constant/header";
+
+export default function MobileDrawer() {
+    const { isMobileDrawerOpen, toggleMobileDrawer } = useDrawer();
+
+    const [navigationStack, setNavigationStack] = useState<NavigationState[]>([
+        { level: 0, category: null, breadcrumb: [] },
+    ]);
+
+    const currentNav = navigationStack[navigationStack.length - 1];
+
+    const handleCategoryClick = (category: ProductCategory) => {
+        if (category.category_children?.length) {
+            setNavigationStack((prev) => [
+                ...prev,
+                {
+                    level: currentNav.level + 1,
+                    category,
+                    breadcrumb: [...currentNav.breadcrumb, category],
+                },
+            ]);
+        }
+    };
+
+    const handleBack = () =>
+        navigationStack.length > 1 &&
+        setNavigationStack((prev) => prev.slice(0, -1));
+
+    const handleClose = () => {
+        setNavigationStack([{ level: 0, category: null, breadcrumb: [] }]);
+        toggleMobileDrawer();
+    };
+
+    const getCurrentCategories = () =>
+        currentNav.level === 0
+            ? product_categories
+            : currentNav.category?.category_children || [];
+
+    // Show feature collections only for level 1 (parent > child, not deeper)
+    const shouldShowFeatureCollections = () => currentNav.level === 1 && currentNav.category && MEGA_MENU.includes(currentNav.category.name);
+
+    const contentVariants = {
+        hidden: { opacity: 0, x: 30 },
+        visible: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: -30 },
+    };
+
+    return (
+        <Drawer
+            isOpen={isMobileDrawerOpen}
+            onClose={toggleMobileDrawer}
+            direction="left"
+        >
+            <div className="flex flex-col h-full w-full bg-background border-divider text-foreground">
+                {" "}
+                {/* bg-modile-drawe bg-scroll */}
+                <div className="flex items-center justify-between p-4 border-b shrink-0">
+                    {currentNav.level > 0 && (
+                        <button
+                            onClick={handleBack}
+                            className="flex items-center text-sm hover:text-foreground-muted"
+                            aria-label="Back"
+                        >
+                            <ChevronLeft size={20} strokeWidth={1.5} className="mr-1" />
+                            Back
+                        </button>
+                    )}
+                    {/* <h2 className="text-base font-semibold truncate">
+            {currentNav.level === 0 ? "Menu" : currentNav.category?.name}
+          </h2> */}
+                    <h2 className="text-lg font-semibold text-text-primary font-heading">
+                        {currentNav.level === 0 ? "Menu" : null}
+                    </h2>
+                    <button
+                        className="ml-auto p-2 rounded-sm text-muted-foreground hover:bg-muted-hover hover:text-foreground transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                        aria-label="Close drawer"
+                        onClick={handleClose}
+                    >
+                        <X size={20} strokeWidth={1.5} />
+                    </button>
+                </div>
+                {/* Breadcrumb - Fixed Height when present */}
+                {/* {currentNav.breadcrumb.length > 0 && (
+          <div className="px-4 py-2 text-sm text-secondary-foreground bg-secondary flex items-center overflow-x-auto whitespace-nowrap">
+            {currentNav.breadcrumb.map((item, i) => (
+              <div key={item.id} className="flex items-center">
+                <span
+                  className={
+                    i === currentNav.breadcrumb.length - 1 ? "font-medium" : ""
+                  }
+                >
+                  {item.name}
+                </span>
+                <ChevronRight className="w-4 h-4 mx-1" />
+              </div>
+            ))}
+          </div>
+        )} */}
+                {/* Content - Scrollable */}
+                <div className="flex-1 overflow-y-auto ">
+                    <AnimatePresence mode="wait">
+                        <Div
+                            key={`${currentNav.level}-${currentNav.category?.id || "root"}`}
+                            variants={contentVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            transition={{ duration: 0.25 }}
+                        >
+                            {/* <h4 className="text-lg font-semibold mb-2">
+                    Featured Collections
+                  </h4> */}
+                            {(currentNav.category && currentNav.level === 1) && <MobileMenuPromotion name={currentNav.category.name} thumbnail={currentNav.category.metadata?.thumbnail as string} />}
+                            {getCurrentCategories().map((cat, index) => (
+                                <Div
+                                    key={cat.id}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: index * 0.04 }}
+                                >
+                                    {cat.category_children?.length ? (
+                                        <button
+                                            onClick={() => handleCategoryClick(cat)}
+                                            className="p-5 text-[15px] border-b flex items-center justify-between cursor-pointer w-full"
+                                        >
+                                            <span className="font-light text-[15px]">
+                                                {cat.name}
+                                            </span>
+                                            <ChevronRight className="w-4 h-4" />
+                                        </button>
+                                    ) : (
+                                        <Link
+                                            href={`/category/${cat.handle}`}
+                                            className="p-5 text-[15px] border-b flex items-center justify-between cursor-pointer"
+                                            onClick={handleClose}
+                                        >
+                                            {cat.name}
+                                        </Link>
+                                    )}
+                                </Div>
+                            ))}
+                        </Div>
+                    </AnimatePresence>
+
+                    {/* Additional Bottom Contact Section */}
+                    {/* {currentNav.breadcrumb.length === 0 && (
+            <Div
+              variants={contentVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              transition={{ duration: 0.2 }}
+              className="flex flex-col gap-y-1 mt-6"
+            >
+              <MobileDrawerContact />
+            </Div>
+          )} */}
+                </div>
+                {/* <div className="flex items-center justify-between px-4 py-3 border-t">
+          <button className="p-2 rounded-full hover:bg-accent hover:text-accent-foreground">
+            <Search className="w-5 h-5" />
+            <span className="sr-only">Search</span>
+          </button>
+        </div> */}
+            </div>
+        </Drawer>
+    );
+}
+
+type NavigationState = {
+    level: number;
+    category: ProductCategory | null;
+    breadcrumb: ProductCategory[];
+};
