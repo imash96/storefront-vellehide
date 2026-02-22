@@ -1,68 +1,50 @@
 /**
- * globals.css — Main Stylesheet Entry Point (OPTIMIZED)
- * 
- * This is your primary CSS file for the Next.js app.
- * Import order is critical for proper theme functionality.
- * 
- * Structure:
- * 1. Tailwind CSS base
- * 2. Theme CSS variables (light & dark)
- * 3. Base layer styles (can be overridden by utilities)
- * 4. Component layer styles
- * 5. Utility layer styles
- * 6. Google Fonts
- * 
+ * globals.css — Main Stylesheet Entry Point
+ * Premium Leather Brand Storefront
+ *
+ * Import order is critical:
+ * 1. Google Fonts
+ * 2. Tailwind CSS
+ * 3. Theme variables (light + dark)
+ * 4. @theme — Tailwind token mapping
+ * 5. @layer base — element defaults
+ * 6. @layer components — brand patterns
+ * 7. @layer utilities — brand utility classes
  */
 
-/* ========================================
-   STEP 1: Import Google Fonts
-   Montserrat for headings, Inter for body
-   ======================================== */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700&display=swap');
+/* ─── FONTS ───────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
-/* ========================================
-   STEP 2: Import Tailwind CSS Base
-   Must come first to ensure utilities work properly
-   ======================================== */
+/* ─── TAILWIND ────────────────────────────────────────────────────────────── */
 @import "tailwindcss";
 
-/* ========================================
-   STEP 3: Import Theme CSS Variables
-   Import both light and dark mode definitions
-   These define the actual color values used throughout
-   ======================================== */
+/* ─── THEME VARIABLES ─────────────────────────────────────────────────────── */
 @import "./mode-light.css";
 @import "./mode-dark.css";
 @import "./common.css";
 
-/* ========================================
-   STEP 4: Tailwind Theme Configuration
-   Maps CSS variables to Tailwind utility classes
-   Must come AFTER variable definitions
-   ======================================== */
+/* ─── TAILWIND THEME MAPPING ──────────────────────────────────────────────── */
 @theme {
-    /* COLOR PALETTE - All colors reference CSS variables from theme files */
-
+    /* Reset Tailwind's default color palette — we use only our tokens */
     --color-*: initial;
     --color-white: oklch(100% 0 0);
     --color-black: oklch(0% 0 0);
 
-    /* Primary Colors */
+    /* Primary */
     --color-primary: var(--primary);
     --color-primary-foreground: var(--primary-foreground);
     --color-primary-hover: var(--primary-hover);
     --color-primary-active: var(--primary-active);
     --color-primary-subtle: var(--primary-subtle);
 
-    /* Secondary Colors */
+    /* Secondary */
     --color-secondary: var(--secondary);
     --color-secondary-foreground: var(--secondary-foreground);
     --color-secondary-hover: var(--secondary-hover);
     --color-secondary-active: var(--secondary-active);
     --color-secondary-subtle: var(--secondary-subtle);
 
-    /* Accent Colors */
+    /* Accent */
     --color-accent: var(--accent);
     --color-accent-foreground: var(--accent-foreground);
     --color-accent-hover: var(--accent-hover);
@@ -99,7 +81,7 @@
     --color-border-subtle: var(--border-subtle);
     --color-border-strong: var(--border-strong);
 
-    /* Divider */
+    /* Dividers */
     --color-divider: var(--divider);
     --color-divider-strong: var(--divider-strong);
 
@@ -122,6 +104,7 @@
     --color-destructive-active: var(--destructive-active);
     --color-destructive-subtle: var(--destructive-subtle);
 
+    /* Error aliased to destructive — same token, no duplication */
     --color-error: var(--error);
     --color-error-foreground: var(--error-foreground);
     --color-error-hover: var(--error-hover);
@@ -140,11 +123,12 @@
     --color-info-active: var(--info-active);
     --color-info-subtle: var(--info-subtle);
 
+    /* Overlays */
     --color-overlay: var(--overlay);
     --color-overlay-light: var(--overlay-light);
     --color-overlay-heavy: var(--overlay-heavy);
 
-    /* Product-Specific Colors */
+    /* Product Badges */
     --color-badge-new: var(--badge-new);
     --color-badge-new-foreground: var(--badge-new-foreground);
     --color-badge-sale: var(--badge-sale);
@@ -152,21 +136,24 @@
     --color-badge-limited: var(--badge-limited);
     --color-badge-limited-foreground: var(--badge-limited-foreground);
 
+    /* Pricing */
     --color-price-current: var(--price-current);
     --color-price-original: var(--price-original);
     --color-price-sale: var(--price-sale);
     --color-price-save: var(--price-save);
 
+    /* Ratings */
     --color-rating-filled: var(--rating-filled);
     --color-rating-empty: var(--rating-empty);
 
+    /* Links */
     --color-link: var(--link);
     --color-link-hover: var(--link-hover);
     --color-link-foreground: var(--link-foreground);
     --color-link-visited: var(--link-visited);
     --color-link-active: var(--link-active);
 
-    /* Input & Form Elements */
+    /* Form Inputs */
     --color-input: var(--input);
     --color-input-background: var(--input-background);
     --color-input-border: var(--input-border);
@@ -219,7 +206,7 @@
     --color-button-badge: var(--button-badge);
     --color-button-badge-foreground: var(--button-badge-foreground);
 
-    /* Neutral scale */
+    /* Neutral Scale */
     --color-neutral-50: var(--neutral-50);
     --color-neutral-100: var(--neutral-100);
     --color-neutral-200: var(--neutral-200);

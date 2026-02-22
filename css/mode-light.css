@@ -7,223 +7,243 @@
 
 :root,
 :root[data-theme="light"] {
-    /* PRIMARY COLORS - Rich chocolate brown for main CTAs and branding */
-    --primary: oklch(31% 0.04 40);
-    --primary-foreground: oklch(98% 0.005 40);
-    --primary-hover: oklch(38% 0.045 40);
-    --primary-active: oklch(26% 0.05 40);
-    --primary-subtle: oklch(94% 0.01 40);
+    /* ─── PRIMARY — Deep Espresso ─────────────────────────────────────────
+       Near-black brown. Confident, premium, decisive.
+       Used for: CTAs, nav text, primary buttons, headings on light bg.   */
+    --primary: oklch(22% 0.025 35);
+    --primary-foreground: oklch(98% 0.004 50);
+    --primary-hover: oklch(28% 0.028 35);
+    --primary-active: oklch(17% 0.030 35);
+    --primary-subtle: oklch(96% 0.008 45);
 
-    /* SECONDARY COLORS - Warm taupe for secondary actions */
-    --secondary: oklch(55% 0.03 45);
-    --secondary-foreground: oklch(98% 0.005 45);
-    --secondary-hover: oklch(62% 0.035 45);
-    --secondary-active: oklch(48% 0.04 45);
-    --secondary-subtle: oklch(96% 0.008 45);
+    /* ─── SECONDARY — Warm Stone ──────────────────────────────────────────
+       Mid-toned warm taupe. Supportive, understated elegance.
+       Used for: secondary actions, filters, tags, tertiary nav.           */
+    --secondary: oklch(50% 0.026 44);
+    --secondary-foreground: oklch(98% 0.004 50);
+    --secondary-hover: oklch(57% 0.030 44);
+    --secondary-active: oklch(44% 0.032 44);
+    --secondary-subtle: oklch(96% 0.007 48);
 
-    /* ACCENT COLORS - Muted cognac for highlights */
-    --accent: oklch(62% 0.08 50);
+    /* ─── ACCENT — Cognac / Saddle Leather ───────────────────────────────
+       The signature leather hue. Warm, confident, distinctly brand.
+       Used for: highlights, active states, hover accents, badges.         */
+    --accent: oklch(56% 0.105 48);
     --accent-foreground: oklch(100% 0 0);
-    --accent-hover: oklch(68% 0.085 50);
-    --accent-active: oklch(56% 0.09 50);
-    --accent-subtle: oklch(97% 0.015 50);
+    --accent-hover: oklch(62% 0.110 48);
+    --accent-active: oklch(50% 0.115 48);
+    --accent-subtle: oklch(97% 0.016 52);
 
-    /* BACKGROUND & SURFACES - Warm neutral layers */
-    --background: oklch(98% 0.005 50);
-    --background-secondary: oklch(96% 0.008 50);
-    --background-tertiary: oklch(94% 0.01 50);
-    --foreground: oklch(20% 0.015 40);
-    --foreground-secondary: oklch(35% 0.02 40);
-    --foreground-tertiary: oklch(50% 0.02 40);
+    /* ─── BACKGROUNDS & SURFACES ─────────────────────────────────────────
+       Crisp near-whites with the faintest warm breath.
+       Three-layer depth system: page → section → card.                   */
+    --background: oklch(99% 0.003 55);
+    /* page canvas */
+    --background-secondary: oklch(97% 0.005 52);
+    /* alt sections */
+    --background-tertiary: oklch(95% 0.008 50);
+    /* subtle panels */
+    --foreground: oklch(18% 0.018 38);
+    --foreground-secondary: oklch(34% 0.022 40);
+    --foreground-tertiary: oklch(52% 0.018 44);
     --surface: oklch(100% 0 0);
-    --surface-foreground: oklch(20% 0.015 40);
-    --muted: oklch(95% 0.008 50);
-    --muted-foreground: oklch(45% 0.025 45);
-    --muted-hover: oklch(92% 0.012 50);
-    --subtle: oklch(97% 0.006 50);
+    /* cards, popovers */
+    --surface-foreground: oklch(18% 0.018 38);
+    --muted: oklch(95% 0.007 50);
+    --muted-foreground: oklch(46% 0.022 44);
+    --muted-hover: oklch(92% 0.010 50);
+    --subtle: oklch(97% 0.005 52);
 
-    /* CARD COMPONENT - Elevated surfaces */
-    --card: oklch(99% 0.003 50);
-    --card-foreground: oklch(20% 0.015 40);
-    --card-hover: oklch(97% 0.006 50);
-    --card-border: oklch(90% 0.01 50);
+    /* ─── CARD ────────────────────────────────────────────────────────────*/
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(18% 0.018 38);
+    --card-hover: oklch(98% 0.004 52);
+    --card-border: oklch(91% 0.010 48);
 
-    /* POPOVER COMPONENT */
-    --popover: oklch(99% 0.003 50);
-    --popover-foreground: oklch(20% 0.015 40);
-    --popover-border: oklch(88% 0.012 50);
+    /* ─── POPOVER / MEGA MENU ─────────────────────────────────────────────*/
+    --popover: oklch(100% 0 0);
+    --popover-foreground: oklch(18% 0.018 38);
+    --popover-border: oklch(88% 0.012 48);
 
-    /* BORDERS & DIVIDERS */
-    --border: oklch(88% 0.012 45);
-    --border-subtle: oklch(93% 0.008 50);
-    --border-strong: oklch(80% 0.018 45);
-    --divider: oklch(90% 0.01 50);
-    --divider-strong: oklch(82% 0.015 45);
+    /* ─── BORDERS & DIVIDERS ──────────────────────────────────────────────
+       Three-step border system for layered surfaces.                      */
+    --border: oklch(89% 0.011 46);
+    --border-subtle: oklch(93% 0.007 50);
+    --border-strong: oklch(78% 0.018 44);
+    --divider: oklch(91% 0.009 50);
+    --divider-strong: oklch(83% 0.014 45);
 
-    /* TEXT HIERARCHY */
-    --text-primary: oklch(20% 0.015 40);
-    --text-secondary: oklch(45% 0.025 45);
-    --text-tertiary: oklch(60% 0.02 45);
-    --text-disabled: oklch(75% 0.015 50);
+    /* ─── TEXT HIERARCHY ──────────────────────────────────────────────────
+       Four-level system. Primary at 7:1+, tertiary at 3:1 min.           */
+    --text-primary: oklch(18% 0.018 38);
+    /* headings, body — 12:1 on white */
+    --text-secondary: oklch(40% 0.022 42);
+    /* supporting text — 7:1 */
+    --text-tertiary: oklch(56% 0.018 44);
+    /* metadata, labels — 4.5:1 */
+    --text-disabled: oklch(72% 0.012 48);
+    /* disabled — 2.5:1 (intentional) */
 
-    /* SUCCESS STATE - Forest green */
-    --success: oklch(48% 0.08 140);
+    /* ─── SEMANTIC STATES ─────────────────────────────────────────────────*/
+    /* Success */
+    --success: oklch(46% 0.09 145);
     --success-foreground: oklch(100% 0 0);
-    --success-hover: oklch(54% 0.085 140);
-    --success-active: oklch(42% 0.09 140);
-    --success-subtle: oklch(96% 0.02 140);
+    --success-hover: oklch(52% 0.095 145);
+    --success-active: oklch(40% 0.100 145);
+    --success-subtle: oklch(96% 0.022 145);
 
-    /* DESTRUCTIVE/ERROR STATE - Brick red */
-    --destructive: oklch(48% 0.12 25);
+    /* Destructive (also aliased as error) */
+    --destructive: oklch(50% 0.14 22);
     --destructive-foreground: oklch(100% 0 0);
-    --destructive-hover: oklch(54% 0.13 25);
-    --destructive-active: oklch(42% 0.14 25);
-    --destructive-subtle: oklch(96% 0.03 25);
+    --destructive-hover: oklch(56% 0.145 22);
+    --destructive-active: oklch(44% 0.150 22);
+    --destructive-subtle: oklch(97% 0.030 22);
 
-    /* ERROR - Alias for destructive */
-    --error: oklch(48% 0.12 25);
-    --error-foreground: oklch(100% 0 0);
-    --error-hover: oklch(54% 0.13 25);
-    --error-active: oklch(42% 0.14 25);
-    --error-subtle: oklch(96% 0.03 25);
+    /* Error — alias maps to destructive */
+    --error: var(--destructive);
+    --error-foreground: var(--destructive-foreground);
+    --error-hover: var(--destructive-hover);
+    --error-active: var(--destructive-active);
+    --error-subtle: var(--destructive-subtle);
 
-    /* WARNING STATE - Warm amber */
-    --warning: oklch(68% 0.12 60);
+    /* Warning */
+    --warning: oklch(66% 0.13 62);
     --warning-foreground: oklch(100% 0 0);
-    --warning-hover: oklch(74% 0.125 60);
-    --warning-active: oklch(62% 0.13 60);
-    --warning-subtle: oklch(97% 0.025 60);
+    --warning-hover: oklch(72% 0.135 62);
+    --warning-active: oklch(60% 0.140 62);
+    --warning-subtle: oklch(97% 0.026 62);
 
-    /* INFO STATE - Slate blue */
-    --info: oklch(48% 0.06 240);
+    /* Info */
+    --info: oklch(50% 0.07 238);
     --info-foreground: oklch(100% 0 0);
-    --info-hover: oklch(54% 0.065 240);
-    --info-active: oklch(42% 0.07 240);
-    --info-subtle: oklch(96% 0.015 240);
+    --info-hover: oklch(56% 0.075 238);
+    --info-active: oklch(44% 0.080 238);
+    --info-subtle: oklch(96% 0.016 238);
 
     /* OVERLAY STATES */
-    --overlay: oklch(15% 0.01 40 / 0.5);
-    --overlay-light: oklch(15% 0.01 40 / 0.3);
-    --overlay-heavy: oklch(10% 0.01 40 / 0.7);
+    /* ─── OVERLAYS ────────────────────────────────────────────────────────*/
+    --overlay: oklch(10% 0.01 40 / 0.50);
+    --overlay-light: oklch(10% 0.01 40 / 0.28);
+    --overlay-heavy: oklch(5% 0.01 40 / 0.72);
 
-    /* INTERACTIVE STATES */
+    /* Interactive micro-overlays (applied via pseudo-elements) */
     --hover-overlay: oklch(0% 0 0);
     --hover-overlay-opacity: 0.04;
     --active-overlay: oklch(0% 0 0);
     --active-overlay-opacity: 0.08;
 
-    /* PRODUCT-SPECIFIC COLORS */
-    --badge-new: oklch(48% 0.08 140);
+    /* ─── PRODUCT — BADGES ────────────────────────────────────────────────*/
+    --badge-new: oklch(46% 0.09 145);
     --badge-new-foreground: oklch(100% 0 0);
-    --badge-sale: oklch(48% 0.12 25);
+    --badge-sale: oklch(50% 0.14 22);
     --badge-sale-foreground: oklch(100% 0 0);
-    --badge-limited: oklch(62% 0.08 50);
+    --badge-limited: oklch(56% 0.105 48);
     --badge-limited-foreground: oklch(100% 0 0);
 
-    /* PRICE DISPLAY */
-    --price-current: oklch(20% 0.015 40);
-    --price-original: oklch(60% 0.02 45);
-    --price-sale: oklch(48% 0.12 25);
-    --price-save: oklch(48% 0.08 140);
+    /* ─── PRODUCT — PRICING ───────────────────────────────────────────────*/
+    --price-current: oklch(18% 0.018 38);
+    --price-original: oklch(58% 0.018 44);
+    --price-sale: oklch(50% 0.14 22);
+    --price-save: oklch(46% 0.09 145);
 
-    /* RATING STARS */
-    --rating-filled: oklch(68% 0.12 60);
-    --rating-empty: oklch(88% 0.012 45);
+    /* ─── PRODUCT — RATINGS ───────────────────────────────────────────────*/
+    --rating-filled: oklch(68% 0.13 58);
+    --rating-empty: oklch(88% 0.010 46);
 
-    /* LINK STATES */
-    --link: oklch(31% 0.04 40);
-    --link-hover: oklch(48% 0.08 45);
-    --link-foreground: oklch(31% 0.04 40);
-    --link-visited: oklch(38% 0.05 320);
-    --link-active: oklch(26% 0.05 40);
+    /* ─── LINKS ───────────────────────────────────────────────────────────*/
+    --link: oklch(22% 0.025 35);
+    --link-hover: oklch(56% 0.105 48);
+    --link-foreground: oklch(22% 0.025 35);
+    --link-visited: oklch(40% 0.055 315);
+    --link-active: oklch(17% 0.030 35);
 
-    /* INPUT & FORM ELEMENTS */
-    --input: oklch(90% 0.01 50);
+    /* ─── FORM INPUTS ─────────────────────────────────────────────────────*/
+    --input: oklch(91% 0.009 48);
     --input-background: oklch(100% 0 0);
-    --input-border: oklch(88% 0.012 45);
-    --input-border-hover: oklch(80% 0.018 45);
-    --input-border-focus: oklch(62% 0.08 50);
-    --input-text: oklch(20% 0.015 40);
-    --input-placeholder: oklch(60% 0.02 45);
-    --input-disabled-background: oklch(97% 0.006 50);
-    --input-disabled-text: oklch(75% 0.015 50);
-    --input-disabled-border: oklch(90% 0.01 50);
-    --input-focus: oklch(62% 0.08 50);
+    --input-border: oklch(89% 0.011 46);
+    --input-border-hover: oklch(78% 0.018 44);
+    --input-border-focus: oklch(56% 0.105 48);
+    --input-text: oklch(18% 0.018 38);
+    --input-placeholder: oklch(60% 0.018 44);
+    --input-disabled-background: oklch(97% 0.005 52);
+    --input-disabled-text: oklch(72% 0.012 48);
+    --input-disabled-border: oklch(91% 0.009 48);
+    --input-focus: oklch(56% 0.105 48);
 
-    /* FOCUS RING */
-    --ring: oklch(31% 0.04 40);
-    --ring-offset: oklch(98% 0.005 50);
-    --focus-ring: oklch(62% 0.08 50);
-    --focus-ring-opacity: 0.4;
+    /* ─── FOCUS ───────────────────────────────────────────────────────────*/
+    --ring: oklch(22% 0.025 35);
+    --ring-offset: oklch(99% 0.003 55);
+    --focus-ring: oklch(56% 0.105 48);
 
-    /* BUTTON VARIANTS */
-    --button-primary: oklch(31% 0.04 40);
-    --button-primary-foreground: oklch(98% 0.01 40);
-    --button-primary-hover: oklch(38% 0.045 40);
-    --button-primary-active: oklch(26% 0.05 40);
+    /* ─── BUTTONS ─────────────────────────────────────────────────────────*/
+    --button-primary: oklch(22% 0.025 35);
+    --button-primary-foreground: oklch(98% 0.004 50);
+    --button-primary-hover: oklch(28% 0.028 35);
+    --button-primary-active: oklch(17% 0.030 35);
 
-    --button-secondary: oklch(94% 0.01 50);
-    --button-secondary-foreground: oklch(25% 0.03 40);
-    --button-secondary-hover: oklch(90% 0.015 50);
-    --button-secondary-active: oklch(86% 0.02 50);
+    --button-secondary: oklch(95% 0.008 50);
+    --button-secondary-foreground: oklch(22% 0.025 35);
+    --button-secondary-hover: oklch(91% 0.012 50);
+    --button-secondary-active: oklch(87% 0.016 50);
 
-    --button-destructive: oklch(48% 0.12 25);
-    --button-destructive-foreground: oklch(98% 0.01 25);
-    --button-destructive-hover: oklch(54% 0.13 25);
-    --button-destructive-active: oklch(42% 0.14 25);
+    --button-destructive: oklch(50% 0.14 22);
+    --button-destructive-foreground: oklch(100% 0 0);
+    --button-destructive-hover: oklch(56% 0.145 22);
+    --button-destructive-active: oklch(44% 0.150 22);
 
-    --button-accent: oklch(62% 0.08 50);
+    --button-accent: oklch(56% 0.105 48);
     --button-accent-foreground: oklch(100% 0 0);
-    --button-accent-hover: oklch(68% 0.085 50);
-    --button-accent-active: oklch(56% 0.09 50);
+    --button-accent-hover: oklch(62% 0.110 48);
+    --button-accent-active: oklch(50% 0.115 48);
 
     --button-ghost: transparent;
-    --button-ghost-foreground: oklch(20% 0.015 40);
-    --button-ghost-hover: oklch(95% 0.008 50);
-    --button-ghost-active: oklch(90% 0.012 50);
+    --button-ghost-foreground: oklch(18% 0.018 38);
+    --button-ghost-hover: oklch(95% 0.007 50);
+    --button-ghost-active: oklch(91% 0.010 50);
 
     --button-outline: transparent;
-    --button-outline-foreground: oklch(31% 0.04 40);
-    --button-outline-border: oklch(31% 0.04 40);
-    --button-outline-hover: oklch(31% 0.04 40);
-    --button-outline-hover-foreground: oklch(98% 0.01 40);
+    --button-outline-foreground: oklch(22% 0.025 35);
+    --button-outline-border: oklch(22% 0.025 35);
+    --button-outline-hover: oklch(22% 0.025 35);
+    --button-outline-hover-foreground: oklch(98% 0.004 50);
 
-    --button-cart: oklch(38% 0.09 140);
-    --button-cart-foreground: oklch(98% 0.01 140);
-    --button-cart-hover: oklch(44% 0.095 140);
+    --button-cart: oklch(40% 0.095 145);
+    --button-cart-foreground: oklch(98% 0.004 145);
+    --button-cart-hover: oklch(46% 0.100 145);
 
-    --button-wishlist: oklch(48% 0.12 25);
-    --button-wishlist-foreground: oklch(98% 0.01 25);
-    --button-wishlist-hover: oklch(54% 0.13 25);
+    --button-wishlist: oklch(50% 0.14 22);
+    --button-wishlist-foreground: oklch(100% 0 0);
+    --button-wishlist-hover: oklch(56% 0.145 22);
 
-    --button-badge: oklch(48% 0.08 45);
-    --button-badge-foreground: oklch(99% 0.005 45);
+    --button-badge: oklch(50% 0.080 46);
+    --button-badge-foreground: oklch(100% 0 0);
 
-    /* NEUTRAL SCALE */
-    --neutral-50: oklch(98% 0.003 50);
+    /* ─── NEUTRAL SCALE — Warm Stone ─────────────────────────────────────*/
+    --neutral-50: oklch(98% 0.003 52);
     --neutral-100: oklch(96% 0.005 50);
     --neutral-200: oklch(92% 0.008 50);
-    --neutral-300: oklch(86% 0.012 50);
-    --neutral-400: oklch(70% 0.015 45);
-    --neutral-500: oklch(55% 0.02 45);
-    --neutral-600: oklch(42% 0.025 45);
-    --neutral-700: oklch(35% 0.03 40);
-    --neutral-800: oklch(26% 0.035 40);
-    --neutral-900: oklch(20% 0.04 40);
-    --neutral-950: oklch(15% 0.045 40);
+    --neutral-300: oklch(85% 0.012 48);
+    --neutral-400: oklch(70% 0.015 46);
+    --neutral-500: oklch(56% 0.018 44);
+    --neutral-600: oklch(44% 0.022 42);
+    --neutral-700: oklch(34% 0.026 40);
+    --neutral-800: oklch(26% 0.030 38);
+    --neutral-900: oklch(20% 0.022 36);
+    --neutral-950: oklch(14% 0.018 35);
 
-    /* SHADOWS - Using OKLCH for consistency */
-    --shadow-color: oklch(31% 0.04 40);
-    --shadow-sm: 0 1px 2px 0 oklch(31% 0.04 40 / 0.05);
-    --shadow: 0 1px 3px 0 oklch(31% 0.04 40 / 0.1), 0 1px 2px -1px oklch(31% 0.04 40 / 0.1);
-    --shadow-md: 0 4px 6px -1px oklch(31% 0.04 40 / 0.1), 0 2px 4px -2px oklch(31% 0.04 40 / 0.1);
-    --shadow-lg: 0 10px 15px -3px oklch(31% 0.04 40 / 0.1), 0 4px 6px -4px oklch(31% 0.04 40 / 0.1);
-    --shadow-xl: 0 20px 25px -5px oklch(31% 0.04 40 / 0.1), 0 8px 10px -6px oklch(31% 0.04 40 / 0.1);
-    --shadow-2xl: 0 25px 50px -12px oklch(31% 0.04 40 / 0.25);
-    --shadow-inner: inset 0 2px 4px 0 oklch(31% 0.04 40 / 0.06);
+    /* ─── SHADOWS ─────────────────────────────────────────────────────────*/
+    --shadow-color: 22% 0.025 35;
+    --shadow-sm: 0 1px 2px 0 oklch(22% 0.025 35 / 0.06);
+    --shadow: 0 1px 3px 0 oklch(22% 0.025 35 / 0.10), 0 1px 2px -1px oklch(22% 0.025 35 / 0.10);
+    --shadow-md: 0 4px 6px -1px oklch(22% 0.025 35 / 0.10), 0 2px 4px -2px oklch(22% 0.025 35 / 0.10);
+    --shadow-lg: 0 10px 15px -3px oklch(22% 0.025 35 / 0.10), 0 4px 6px -4px oklch(22% 0.025 35 / 0.10);
+    --shadow-xl: 0 20px 25px -5px oklch(22% 0.025 35 / 0.12), 0 8px 10px -6px oklch(22% 0.025 35 / 0.10);
+    --shadow-2xl: 0 25px 50px -12px oklch(22% 0.025 35 / 0.28);
+    --shadow-inner: inset 0 2px 4px 0 oklch(22% 0.025 35 / 0.06);
 
-    /* GRADIENTS */
-    --gradient-primary: linear-gradient(135deg, oklch(31% 0.04 40) 0%, oklch(38% 0.045 40) 100%);
-    --gradient-accent: linear-gradient(135deg, oklch(62% 0.08 50) 0%, oklch(68% 0.085 50) 100%);
-    --gradient-warm: linear-gradient(135deg, oklch(98% 0.005 50) 0%, oklch(96% 0.01 45) 100%);
+    /* ─── GRADIENTS ───────────────────────────────────────────────────────*/
+    --gradient-primary: linear-gradient(135deg, oklch(22% 0.025 35) 0%, oklch(28% 0.028 35) 100%);
+    --gradient-accent: linear-gradient(135deg, oklch(56% 0.105 48) 0%, oklch(62% 0.110 48) 100%);
+    --gradient-warm: linear-gradient(135deg, oklch(99% 0.003 55) 0%, oklch(97% 0.007 50) 100%);
+    --gradient-hero: linear-gradient(160deg, oklch(99% 0.003 55) 0%, oklch(95% 0.012 48) 100%);
 }
