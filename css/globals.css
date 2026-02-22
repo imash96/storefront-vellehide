@@ -615,6 +615,29 @@
     .section-spacing {
         @apply py-12 md:py-16 lg:py-20;
     }
+
+    /* Container Custom */
+    .container-custom {
+        max-width: var(--container-xl);
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    @media (min-width: 640px) {
+        .container-custom {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .container-custom {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    }
 }
 
 
