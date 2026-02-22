@@ -1,6 +1,6 @@
 import { getInitialTheme } from "@lib/util/get-initial-theme";
 import HeaderClient from "../components/header-client";
-import HeaderServer from "../components/header-server";
+import HeaderServer from "../components/header-server-new";
 import { navLinks } from "@lib/constant/data";
 import { fetchCartItemCount } from "@lib/action/cart";
 

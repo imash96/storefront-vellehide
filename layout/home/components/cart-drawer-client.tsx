@@ -13,25 +13,29 @@ export default function CartDrawerClient({ children }: React.PropsWithChildren) 
             onClose={toggleCartDrawer}
             direction="right"
             size="md"
-            showCloseButton={false} // Custom header
+            showCloseButton={false}
         >
-            <div className="flex flex-col size-full bg-background">
+            <div className="flex flex-col h-full bg-background">
                 {/* Custom Header */}
                 <Div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2, delay: 0.1 }}
-                    className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-divider shrink-0 bg-surface"
+                    transition={{ duration: 0.15 }}
+                    className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-divider shrink-0 bg-surface sticky top-0 z-10"
                 >
                     <div className="flex items-center gap-2.5">
-                        <ShoppingBag className="size-5 text-accent" strokeWidth={1.5} aria-hidden="true" />
+                        <ShoppingBag
+                            className="size-5 text-accent"
+                            strokeWidth={1.5}
+                            aria-hidden="true"
+                        />
                         <h2 className="font-heading font-semibold text-lg text-foreground tracking-tight">
                             Shopping Cart
                         </h2>
                     </div>
 
                     <button
-                        className="p-2 rounded-md text-foreground-secondary hover:bg-muted hover:text-foreground transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-focus-ring focus:ring-offset-2 hover:scale-110 active:scale-95"
+                        className="p-2 rounded-md text-foreground-secondary hover:bg-muted hover:text-foreground transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-focus-ring hover:scale-110 active:scale-95"
                         onClick={toggleCartDrawer}
                         aria-label="Close cart drawer"
                     >

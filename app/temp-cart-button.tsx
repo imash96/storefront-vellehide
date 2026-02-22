@@ -54,7 +54,6 @@ export default function TempCart({ countryCode, products }: { countryCode: strin
                         </Button>
                     </div>
                 </form>
-                <span>{JSON.stringify(stateCart)}</span>
                 {/* <form action={addWishlistItem} className="flex flex-col gap-4 w-full">
                     <div className="flex gap-2">
                         <Button

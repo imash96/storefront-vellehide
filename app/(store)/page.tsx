@@ -6,7 +6,7 @@ export default async function Page() {
   const countryCode = (await cookies()).get("__country_code")?.value || process.env.NEXT_PUBLIC_DEFAULT_REGION || "us"
   const products = await listProductVariant();
   return (
-    <div className="flex justify-center items-center h-[200vh]">
+    <div className="flex justify-center items-center h-screen">
       <TempCart countryCode={countryCode} products={products} />
     </div>
   );

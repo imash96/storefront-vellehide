@@ -11,23 +11,34 @@ import { Minus, Plus, Trash } from "lucide-react";
 
 export default async function CartDrawer() {
     const cart = await retrieveCart()
-    const sortedItems = cart?.items?.sort((a, b) => new Date(b.created_at || "").getTime() - new Date(a.created_at || "").getTime());
+    const sortedItems = cart?.items?.sort(
+        (a, b) =>
+            new Date(b.created_at || "").getTime() -
+            new Date(a.created_at || "").getTime()
+    );
     return (
         <CartDrawerClient>
             {cart && cart.items?.length ? (
                 <>
-                    <div className="flex-1 overflow-y-auto px-4">
-                        <ul className="divide-y py-2">
+                    <div className="flex-1 overflow-y-auto px-4 sm:px-6">
+                        <ul className="divide-y divide-divider py-4">
                             {sortedItems?.map((item, index) => {
-                                const adjustmentsSum = (item.adjustments || []).reduce((acc, adjustment) => adjustment.amount + acc, 0)
-                                const currentPrice = item.total! - adjustmentsSum
+                                const adjustmentsSum = (item.adjustments || []).reduce(
+                                    (acc, adjustment) => adjustment.amount + acc,
+                                    0
+                                );
+                                const currentPrice = item.total! - adjustmentsSum;
                                 return (
                                     <Li
                                         key={item.id}
-                                        className="flex gap-2 py-2 text-foreground"
-                                        initial={{ opacity: 0, x: -50 }}
+                                        className="flex gap-3 sm:gap-4 py-4 text-foreground"
+                                        initial={{ opacity: 0, x: 20 }}
                                         animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: index * 0.1 }}
+                                        transition={{
+                                            delay: index * 0.05,
+                                            duration: 0.2,
+                                            ease: [0.4, 0, 0.2, 1],
+                                        }}
                                     >
                                         {/* Product Image */}
                                         <div className="relative w-16 h-20 overflow-hidden no-scrollbar rounded-xs border shrink-0 bg-same-white">
@@ -72,11 +83,11 @@ export default async function CartDrawer() {
                                             </div>
                                         </div>
                                     </Li>
-                                )
+                                );
                             })}
                         </ul>
                     </div>
-                    <hr />
+                    {/* Cart Footer */}
                     <CartFooter cart={cart} />
                 </>
             ) : (<EmptyCart className="min-h-full" />)}
