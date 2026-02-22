@@ -41,9 +41,9 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
     return (
         <>
             {/* Main Header */}
-            <header aria-label="Main Navigation" className={`sticky top-0 z-50 transition-all border-border duration-300 ease-out ${shouldSolid ? "bg-surface/98 backdrop-blur-xl text-foreground border-b shadow-md" : "bg-transparent text-white"}`}>
+            <header aria-label="Main Navigation" className={`sticky top-0 z-50 transition-all border-border duration-300 ease-out ${shouldSolid ? "bg-surface/98 backdrop-blur-xl text-foreground border-b shadow-md" : "bg-transparent"}`}>
                 <div className="container-custom">
-                    <div className="flex items-center justify-between h-16 lg:h-20">
+                    <div className="relative flex items-center justify-between h-16 lg:h-20">
                         {/* Logo */}
                         <Link
                             href="/"

@@ -41,12 +41,12 @@ export default async function CartDrawer() {
                                         }}
                                     >
                                         {/* Product Image */}
-                                        <div className="relative w-16 h-20 overflow-hidden no-scrollbar rounded-xs border shrink-0 bg-same-white">
+                                        <div className="relative w-16 h-20 overflow-hidden rounded-md border border-border shrink-0 bg-white group">
                                             <Image
                                                 src={item.thumbnail || "/svg/placeholder.svg"}
-                                                alt={"product image"}
-                                                sizes="(min-width: 768px) 12rem, (min-width: 640px) 15rem, 16rem"
-                                                className="h-full w-full object-contain object-center"
+                                                alt={item.title || "Product image"}
+                                                sizes="(min-width: 640px) 6rem, 5rem"
+                                                className="size-full object-contain object-center transition-transform duration-300 group-hover:scale-105"
                                                 height={65}
                                                 width={55}
                                             />
@@ -57,18 +57,27 @@ export default async function CartDrawer() {
                                             <Link href={`/product/${item.product_handle}`}>
                                                 <h3 className="text-sm leading-tight line-clamp-2">{item.title}</h3>
                                             </Link>
-                                            <div className="text-xs text-foreground-muted mt-1">
-                                                {item.variant && <span>Size: {item.variant?.title}</span>}<br />
+                                            <div className="text-xs text-foreground-tertiary mt-1">
+                                                {item.variant?.title && <span>Size: {item.variant?.title}</span>}<br />
                                                 {item.variant_sku && <span>{item.variant_sku}</span>}<br />
                                             </div>
                                         </div>
                                         <div className="flex flex-col justify-between items-center w-20">
-                                            <div className="text-sm">
+                                            <span className="font-semibold text-foreground">
                                                 {convertToLocale({
                                                     amount: currentPrice,
                                                     currency_code: cart.currency_code,
                                                 })}
-                                            </div>
+                                            </span>
+                                            {/* {adjustmentsSum > 0 && (
+                                                <span className="text-xs text-foreground-tertiary line-through">
+                                                    {convertToLocale({
+                                                        amount: item.total!,
+                                                        currency_code:
+                                                            cart.currency_code || "USD",
+                                                    })}
+                                                </span>
+                                            )} */}
                                             {item.quantity > 1 && <RemoveButton itemId={item.id} />}
                                             <div className="flex items-center border rounded-md bg-btn-primary text-btn-primary-foreground">
                                                 <QuntityButton itemId={item.id} quantity={item.quantity - 1}>
