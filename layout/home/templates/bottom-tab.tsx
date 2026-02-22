@@ -14,7 +14,7 @@ export default function BottomTabs() {
     const pathname = usePathname()
     const { toggleCartDrawer, toggleMobileDrawer } = useDrawer()
 
-    // Hide on product pages
+    // Hide on product pages for better UX
     if (pathname.includes("/product")) return null
 
     const isActive = (path: string) => pathname === path
@@ -28,10 +28,10 @@ export default function BottomTabs() {
     ]
 
     const commonClasses =
-        "grid gap-1 place-content-center place-items-center transition active:scale-95 active:bg-accent/20 focus:outline-none focus:ring-0"
+        "grid gap-1 place-content-center place-items-center transition-all duration-200 active:scale-95 active:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-focus-ring focus:ring-inset hover:bg-muted/5 relative"
 
     return (
-        <nav className="lg:hidden h-16.25 fixed bottom-0 left-0 z-20 w-full border-t border-border bg-background-elevated shadow-lg rounded-t-2xl grid grid-cols-5 select-none">
+        <nav className="lg:hidden fixed bottom-0 left-0 z-20 w-full h-16 border-t border-border bg-surface/98 backdrop-blur-xl shadow-lg rounded-t-2xl grid grid-cols-5 select-none" aria-label="Mobile Bottom Navigation">
             {tabs.map((tab) => {
                 if (tab.type === "link") {
                     const active = isActive(tab.href)
@@ -40,14 +40,17 @@ export default function BottomTabs() {
                             key={tab.label}
                             href={tab.href}
                             aria-label={tab.label}
-                            className={`${commonClasses} ${active ? "text-primary font-medium" : ""}`}
+                            aria-current={active ? "page" : undefined}
+                            className={`${commonClasses} ${active ? "text-primary" : "text-foreground-secondary"}`}
                         >
                             <tab.Icon
                                 size={22}
                                 strokeWidth={active ? 2.5 : 1.5}
-                                className={active ? "text-primary" : "text-foreground-muted"}
+                                className={active ? "text-primary" : "text-foreground-secondary"}
                             />
-                            <span className="text-xs font-light tracking-wide">{tab.label}</span>
+                            <span className={`text-xs font-light tracking-wide ${active ? "font-medium text-primary" : "text-foreground-tertiary"}`}>
+                                {tab.label}
+                            </span>
                         </Link>
                     )
                 }
@@ -56,10 +59,10 @@ export default function BottomTabs() {
                         key={tab.label}
                         onClick={tab.onClick}
                         aria-label={tab.label}
-                        className={commonClasses}
+                        className={`${commonClasses} text-foreground-secondary`}
                     >
-                        <tab.Icon size={22} strokeWidth={1.5} className="text-foreground-muted" />
-                        <span className="text-xs font-light tracking-wide">{tab.label}</span>
+                        <tab.Icon size={22} strokeWidth={1.5} className="text-foreground-secondary" aria-hidden="true" />
+                        <span className="text-xs font-light tracking-wide text-foreground-tertiary">{tab.label}</span>
                     </button>
                 )
             })}

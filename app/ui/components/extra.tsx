@@ -286,7 +286,7 @@ function AccordionSection() {
                             <p className="text-sm text-text-secondary mb-3">Separated Variant</p>
                             <CustomAccordion
                                 items={[
-                                    { value: '1', title: 'Craftsmanship', content: 'Handmade by skilled artisans' },
+                                    { value: '1', title: 'Craftsmanship', content: 'Handmade by skilled velles' },
                                     { value: '2', title: 'Materials', content: 'Premium full-grain leather' },
                                     { value: '3', title: 'Sustainability', content: 'Ethically sourced materials' },
                                 ]}

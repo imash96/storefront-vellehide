@@ -11,51 +11,38 @@ export type SelectOption = {
 type SelectProps = {
     label: string
     options: SelectOption[] | undefined
-    state?: "default" | "success" | "error"
+    error?: string
     helperText?: string
+    variant?: 'default' | 'filled'
+    fullWidth?: boolean
 } & Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size">
 
 export default function NativeSelect({
     label,
     options,
-    state = "default",
     helperText,
-    className = "",
-    disabled,
+    variant = 'default',
+    fullWidth = false,
+    className = '',
     required,
+    error,
+    disabled,
+    id,
     ...props
 }: SelectProps) {
-    const id = useId()
-    const helpId = helperText ? `${id}-helper` : undefined
-
-    const stateClasses = {
-        default: {
-            border: "border-border focus:border-card-foreground",
-            label: "text-card-foreground peer-focus:text-card-foreground",
-            helper: "text-card-foreground"
-        },
-        success: {
-            border: "border-success focus:border-success",
-            label: "text-success-foreground",
-            helper: "text-success-foreground"
-        },
-        error: {
-            border: "border-destructive focus:border-destructive",
-            label: "text-destructive",
-            helper: "text-destructive"
-        }
-    }[state]
+    const generatedId = useId()
+    const inputId = id ?? generatedId
 
     return (
-        <div className={className}>
+        <div className={`${fullWidth ? 'w-full' : 'w-auto'} ${className}`}>
             <div className="relative">
                 <select
-                    id={id}
+                    id={inputId}
                     disabled={disabled}
                     required={required}
-                    aria-describedby={helpId}
-                    aria-invalid={state === "error"}
-                    className={`peer block w-full px-2.5 pb-1 pt-5 text-sm bg-card border appearance-none focus:outline-none focus:ring-0 rounded-md ${stateClasses.border} ${disabled ? "text-foreground-muted cursor-not-allowed bg-background-muted" : ""}`}
+                    aria-invalid={!!error}
+                    aria-describedby={error ? `${inputId}-error` : helperText ? `${inputId}-helper` : undefined}
+                    className={`peer block w-full px-2.5 pb-1 pt-5 text-sm rounded-md border ${variant === 'filled' ? 'bg-input-background' : 'bg-surface'} ${disabled ? 'bg-input-disabled-background text-input-disabled-text border-input-disabled-border cursor-not-allowed' : ''} ${error ? 'border-error focus-visible:ring-error/20 focus-visible:border-error' : ''} ${!error && !disabled ? 'border-input-border hover:border-input-border-hover focus-visible:border-input-border-focus' : ''}`}
                     {...props}
                 >
                     <option value="" disabled hidden></option>
@@ -71,8 +58,8 @@ export default function NativeSelect({
                 </select>
 
                 <label
-                    htmlFor={id}
-                    className={`absolute text-sm duration-300 transform -translate-y-3 scale-75 top-3.5 z-9 origin-left inset-s-2.5 transition-all peer-focus:scale-75 peer-focus:-translate-y-3 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 ${stateClasses.label} ${disabled && "text-foreground-muted"}`}
+                    htmlFor={inputId}
+                    className={`absolute text-sm duration-300 transform -translate-y-3 scale-75 top-3.5 z-9 origin-left inset-s-2.5 transition-all peer-focus:scale-75 peer-focus:-translate-y-3 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  ${error && 'text-error'} ${disabled ? 'text-input-disabled-text' : ''} ${!error && !disabled ? 'text-input-placeholder peer-focus:text-primary' : ''}`}
                 >
                     {label}
                     {required && <span className="text-destructive ml-1">*</span>}
@@ -96,9 +83,14 @@ export default function NativeSelect({
                 </div>
             </div>
 
-            {helperText && (
-                <p id={helpId} className={`mt-1 text-xs ${stateClasses.helper}`}>
-                    {helperText}
+            {/* Helper / Error */}
+            {(error || helperText) && (
+                <p
+                    id={error ? `${inputId}-error` : `${inputId}-helper`}
+                    className={`mt-1.5 text-xs font-body ${error ? 'text-error' : 'text-text-secondary'}`}
+                    role={error ? 'alert' : undefined}
+                >
+                    {error ?? helperText}
                 </p>
             )}
         </div>

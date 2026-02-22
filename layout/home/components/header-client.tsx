@@ -58,7 +58,7 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                         <div className="flex items-center gap-2 lg:gap-4">
                             {/* Search Button */}
                             <button
-                                className="p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                                className="p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring focus:ring-offset-2"
                                 aria-label="Search"
                             >
                                 <Search className="w-5 h-5" strokeWidth={1.5} />
@@ -67,13 +67,13 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                             {/* Theme Toggle */}
                             <ThemeButton
                                 initialTheme={initialTheme}
-                                className="p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                                className="p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring focus:ring-offset-2"
                             />
 
                             {/* Account Link - Hidden on mobile */}
                             <Link
                                 href="/account"
-                                className="hidden md:flex p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                                className="hidden md:flex p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring focus:ring-offset-2"
                                 aria-label="Account"
                             >
                                 <User className="w-5 h-5" strokeWidth={1.5} />
@@ -82,12 +82,12 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                             {/* Cart Button */}
                             <CartDrawerButton
                                 totalItems={totalItems}
-                                className="relative p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                                className="relative p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring focus:ring-offset-2"
                             />
                             {/* Mobile Menu Button */}
                             <button
                                 onClick={toggleMobileDrawer}
-                                className="lg:hidden p-2 rounded-md hover:bg-muted/10  transition-all duration-200  hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                                className="lg:hidden p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring focus:ring-offset-2"
                                 aria-label="Open menu"
                                 aria-expanded={isMobileDrawerOpen}
                             >
@@ -98,7 +98,7 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                 </div>
                 {/* Progress Bar on Scroll */}
                 {isScrolled && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-accent to-transparent opacity-50 animate-in fade-in duration-300" />
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-accent to-transparent opacity-50 animate-in fade-in duration-300" aria-hidden="true" />
                 )}
             </header>
             {/* Spacer to prevent content jump */}

@@ -1,6 +1,18 @@
+import { cookies } from "next/headers";
+import TempCart from "../temp-cart-button";
+import { sdk } from "@lib/sdk";
 
-export default function Page() {
+export default async function Page() {
+  const countryCode = (await cookies()).get("__country_code")?.value || process.env.NEXT_PUBLIC_DEFAULT_REGION || "us"
+  const products = await listProductVariant();
   return (
-    <div className="flex justify-center items-center h-[200vh]">Home</div>
+    <div className="flex justify-center items-center h-[200vh]">
+      <TempCart countryCode={countryCode} products={products} />
+    </div>
   );
+}
+
+const listProductVariant = async () => {
+  const { products } = await sdk.store.product.list()
+  return products
 }

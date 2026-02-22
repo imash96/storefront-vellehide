@@ -5,25 +5,25 @@ export const product_categories: ProductCategory[] = [
         "name": "Men",
         "rank": 0,
         "handle": "men",
-        "description": "Discover Artisan Hide's premium collection of men's genuine leather apparel. From durable jackets and coats to stylish accessories, each piece is handcrafted to blend timeless style with unparalleled craftsmanship.",
+        "description": "Discover Velle Hide's premium collection of men's genuine leather apparel. From durable jackets and coats to stylish accessories, each piece is handcrafted to blend timeless style with unparalleled craftsmanship.",
         "category_children": [
             {
                 "name": "Outerwear",
                 "rank": 0,
                 "handle": "men/outerwear",
-                "description": "Shop handcrafted men's genuine leather outerwear at Artisan Hide. Our collection, including iconic biker jackets, classic trench coats, and sharp blazers, offers timeless protection and elegance for any occasion.",
+                "description": "Shop handcrafted men's genuine leather outerwear at Velle Hide. Our collection, including iconic biker jackets, classic trench coats, and sharp blazers, offers timeless protection and elegance for any occasion.",
                 "category_children": [
                     {
                         "name": "Jackets",
                         "rank": 0,
                         "handle": "men/outerwear/jackets",
-                        "description": "Explore Artisan Hide's curated selection of men's genuine leather jackets. From rugged biker jackets to sleek bomber styles, find the perfect layer for all-season style and comfort, crafted from premium hides.",
+                        "description": "Explore Velle Hide's curated selection of men's genuine leather jackets. From rugged biker jackets to sleek bomber styles, find the perfect layer for all-season style and comfort, crafted from premium hides.",
                         "category_children": [
                             {
                                 "name": "Biker and Motorcycle Jackets",
                                 "rank": 0,
                                 "handle": "men/outerwear/jackets/biker-motorcycle",
-                                "description": "Unleash your rebellious side with Artisan Hide's genuine leather biker jackets. Featuring classic asymmetrical zips and durable heavyweight leather, they offer rugged protection and timeless motorcycle style.",
+                                "description": "Unleash your rebellious side with Velle Hide's genuine leather biker jackets. Featuring classic asymmetrical zips and durable heavyweight leather, they offer rugged protection and timeless motorcycle style.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["men's leather biker jacket", "motorcycle jacket leather", "asymmetrical moto jacket", "genuine leather rider jacket"],
@@ -39,7 +39,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Cafe Racer Jackets",
                                 "rank": 1,
                                 "handle": "men/outerwear/jackets/cafe-racer",
-                                "description": "Achieve a streamlined, minimalist look with Artisan Hide's cafe racer jackets. Crafted from genuine leather, these slim, straight-zip jackets with minimal collars are the epitome of sleek, modern riding style.",
+                                "description": "Achieve a streamlined, minimalist look with Velle Hide's cafe racer jackets. Crafted from genuine leather, these slim, straight-zip jackets with minimal collars are the epitome of sleek, modern riding style.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["cafe racer jacket men", "men's leather racer jacket", "minimalist leather jacket", "straight zip leather jacket"],
@@ -55,7 +55,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Bomber and Flight Jackets",
                                 "rank": 2,
                                 "handle": "men/outerwear/jackets/bomber-flight",
-                                "description": "Embrace iconic aviator style with genuine leather bomber jackets from Artisan Hide. Featuring classic ribbed cuffs and collars, our flight jackets offer timeless appeal and exceptional comfort.",
+                                "description": "Embrace iconic aviator style with genuine leather bomber jackets from Velle Hide. Featuring classic ribbed cuffs and collars, our flight jackets offer timeless appeal and exceptional comfort.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["men's leather bomber jacket", "aviator flight jacket leather", "A2 flight jacket", "G1 bomber jacket"],
@@ -71,7 +71,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Quilted and Padded Jackets",
                                 "rank": 3,
                                 "handle": "men/outerwear/jackets/quilted-padded",
-                                "description": "Stay warm without sacrificing style with insulated quilted leather jackets from Artisan Hide. The padded design provides exceptional warmth and a unique textured look, perfect for cold weather.",
+                                "description": "Stay warm without sacrificing style with insulated quilted leather jackets from Velle Hide. The padded design provides exceptional warmth and a unique textured look, perfect for cold weather.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["quilted leather jacket men", "padded leather jacket", "men's insulated jacket", "winter leather jacket"],
@@ -87,7 +87,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Hooded and Sweatshirt Jackets",
                                 "rank": 4,
                                 "handle": "men/outerwear/jackets/hooded",
-                                "description": "Experience the perfect blend of casual comfort and rugged durability with Artisan Hide's hooded leather jackets. Featuring removable hoods, they offer versatile layering options for a modern, athleisure-inspired look.",
+                                "description": "Experience the perfect blend of casual comfort and rugged durability with Velle Hide's hooded leather jackets. Featuring removable hoods, they offer versatile layering options for a modern, athleisure-inspired look.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["men's hooded leather jacket", "leather jacket with hood", "removable hood jacket", "casual leather jacket"],
@@ -115,13 +115,13 @@ export const product_categories: ProductCategory[] = [
                         "name": "Coats",
                         "rank": 1,
                         "handle": "men/outerwear/coats",
-                        "description": "Discover sophisticated and weather-resistant men's genuine leather coats at Artisan Hide. Including classic trenches and long overcoats, our collection offers polished silhouettes for ultimate warmth and style.",
+                        "description": "Discover sophisticated and weather-resistant men's genuine leather coats at Velle Hide. Including classic trenches and long overcoats, our collection offers polished silhouettes for ultimate warmth and style.",
                         "category_children": [
                             {
                                 "name": "Car Coats",
                                 "rank": 0,
                                 "handle": "men/outerwear/coats/car",
-                                "description": "Artisan Hide's mid-thigh genuine leather car coats offer a blend of practicality and style. Featuring clean lines and premium hides, they are the perfect choice for daily wear and effortless comfort.",
+                                "description": "Velle Hide's mid-thigh genuine leather car coats offer a blend of practicality and style. Featuring clean lines and premium hides, they are the perfect choice for daily wear and effortless comfort.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["leather car coat men", "men's thigh-length coat", "driving coat leather", "classic car coat"],
@@ -137,7 +137,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Duster Coats",
                                 "rank": 1,
                                 "handle": "men/outerwear/coats/duster",
-                                "description": "Make a dramatic statement with full-length genuine leather duster coats from Artisan Hide. These longline coats provide maximum coverage and a commanding presence, perfect for a bold, vintage-inspired look.",
+                                "description": "Make a dramatic statement with full-length genuine leather duster coats from Velle Hide. These longline coats provide maximum coverage and a commanding presence, perfect for a bold, vintage-inspired look.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["men's leather duster coat", "full length leather coat", "long leather overcoat", "western duster coat"],
@@ -153,7 +153,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Overcoats",
                                 "rank": 2,
                                 "handle": "men/outerwear/coats/overcoats",
-                                "description": "Stay warm in sophisticated style with genuine leather overcoats from Artisan Hide. Tailored for elegance and durability, these handcrafted coats are the ultimate top layer for cooler seasons.",
+                                "description": "Stay warm in sophisticated style with genuine leather overcoats from Velle Hide. Tailored for elegance and durability, these handcrafted coats are the ultimate top layer for cooler seasons.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["leather overcoat men", "men's winter leather coat", "long leather coat", "formal overcoat leather"],
@@ -169,7 +169,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Pea Coats",
                                 "rank": 3,
                                 "handle": "men/outerwear/coats/pea",
-                                "description": "Discover the timeless naval-inspired pea coat, reimagined in genuine leather by Artisan Hide. Featuring a classic double-breasted front, this coat offers a smart, structured silhouette for any modern man.",
+                                "description": "Discover the timeless naval-inspired pea coat, reimagined in genuine leather by Velle Hide. Featuring a classic double-breasted front, this coat offers a smart, structured silhouette for any modern man.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["leather pea coat men", "men's double breasted coat", "naval leather coat", "short overcoat men"],
@@ -185,7 +185,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Trench Coats",
                                 "rank": 4,
                                 "handle": "men/outerwear/coats/trench",
-                                "description": "Define your look with a classic genuine leather trench coat from Artisan Hide. Complete with traditional epaulets and storm flaps, this iconic piece delivers timeless polish and water-resistant protection.",
+                                "description": "Define your look with a classic genuine leather trench coat from Velle Hide. Complete with traditional epaulets and storm flaps, this iconic piece delivers timeless polish and water-resistant protection.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["men's leather trench coat", "double breasted trench", "long leather rain coat", "classic trench coat"],
@@ -213,7 +213,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "Blazers",
                         "rank": 2,
                         "handle": "men/outerwear/blazers",
-                        "description": "Elevate your wardrobe with sophisticated genuine leather blazers from Artisan Hide. Available in single or double-breasted cuts, they are ideal for creating sharp business casual and formal ensembles.",
+                        "description": "Elevate your wardrobe with sophisticated genuine leather blazers from Velle Hide. Available in single or double-breasted cuts, they are ideal for creating sharp business casual and formal ensembles.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["men's leather blazer", "leather sport coat", "black leather blazer", "casual leather blazer"],
@@ -241,13 +241,13 @@ export const product_categories: ProductCategory[] = [
                 "name": "Tops",
                 "rank": 1,
                 "handle": "men/tops",
-                "description": "Explore Artisan Hide's unique collection of men's genuine leather tops. From bold button-down shirts to versatile vests, our tops offer distinctive styling options for the modern man.",
+                "description": "Explore Velle Hide's unique collection of men's genuine leather tops. From bold button-down shirts to versatile vests, our tops offer distinctive styling options for the modern man.",
                 "category_children": [
                     {
                         "name": "Shirts",
                         "rank": 0,
                         "handle": "men/tops/shirts",
-                        "description": "Make a statement with genuine leather button-down shirts from Artisan Hide. Our collection blends casual ruggedness with refined appeal, creating a bold and unforgettable look.",
+                        "description": "Make a statement with genuine leather button-down shirts from Velle Hide. Our collection blends casual ruggedness with refined appeal, creating a bold and unforgettable look.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["men's leather shirt", "leather button down shirt", "black leather shirt men", "western leather shirt"],
@@ -263,7 +263,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "T-Shirts",
                         "rank": 1,
                         "handle": "men/tops/t-shirts",
-                        "description": "Redefine casual wear with soft genuine leather T-shirts from Artisan Hide. These unique pieces offer a modern, luxurious twist on a classic staple, providing premium comfort and standout style.",
+                        "description": "Redefine casual wear with soft genuine leather T-shirts from Velle Hide. These unique pieces offer a modern, luxurious twist on a classic staple, providing premium comfort and standout style.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["leather t-shirt men", "men's leather tee", "short sleeve leather shirt", "designer leather t-shirt"],
@@ -279,7 +279,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "Vests and Waistcoats",
                         "rank": 2,
                         "handle": "men/tops/vests-waistcoats",
-                        "description": "Add an edge to any outfit with sleeveless genuine leather vests from Artisan Hide. Perfect for layering, our biker and utilitarian styles are crafted for a rugged, rebellious aesthetic.",
+                        "description": "Add an edge to any outfit with sleeveless genuine leather vests from Velle Hide. Perfect for layering, our biker and utilitarian styles are crafted for a rugged, rebellious aesthetic.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["men's leather vest", "leather waistcoat", "biker leather vest", "motorcycle vest men"],
@@ -307,13 +307,13 @@ export const product_categories: ProductCategory[] = [
                 "name": "Bottoms",
                 "rank": 2,
                 "handle": "men/bottoms",
-                "description": "Discover versatile men's genuine leather bottoms at Artisan Hide. Our collection includes expertly tailored pants, trousers, and shorts designed for durable, day-to-night styling.",
+                "description": "Discover versatile men's genuine leather bottoms at Velle Hide. Our collection includes expertly tailored pants, trousers, and shorts designed for durable, day-to-night styling.",
                 "category_children": [
                     {
                         "name": "Pants and Trousers",
                         "rank": 0,
                         "handle": "men/bottoms/pants-trousers",
-                        "description": "Shop tailored genuine leather pants for men from Artisan Hide. From slim-fit styles to relaxed cargo cuts, our trousers are crafted from premium hides for a sophisticated yet edgy look.",
+                        "description": "Shop tailored genuine leather pants for men from Velle Hide. From slim-fit styles to relaxed cargo cuts, our trousers are crafted from premium hides for a sophisticated yet edgy look.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["men's leather pants", "leather trousers men", "genuine leather pants", "black leather pants"],
@@ -329,7 +329,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "Shorts",
                         "rank": 1,
                         "handle": "men/bottoms/shorts",
-                        "description": "Make a bold statement with stylish genuine leather shorts from Artisan Hide. Ideal for warm weather or edgy festival looks, our shorts are designed for comfort and contemporary style.",
+                        "description": "Make a bold statement with stylish genuine leather shorts from Velle Hide. Ideal for warm weather or edgy festival looks, our shorts are designed for comfort and contemporary style.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["men's leather shorts", "black leather shorts", "leather shorts for men", "festival leather shorts"],
@@ -376,25 +376,25 @@ export const product_categories: ProductCategory[] = [
         "name": "Women",
         "rank": 1,
         "handle": "women",
-        "description": "Explore Artisan Hide's elegant collection of women's genuine leather apparel. Discover chic jackets, sophisticated coats, and statement accessories handcrafted for durability and timeless style.",
+        "description": "Explore Velle Hide's elegant collection of women's genuine leather apparel. Discover chic jackets, sophisticated coats, and statement accessories handcrafted for durability and timeless style.",
         "category_children": [
             {
                 "name": "Outerwear",
                 "rank": 0,
                 "handle": "women/outerwear",
-                "description": "Shop handcrafted women's genuine leather outerwear at Artisan Hide. From edgy biker jackets to classic blazers, each piece is designed for superior comfort, protection, and fashionable appeal.",
+                "description": "Shop handcrafted women's genuine leather outerwear at Velle Hide. From edgy biker jackets to classic blazers, each piece is designed for superior comfort, protection, and fashionable appeal.",
                 "category_children": [
                     {
                         "name": "Jackets",
                         "rank": 0,
                         "handle": "women/outerwear/jackets",
-                        "description": "Discover Artisan Hide's collection of women's genuine leather jackets. Featuring edgy biker styles and refined bombers in soft lambskin, these jackets offer all-season versatility and effortless style.",
+                        "description": "Discover Velle Hide's collection of women's genuine leather jackets. Featuring edgy biker styles and refined bombers in soft lambskin, these jackets offer all-season versatility and effortless style.",
                         "category_children": [
                             {
                                 "name": "Biker and Motorcycle Jackets",
                                 "rank": 0,
                                 "handle": "women/outerwear/jackets/biker-motorcycle",
-                                "description": "Channel your inner rebel with asymmetrical-zip genuine leather biker jackets from Artisan Hide. Expertly crafted for a flattering fit, they offer rugged protection and timeless motorcycle-inspired aesthetics.",
+                                "description": "Channel your inner rebel with asymmetrical-zip genuine leather biker jackets from Velle Hide. Expertly crafted for a flattering fit, they offer rugged protection and timeless motorcycle-inspired aesthetics.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["women's leather biker jacket", "moto jacket women", "asymmetrical leather jacket", "leather motorcycle jacket"],
@@ -410,7 +410,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Cafe Racer Jackets",
                                 "rank": 1,
                                 "handle": "women/outerwear/jackets/cafe-racer",
-                                "description": "Embrace a sleek, streamlined silhouette with Artisan Hide's cafe racer jackets. Crafted from supple genuine leather with minimal collars, these jackets offer a sophisticated, minimalist riding look.",
+                                "description": "Embrace a sleek, streamlined silhouette with Velle Hide's cafe racer jackets. Crafted from supple genuine leather with minimal collars, these jackets offer a sophisticated, minimalist riding look.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["cafe racer jacket women", "women's leather racer jacket", "minimalist leather jacket", "slim fit leather jacket"],
@@ -426,7 +426,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Bomber and Flight Jackets",
                                 "rank": 2,
                                 "handle": "women/outerwear/jackets/bomber-flight",
-                                "description": "Stay effortlessly cool with classic genuine leather bomber jackets for women from Artisan Hide. Featuring iconic ribbed trim and a comfortable fit, these jackets are perfect for everyday aviator-inspired style.",
+                                "description": "Stay effortlessly cool with classic genuine leather bomber jackets for women from Velle Hide. Featuring iconic ribbed trim and a comfortable fit, these jackets are perfect for everyday aviator-inspired style.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["women's leather bomber jacket", "aviator jacket women", "leather flight jacket", "brown leather bomber jacket"],
@@ -442,7 +442,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Quilted and Padded Jackets",
                                 "rank": 3,
                                 "handle": "women/outerwear/jackets/quilted-padded",
-                                "description": "Combine warmth and high fashion with insulated quilted leather jackets from Artisan Hide. The textured, padded design provides cozy comfort and chic elegance for any cold-weather ensemble.",
+                                "description": "Combine warmth and high fashion with insulated quilted leather jackets from Velle Hide. The textured, padded design provides cozy comfort and chic elegance for any cold-weather ensemble.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["quilted leather jacket women", "padded leather jacket", "women's insulated jacket", "winter fashion jacket"],
@@ -458,7 +458,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Hooded and Sweatshirt Jackets",
                                 "rank": 4,
                                 "handle": "women/outerwear/jackets/hooded",
-                                "description": "Fuse sporty style with luxury in hooded genuine leather jackets from Artisan Hide. Perfect for casual layering, these versatile jackets offer a relaxed fit and modern athleisure appeal.",
+                                "description": "Fuse sporty style with luxury in hooded genuine leather jackets from Velle Hide. Perfect for casual layering, these versatile jackets offer a relaxed fit and modern athleisure appeal.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["women's hooded leather jacket", "leather jacket with hood", "casual leather jacket women", "athleisure jacket"],
@@ -486,13 +486,13 @@ export const product_categories: ProductCategory[] = [
                         "name": "Coats",
                         "rank": 1,
                         "handle": "women/outerwear/coats",
-                        "description": "Wrap yourself in luxury with long genuine leather coats for women from Artisan Hide. Our collection of trenches and dusters offers sophisticated warmth and refined, weather-resistant style.",
+                        "description": "Wrap yourself in luxury with long genuine leather coats for women from Velle Hide. Our collection of trenches and dusters offers sophisticated warmth and refined, weather-resistant style.",
                         "category_children": [
                             {
                                 "name": "Trench Coats",
                                 "rank": 0,
                                 "handle": "women/outerwear/coats/trench",
-                                "description": "Achieve timeless style with classic genuine leather trench coats from Artisan Hide. Featuring iconic details like epaulets and belts, they offer polished, all-weather protection for a sophisticated look.",
+                                "description": "Achieve timeless style with classic genuine leather trench coats from Velle Hide. Featuring iconic details like epaulets and belts, they offer polished, all-weather protection for a sophisticated look.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["women's leather trench coat", "long leather coat women", "black trench coat leather", "classic women's coat"],
@@ -508,7 +508,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Car Coats",
                                 "rank": 1,
                                 "handle": "women/outerwear/coats/car",
-                                "description": "Discover chic and practical mid-thigh genuine leather car coats at Artisan Hide. Tailored for women, their clean lines and premium materials make them perfect for daily wear and effortless style.",
+                                "description": "Discover chic and practical mid-thigh genuine leather car coats at Velle Hide. Tailored for women, their clean lines and premium materials make them perfect for daily wear and effortless style.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["leather car coat women", "women's mid-length coat", "driving coat leather", "A-line leather coat"],
@@ -524,7 +524,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Duster Coats",
                                 "rank": 2,
                                 "handle": "women/outerwear/coats/duster",
-                                "description": "Command attention with dramatic, full-length genuine leather duster coats from Artisan Hide. Handcrafted for a flowing silhouette, they provide elegance, warmth, and maximum style impact.",
+                                "description": "Command attention with dramatic, full-length genuine leather duster coats from Velle Hide. Handcrafted for a flowing silhouette, they provide elegance, warmth, and maximum style impact.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["women's leather duster", "full length leather coat", "long duster coat", "maxi leather coat"],
@@ -540,7 +540,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Overcoats",
                                 "rank": 3,
                                 "handle": "women/outerwear/coats/overcoats",
-                                "description": "Embrace cold seasons with elegant full-length genuine leather overcoats from Artisan Hide. These durable, handcrafted designs provide exceptional warmth and a sophisticated finish to any outfit.",
+                                "description": "Embrace cold seasons with elegant full-length genuine leather overcoats from Velle Hide. These durable, handcrafted designs provide exceptional warmth and a sophisticated finish to any outfit.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["leather overcoat women", "women's winter leather coat", "long fashion coat", "formal leather overcoat"],
@@ -556,7 +556,7 @@ export const product_categories: ProductCategory[] = [
                                 "name": "Pea Coats",
                                 "rank": 4,
                                 "handle": "women/outerwear/coats/pea",
-                                "description": "Artisan Hide reinterprets the classic pea coat in luxurious genuine leather. With its signature double-breasted design, this coat offers a chic, structured look that is both timeless and modern.",
+                                "description": "Velle Hide reinterprets the classic pea coat in luxurious genuine leather. With its signature double-breasted design, this coat offers a chic, structured look that is both timeless and modern.",
                                 "is_active": true,
                                 "metadata": {
                                     "seo_keywords": ["leather pea coat women", "double breasted leather coat", "women's naval coat", "short leather overcoat"],
@@ -584,7 +584,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "Blazers",
                         "rank": 2,
                         "handle": "women/outerwear/blazers",
-                        "description": "Add a touch of polished edge with sophisticated genuine leather blazers from Artisan Hide. Our versatile single and double-breasted cuts are perfect for elevating smart-casual and formal outfits.",
+                        "description": "Add a touch of polished edge with sophisticated genuine leather blazers from Velle Hide. Our versatile single and double-breasted cuts are perfect for elevating smart-casual and formal outfits.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["women's leather blazer", "black leather blazer", "leather sport coat women", "fitted leather blazer"],
@@ -612,13 +612,13 @@ export const product_categories: ProductCategory[] = [
                 "name": "Tops",
                 "rank": 1,
                 "handle": "women/tops",
-                "description": "Discover unique women's genuine leather tops from Artisan Hide. Our collection of shirts, vests, and tees adds an elegant yet edgy touch to any modern ensemble.",
+                "description": "Discover unique women's genuine leather tops from Velle Hide. Our collection of shirts, vests, and tees adds an elegant yet edgy touch to any modern ensemble.",
                 "category_children": [
                     {
                         "name": "Shirts",
                         "rank": 0,
                         "handle": "women/tops/shirts",
-                        "description": "Shop genuine leather button-down shirts for women at Artisan Hide. These versatile pieces blend bohemian ruggedness with feminine style, creating a statement look for any occasion.",
+                        "description": "Shop genuine leather button-down shirts for women at Velle Hide. These versatile pieces blend bohemian ruggedness with feminine style, creating a statement look for any occasion.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["women's leather shirt", "leather button down shirt", "black leather shirt women", "leather blouse"],
@@ -634,7 +634,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "T-Shirts",
                         "rank": 1,
                         "handle": "women/tops/t-shirts",
-                        "description": "Elevate your casual wardrobe with soft genuine leather T-shirts from Artisan Hide. These tops offer a modern twist on an everyday staple, providing premium comfort and effortless chic.",
+                        "description": "Elevate your casual wardrobe with soft genuine leather T-shirts from Velle Hide. These tops offer a modern twist on an everyday staple, providing premium comfort and effortless chic.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["leather t-shirt women", "women's leather tee", "short sleeve leather top", "designer leather tee"],
@@ -650,7 +650,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "Vests and Waistcoats",
                         "rank": 2,
                         "handle": "women/tops/vests-waistcoats",
-                        "description": "Layer in style with leather vests and waistcoats for women from Artisan Hide. Our biker-inspired and utilitarian designs are crafted from durable genuine hides to add an edge to any look.",
+                        "description": "Layer in style with leather vests and waistcoats for women from Velle Hide. Our biker-inspired and utilitarian designs are crafted from durable genuine hides to add an edge to any look.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["women's leather vest", "leather waistcoat women", "biker vest for women", "sleeveless leather jacket"],
@@ -678,13 +678,13 @@ export const product_categories: ProductCategory[] = [
                 "name": "Bottoms",
                 "rank": 2,
                 "handle": "women/bottoms",
-                "description": "Shop women's genuine leather bottoms at Artisan Hide. From tailored pants to chic skirts and bold shorts, find versatile day-to-evening styles handcrafted from premium leather.",
+                "description": "Shop women's genuine leather bottoms at Velle Hide. From tailored pants to chic skirts and bold shorts, find versatile day-to-evening styles handcrafted from premium leather.",
                 "category_children": [
                     {
                         "name": "Pants and Trousers",
                         "rank": 0,
                         "handle": "women/bottoms/pants-trousers",
-                        "description": "Discover impeccably tailored genuine leather pants for women at Artisan Hide. Our collection, including skinny and cargo styles, is perfect for creating both casual and sophisticated looks.",
+                        "description": "Discover impeccably tailored genuine leather pants for women at Velle Hide. Our collection, including skinny and cargo styles, is perfect for creating both casual and sophisticated looks.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["women's leather pants", "leather trousers women", "black leather leggings", "high waisted leather pants"],
@@ -700,7 +700,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "Shorts",
                         "rank": 1,
                         "handle": "women/bottoms/shorts",
-                        "description": "Embrace bold street style with contemporary genuine leather shorts from Artisan Hide. Designed for a comfortable, edgy fit, they are the perfect statement piece for summer and beyond.",
+                        "description": "Embrace bold street style with contemporary genuine leather shorts from Velle Hide. Designed for a comfortable, edgy fit, they are the perfect statement piece for summer and beyond.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["women's leather shorts", "black leather shorts", "high waisted shorts", "leather shorts outfit"],
@@ -716,7 +716,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "Skirts",
                         "rank": 2,
                         "handle": "women/bottoms/skirts",
-                        "description": "Explore chic genuine leather skirts from Artisan Hide, available in mini to maxi lengths. Featuring A-line and pencil cuts, these skirts are elegant, edgy, and essential wardrobe staples.",
+                        "description": "Explore chic genuine leather skirts from Velle Hide, available in mini to maxi lengths. Featuring A-line and pencil cuts, these skirts are elegant, edgy, and essential wardrobe staples.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["women's leather skirt", "leather mini skirt", "black leather pencil skirt", "A-line leather skirt"],
@@ -744,7 +744,7 @@ export const product_categories: ProductCategory[] = [
                 "name": "Dresses",
                 "rank": 3,
                 "handle": "women/dresses",
-                "description": "Make an unforgettable impression with statement genuine leather dresses from Artisan Hide. Handcrafted for a flawless fit, our edgy and sophisticated styles are perfect for day or evening looks.",
+                "description": "Make an unforgettable impression with statement genuine leather dresses from Velle Hide. Handcrafted for a flawless fit, our edgy and sophisticated styles are perfect for day or evening looks.",
                 "is_active": true,
                 "metadata": {
                     "seo_keywords": ["leather dress", "black leather dress", "women's leather dresses", "leather bodycon dress", "genuine leather dress"],
@@ -779,13 +779,13 @@ export const product_categories: ProductCategory[] = [
         "name": "Bags and Luggage",
         "rank": 2,
         "handle": "bags-luggage",
-        "description": "Discover durable and stylish genuine leather bags at Artisan Hide. From spacious backpacks to professional briefcases and weekend duffels, each piece is handcrafted for travel and daily use.",
+        "description": "Discover durable and stylish genuine leather bags at Velle Hide. From spacious backpacks to professional briefcases and weekend duffels, each piece is handcrafted for travel and daily use.",
         "category_children": [
             {
                 "name": "Backpacks",
                 "rank": 0,
                 "handle": "bags-luggage/backpacks",
-                "description": "Carry your essentials in style with genuine leather backpacks from Artisan Hide. Featuring durable designs with laptop sleeves and secure pockets, they are the ideal unisex choice for work or travel.",
+                "description": "Carry your essentials in style with genuine leather backpacks from Velle Hide. Featuring durable designs with laptop sleeves and secure pockets, they are the ideal unisex choice for work or travel.",
                 "is_active": true,
                 "metadata": {
                     "seo_keywords": ["leather backpack", "genuine leather rucksack", "laptop backpack leather", "travel leather backpack"],
@@ -801,7 +801,7 @@ export const product_categories: ProductCategory[] = [
                 "name": "Briefcases and Portfolios",
                 "rank": 1,
                 "handle": "bags-luggage/briefcases-portfolios",
-                "description": "Make a professional statement with genuine leather briefcases from Artisan Hide. Designed for unisex appeal, they feature functional compartments to keep business essentials organized.",
+                "description": "Make a professional statement with genuine leather briefcases from Velle Hide. Designed for unisex appeal, they feature functional compartments to keep business essentials organized.",
                 "is_active": true,
                 "metadata": {
                     "seo_keywords": ["leather briefcase", "leather portfolio bag", "men's leather work bag", "laptop briefcase"],
@@ -817,7 +817,7 @@ export const product_categories: ProductCategory[] = [
                 "name": "Travel and Duffel Bags",
                 "rank": 2,
                 "handle": "bags-luggage/travel-duffel",
-                "description": "Travel in style with spacious genuine leather duffel bags from Artisan Hide. Built for weekend getaways and more, their durable construction and classic design make them the perfect travel companion.",
+                "description": "Travel in style with spacious genuine leather duffel bags from Velle Hide. Built for weekend getaways and more, their durable construction and classic design make them the perfect travel companion.",
                 "is_active": true,
                 "metadata": {
                     "seo_keywords": ["leather duffel bag", "weekend travel bag", "leather holdall", "gym duffel bag leather"],
@@ -833,7 +833,7 @@ export const product_categories: ProductCategory[] = [
                 "name": "Handbags and Totes",
                 "rank": 3,
                 "handle": "bags-luggage/handbags-totes",
-                "description": "Find your perfect everyday companion in our collection of genuine leather handbags and totes. Elegant and versatile, these unisex bags from Artisan Hide offer ample storage and timeless style.",
+                "description": "Find your perfect everyday companion in our collection of genuine leather handbags and totes. Elegant and versatile, these unisex bags from Velle Hide offer ample storage and timeless style.",
                 "is_active": true,
                 "metadata": {
                     "seo_keywords": ["leather handbag", "leather tote bag", "women's leather purse", "shoulder bag leather"],
@@ -849,7 +849,7 @@ export const product_categories: ProductCategory[] = [
                 "name": "Messenger Bags",
                 "rank": 4,
                 "handle": "bags-luggage/messenger",
-                "description": "Stay organized on the go with secure genuine leather messenger bags from Artisan Hide. Featuring adjustable straps and functional compartments, they keep your unisex essentials accessible and safe.",
+                "description": "Stay organized on the go with secure genuine leather messenger bags from Velle Hide. Featuring adjustable straps and functional compartments, they keep your unisex essentials accessible and safe.",
                 "is_active": true,
                 "metadata": {
                     "seo_keywords": ["leather messenger bag", "crossbody bag leather", "laptop messenger bag", "satchel bag"],
@@ -884,19 +884,19 @@ export const product_categories: ProductCategory[] = [
         "name": "Footwear",
         "rank": 3,
         "handle": "footwear",
-        "description": "Step into quality with Artisan Hide's premium genuine leather footwear. Our collection of handcrafted unisex boots and shoes offers durable, comfortable, and stylish options for both casual and formal wear.",
+        "description": "Step into quality with Velle Hide's premium genuine leather footwear. Our collection of handcrafted unisex boots and shoes offers durable, comfortable, and stylish options for both casual and formal wear.",
         "category_children": [
             {
                 "name": "Boots",
                 "rank": 0,
                 "handle": "footwear/boots",
-                "description": "Discover stylish and durable genuine leather boots from Artisan Hide. Our collection includes timeless Chelsea boots and rugged combat styles, offering unisex versatility for any occasion.",
+                "description": "Discover stylish and durable genuine leather boots from Velle Hide. Our collection includes timeless Chelsea boots and rugged combat styles, offering unisex versatility for any occasion.",
                 "category_children": [
                     {
                         "name": "Chelsea Boots",
                         "rank": 0,
                         "handle": "footwear/boots/chelsea",
-                        "description": "Experience timeless style with ankle-high genuine leather Chelsea boots from Artisan Hide. Featuring iconic elastic panels, they offer effortless unisex comfort and ultimate wardrobe versatility.",
+                        "description": "Experience timeless style with ankle-high genuine leather Chelsea boots from Velle Hide. Featuring iconic elastic panels, they offer effortless unisex comfort and ultimate wardrobe versatility.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["leather chelsea boots", "chelsea boots men", "chelsea boots women", "black leather chelsea boots"],
@@ -912,7 +912,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "Chukka and Desert Boots",
                         "rank": 1,
                         "handle": "footwear/boots/chukka-desert",
-                        "description": "Perfect your smart-casual look with genuine leather chukka boots from Artisan Hide. Available in smooth or suede finishes, these unisex boots are perfect for relaxed, everyday style.",
+                        "description": "Perfect your smart-casual look with genuine leather chukka boots from Velle Hide. Available in smooth or suede finishes, these unisex boots are perfect for relaxed, everyday style.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["leather chukka boots", "desert boots leather", "men's chukka boots", "suede chukka boots"],
@@ -928,7 +928,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "Combat and Work Boots",
                         "rank": 2,
                         "handle": "footwear/boots/combat-work",
-                        "description": "Take on any challenge with rugged, lace-up genuine leather combat boots from Artisan Hide. Designed for unisex durability, they provide all-weather comfort for urban and outdoor adventures.",
+                        "description": "Take on any challenge with rugged, lace-up genuine leather combat boots from Velle Hide. Designed for unisex durability, they provide all-weather comfort for urban and outdoor adventures.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["leather combat boots", "work boots leather", "lace up leather boots", "military style boots"],
@@ -944,7 +944,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "Western and Cowboy Boots",
                         "rank": 3,
                         "handle": "footwear/boots/western-cowboy",
-                        "description": "Embrace authentic style with genuine leather western boots from Artisan Hide. Featuring traditional stitched details and angled heels, these unisex boots are a timeless addition to any wardrobe.",
+                        "description": "Embrace authentic style with genuine leather western boots from Velle Hide. Featuring traditional stitched details and angled heels, these unisex boots are a timeless addition to any wardrobe.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["leather cowboy boots", "western boots", "men's cowboy boots", "women's western boots"],
@@ -972,13 +972,13 @@ export const product_categories: ProductCategory[] = [
                 "name": "Shoes",
                 "rank": 1,
                 "handle": "footwear/shoes",
-                "description": "Explore classic genuine leather shoes at Artisan Hide. From formal Oxfords to casual loafers, our collection combines timeless unisex elegance with everyday sophistication.",
+                "description": "Explore classic genuine leather shoes at Velle Hide. From formal Oxfords to casual loafers, our collection combines timeless unisex elegance with everyday sophistication.",
                 "category_children": [
                     {
                         "name": "Dress Shoes",
                         "rank": 0,
                         "handle": "footwear/shoes/dress",
-                        "description": "Elevate your formal wear with sophisticated genuine leather dress shoes from Artisan Hide. Our collection includes classic Oxfords and Derbies, handcrafted for a polished and timeless unisex appeal.",
+                        "description": "Elevate your formal wear with sophisticated genuine leather dress shoes from Velle Hide. Our collection includes classic Oxfords and Derbies, handcrafted for a polished and timeless unisex appeal.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["leather dress shoes", "men's oxford shoes", "formal leather shoes", "derby shoes"],
@@ -994,7 +994,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "Loafers and Slip-Ons",
                         "rank": 1,
                         "handle": "footwear/shoes/loafers-slip-ons",
-                        "description": "Experience effortless style with comfortable genuine leather loafers from Artisan Hide. Perfect for smart-casual looks, our unisex slip-ons are designed for easy, everyday wear.",
+                        "description": "Experience effortless style with comfortable genuine leather loafers from Velle Hide. Perfect for smart-casual looks, our unisex slip-ons are designed for easy, everyday wear.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["leather loafers", "slip-on shoes", "penny loafers", "men's leather loafers"],
@@ -1010,7 +1010,7 @@ export const product_categories: ProductCategory[] = [
                         "name": "Casual Shoes",
                         "rank": 2,
                         "handle": "footwear/shoes/casual",
-                        "description": "Discover premium genuine leather casual shoes from Artisan Hide. Our collection of sneakers and moccasins offers relaxed unisex comfort with a touch of sophisticated style for daily use.",
+                        "description": "Discover premium genuine leather casual shoes from Velle Hide. Our collection of sneakers and moccasins offers relaxed unisex comfort with a touch of sophisticated style for daily use.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["leather sneakers", "casual leather shoes", "leather moccasins", "everyday leather shoes"],
@@ -1057,13 +1057,13 @@ export const product_categories: ProductCategory[] = [
         "name": "Accessories",
         "rank": 4,
         "handle": "accessories",
-        "description": "Complete your look with Artisan Hide's genuine leather accessories. Explore our collection of handcrafted unisex wallets, belts, and gloves that combine timeless style with practical, everyday utility.",
+        "description": "Complete your look with Velle Hide's genuine leather accessories. Explore our collection of handcrafted unisex wallets, belts, and gloves that combine timeless style with practical, everyday utility.",
         "category_children": [
             {
                 "name": "Wallets",
                 "rank": 0,
                 "handle": "accessories/wallets",
-                "description": "Keep your essentials organized with genuine leather wallets from Artisan Hide. Our collection of bifolds and cardholders offers compact, durable, and stylish designs for everyone.",
+                "description": "Keep your essentials organized with genuine leather wallets from Velle Hide. Our collection of bifolds and cardholders offers compact, durable, and stylish designs for everyone.",
                 "is_active": true,
                 "metadata": {
                     "seo_keywords": ["leather wallet", "men's leather wallet", "bifold wallet", "cardholder wallet"],
@@ -1079,7 +1079,7 @@ export const product_categories: ProductCategory[] = [
                 "name": "Belts",
                 "rank": 1,
                 "handle": "accessories/belts",
-                "description": "Find the perfect finishing touch with adjustable genuine leather belts from Artisan Hide. Available in a range of classic and modern styles, they are a versatile unisex addition to any outfit.",
+                "description": "Find the perfect finishing touch with adjustable genuine leather belts from Velle Hide. Available in a range of classic and modern styles, they are a versatile unisex addition to any outfit.",
                 "is_active": true,
                 "metadata": {
                     "seo_keywords": ["leather belt", "men's leather belt", "women's leather belt", "genuine leather belt"],
@@ -1095,7 +1095,7 @@ export const product_categories: ProductCategory[] = [
                 "name": "Gloves",
                 "rank": 2,
                 "handle": "accessories/gloves",
-                "description": "Stay warm and stylish with genuine leather gloves from Artisan Hide. Our insulated and touchscreen-compatible designs offer superior unisex comfort, warmth, and everyday functionality.",
+                "description": "Stay warm and stylish with genuine leather gloves from Velle Hide. Our insulated and touchscreen-compatible designs offer superior unisex comfort, warmth, and everyday functionality.",
                 "is_active": true,
                 "metadata": {
                     "seo_keywords": ["leather gloves", "men's leather gloves", "women's leather gloves", "winter driving gloves"],
@@ -1130,13 +1130,13 @@ export const product_categories: ProductCategory[] = [
         "name": "Home Decor",
         "rank": 5,
         "handle": "home-decor",
-        "description": "Elevate your living space with luxury genuine leather home decor from Artisan Hide. Our collection of handcrafted pillow covers and accents adds a durable, stylish, and sophisticated touch to any interior.",
+        "description": "Elevate your living space with luxury genuine leather home decor from Velle Hide. Our collection of handcrafted pillow covers and accents adds a durable, stylish, and sophisticated touch to any interior.",
         "category_children": [
             {
                 "name": "Pillow Covers",
                 "rank": 0,
                 "handle": "home-decor/pillow-covers",
-                "description": "Add a touch of luxury to your home with durable genuine leather pillow covers from Artisan Hide. These stylish, handcrafted accents are the perfect decorative touch for sofas, beds, and chairs.",
+                "description": "Add a touch of luxury to your home with durable genuine leather pillow covers from Velle Hide. These stylish, handcrafted accents are the perfect decorative touch for sofas, beds, and chairs.",
                 "is_active": true,
                 "metadata": {
                     "seo_keywords": ["leather pillow cover", "decorative leather pillow", "cushion cover leather", "sofa pillow cover"],
@@ -1152,7 +1152,7 @@ export const product_categories: ProductCategory[] = [
                 "name": "Home Accents",
                 "rank": 1,
                 "handle": "home-decor/accents",
-                "description": "Discover small genuine leather home accents from Artisan Hide. From elegant trays to classic coasters, these decorative touches add a sophisticated and timeless feel to any interior.",
+                "description": "Discover small genuine leather home accents from Velle Hide. From elegant trays to classic coasters, these decorative touches add a sophisticated and timeless feel to any interior.",
                 "is_active": true,
                 "metadata": {
                     "seo_keywords": ["leather home accents", "leather tray", "leather coasters", "home decor leather goods"],
@@ -1187,19 +1187,19 @@ export const product_categories: ProductCategory[] = [
         "name": "Kids",
         "rank": 6,
         "handle": "kids",
-        "description": "Shop Artisan Hide's genuine leather apparel for kids. Our handcrafted jackets and essentials are designed to be durable for play while blending premium comfort with timeless, stylish designs.",
+        "description": "Shop Velle Hide's genuine leather apparel for kids. Our handcrafted jackets and essentials are designed to be durable for play while blending premium comfort with timeless, stylish designs.",
         "category_children": [
             {
                 "name": "Boys",
                 "rank": 0,
                 "handle": "kids/boys",
-                "description": "Discover durable genuine leather apparel for boys at Artisan Hide. Our collection includes stylish jackets and vests, all handcrafted for active play and timeless, kid-friendly fashion.",
+                "description": "Discover durable genuine leather apparel for boys at Velle Hide. Our collection includes stylish jackets and vests, all handcrafted for active play and timeless, kid-friendly fashion.",
                 "category_children": [
                     {
                         "name": "Jackets",
                         "rank": 0,
                         "handle": "kids/boys/jackets",
-                        "description": "Equip him for adventure with rugged genuine leather jackets for boys from Artisan Hide. Featuring biker and bomber styles in soft, durable hides, they're perfect for all-season play.",
+                        "description": "Equip him for adventure with rugged genuine leather jackets for boys from Velle Hide. Featuring biker and bomber styles in soft, durable hides, they're perfect for all-season play.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["boys leather jacket", "kids leather biker jacket", "children's leather coat", "toddler leather jacket"],
@@ -1227,13 +1227,13 @@ export const product_categories: ProductCategory[] = [
                 "name": "Girls",
                 "rank": 1,
                 "handle": "kids/girls",
-                "description": "Explore chic genuine leather apparel for girls at Artisan Hide. Our collection of jackets and skirts is designed for ultimate comfort, durability, and playful, elegant style.",
+                "description": "Explore chic genuine leather apparel for girls at Velle Hide. Our collection of jackets and skirts is designed for ultimate comfort, durability, and playful, elegant style.",
                 "category_children": [
                     {
                         "name": "Jackets",
                         "rank": 0,
                         "handle": "kids/girls/jackets",
-                        "description": "Keep her stylish and warm with genuine leather jackets for girls from Artisan Hide. Including hooded and quilted options, these jackets offer fun, protective wear in premium leather.",
+                        "description": "Keep her stylish and warm with genuine leather jackets for girls from Velle Hide. Including hooded and quilted options, these jackets offer fun, protective wear in premium leather.",
                         "is_active": true,
                         "metadata": {
                             "seo_keywords": ["girls leather jacket", "kids leather moto jacket", "children's leather coat girls", "toddler girl leather jacket"],

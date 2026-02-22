@@ -126,7 +126,6 @@ export async function addToCart({ variantId, quantity, countryCode }: AddToCartP
         revalidateTag(await getCacheTag("carts"), 'max');
         revalidateTag(await getCacheTag("fulfillment"), 'max');
 
-        return { success: true };
     } catch (err) {
         medusaError(err);
     }

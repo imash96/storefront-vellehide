@@ -79,7 +79,7 @@ export default async function CartDrawer() {
                     <hr />
                     <CartFooter cart={cart} />
                 </>
-            ) : (<EmptyCart className="min-h-[70vh]" />)}
+            ) : (<EmptyCart className="min-h-full" />)}
         </CartDrawerClient>
     )
 }

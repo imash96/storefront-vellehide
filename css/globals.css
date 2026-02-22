@@ -450,6 +450,19 @@
         font-family: var(--font-family-body);
     }
 
+    select {
+        -webkit-appearance: none;
+        /* For Chrome, Safari, and Opera */
+        -moz-appearance: none;
+        /* For Firefox */
+        appearance: none;
+        /* Standard property */
+        background: none;
+        /* Optional: removes any default background image/gradient that might also contain an arrow */
+        padding: 0;
+        /* Optional: adjusts padding after removing the chevron */
+    }
+
     /* Remove number input spinners */
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
