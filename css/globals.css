@@ -492,67 +492,6 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 @layer components {
 
-    /* ── Buttons ─────────────────────────────────────────────────────────── */
-    .btn-primary {
-        @apply inline-flex items-center justify-center bg-button-primary text-button-primary-foreground hover:bg-button-primary-hover active:bg-button-primary-active disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
-    }
-
-    .btn-secondary {
-        @apply inline-flex items-center justify-center bg-button-secondary text-button-secondary-foreground hover:bg-button-secondary-hover active:bg-button-secondary-active disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
-    }
-
-    .btn-accent {
-        @apply inline-flex items-center justify-center bg-button-accent text-button-accent-foreground hover:bg-button-accent-hover active:bg-button-accent-active disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
-    }
-
-    .btn-outline {
-        @apply inline-flex items-center justify-center bg-button-outline text-button-outline-foreground border-2 border-button-outline-border hover:bg-button-outline-hover hover:text-button-outline-hover-foreground disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
-    }
-
-    .btn-ghost {
-        @apply inline-flex items-center justify-center bg-button-ghost text-button-ghost-foreground hover:bg-button-ghost-hover active:bg-button-ghost-active disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-md font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2;
-    }
-
-    /* ── Cards ───────────────────────────────────────────────────────────── */
-    .card {
-        @apply bg-card text-card-foreground border border-card-border rounded-lg shadow-sm;
-    }
-
-    .card-hover {
-        @apply card transition-all duration-200 hover:bg-card-hover hover:shadow-md hover:-translate-y-0.5;
-    }
-
-    /* ── Product Badges ──────────────────────────────────────────────────── */
-    .badge {
-        @apply inline-flex items-center px-2.5 py-1 rounded text-xs font-semibold tracking-wide uppercase;
-    }
-
-    .badge-new {
-        @apply badge bg-badge-new text-badge-new-foreground;
-    }
-
-    .badge-sale {
-        @apply badge bg-badge-sale text-badge-sale-foreground;
-    }
-
-    .badge-limited {
-        @apply badge bg-badge-limited text-badge-limited-foreground;
-    }
-
-    /* ── Dividers ────────────────────────────────────────────────────────── */
-    .divider {
-        @apply h-px bg-divider w-full;
-    }
-
-    .divider-strong {
-        @apply h-px bg-divider-strong w-full;
-    }
-
-    /* ── Glass / Frosted Surface ─────────────────────────────────────────── */
-    .glass {
-        @apply bg-surface/80 backdrop-blur-md border border-border;
-    }
-
     /* ── Skeleton Loader ─────────────────────────────────────────────────── */
     .skeleton {
         background: linear-gradient(90deg,
