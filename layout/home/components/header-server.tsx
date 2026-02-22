@@ -74,12 +74,15 @@ export default function HeaderServer({ links }: NavigationProps) {
                                             {/* Categories Section */}
                                             <div className="col-span-4 p-8">
                                                 <div className="grid grid-cols-3 gap-x-8 gap-y-6">
-                                                    {category.category_children?.map((subCategory) => (
-                                                        <MegaMenuColumn
-                                                            key={`mega-${subCategory.id || subCategory.handle}`}
-                                                            category={subCategory}
-                                                        />
-                                                    ))}
+                                                    {category.category_children?.map((subCategory) => {
+                                                        if (!subCategory.category_children) return
+                                                        return (
+                                                            <MegaMenuColumn
+                                                                key={`mega-${subCategory.id || subCategory.handle}`}
+                                                                category={subCategory}
+                                                            />
+                                                        )
+                                                    })}
                                                 </div>
                                             </div>
 

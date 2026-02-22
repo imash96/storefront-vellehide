@@ -21,7 +21,7 @@ export default async function CartDrawer() {
             {cart && cart.items?.length ? (
                 <>
                     <div className="flex-1 overflow-y-auto px-4 sm:px-6">
-                        <ul className="divide-y divide-divider py-4">
+                        <ul className="divide-y divide-divider">
                             {sortedItems?.map((item, index) => {
                                 const adjustmentsSum = (item.adjustments || []).reduce(
                                     (acc, adjustment) => adjustment.amount + acc,

@@ -54,7 +54,7 @@ export default function RegionModal({ countryCode }: RegionModalProps) {
         <Dialog open={showModal} onOpenChange={setShowModal}>
             <DialogTrigger asChild>
                 <button
-                    className="flex items-center gap-2 border border-border rounded-md px-3 py-2 text-left hover:bg-muted/50 hover:border-primary/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-focus-ring focus:ring-offset-2 min-h-11"
+                    className="flex items-center gap-2 rounded-md px-3 py-2 text-left hover:border hover:border-border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-focus-ring focus:ring-offset-2 min-h-11"
                     aria-haspopup="dialog"
                     aria-expanded={showModal}
                     aria-label={`Current region: ${current.label}. Click to change`}
@@ -65,7 +65,7 @@ export default function RegionModal({ countryCode }: RegionModalProps) {
                         aria-hidden="true"
                         className="w-6 h-4"
                     />
-                    <span className="text-sm text-foreground font-medium">{current.label}</span>
+                    <span className="text-sm font-medium">{current.label}</span>
                 </button>
             </DialogTrigger>
             <DialogContent

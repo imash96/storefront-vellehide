@@ -50,7 +50,7 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                             aria-label="Home"
                             className="transition-opacity hover:opacity-80 duration-300 z-10"
                         >
-                            <Logo className="w-20 lg:w-24" />
+                            <Logo className="text-primary w-18 lg:w-22" />
                         </Link>
                         {/* Desktop Navigation */}
                         {children}
