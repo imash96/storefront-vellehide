@@ -42,58 +42,56 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
         <>
             {/* Main Header */}
             <header aria-label="Main Navigation" className={`sticky top-0 z-50 transition-all border-border duration-300 ease-out ${shouldSolid ? "bg-surface/98 backdrop-blur-xl text-foreground border-b shadow-md" : "bg-transparent"}`}>
-                <div className="container-custom">
-                    <div className="relative flex items-center justify-between h-16 lg:h-20">
-                        {/* Logo */}
-                        <Link
-                            href="/"
-                            aria-label="Home"
-                            className="transition-opacity hover:opacity-80 duration-300 z-10"
+                <div className="container-custom relative flex items-center justify-between h-16 lg:h-20">
+                    {/* Logo */}
+                    <Link
+                        href="/"
+                        aria-label="Home"
+                        className="transition-opacity hover:opacity-80 duration-300 z-10"
+                    >
+                        <Logo className="text-primary w-18 lg:w-22" />
+                    </Link>
+                    {/* Desktop Navigation */}
+                    {children}
+                    {/* Right Actions */}
+                    <div className="flex items-center gap-2 lg:gap-4">
+                        {/* Search Button */}
+                        <button
+                            className="p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                            aria-label="Search"
                         >
-                            <Logo className="text-primary w-18 lg:w-22" />
+                            <Search className="w-5 h-5" strokeWidth={1.5} />
+                        </button>
+
+                        {/* Theme Toggle */}
+                        <ThemeButton
+                            initialTheme={initialTheme}
+                            className="p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                        />
+
+                        {/* Account Link - Hidden on mobile */}
+                        <Link
+                            href="/account"
+                            className="hidden md:flex p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                            aria-label="Account"
+                        >
+                            <User className="w-5 h-5" strokeWidth={1.5} />
                         </Link>
-                        {/* Desktop Navigation */}
-                        {children}
-                        {/* Right Actions */}
-                        <div className="flex items-center gap-2 lg:gap-4">
-                            {/* Search Button */}
-                            <button
-                                className="p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
-                                aria-label="Search"
-                            >
-                                <Search className="w-5 h-5" strokeWidth={1.5} />
-                            </button>
 
-                            {/* Theme Toggle */}
-                            <ThemeButton
-                                initialTheme={initialTheme}
-                                className="p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
-                            />
-
-                            {/* Account Link - Hidden on mobile */}
-                            <Link
-                                href="/account"
-                                className="hidden md:flex p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
-                                aria-label="Account"
-                            >
-                                <User className="w-5 h-5" strokeWidth={1.5} />
-                            </Link>
-
-                            {/* Cart Button */}
-                            <CartDrawerButton
-                                totalItems={totalItems}
-                                className="relative p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
-                            />
-                            {/* Mobile Menu Button */}
-                            <button
-                                onClick={toggleMobileDrawer}
-                                className="lg:hidden p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
-                                aria-label="Open menu"
-                                aria-expanded={isMobileDrawerOpen}
-                            >
-                                <Menu className="w-6 h-6" strokeWidth={1.5} />
-                            </button>
-                        </div>
+                        {/* Cart Button */}
+                        <CartDrawerButton
+                            totalItems={totalItems}
+                            className="relative p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                        />
+                        {/* Mobile Menu Button */}
+                        <button
+                            onClick={toggleMobileDrawer}
+                            className="lg:hidden p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                            aria-label="Open menu"
+                            aria-expanded={isMobileDrawerOpen}
+                        >
+                            <Menu className="w-6 h-6" strokeWidth={1.5} />
+                        </button>
                     </div>
                 </div>
                 {/* Progress Bar on Scroll */}

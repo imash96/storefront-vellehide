@@ -12,7 +12,7 @@ export default function CartDrawerClient({ children }: React.PropsWithChildren) 
             isOpen={isCartDrawerOpen}
             onClose={toggleCartDrawer}
             direction="right"
-            size="md"
+            size="sm"
             showCloseButton={false}
         >
             <div className="flex flex-col h-full bg-background">

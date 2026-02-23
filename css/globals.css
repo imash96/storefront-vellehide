@@ -358,17 +358,20 @@
 
     /* ── Scrollbar ─────────────────────────────────────────────── */
     ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
+        width: 12px;
+        height: 12px;
     }
 
     ::-webkit-scrollbar-track {
         background: var(--background-secondary);
+        border-radius: 6px;
     }
 
     ::-webkit-scrollbar-thumb {
         background: var(--border-strong);
-        border-radius: 9999px;
+        border-radius: 6px;
+        border: 2px solid var(--muted);
+        transition: background var(--transition-base);
     }
 
     ::-webkit-scrollbar-thumb:hover {
@@ -378,6 +381,28 @@
     * {
         scrollbar-width: thin;
         scrollbar-color: var(--border-strong) var(--background-secondary);
+    }
+}
+
+@layer utilities {
+    .container-custom {
+        width: 100%;
+        max-width: 80rem;
+        /* 1280px = 7xl */
+        margin-inline: auto;
+        padding-inline: 1rem;
+
+        @media (width >=640px) {
+            padding-inline: 1.5rem;
+        }
+
+        @media (width >=768px) {
+            padding-inline: 2.5rem;
+        }
+
+        @media (width >=1024px) {
+            padding-inline: 3.5rem;
+        }
     }
 }
 
