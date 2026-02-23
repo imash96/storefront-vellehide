@@ -1,145 +1,92 @@
-:root,
-:root[data-theme="light"],
-:root[data-theme="dark"] {
+/* ─────────────────────────────────────────────────────────────────────────────
+   COMMON.CSS — Static design tokens (theme-agnostic)
+   These values do NOT change between light/dark mode.
+   All dynamic color tokens live in mode-light.css / mode-dark.css.
+   ───────────────────────────────────────────────────────────────────────────── */
 
-    /* ═══════════════════════════════════════════════════════════════════
+:root {
+
+    /* ═══════════════════════════════════════════════════════════════════════
        TYPOGRAPHY
-    ═══════════════════════════════════════════════════════════════════ */
+       ═══════════════════════════════════════════════════════════════════════ */
 
     /* Font Families */
     --font-family-heading: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-family-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
     --font-family-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
 
-    /* Fluid Font Scale — clamp(min, preferred, max) */
-    --text-xs: clamp(0.75rem, 0.70rem + 0.25vw, 0.8125rem);
-    /* 12–13px  */
-    --text-sm: clamp(0.875rem, 0.82rem + 0.30vw, 0.9375rem);
-    /* 14–15px  */
-    --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);
-    /* 16–17px  */
-    --text-lg: clamp(1.125rem, 1.06rem + 0.35vw, 1.25rem);
-    /* 18–20px  */
-    --text-xl: clamp(1.25rem, 1.15rem + 0.50vw, 1.5rem);
-    /* 20–24px  */
-    --text-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem);
-    /* 24–30px  */
-    --text-3xl: clamp(1.875rem, 1.65rem + 1.10vw, 2.25rem);
-    /* 30–36px  */
-    --text-4xl: clamp(2.25rem, 1.95rem + 1.50vw, 3rem);
-    /* 36–48px  */
-    --text-5xl: clamp(3rem, 2.55rem + 2.25vw, 3.75rem);
-    /* 48–60px  */
-    --text-6xl: clamp(3.75rem, 3.15rem + 3.00vw, 4.5rem);
-    /* 60–72px  */
+    --text-xs: clamp(0.6875rem, 0.66rem + 0.12vw, 0.75rem);
+    --text-sm: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+    --text-base: clamp(0.9375rem, 0.91rem + 0.12vw, 1rem);
+    --text-lg: clamp(1.0625rem, 1.03rem + 0.14vw, 1.125rem);
+    --text-xl: clamp(1.1875rem, 1.14rem + 0.2vw, 1.25rem);
+    --text-2xl: clamp(1.375rem, 1.3rem + 0.32vw, 1.5rem);
+    --text-3xl: clamp(1.75rem, 1.62rem + 0.56vw, 1.875rem);
+    --text-4xl: clamp(2rem, 1.8rem + 0.85vw, 2.25rem);
+    --text-5xl: clamp(2.5rem, 2.15rem + 1.5vw, 3rem);
+    --text-6xl: clamp(3rem, 2.5rem + 2.1vw, 3.75rem);
 
-    /* Line Heights */
     --leading-none: 1;
-    --leading-tight: 1.25;
-    --leading-snug: 1.375;
+    --leading-tight: 1.2;
+    --leading-snug: 1.35;
     --leading-normal: 1.5;
     --leading-relaxed: 1.625;
     --leading-loose: 2;
 
-    /* Letter Spacing */
-    --tracking-tighter: -0.05em;
-    /* Large headlines                    */
-    --tracking-tight: -0.025em;
-    /* Headings                           */
+    --tracking-tighter: -0.04em;
+    --tracking-tight: -0.02em;
     --tracking-normal: 0em;
-    /* Body copy                          */
-    --tracking-wide: 0.025em;
-    /* Labels, small caps                 */
+    --tracking-wide: 0.02em;
     --tracking-wider: 0.05em;
-    /* Buttons, badges                    */
     --tracking-widest: 0.1em;
-    /* Luxury uppercase, nav labels       */
 
-    /* Font Weights (Bricolage Grotesque range: 400–800) */
     --font-light: 300;
-    /* Use 400 for Bricolage (no 300)     */
     --font-normal: 400;
     --font-medium: 500;
     --font-semibold: 600;
     --font-bold: 700;
     --font-extrabold: 800;
 
-
-    /* ═══════════════════════════════════════════════════════════════════
-       TRANSITIONS & EASING
-       ═══════════════════════════════════════════════════════════════════ */
-    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slower: 500ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-elegant: 400ms cubic-bezier(0.16, 1, 0.3, 1);
-
-    --ease-in: cubic-bezier(0.4, 0, 1, 1);
-    --ease-out: cubic-bezier(0, 0, 0.2, 1);
-    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
-
-
-    /* ═══════════════════════════════════════════════════════════════════
-       BORDER RADIUS
-       ═══════════════════════════════════════════════════════════════════ */
-    --radius-none: 0;
+    /* ─── BORDER RADIUS ─────────────────────────────────────────────────────── */
+    --radius-none: 0px;
     --radius-sm: 0.25rem;
-    /*  4px */
-    --radius: 0.5rem;
-    /*  8px */
-    --radius-md: 0.75rem;
-    /* 12px */
-    --radius-lg: 1rem;
-    /* 16px */
-    --radius-xl: 1.5rem;
-    /* 24px */
-    --radius-2xl: 2rem;
-    /* 32px */
+    --radius: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
     --radius-full: 9999px;
 
+    /* ─── TRANSITIONS ───────────────────────────────────────────────────────── */
+    --transition-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    /* ═══════════════════════════════════════════════════════════════════
-       SPACING SCALE (supplemental — Tailwind's default scale handles most)
-       ═══════════════════════════════════════════════════════════════════ */
-    --spacing-xs: 0.25rem;
-    /*  4px */
-    --spacing-sm: 0.5rem;
-    /*  8px */
-    --spacing-md: 1rem;
-    /* 16px */
-    --spacing-lg: 1.5rem;
-    /* 24px */
-    --spacing-xl: 2rem;
-    /* 32px */
-    --spacing-2xl: 3rem;
-    /* 48px */
-    --spacing-3xl: 4rem;
-    /* 64px */
+/* ─────────────────────────────────────────────────────────────────────────────
+   COMMON.CSS — Shared utilities & component classes
+   Minimal — only what Tailwind v4 can't express natively.
+   ───────────────────────────────────────────────────────────────────────────── */
 
+/* Skeleton loader animation — requires custom keyframes */
+@layer components {
+    .skeleton {
+        background: linear-gradient(90deg,
+                var(--muted) 25%,
+                var(--muted-hover) 50%,
+                var(--muted) 75%);
+        background-size: 200% 100%;
+        animation: skeleton-sweep 1.6s ease-in-out infinite;
+        border-radius: var(--radius-sm);
+    }
 
-    /* ═══════════════════════════════════════════════════════════════════
-       Z-INDEX SCALE
-       ═══════════════════════════════════════════════════════════════════ */
-    --z-base: 0;
-    --z-dropdown: 1000;
-    --z-sticky: 1100;
-    --z-fixed: 1200;
-    --z-modal-backdrop: 1300;
-    --z-modal: 1400;
-    --z-popover: 1500;
-    --z-tooltip: 1600;
-    --z-toast: 1700;
-    --z-max: 9999;
+    @keyframes skeleton-sweep {
+        0% {
+            background-position: 200% 0;
+        }
 
-
-    /* ═══════════════════════════════════════════════════════════════════
-       LAYOUT / CONTAINER WIDTHS
-       ═══════════════════════════════════════════════════════════════════ */
-    --container-sm: 640px;
-    --container-md: 768px;
-    --container-lg: 1024px;
-    --container-xl: 1280px;
-    --container-2xl: 1536px;
+        100% {
+            background-position: -200% 0;
+        }
+    }
 }

@@ -1,4 +1,7 @@
-/* globals.css — main entry (imports fonts, tailwind, themes) */
+/* ─────────────────────────────────────────────────────────────────────────────
+   GLOBALS.CSS — Main entry point
+   Import order: fonts → tailwind → theme tokens → common utilities
+   ───────────────────────────────────────────────────────────────────────────── */
 
 /* ─── FONTS ───────────────────────────────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap');
@@ -6,40 +9,48 @@
 /* ─── TAILWIND ────────────────────────────────────────────────────────────── */
 @import "tailwindcss";
 
-/* ─── THEME VARIABLES ─────────────────────────────────────────────────────── */
+/* ─── THEME TOKENS ────────────────────────────────────────────────────────── */
 @import "./mode-light.css";
 @import "./mode-dark.css";
 @import "./common.css";
 
-/* ─── TAILWIND THEME MAPPING ──────────────────────────────────────────────── */
-@theme {
-    /* Reset default Tailwind palette — only brand tokens */
-    --color-*: initial;
-    --color-white: oklch(100% 0 0);
-    --color-black: oklch(0% 0 0);
 
-    /* ── Primary ── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   TAILWIND THEME MAPPING
+   Maps CSS custom properties → Tailwind utility classes.
+   Convention: --color-* resolves at build time via var() references.
+   ═══════════════════════════════════════════════════════════════════════════ */
+@theme {
+
+    /* Reset default Tailwind palette — only brand tokens exposed */
+    --color-*: initial;
+    --color-white: oklch(1.0 0 0);
+    --color-black: oklch(0 0 0);
+
+    /* ── Primary ─────────────────────────────────────────────────────────── */
     --color-primary: var(--primary);
     --color-primary-foreground: var(--primary-foreground);
     --color-primary-hover: var(--primary-hover);
     --color-primary-active: var(--primary-active);
     --color-primary-subtle: var(--primary-subtle);
+    --color-primary-muted: var(--primary-muted);
 
-    /* ── Secondary ── */
+    /* ── Secondary ───────────────────────────────────────────────────────── */
     --color-secondary: var(--secondary);
     --color-secondary-foreground: var(--secondary-foreground);
     --color-secondary-hover: var(--secondary-hover);
     --color-secondary-active: var(--secondary-active);
     --color-secondary-subtle: var(--secondary-subtle);
 
-    /* ── Accent ── */
+    /* ── Accent ──────────────────────────────────────────────────────────── */
     --color-accent: var(--accent);
     --color-accent-foreground: var(--accent-foreground);
     --color-accent-hover: var(--accent-hover);
     --color-accent-active: var(--accent-active);
     --color-accent-subtle: var(--accent-subtle);
+    --color-accent-muted: var(--accent-muted);
 
-    /* ── Backgrounds & Surfaces ── */
+    /* ── Backgrounds & Surfaces ──────────────────────────────────────────── */
     --color-background: var(--background);
     --color-background-secondary: var(--background-secondary);
     --color-background-tertiary: var(--background-tertiary);
@@ -53,38 +64,37 @@
     --color-muted-hover: var(--muted-hover);
     --color-subtle: var(--subtle);
 
-    /* ── Card ── */
+    /* ── Card ────────────────────────────────────────────────────────────── */
     --color-card: var(--card);
     --color-card-foreground: var(--card-foreground);
     --color-card-hover: var(--card-hover);
     --color-card-border: var(--card-border);
 
-    /* ── Popover ── */
+    /* ── Popover ─────────────────────────────────────────────────────────── */
     --color-popover: var(--popover);
     --color-popover-foreground: var(--popover-foreground);
     --color-popover-border: var(--popover-border);
 
-    /* ── Borders & Dividers ── */
+    /* ── Borders & Dividers ──────────────────────────────────────────────── */
     --color-border: var(--border);
     --color-border-subtle: var(--border-subtle);
     --color-border-strong: var(--border-strong);
     --color-divider: var(--divider);
     --color-divider-strong: var(--divider-strong);
 
-    /* ── Text ── */
+    /* ── Text ────────────────────────────────────────────────────────────── */
     --color-text-primary: var(--text-primary);
     --color-text-secondary: var(--text-secondary);
     --color-text-tertiary: var(--text-tertiary);
     --color-text-disabled: var(--text-disabled);
 
-    /* ── Semantic States ── */
+    /* ── Semantic States ─────────────────────────────────────────────────── */
     --color-success: var(--success);
     --color-success-foreground: var(--success-foreground);
     --color-success-hover: var(--success-hover);
     --color-success-active: var(--success-active);
     --color-success-subtle: var(--success-subtle);
 
-    /* destructive + error share the same underlying tokens */
     --color-destructive: var(--destructive);
     --color-destructive-foreground: var(--destructive-foreground);
     --color-destructive-hover: var(--destructive-hover);
@@ -103,12 +113,12 @@
     --color-info-active: var(--info-active);
     --color-info-subtle: var(--info-subtle);
 
-    /* ── Overlays ── */
+    /* ── Overlays ────────────────────────────────────────────────────────── */
     --color-overlay: var(--overlay);
     --color-overlay-light: var(--overlay-light);
     --color-overlay-heavy: var(--overlay-heavy);
 
-    /* ── Product Badges ── */
+    /* ── Product Badges ──────────────────────────────────────────────────── */
     --color-badge-new: var(--badge-new);
     --color-badge-new-foreground: var(--badge-new-foreground);
     --color-badge-sale: var(--badge-sale);
@@ -116,23 +126,23 @@
     --color-badge-limited: var(--badge-limited);
     --color-badge-limited-foreground: var(--badge-limited-foreground);
 
-    /* ── Pricing ── */
+    /* ── Pricing ─────────────────────────────────────────────────────────── */
     --color-price-current: var(--price-current);
     --color-price-original: var(--price-original);
     --color-price-sale: var(--price-sale);
     --color-price-save: var(--price-save);
 
-    /* ── Ratings ── */
+    /* ── Ratings ─────────────────────────────────────────────────────────── */
     --color-rating-filled: var(--rating-filled);
     --color-rating-empty: var(--rating-empty);
 
-    /* ── Links ── */
+    /* ── Links ───────────────────────────────────────────────────────────── */
     --color-link: var(--link);
     --color-link-hover: var(--link-hover);
     --color-link-visited: var(--link-visited);
     --color-link-active: var(--link-active);
 
-    /* ── Form Inputs ── */
+    /* ── Form Inputs ─────────────────────────────────────────────────────── */
     --color-input-background: var(--input-background);
     --color-input-border: var(--input-border);
     --color-input-border-hover: var(--input-border-hover);
@@ -143,12 +153,12 @@
     --color-input-disabled-text: var(--input-disabled-text);
     --color-input-disabled-border: var(--input-disabled-border);
 
-    /* ── Focus Ring ── */
+    /* ── Focus Ring ──────────────────────────────────────────────────────── */
     --color-ring: var(--ring);
     --color-ring-offset: var(--ring-offset);
     --color-focus-ring: var(--focus-ring);
 
-    /* ── Buttons ── */
+    /* ── Buttons ─────────────────────────────────────────────────────────── */
     --color-button-primary: var(--button-primary);
     --color-button-primary-foreground: var(--button-primary-foreground);
     --color-button-primary-hover: var(--button-primary-hover);
@@ -180,18 +190,7 @@
     --color-button-outline-hover: var(--button-outline-hover);
     --color-button-outline-hover-foreground: var(--button-outline-hover-foreground);
 
-    --color-button-cart: var(--button-cart);
-    --color-button-cart-foreground: var(--button-cart-foreground);
-    --color-button-cart-hover: var(--button-cart-hover);
-
-    --color-button-wishlist: var(--button-wishlist);
-    --color-button-wishlist-foreground: var(--button-wishlist-foreground);
-    --color-button-wishlist-hover: var(--button-wishlist-hover);
-
-    --color-button-badge: var(--button-badge);
-    --color-button-badge-foreground: var(--button-badge-foreground);
-
-    /* ── Neutral Scale ── */
+    /* ── Neutral Scale ───────────────────────────────────────────────────── */
     --color-neutral-50: var(--neutral-50);
     --color-neutral-100: var(--neutral-100);
     --color-neutral-200: var(--neutral-200);
@@ -204,61 +203,10 @@
     --color-neutral-900: var(--neutral-900);
     --color-neutral-950: var(--neutral-950);
 
-    /* ── Shadows (from mode files) ── */
-    --shadow-sm: var(--shadow-sm);
-    --shadow: var(--shadow);
-    --shadow-md: var(--shadow-md);
-    --shadow-lg: var(--shadow-lg);
-    --shadow-xl: var(--shadow-xl);
-    --shadow-2xl: var(--shadow-2xl);
-    --shadow-inner: var(--shadow-inner);
-
-    /* ── Border Radius (from common.css) ── */
-    --radius-none: var(--radius-none);
-    --radius-sm: var(--radius-sm);
-    --radius: var(--radius);
-    --radius-md: var(--radius-md);
-    --radius-lg: var(--radius-lg);
-    --radius-xl: var(--radius-xl);
-    --radius-2xl: var(--radius-2xl);
-    --radius-full: var(--radius-full);
-
-    /* ── Typography ── */
+    /* ── Typography ──────────────────────────────────────────────────────── */
     --font-heading: var(--font-family-heading);
     --font-body: var(--font-family-body);
     --font-mono: var(--font-family-mono);
-
-    --font-size-xs: var(--text-xs);
-    --font-size-sm: var(--text-sm);
-    --font-size-base: var(--text-base);
-    --font-size-lg: var(--text-lg);
-    --font-size-xl: var(--text-xl);
-    --font-size-2xl: var(--text-2xl);
-    --font-size-3xl: var(--text-3xl);
-    --font-size-4xl: var(--text-4xl);
-    --font-size-5xl: var(--text-5xl);
-    --font-size-6xl: var(--text-6xl);
-
-    --line-height-none: var(--leading-none);
-    --line-height-tight: var(--leading-tight);
-    --line-height-snug: var(--leading-snug);
-    --line-height-normal: var(--leading-normal);
-    --line-height-relaxed: var(--leading-relaxed);
-    --line-height-loose: var(--leading-loose);
-
-    --letter-spacing-tighter: var(--tracking-tighter);
-    --letter-spacing-tight: var(--tracking-tight);
-    --letter-spacing-normal: var(--tracking-normal);
-    --letter-spacing-wide: var(--tracking-wide);
-    --letter-spacing-wider: var(--tracking-wider);
-    --letter-spacing-widest: var(--tracking-widest);
-
-    --font-weight-light: var(--font-light);
-    --font-weight-normal: var(--font-normal);
-    --font-weight-medium: var(--font-medium);
-    --font-weight-semibold: var(--font-semibold);
-    --font-weight-bold: var(--font-bold);
-    --font-weight-extrabold: var(--font-extrabold);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -266,48 +214,21 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 @layer base {
 
-    /* Universal reset - can be overridden by margin/padding utilities */
-    *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
-    }
-
-    /* Root element styles */
     html {
-        /* Prevent font size adjustment on iOS */
         -webkit-text-size-adjust: 100%;
-        /* Smooth scrolling */
         scroll-behavior: smooth;
-        /* Better text rendering */
         text-rendering: optimizeLegibility;
-        /* Better kerning */
-        font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Body base styles - can be overridden */
     body {
-        /* Apply theme colors */
         background-color: var(--background);
         color: var(--foreground);
-
-        /* Premium typography - Inter for body */
         font-family: var(--font-family-body);
         font-size: var(--text-base);
         line-height: var(--leading-normal);
-        font-weight: var(--font-normal);
-        letter-spacing: var(--tracking-normal);
-
-        /* Prevent horizontal scroll */
-        overflow-x: hidden;
-
-        /* Minimum height for full-page layouts */
         min-height: 100vh;
-
-        /* Remove default margin */
-        margin: 0;
     }
 
     h1,
@@ -316,53 +237,13 @@
     h4,
     h5,
     h6 {
-        margin: 0;
         font-family: var(--font-family-heading);
-        letter-spacing: var(--tracking-tight);
         line-height: var(--leading-tight);
+        letter-spacing: var(--tracking-tight);
         color: var(--text-primary);
         font-optical-sizing: auto;
     }
 
-    h1 {
-        font-size: var(--text-6xl);
-        font-weight: var(--font-extrabold);
-        letter-spacing: var(--tracking-tighter);
-    }
-
-    h2 {
-        font-size: var(--text-5xl);
-        font-weight: var(--font-bold);
-    }
-
-    h3 {
-        font-size: var(--text-4xl);
-        font-weight: var(--font-bold);
-    }
-
-    h4 {
-        font-size: var(--text-3xl);
-        font-weight: var(--font-semibold);
-    }
-
-    h5 {
-        font-size: var(--text-2xl);
-        font-weight: var(--font-semibold);
-    }
-
-    h6 {
-        font-size: var(--text-xl);
-        font-weight: var(--font-semibold);
-    }
-
-    /* Paragraph styles - NOW OVERRIDABLE by utilities */
-    p {
-        margin: 0;
-        line-height: var(--leading-relaxed);
-        color: var(--text-primary);
-    }
-
-    /* Link styles - can be overridden */
     a {
         color: var(--link);
         text-decoration: none;
@@ -373,65 +254,10 @@
         color: var(--link-hover);
     }
 
-    a:visited {
-        color: var(--link-visited);
-    }
-
     a:active {
         color: var(--link-active);
     }
 
-    /* Form element resets */
-    button,
-    input,
-    select,
-    textarea {
-        margin: 0;
-        font: inherit;
-        color: inherit;
-    }
-
-    button {
-        cursor: pointer;
-        border: none;
-        background: none;
-    }
-
-    input,
-    textarea,
-    select {
-        background-color: transparent;
-    }
-
-    select {
-        appearance: none;
-        -webkit-appearance: none;
-        background: none;
-    }
-
-    input[type="number"] {
-        -moz-appearance: textfield;
-        appearance: textfield;
-    }
-
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    /* Media defaults */
-    img,
-    picture,
-    video,
-    canvas,
-    svg {
-        max-width: 100%;
-        height: auto;
-        display: block;
-    }
-
-    /* Focus management */
     :focus-visible {
         outline: 2px solid var(--focus-ring);
         outline-offset: 2px;
@@ -442,27 +268,24 @@
         outline: none;
     }
 
-    /* Text selection */
     ::selection {
-        background-color: var(--accent);
-        color: var(--accent-foreground);
+        background-color: var(--accent-subtle);
+        color: var(--text-primary);
     }
 
-    /* Scrollbar */
+    /* Scrollbar — minimal, warm-tinted */
     ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
     }
 
     ::-webkit-scrollbar-track {
-        background: var(--muted);
+        background: var(--background-secondary);
     }
 
     ::-webkit-scrollbar-thumb {
         background: var(--border-strong);
-        border-radius: 4px;
-        border: 2px solid var(--muted);
-        transition: background var(--transition-base);
+        border-radius: 9999px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
@@ -471,222 +294,10 @@
 
     * {
         scrollbar-width: thin;
-        scrollbar-color: var(--border-strong) var(--muted);
+        scrollbar-color: var(--border-strong) var(--background-secondary);
     }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   COMPONENT LAYER — Named, reusable component classes
-   ═══════════════════════════════════════════════════════════════════════════ */
-@layer components {
-
-    /* ── Skeleton Loader ─────────────────────────────────────────────────── */
-    .skeleton {
-        background: linear-gradient(90deg,
-                var(--muted) 25%,
-                var(--muted-hover) 50%,
-                var(--muted) 75%);
-        background-size: 200% 100%;
-        animation: skeleton-sweep 1.6s ease-in-out infinite;
-        border-radius: var(--radius-sm);
-    }
-}
-
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   UTILITY LAYER — Brand-specific utility classes
-   ═══════════════════════════════════════════════════════════════════════════ */
-@layer utilities {
-
-    /* ── Font Family ─────────────────────────────────────────────────────── */
-    .font-heading {
-        font-family: var(--font-family-heading);
-        font-optical-sizing: auto;
-    }
-
-    .font-body {
-        font-family: var(--font-family-body);
-    }
-
-    .font-mono {
-        font-family: var(--font-family-mono);
-    }
-
-    /* ── Display Type Scale ──────────────────────────────────────────────── */
-    .text-display-1 {
-        font-family: var(--font-family-heading);
-        font-size: var(--text-6xl);
-        font-weight: var(--font-extrabold);
-        line-height: var(--leading-none);
-        letter-spacing: var(--tracking-tighter);
-        font-optical-sizing: auto;
-    }
-
-    .text-display-2 {
-        font-family: var(--font-family-heading);
-        font-size: var(--text-5xl);
-        font-weight: var(--font-bold);
-        line-height: var(--leading-tight);
-        letter-spacing: var(--tracking-tight);
-        font-optical-sizing: auto;
-    }
-
-    /* ── Product Typography ──────────────────────────────────────────────── */
-    .product-title {
-        font-family: var(--font-family-heading);
-        font-size: var(--text-2xl);
-        font-weight: var(--font-semibold);
-        line-height: var(--leading-snug);
-        letter-spacing: var(--tracking-tight);
-        font-optical-sizing: auto;
-    }
-
-    .product-title-lg {
-        font-family: var(--font-family-heading);
-        font-size: var(--text-4xl);
-        font-weight: var(--font-bold);
-        line-height: var(--leading-tight);
-        letter-spacing: var(--tracking-tight);
-        font-optical-sizing: auto;
-    }
-
-    /* ── Price Display ───────────────────────────────────────────────────── */
-    .price {
-        font-family: var(--font-family-heading);
-        font-size: var(--text-3xl);
-        font-weight: var(--font-bold);
-        line-height: var(--leading-none);
-        letter-spacing: var(--tracking-tight);
-    }
-
-    .price-lg {
-        font-family: var(--font-family-heading);
-        font-size: var(--text-5xl);
-        font-weight: var(--font-extrabold);
-        line-height: var(--leading-none);
-        letter-spacing: var(--tracking-tighter);
-    }
-
-    /* ── Interactive Hover Overlay ───────────────────────────────────────── */
-    /* Apply to a positioned container; the pseudo-element dims on hover. */
-    .hover-overlay {
-        position: relative;
-        isolation: isolate;
-    }
-
-    .hover-overlay::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: var(--hover-overlay);
-        opacity: 0;
-        transition: opacity var(--transition-fast);
-        pointer-events: none;
-        border-radius: inherit;
-        z-index: 1;
-    }
-
-    .hover-overlay:hover::before {
-        opacity: var(--hover-overlay-opacity);
-    }
-
-    /* ── Image Gradient Overlays ─────────────────────────────────────────── */
-    .gradient-overlay-bottom {
-        background: linear-gradient(to top, oklch(0% 0 0 / 0.70) 0%, transparent 60%);
-    }
-
-    .gradient-overlay-top {
-        background: linear-gradient(to bottom, oklch(0% 0 0 / 0.50) 0%, transparent 60%);
-    }
-
-    /* ── Section Spacing ─────────────────────────────────────────────────── */
-    .section-spacing {
-        @apply py-12 md:py-16 lg:py-20;
-    }
-
-    /* Container Custom */
-    .container-custom {
-        max-width: var(--container-xl);
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
-    @media (min-width: 640px) {
-        .container-custom {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-    }
-
-    @media (min-width: 1024px) {
-        .container-custom {
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-    }
-}
-
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   KEYFRAMES
-   ═══════════════════════════════════════════════════════════════════════════ */
-@keyframes skeleton-sweep {
-    0% {
-        background-position: 200% 0;
-    }
-
-    100% {
-        background-position: -200% 0;
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(10px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideDown {
-    from {
-        transform: translateY(-8px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes scaleIn {
-    from {
-        transform: scale(0.96);
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    ACCESSIBILITY
@@ -707,6 +318,7 @@
     :root {
         --border: var(--border-strong);
         --input-border: var(--border-strong);
+        --text-secondary: var(--text-primary);
     }
 }
 

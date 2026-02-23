@@ -1,36 +1,42 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ACCORDION.CSS — Radix Accordion component styles
+   ───────────────────────────────────────────────────────────────────────────── */
+
 @layer components {
 
-    /* ============================================
-    ACCORDION COMPONENT STYLES (Radix Accordion)
-    ============================================ */
+    /* ── Root Variants ───────────────────────────────────────────────────── */
 
-    .accordion-root.accordion-default {
+    .accordion-root.accordion-default,
+    .accordion-root.accordion-bordered,
+    .accordion-root.accordion-separated {
         width: 100%;
     }
 
     .accordion-root.accordion-bordered {
-        width: 100%;
         border-radius: var(--radius-lg);
         border: 1px solid var(--border);
     }
 
     .accordion-root.accordion-separated {
-        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
     }
 
+
+    /* ── Item ────────────────────────────────────────────────────────────── */
+
     .accordion-item {
         overflow: hidden;
-        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        transition: background-color var(--transition-base);
     }
 
     .accordion-default .accordion-item {
         border-bottom: 1px solid var(--border);
     }
 
-    .accordion-default .accordion-item:last-child {
+    .accordion-default .accordion-item:last-child,
+    .accordion-bordered .accordion-item:last-child {
         border-bottom: none;
     }
 
@@ -38,15 +44,14 @@
         border-bottom: 1px solid var(--border);
     }
 
-    .accordion-bordered .accordion-item:last-child {
-        border-bottom: none;
-    }
-
     .accordion-separated .accordion-item {
         border-radius: var(--radius-lg);
         border: 1px solid var(--border);
         background-color: var(--surface);
     }
+
+
+    /* ── Trigger ─────────────────────────────────────────────────────────── */
 
     .accordion-header {
         display: flex;
@@ -60,24 +65,26 @@
         gap: 1rem;
         padding: 1rem 1.25rem;
         text-align: left;
-        font-weight: 500;
-        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
         background-color: transparent;
+        transition: background-color var(--transition-base);
+        width: 100%;
     }
 
     .accordion-trigger:hover {
         background-color: var(--muted);
     }
 
-    .accordion-trigger:focus {
-        outline: none;
-        box-shadow: inset 0 0 0 2px var(--focus-ring);
-        opacity: 0.2;
+    /* Fix: use outline instead of box-shadow+opacity (opacity bugs dim entire element) */
+    .accordion-trigger:focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: -2px;
+        border-radius: var(--radius-sm);
     }
 
     .accordion-trigger[data-disabled] {
         cursor: not-allowed;
         opacity: 0.5;
+        pointer-events: none;
     }
 
     .accordion-separated .accordion-trigger {
@@ -85,56 +92,67 @@
     }
 
     .accordion-trigger-text {
-        font-size: 1rem;
+        font-size: var(--text-base);
         font-weight: 600;
         color: var(--text-primary);
     }
 
     .accordion-chevron {
-        color: var(--text-secondary);
-        transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        flex-shrink: 0;
+        color: var(--text-tertiary);
+        transition: transform var(--transition-slow) var(--ease-spring);
     }
 
     .accordion-trigger[data-state="open"] .accordion-chevron {
         transform: rotate(180deg);
     }
 
+
+    /* ── Content ─────────────────────────────────────────────────────────── */
+
     .accordion-content {
         overflow: hidden;
-        font-size: 0.875rem;
+        font-size: var(--text-sm);
     }
 
     .accordion-content[data-state="closed"] {
-        animation: accordion-up 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        animation: accordion-up 280ms var(--ease-in-out);
     }
 
     .accordion-content[data-state="open"] {
-        animation: accordion-down 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        animation: accordion-down 280ms var(--ease-in-out);
     }
 
     .accordion-content-inner {
-        padding: 0.5rem 1.25rem 1.25rem 1.25rem;
-        color: var(--text-primary);
-        line-height: 1.625;
+        padding: 0.5rem 1.25rem 1.25rem;
+        color: var(--text-secondary);
+        line-height: var(--leading-relaxed);
     }
+
+
+    /* ── Keyframes ───────────────────────────────────────────────────────── */
 
     @keyframes accordion-down {
         from {
             height: 0;
+            opacity: 0.6;
         }
 
         to {
             height: var(--radix-accordion-content-height);
+            opacity: 1;
         }
     }
 
     @keyframes accordion-up {
         from {
             height: var(--radix-accordion-content-height);
+            opacity: 1;
         }
 
         to {
             height: 0;
+            opacity: 0;
         }
     }
 }
