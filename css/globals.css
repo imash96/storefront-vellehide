@@ -10,8 +10,8 @@
 @import "tailwindcss";
 
 /* ─── THEME TOKENS ────────────────────────────────────────────────────────── */
-@import "./mode-light.css";
-@import "./mode-dark.css";
+@import "./mode-light-v2.css";
+@import "./mode-dark-v2.css";
 @import "./common.css";
 
 
@@ -27,98 +27,118 @@
     --color-white: oklch(1.0 0 0);
     --color-black: oklch(0 0 0);
 
-    /* ── Primary ─────────────────────────────────────────────────────────── */
+    /* Primary */
     --color-primary: var(--primary);
     --color-primary-foreground: var(--primary-foreground);
     --color-primary-hover: var(--primary-hover);
     --color-primary-active: var(--primary-active);
     --color-primary-subtle: var(--primary-subtle);
-    --color-primary-muted: var(--primary-muted);
 
-    /* ── Secondary ───────────────────────────────────────────────────────── */
+    /* Secondary */
     --color-secondary: var(--secondary);
     --color-secondary-foreground: var(--secondary-foreground);
     --color-secondary-hover: var(--secondary-hover);
     --color-secondary-active: var(--secondary-active);
     --color-secondary-subtle: var(--secondary-subtle);
 
-    /* ── Accent ──────────────────────────────────────────────────────────── */
+    /* Accent */
     --color-accent: var(--accent);
     --color-accent-foreground: var(--accent-foreground);
     --color-accent-hover: var(--accent-hover);
     --color-accent-active: var(--accent-active);
     --color-accent-subtle: var(--accent-subtle);
-    --color-accent-muted: var(--accent-muted);
 
-    /* ── Backgrounds & Surfaces ──────────────────────────────────────────── */
+    /* Backgrounds */
     --color-background: var(--background);
     --color-background-secondary: var(--background-secondary);
     --color-background-tertiary: var(--background-tertiary);
+
+    /* Foregrounds */
     --color-foreground: var(--foreground);
     --color-foreground-secondary: var(--foreground-secondary);
     --color-foreground-tertiary: var(--foreground-tertiary);
+
+    /* Surface */
     --color-surface: var(--surface);
     --color-surface-foreground: var(--surface-foreground);
+
+    /* Muted */
     --color-muted: var(--muted);
     --color-muted-foreground: var(--muted-foreground);
     --color-muted-hover: var(--muted-hover);
+
+    /* Subtle */
     --color-subtle: var(--subtle);
 
-    /* ── Card ────────────────────────────────────────────────────────────── */
+    /* Card */
     --color-card: var(--card);
     --color-card-foreground: var(--card-foreground);
     --color-card-hover: var(--card-hover);
     --color-card-border: var(--card-border);
 
-    /* ── Popover ─────────────────────────────────────────────────────────── */
+    /* Popover */
     --color-popover: var(--popover);
     --color-popover-foreground: var(--popover-foreground);
     --color-popover-border: var(--popover-border);
 
-    /* ── Borders & Dividers ──────────────────────────────────────────────── */
+    /* Borders */
     --color-border: var(--border);
     --color-border-subtle: var(--border-subtle);
     --color-border-strong: var(--border-strong);
+
+    /* Dividers */
     --color-divider: var(--divider);
     --color-divider-strong: var(--divider-strong);
 
-    /* ── Text ────────────────────────────────────────────────────────────── */
+    /* Text */
     --color-text-primary: var(--text-primary);
     --color-text-secondary: var(--text-secondary);
     --color-text-tertiary: var(--text-tertiary);
     --color-text-disabled: var(--text-disabled);
 
-    /* ── Semantic States ─────────────────────────────────────────────────── */
+    /* Success */
     --color-success: var(--success);
     --color-success-foreground: var(--success-foreground);
     --color-success-hover: var(--success-hover);
     --color-success-active: var(--success-active);
     --color-success-subtle: var(--success-subtle);
 
+    /* Destructive */
     --color-destructive: var(--destructive);
     --color-destructive-foreground: var(--destructive-foreground);
     --color-destructive-hover: var(--destructive-hover);
     --color-destructive-active: var(--destructive-active);
     --color-destructive-subtle: var(--destructive-subtle);
 
+    /* Error */
+    --color-error: var(--error);
+    --color-error-foreground: var(--error-foreground);
+    --color-error-hover: var(--error-hover);
+    --color-error-active: var(--error-active);
+    --color-error-subtle: var(--error-subtle);
+
+    /* Warning */
     --color-warning: var(--warning);
     --color-warning-foreground: var(--warning-foreground);
     --color-warning-hover: var(--warning-hover);
     --color-warning-active: var(--warning-active);
     --color-warning-subtle: var(--warning-subtle);
 
+    /* Info */
     --color-info: var(--info);
     --color-info-foreground: var(--info-foreground);
     --color-info-hover: var(--info-hover);
     --color-info-active: var(--info-active);
     --color-info-subtle: var(--info-subtle);
 
-    /* ── Overlays ────────────────────────────────────────────────────────── */
+    /* Overlays */
     --color-overlay: var(--overlay);
     --color-overlay-light: var(--overlay-light);
     --color-overlay-heavy: var(--overlay-heavy);
+    --color-hover-overlay: var(--hover-overlay);
+    --color-active-overlay: var(--active-overlay);
 
-    /* ── Product Badges ──────────────────────────────────────────────────── */
+    /* Badges */
     --color-badge-new: var(--badge-new);
     --color-badge-new-foreground: var(--badge-new-foreground);
     --color-badge-sale: var(--badge-sale);
@@ -126,23 +146,23 @@
     --color-badge-limited: var(--badge-limited);
     --color-badge-limited-foreground: var(--badge-limited-foreground);
 
-    /* ── Pricing ─────────────────────────────────────────────────────────── */
+    /* Pricing */
     --color-price-current: var(--price-current);
     --color-price-original: var(--price-original);
     --color-price-sale: var(--price-sale);
     --color-price-save: var(--price-save);
 
-    /* ── Ratings ─────────────────────────────────────────────────────────── */
+    /* Ratings */
     --color-rating-filled: var(--rating-filled);
     --color-rating-empty: var(--rating-empty);
 
-    /* ── Links ───────────────────────────────────────────────────────────── */
+    /* Links */
     --color-link: var(--link);
     --color-link-hover: var(--link-hover);
     --color-link-visited: var(--link-visited);
     --color-link-active: var(--link-active);
 
-    /* ── Form Inputs ─────────────────────────────────────────────────────── */
+    /* Inputs */
     --color-input-background: var(--input-background);
     --color-input-border: var(--input-border);
     --color-input-border-hover: var(--input-border-hover);
@@ -153,44 +173,63 @@
     --color-input-disabled-text: var(--input-disabled-text);
     --color-input-disabled-border: var(--input-disabled-border);
 
-    /* ── Focus Ring ──────────────────────────────────────────────────────── */
+    /* Focus Rings */
     --color-ring: var(--ring);
     --color-ring-offset: var(--ring-offset);
     --color-focus-ring: var(--focus-ring);
 
-    /* ── Buttons ─────────────────────────────────────────────────────────── */
+    /* Button — Primary */
     --color-button-primary: var(--button-primary);
     --color-button-primary-foreground: var(--button-primary-foreground);
     --color-button-primary-hover: var(--button-primary-hover);
     --color-button-primary-active: var(--button-primary-active);
 
+    /* Button — Secondary */
     --color-button-secondary: var(--button-secondary);
     --color-button-secondary-foreground: var(--button-secondary-foreground);
     --color-button-secondary-hover: var(--button-secondary-hover);
     --color-button-secondary-active: var(--button-secondary-active);
 
+    /* Button — Destructive */
     --color-button-destructive: var(--button-destructive);
     --color-button-destructive-foreground: var(--button-destructive-foreground);
     --color-button-destructive-hover: var(--button-destructive-hover);
     --color-button-destructive-active: var(--button-destructive-active);
 
+    /* Button — Accent */
     --color-button-accent: var(--button-accent);
     --color-button-accent-foreground: var(--button-accent-foreground);
     --color-button-accent-hover: var(--button-accent-hover);
     --color-button-accent-active: var(--button-accent-active);
 
+    /* Button — Ghost */
     --color-button-ghost: var(--button-ghost);
     --color-button-ghost-foreground: var(--button-ghost-foreground);
     --color-button-ghost-hover: var(--button-ghost-hover);
     --color-button-ghost-active: var(--button-ghost-active);
 
+    /* Button — Outline */
     --color-button-outline: var(--button-outline);
     --color-button-outline-foreground: var(--button-outline-foreground);
     --color-button-outline-border: var(--button-outline-border);
     --color-button-outline-hover: var(--button-outline-hover);
     --color-button-outline-hover-foreground: var(--button-outline-hover-foreground);
 
-    /* ── Neutral Scale ───────────────────────────────────────────────────── */
+    /* Button — Cart */
+    --color-button-cart: var(--button-cart);
+    --color-button-cart-foreground: var(--button-cart-foreground);
+    --color-button-cart-hover: var(--button-cart-hover);
+
+    /* Button — Wishlist */
+    --color-button-wishlist: var(--button-wishlist);
+    --color-button-wishlist-foreground: var(--button-wishlist-foreground);
+    --color-button-wishlist-hover: var(--button-wishlist-hover);
+
+    /* Button — Badge */
+    --color-button-badge: var(--button-badge);
+    --color-button-badge-foreground: var(--button-badge-foreground);
+
+    /* Neutrals */
     --color-neutral-50: var(--neutral-50);
     --color-neutral-100: var(--neutral-100);
     --color-neutral-200: var(--neutral-200);
@@ -203,6 +242,15 @@
     --color-neutral-900: var(--neutral-900);
     --color-neutral-950: var(--neutral-950);
 
+    /* ─── Shadows ────────────────────────────────────────────── */
+    --shadow-sm: var(--shadow-sm);
+    --shadow: var(--shadow);
+    --shadow-md: var(--shadow-md);
+    --shadow-lg: var(--shadow-lg);
+    --shadow-xl: var(--shadow-xl);
+    --shadow-2xl: var(--shadow-2xl);
+    --shadow-inner: var(--shadow-inner);
+
     /* ── Typography ──────────────────────────────────────────────────────── */
     --font-heading: var(--font-family-heading);
     --font-body: var(--font-family-body);
@@ -213,6 +261,13 @@
    BASE LAYER — Element defaults; all overridable by Tailwind utilities
    ═══════════════════════════════════════════════════════════════════════════ */
 @layer base {
+
+    *,
+    *::before,
+    *::after {
+        border-color: var(--border);
+        box-sizing: border-box;
+    }
 
     html {
         -webkit-text-size-adjust: 100%;
@@ -229,6 +284,7 @@
         font-size: var(--text-base);
         line-height: var(--leading-normal);
         min-height: 100vh;
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     h1,

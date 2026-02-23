@@ -4,6 +4,19 @@
    All dynamic color tokens live in mode-light.css / mode-dark.css.
    ───────────────────────────────────────────────────────────────────────────── */
 
+/* ── SMOOTH THEME TRANSITIONS ────────────────────────────────── */
+:root {
+    color-scheme: light dark;
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+}
+
 :root {
 
     /* ═══════════════════════════════════════════════════════════════════════
