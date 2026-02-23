@@ -1,16 +1,4 @@
-/**
- * globals.css — Main Stylesheet Entry Point
- * Premium Leather Brand Storefront
- *
- * Import order:
- * 1. Google Fonts
- * 2. Tailwind CSS
- * 3. Theme variables (light + dark)
- * 4. @theme  — Tailwind token mapping
- * 5. @layer base       — element defaults
- * 6. @layer components — named component classes
- * 7. @layer utilities  — brand utility classes
- */
+/* globals.css — main entry (imports fonts, tailwind, themes) */
 
 /* ─── FONTS ───────────────────────────────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap');
