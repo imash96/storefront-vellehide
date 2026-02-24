@@ -6,8 +6,13 @@ import { product_categories } from "@/lib/constant/category";
 
 export default async function Category() {
     return (
-        <SectionHeader title="Shop by Category" desc="Discover Your Style: Navigate by Category for Effortless Shopping!" sectionName="category">
-            <div className="grid md:grid-cols-6 lg:grid-cols-4  gap-4">
+        <SectionHeader
+            title="Shop by Category"
+            desc="Discover your style - navigate by category for effortless shopping."
+            sectionName="category"
+            eyebrow="Collections"
+        >
+            <div className="grid md:grid-cols-6 lg:grid-cols-4 gap-4">
                 {product_categories.slice(0, 6).map((category, xIndex) => (
                     <div key={category.id} className="tw-category-card relative overflow-hidden no-scrollbar max-h-80" data-index={xIndex}>
                         <Image

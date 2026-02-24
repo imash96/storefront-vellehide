@@ -10,7 +10,7 @@ import Category from "@/module/home/templates/category";
 import TrendingNow from "@/module/home/templates/col-tending-now";
 import Collection from "@/module/home/templates/collection";
 import NewArrival from "@/module/home/templates/col-new-arrivals";
-import Testimonials from "@/module/home/templates/testimonials";
+import Testimonials from "@/module/home/templates/testimonials-new";
 import OnSale from "@/module/home/templates/col-on-sale";
 
 export default async function Page() {

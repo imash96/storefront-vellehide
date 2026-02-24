@@ -2,11 +2,11 @@
 
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
-import { useCallback } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import { BannerSlide } from "@/types/homepage"
+import Button from "@/ui/button"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -16,7 +16,7 @@ type HeroBannerCarouselProps = {
 
 // ─── Slide Card ───────────────────────────────────────────────────────────────
 
-function SlideCard({ slide }: { slide: BannerSlide }) {
+function SlideCard({ slide, isActive }: { slide: BannerSlide, isActive: boolean }) {
     const alignClass = {
         left: "items-start text-left",
         center: "items-center text-center",
@@ -44,7 +44,7 @@ function SlideCard({ slide }: { slide: BannerSlide }) {
 
             {/* Scrim */}
             <div
-                className="absolute inset-0 pointer-events-none"
+                className="absolute inset-0 pointer-events-none mix-blend-overlay"
                 style={{
                     background:
                         "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 45%, transparent 100%)",
@@ -55,23 +55,33 @@ function SlideCard({ slide }: { slide: BannerSlide }) {
             <div
                 className={`absolute inset-0 z-10 flex flex-col justify-end gap-2 p-5 sm:p-6 md:p-7 lg:p-8 ${alignClass}`}
             >
+                {/* Eyebrow / subheading */}
                 {slide.subheading && (
-                    <p className="text-white/55 text-[10px] sm:text-xs font-medium tracking-[0.22em] uppercase">
+                    <p
+                        className={`text-white/60 text-[9px] sm:text-[10px] font-medium tracking-[0.28em] uppercase transition-all duration-700 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
+                        style={{ transitionDelay: "100ms" }}
+                    >
                         {slide.subheading}
                     </p>
                 )}
 
-                <h2 className="font-heading text-white text-[1.65rem] sm:text-[1.85rem] md:text-[2rem] lg:text-[2.1rem] xl:text-[2.4rem] font-light leading-[1.1] tracking-tight max-w-[14ch]">
+                {/* Heading */}
+                <h2
+                    className={`font-heading text-white font-light leading-[1.05] tracking-[-0.02em] max-w-[14ch] transition-all duration-700 text-[1.7rem] sm:text-[2rem] md:text-[2.15rem] lg:text-[2.35rem] xl:text-[2.6rem] ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
+                    style={{ transitionDelay: "200ms" }}
+                >
                     {slide.heading}
                 </h2>
 
-                <Link
+                <Button
                     href={slide.cta.href}
-                    className={`mt-2 inline-flex items-center gap-1.5 bg-white text-black text-[10px] sm:text-xs font-semibold tracking-[0.15em] uppercase px-4 sm:px-5 py-2.5 sm:py-3 transition-all duration-200 hover:bg-neutral-100 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 ${ctaSelfClass}`}
+                    className={`mt-3 group/cta inline-flex items-center gap-2 text-white border border-white/40 bg-white/10 hover:bg-white hover:text-black backdrop-blur-sm text-[10px] sm:text-xs font-semibold tracking-[0.14em] uppercase px-5 sm:px-6 py-2.5 sm:py-3 transition-all duration-300 hover:border-white active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 ${ctaSelfClass} ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
+                    style={{ transitionDelay: "350ms" }}
+                    icon={<ArrowRight className="size-3 transition-transform duration-200 group-hover/cta:translate-x-0.5" aria-hidden />}
+                    iconPosition="right"
                 >
                     {slide.cta.label}
-                    <ChevronRight className="size-3" aria-hidden />
-                </Link>
+                </Button>
             </div>
         </article>
     )
@@ -90,7 +100,7 @@ function NavArrow({
         <button
             onClick={onClick}
             aria-label={direction === "prev" ? "Previous slide" : "Next slide"}
-            className={`lg:hidden absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center size-9 sm:w-10 sm:h-10 bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/15 text-white transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-white ${direction === "prev" ? "left-2 sm:left-3" : "right-2 sm:right-3"}`}
+            className={`lg:hidden absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center size-9 sm:w-10 sm:h-10 bg-surface/60 hover:bg-surface backdrop-blur-sm border border-border text-text-primary transition-all duration-200 active:scale-95 ${direction === "prev" ? "left-2 sm:left-3" : "right-2 sm:right-3"}`}
         >
             {direction === "prev" ? (
                 <ChevronLeft className="size-4" />
@@ -104,6 +114,8 @@ function NavArrow({
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function BannerCarousel({ slides }: HeroBannerCarouselProps) {
+
+    const [selectedIndex, setSelectedIndex] = useState(0)
 
     const [emblaRef, emblaApi] = useEmblaCarousel(
         {
@@ -125,13 +137,18 @@ export default function BannerCarousel({ slides }: HeroBannerCarouselProps) {
     const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
     const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
 
+    useEffect(() => {
+        if (!emblaApi) return
+        emblaApi.on("select", () => setSelectedIndex(emblaApi.selectedScrollSnap()))
+    }, [emblaApi])
+
     // ── Render ─────────────────────────────────────────────────────────────────
 
     return (
         <section
             aria-label="Hero Banners"
             aria-roledescription="carousel"
-            className="relative w-full"
+            className="relative w-full bg-background-secondary"
         >
             {/* Embla viewport */}
             <div
@@ -147,9 +164,9 @@ export default function BannerCarousel({ slides }: HeroBannerCarouselProps) {
                             role="group"
                             aria-roledescription="slide"
                             aria-label={`Slide ${i + 1} of ${slides.length}: ${slide.heading}`}
-                            className={`relative shrink-0 w-[90%] md:w-[calc(50%-4px)] lg:w-[calc(33.333%-5.34px)] aspect-3/4 sm:aspect-4/5 md:aspect-3/4 lg:aspect-3/4 xl:aspect-9/11`}
+                            className={`relative shrink-0 w-[90%] md:w-[calc(50%-4px)] lg:w-[calc(33.333%-5.34px)] aspect-3/4 sm:aspect-4/5 md:aspect-3/4 xl:aspect-9/11`}
                         >
-                            <SlideCard slide={slide} />
+                            <SlideCard slide={slide} isActive={selectedIndex === i} />
                         </div>
                     ))}
                 </div>
