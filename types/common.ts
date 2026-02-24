@@ -1,5 +1,5 @@
 import { BaseProductCategory } from "@medusajs/types/dist/http/product-category/common";
-import React from "react";
+import React, { ElementType } from "react";
 
 export type IconProp = React.ComponentPropsWithoutRef<'svg'>
 
@@ -15,10 +15,10 @@ export type FeaturesType = {
     }[]
 }
 
-export type IconWithTextType = {
+export type IconItem = {
     name: string;
     description: string;
-    Icon: ({ ...props }: IconProp) => React.JSX.Element;
+    Icon: ElementType;
 }
 
 export type FormState = {

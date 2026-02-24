@@ -102,9 +102,6 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                     />
                 )}
             </header>
-            {/* Spacer to prevent content jump */}
-            <div className="h-16 lg:h-20" aria-hidden="true" />
-
             {/* Mobile Menu Overlay */}
             <MobileDrawer />
         </>

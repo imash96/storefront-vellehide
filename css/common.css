@@ -123,6 +123,16 @@
 /* Skeleton loader animation — requires custom keyframes */
 @layer components {
 
+    @keyframes marquee {
+        0% {
+            transform: translateX(0%);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
     /* ── SKELETON LOADER ───────────────────────────────────────────────────── */
     .skeleton {
         background: linear-gradient(90deg,

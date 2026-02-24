@@ -38,6 +38,15 @@ export interface MegaMenuCategory {
     }[];
 }
 
+export type BannerSlide = {
+    id: string
+    image: { src: string; alt: string }
+    heading: string
+    subheading?: string
+    cta: { label: string; href: string }
+    align?: "left" | "center" | "right"
+}
+
 export interface HeroSlide {
     id: string;
     image: string;

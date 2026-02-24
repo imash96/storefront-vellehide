@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence } from "motion/react";
 import { div as Div } from "motion/react-client";
-import { ChevronLeft, ChevronRight, Home, MenuIcon, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home, Logs, X } from "lucide-react";
 import { useDrawer } from "@lib/context/drawer-context";
 import { ProductCategory } from "@/types/common";
 import { Drawer } from "@/ui/drawer";
@@ -73,7 +73,7 @@ export default function MobileDrawer() {
                         </button>
                     ) : (
                         <div className="flex items-center gap-2.5">
-                            <MenuIcon
+                            <Logs
                                 className="size-5 text-accent"
                                 strokeWidth={1.5}
                                 aria-hidden="true"
@@ -199,14 +199,14 @@ export default function MobileDrawer() {
                                 onClick={handleClose}
                                 className="block px-4 py-3 rounded-lg text-sm font-medium text-foreground-secondary hover:bg-muted hover:text-foreground transition-all duration-200"
                             >
-                                Track Order
+                                Contact us
                             </Link>
                             <Link
                                 href="/contact"
                                 onClick={handleClose}
                                 className="block px-4 py-3 rounded-lg text-sm font-medium text-foreground-secondary hover:bg-muted hover:text-foreground transition-all duration-200"
                             >
-                                Contact Us
+                                About Us
                             </Link>
                         </div>
                     </Div>
