@@ -1,31 +1,37 @@
 import { cookies } from "next/headers";
-import TempCart from "../temp-cart-button";
-import { sdk } from "@lib/sdk";
 import { BannerSlide } from "@/types/homepage";
 import BannerCarousel from "@/module/home/templates/banner";
 import IconGridSection from "@/module/home/templates/icon-grid-section";
 import { podData, uspData } from "@/module/home/components/icon-with-text";
 import GalleryWall from "@/module/home/templates/gallery-wall";
 import Blog from "@/module/home/templates/blog";
+import { getRegion } from "@/lib/action/region";
+import Category from "@/module/home/templates/category";
+import TrendingNow from "@/module/home/templates/col-tending-now";
+import Collection from "@/module/home/templates/collection";
+import NewArrival from "@/module/home/templates/col-new-arrivals";
+import Testimonials from "@/module/home/templates/testimonials";
+import OnSale from "@/module/home/templates/col-on-sale";
 
 export default async function Page() {
   const countryCode = (await cookies()).get("__country_code")?.value || process.env.NEXT_PUBLIC_DEFAULT_REGION || "us"
-  const products = await listProductVariant();
+  const region = getRegion(countryCode);
+  if (!region) return null;
   return (
     <>
       <BannerCarousel slides={DEMO_SLIDES} />
       <IconGridSection items={uspData} />
-      <TempCart countryCode={countryCode} products={products} />
+      <Category />
+      <TrendingNow region_id={region.id} />
+      <Collection />
+      <NewArrival region_id={region.id} />
       <GalleryWall />
+      <Testimonials />
+      <OnSale region_id={region.id} />
       <Blog />
       <IconGridSection items={podData} />
     </>
   );
-}
-
-const listProductVariant = async () => {
-  const { products } = await sdk.store.product.list()
-  return products
 }
 
 // ─── Demo Data ────────────────────────────────────────────────────────────────

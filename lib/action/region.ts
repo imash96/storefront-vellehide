@@ -1,4 +1,4 @@
-import { regions } from "@lib/constant/regions";
+import { regions } from "@/lib/constant/regions";
 import medusaError from "../util/medusa-error";
 import type { StoreRegion } from "@medusajs/types";
 

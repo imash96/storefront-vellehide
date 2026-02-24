@@ -1,7 +1,7 @@
 "use client";
 
 import { startTransition, useActionState } from "react";
-import { addToCart } from "@lib/action/cart";
+import { addToCart } from "@/lib/action/cart";
 import { ShoppingCart } from "lucide-react";
 import Button from "@/ui/button";
 import Container from "@/module/common/create-section";

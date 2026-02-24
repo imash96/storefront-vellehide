@@ -1,7 +1,7 @@
 "use client"
 
 import { LoaderCircle, Trash } from "lucide-react";
-import { deleteLineItem, updateLineItem } from "@lib/action/cart";
+import { deleteLineItem, updateLineItem } from "@/lib/action/cart";
 import { useTransition } from "react";
 
 

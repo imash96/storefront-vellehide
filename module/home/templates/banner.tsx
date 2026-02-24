@@ -12,8 +12,6 @@ import { BannerSlide } from "@/types/homepage"
 
 type HeroBannerCarouselProps = {
     slides: BannerSlide[]
-    autoplay?: boolean
-    autoplayDelay?: number
 }
 
 // ─── Slide Card ───────────────────────────────────────────────────────────────
@@ -32,7 +30,7 @@ function SlideCard({ slide }: { slide: BannerSlide }) {
     }[slide.align ?? "left"]
 
     return (
-        <article className="relative w-full h-full overflow-hidden group select-none">
+        <article className="relative size-full overflow-hidden group select-none">
             {/* Image */}
             <Image
                 src={slide.image.src}
@@ -58,21 +56,21 @@ function SlideCard({ slide }: { slide: BannerSlide }) {
                 className={`absolute inset-0 z-10 flex flex-col justify-end gap-2 p-5 sm:p-6 md:p-7 lg:p-8 ${alignClass}`}
             >
                 {slide.subheading && (
-                    <p className="text-white/55 text-[10px] sm:text-[11px] font-medium tracking-[0.22em] uppercase">
+                    <p className="text-white/55 text-[10px] sm:text-xs font-medium tracking-[0.22em] uppercase">
                         {slide.subheading}
                     </p>
                 )}
 
-                <h2 className="font-serif text-white text-[1.65rem] sm:text-[1.85rem] md:text-[2rem] lg:text-[2.1rem] xl:text-[2.4rem] font-light leading-[1.12] tracking-tight max-w-[13ch]">
+                <h2 className="font-heading text-white text-[1.65rem] sm:text-[1.85rem] md:text-[2rem] lg:text-[2.1rem] xl:text-[2.4rem] font-light leading-[1.1] tracking-tight max-w-[14ch]">
                     {slide.heading}
                 </h2>
 
                 <Link
                     href={slide.cta.href}
-                    className={`mt-2 inline-flex items-center gap-1.5 bg-white text-black text-[10px] sm:text-xs font-semibold tracking-[0.15em] uppercase px-4 sm:px-5 py-2.5 sm:py-3 transition-all duration-200 hover:bg-stone-100 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 ${ctaSelfClass}`}
+                    className={`mt-2 inline-flex items-center gap-1.5 bg-white text-black text-[10px] sm:text-xs font-semibold tracking-[0.15em] uppercase px-4 sm:px-5 py-2.5 sm:py-3 transition-all duration-200 hover:bg-neutral-100 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 ${ctaSelfClass}`}
                 >
                     {slide.cta.label}
-                    <ChevronRight className="w-3 h-3" aria-hidden />
+                    <ChevronRight className="size-3" aria-hidden />
                 </Link>
             </div>
         </article>
@@ -92,12 +90,12 @@ function NavArrow({
         <button
             onClick={onClick}
             aria-label={direction === "prev" ? "Previous slide" : "Next slide"}
-            className={`lg:hidden absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/15 text-white transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-white ${direction === "prev" ? "left-2 sm:left-3" : "right-2 sm:right-3"}`}
+            className={`lg:hidden absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center size-9 sm:w-10 sm:h-10 bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/15 text-white transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-white ${direction === "prev" ? "left-2 sm:left-3" : "right-2 sm:right-3"}`}
         >
             {direction === "prev" ? (
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="size-4" />
             ) : (
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="size-4" />
             )}
         </button>
     )
@@ -109,7 +107,6 @@ export default function BannerCarousel({ slides }: HeroBannerCarouselProps) {
 
     const [emblaRef, emblaApi] = useEmblaCarousel(
         {
-            loop: true,
             align: "start",
             slidesToScroll: 1,
             breakpoints: {
@@ -134,35 +131,33 @@ export default function BannerCarousel({ slides }: HeroBannerCarouselProps) {
         <section
             aria-label="Hero Banners"
             aria-roledescription="carousel"
-            className="w-full"
+            className="relative w-full"
         >
-            <div className="relative">
-                {/* Embla viewport */}
-                <div
-                    ref={emblaRef}
-                    className="overflow-hidden"
-                    role="region"
-                    aria-label="Hero slides"
-                >
-                    <div className="flex touch-pan-y">
-                        {slides.map((slide, i) => (
-                            <div
-                                key={slide.id}
-                                role="group"
-                                aria-roledescription="slide"
-                                aria-label={`Slide ${i + 1} of ${slides.length}: ${slide.heading}`}
-                                className={`relative pl-1 shrink-0 w-[90%] md:w-[calc(50%-4px)] lg:w-[calc(33.333%-5.34px)] aspect-3/4 sm:aspect-4/5 md:aspect-3/4 lg:aspect-3/4 xl:aspect-9/11`}
-                            >
-                                <SlideCard slide={slide} />
-                            </div>
-                        ))}
-                    </div>
+            {/* Embla viewport */}
+            <div
+                ref={emblaRef}
+                className="overflow-hidden"
+                role="region"
+                aria-label="Hero slides"
+            >
+                <div className="flex gap-x-2 touch-pan-y">
+                    {slides.map((slide, i) => (
+                        <div
+                            key={slide.id}
+                            role="group"
+                            aria-roledescription="slide"
+                            aria-label={`Slide ${i + 1} of ${slides.length}: ${slide.heading}`}
+                            className={`relative shrink-0 w-[90%] md:w-[calc(50%-4px)] lg:w-[calc(33.333%-5.34px)] aspect-3/4 sm:aspect-4/5 md:aspect-3/4 lg:aspect-3/4 xl:aspect-9/11`}
+                        >
+                            <SlideCard slide={slide} />
+                        </div>
+                    ))}
                 </div>
-
-                {/* Prev / Next arrows (hidden on lg+) */}
-                <NavArrow direction="prev" onClick={scrollPrev} />
-                <NavArrow direction="next" onClick={scrollNext} />
             </div>
+
+            {/* Prev / Next arrows (hidden on lg+) */}
+            <NavArrow direction="prev" onClick={scrollPrev} />
+            <NavArrow direction="next" onClick={scrollNext} />
         </section>
     )
 }

@@ -1,7 +1,7 @@
 "use client"
 
 import { ShoppingBag } from "lucide-react"
-import { useDrawer } from "@lib/context/drawer-context";
+import { useDrawer } from "@/lib/context/drawer-context";
 import { span as Span } from "motion/react-client"
 
 // TODO: mix cartbutton with cart drawer

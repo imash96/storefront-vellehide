@@ -1,8 +1,8 @@
 "use client"
 
 import type { StoreCart } from "@medusajs/types"
-import { convertToLocale } from "@lib/util/money"
-import { useDrawer } from "@lib/context/drawer-context";
+import { convertToLocale } from "@/lib/util/money"
+import { useDrawer } from "@/lib/context/drawer-context";
 import Button from "@/ui/button";
 import { ArrowRight } from "lucide-react";
 import { div as Div } from "motion/react-client"

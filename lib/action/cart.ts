@@ -1,12 +1,12 @@
 "use server";
 
-import { sdk } from "@lib/sdk";
+import { sdk } from "@/lib/sdk";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { StoreCart, StoreInitializePaymentSession, StoreUpdateCart } from "@medusajs/types";
 import { getAuthHeaders, getCacheOptions, getCacheTag, getCartId, removeCartId, setCartId, setCountryCode, } from "./cookies";
 import { getRegion } from "./region";
-import medusaError from "@lib/util/medusa-error";
+import medusaError from "@/lib/util/medusa-error";
 
 
 /**

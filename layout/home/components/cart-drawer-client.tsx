@@ -1,7 +1,7 @@
 "use client"
 
 import { ShoppingBag, X } from "lucide-react"
-import { useDrawer } from "@lib/context/drawer-context";
+import { useDrawer } from "@/lib/context/drawer-context";
 import { Drawer } from "@/ui/drawer";
 import { div as Div } from "motion/react-client";
 

@@ -11,11 +11,15 @@ export default function IconGridSection({ items, className = '' }: IconGridSecti
             <ul role="list" className="grid grid-cols-2 md:grid-cols-4 gap-3 gap-y-6">
                 {items.map(({ name, Icon, description }) => {
                     return (
-                        <div key={name} className={`flex flex-col md:flex-row items-center gap-3 md:gap-4 py-7 px-4 sm:px-6`}>
+                        <div key={name} className={`flex flex-col md:flex-row items-center gap-3 md:gap-4 p-4`}>
                             <Icon className="w-14 lg:w-16 text-accent" aria-hidden />
-                            <div className="sm:flex flex-col justify-center align-middle space-y-1 sm:space-y-0 text-center sm:text-left ">
-                                <h3 className="text-base font-medium tracking-wider text-text-primary">{name}</h3>
-                                <p className="font-light text-xs text-text-secondary">{description}</p>
+                            <div className="flex flex-col items-center md:items-start gap-0.5 text-center md:text-left">
+                                <h3 className="text-sm font-semibold tracking-wide text-text-primary">
+                                    {name}
+                                </h3>
+                                <p className="text-xs font-light leading-snug text-text-secondary">
+                                    {description}
+                                </p>
                             </div>
                         </div>
                     )

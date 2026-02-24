@@ -7,7 +7,7 @@ import { IconProp } from "@/types/common";
 import RegionModal from "./region-modal";
 import type { Route } from "next";
 import Container from "@/module/common/create-section";
-import { footer } from "@lib/constant/footer";
+import { footer } from "@/lib/constant/footer";
 
 export default async function Footer() {
     const countryCode = (await cookies()).get('__country_code')?.value

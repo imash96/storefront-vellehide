@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation"
 import { House, Menu, Search, ShoppingBag, User } from "lucide-react"
-import { useDrawer } from "@lib/context/drawer-context"
+import { useDrawer } from "@/lib/context/drawer-context"
 import Link from "next/link"
 import type { Route } from "next"
 

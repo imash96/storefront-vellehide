@@ -1,8 +1,8 @@
 "use server"
 
-import { sdk } from "@lib/sdk"
+import { sdk } from "@/lib/sdk"
 import { getAuthHeaders, getCacheOptions, getCacheTag } from "./cookies"
-import medusaError from "@lib/util/medusa-error"
+import medusaError from "@/lib/util/medusa-error"
 import { SelectParams, StoreInitializePaymentSession } from "@medusajs/types"
 import { revalidateTag } from "next/cache"
 

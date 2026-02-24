@@ -5,11 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { product_categories } from "@lib/constant/category";
+import { product_categories } from "@/lib/constant/category";
 import { ProductCategory } from "@/types/common";
 import { AnimatePresence } from "motion/react";
 import { div as Div } from "motion/react-client";
-import { MEGA_MENU } from "@lib/constant/header";
+import { MEGA_MENU } from "@/lib/constant/header";
 
 type NavigationProps = {
     links: Array<{

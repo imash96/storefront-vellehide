@@ -7,7 +7,7 @@ export default function GalleryWall() {
         { src: "/images/marquee/t3.jpg", alt: "Image 3" },
         { src: "/images/marquee/t4.jpg", alt: "Image 4" },
         { src: "/images/marquee/t5.jpg", alt: "Image 5" },
-        { src: "/images/marquee/t6.jpg", alt: "Image 6" },
+        { src: "/images/marquee/t3.jpg", alt: "Image 6" },
         { src: "/images/marquee/t7.jpg", alt: "Image 7" },
         { src: "/images/marquee/t8.jpg", alt: "Image 8" },
     ]
@@ -24,7 +24,7 @@ export default function GalleryWall() {
     ]
 
     return (
-        <div className="mx-auto my-0 max-w-full py-6 md:py-10 lg:py-14 space-y-6">
+        <div className="overflow-hidden py-8 md:py-12 lg:py-16 max-w-full space-y-8">
             <ImageMarquee
                 images={tImages}
                 duration={35}

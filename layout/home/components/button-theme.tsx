@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "@lib/hook/use-theme";
+import { useTheme } from "@/lib/hook/use-theme";
 import { Lightbulb, LightbulbOff } from "lucide-react";
 
 type ThemeProviderProps = {

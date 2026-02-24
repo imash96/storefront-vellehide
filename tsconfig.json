@@ -18,7 +18,7 @@
       "@/css/*": [ "./css/*" ],
       "@/icon/*": [ "./icon/*" ],
       "@/layout/*": [ "./layout/*" ],
-      "@lib/*": [ "./lib/*" ],
+      "@/lib/*": [ "./lib/*" ],
       "@/module/*": [ "./module/*" ],
       "@/types/*": [ "./types/*" ],
       "@/ui/*": [ "./ui/*" ]

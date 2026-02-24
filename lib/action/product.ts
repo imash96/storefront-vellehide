@@ -1,103 +1,163 @@
-"use server"
+"use server";
 
-import type { FindParams, StoreProduct, StoreProductParams } from "@medusajs/types"
-import type { SortOptions } from "@/types/common"
-import { sortProducts } from "@lib/util/sort-products"
-import { sdk } from "@lib/sdk"
-import { getAuthHeaders, getCacheOptions } from "./cookies"
-import { getRegion, retrieveRegion } from "./region"
+import type {
+    FindParams,
+    StoreProduct,
+    StoreProductListParams,
+    StoreProductParams,
+    StoreRegion,
+} from "@medusajs/types";
+import type { SortOptions } from "@/types/common";
+import { sdk } from "../sdk";
+import { sortProducts } from "../util/sort-products";
+import { getAuthHeaders, getCacheOptions } from "./cookies";
+import { getRegion, retrieveRegion } from "./region";
 
-export async function listProducts({ pageParam = 1, queryParams, countryCode, regionId, }: ListProductsProps): Promise<ListProductsResp> {
-    if (!countryCode && !regionId) throw new Error("Country code or region ID is required");
 
-    const region = countryCode ? getRegion(countryCode) : retrieveRegion(regionId!);
+export const listProducts = async ({ pageParam = 1, queryParams, countryCode, regionId, }: ListProductsParam, cacheKey?: string,): Promise<ListProductsResp> => {
+    if (!countryCode && !regionId) {
+        throw new Error("Country code or region ID is required")
+    }
 
-    if (!region) return {
-        response: { products: [], count: 0 },
-        nextPage: null,
-    };
+    const limit = queryParams?.limit || 12
+    const _pageParam = Math.max(pageParam, 1)
+    const offset = _pageParam === 1 ? 0 : (_pageParam - 1) * limit
 
-    const limit = queryParams?.limit ?? 12;
-    const offset = (Math.max(pageParam, 1) - 1) * limit;
+    let region: StoreRegion | undefined | null
 
-    try {
-        const headers = await getAuthHeaders();
-        const nextOptions = await getCacheOptions("products");
+    if (countryCode) {
+        region = getRegion(countryCode)
+    } else {
+        region = retrieveRegion(regionId!)
+    }
 
-        const { products, count, } = await sdk.store.product.list({
-            limit, offset, region_id: region.id,
-            fields: "*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags",
-            ...queryParams,
-        }, {
-            ...headers,
-            next: nextOptions,
+    if (!region) {
+        return {
+            response: { products: [], count: 0 },
+            nextPage: null,
+        }
+    }
+
+    const headers = {
+        ...(await getAuthHeaders()),
+    }
+
+    const next = cacheKey ? { ...(await getCacheOptions(cacheKey)) } : { ...(await getCacheOptions("products")) }
+
+    return sdk.client.fetch<{ products: StoreProduct[]; count: number }>(
+        `/store/products`,
+        {
+            method: "GET",
+            query: {
+                limit,
+                offset,
+                region_id: region?.id,
+                fields:
+                    "*variants.calculated_price,+variants.inventory_quantity,*variants.images,+metadata,+tags,",
+                ...queryParams,
+            },
+            headers,
+            next,
             cache: "force-cache",
-        })
-
-        const hasMore = count > offset + limit;
+        }
+    ).then(({ products, count }) => {
+        const nextPage = count > offset + limit ? pageParam + 1 : null
 
         return {
-            response: { products, count },
-            nextPage: hasMore ? pageParam + 1 : null,
+            response: {
+                products,
+                count,
+            },
+            nextPage: nextPage,
             queryParams,
-        };
-    } catch (err) {
-        console.error("listProducts error:", err);
-        throw err;
-    }
+        }
+    })
 }
 
+/**
+ * This will fetch 100 products to the Next.js cache and sort them based on the sortBy parameter.
+ * It will then return the paginated products based on the page and limit parameters.
+ */
+export const listProductsWithSort = async ({
+    page = 0,
+    queryParams,
+    sortBy = "created_at",
+    countryCode,
+}: ListProductsWithSortParam): Promise<ListProductsWithSortResp> => {
+    const limit = queryParams?.limit || 12
 
-export async function listProductsWithSort({ page = 1, queryParams, sortBy = "created_at", countryCode }: ListProductsWithSortProps): Promise<ListProductsWithSortResp> {
-    const limit = queryParams?.limit ?? 12;
-
-    const { response: { products, count }, nextPage } = await listProducts({
-        pageParam: 1,
+    const {
+        response: { products, count },
+    } = await listProducts({
+        pageParam: 0,
         queryParams: {
             ...queryParams,
             limit: 100,
-            fields: "*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags",
         },
         countryCode,
-    });
+    })
 
-    const sortedProducts = sortProducts(products, sortBy);
+    const sortedProducts = sortProducts(products, sortBy)
 
-    const offset = (page - 1) * limit;
-    const paginatedProducts = sortedProducts.slice(offset, offset + limit);
-    const hasMore = count > offset + limit;
+    const pageParam = (page - 1) * limit
+
+    const nextPage = count > pageParam + limit ? pageParam + limit : null
+
+    const paginatedProducts = sortedProducts.slice(pageParam, pageParam + limit)
 
     return {
-        response: { products: paginatedProducts, count },
+        response: {
+            products: paginatedProducts,
+            count,
+        },
         nextPage,
-        hasMore,
         queryParams,
-    };
+    }
 }
 
-export type ListProductsProps = {
-    pageParam?: number;
-    queryParams?: FindParams & StoreProductParams;
-    countryCode?: string;
-    regionId?: string;
+export async function fetchProductsByCollection({ regionId, collection_id, handle }: FetchProductsByCollectionParam) {
+    const { response } = await listProducts(
+        {
+            regionId,
+            queryParams: {
+                collection_id,
+                limit: 6,
+                fields: "id,handle,title,*images,*variants.calculated_price",
+            },
+        },
+        `${handle}-${regionId}`,
+    );
+    return response.products;
+}
+
+type FetchProductsByCollectionParam = {
+    regionId: string;
+    collection_id: string;
+    handle?: string;
+}
+
+type ListProductsParam = {
+    pageParam?: number
+    queryParams?: FindParams & StoreProductListParams
+    countryCode?: string
+    regionId?: string
 }
 
 type ListProductsResp = {
-    response: { products: StoreProduct[]; count: number };
-    nextPage: number | null;
-    queryParams?: FindParams & StoreProductParams;
+    response: { products: StoreProduct[]; count: number }
+    nextPage: number | null
+    queryParams?: FindParams & StoreProductListParams
 }
 
-type ListProductsWithSortProps = {
-    page?: number;
-    queryParams?: FindParams & StoreProductParams;
-    sortBy?: SortOptions;
-    countryCode: string;
+type ListProductsWithSortParam = {
+    page?: number
+    queryParams?: FindParams & StoreProductParams
+    sortBy?: SortOptions
+    countryCode: string
 }
 
 type ListProductsWithSortResp = {
-    response: { products: StoreProduct[]; count: number };
-    nextPage: number | null;
-    hasMore: boolean;
-    queryParams?: FindParams & StoreProductParams;
+    response: { products: StoreProduct[]; count: number }
+    nextPage: number | null
+    queryParams?: FindParams & StoreProductParams
 }

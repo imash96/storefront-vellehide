@@ -1,36 +1,35 @@
 import Image from "next/image"
 
 export default function Marquee({ images, direction = "forward", duration = 20, className = "" }: MarqueeProps) {
-
+    const doubled = [...images, ...images]
     return (
-        <div className={`overflow-hidden no-scrollbar whitespace-nowrap ${className ?? ""}`}>
-            <div className="inline-flex animate-marquee" style={{
-                animationDuration: `${duration}s`,
-                animationDirection: direction === "forward" ? "normal" : "reverse",
-            }}>
-                {images.map((img, index) => (
-                    <div key={index} className="shrink-0 mx-2 relative" style={{ width: "240px", height: "260px" }}>
+        <div className={`overflow-hidden no-scrollbar whitespace-nowrap ${className ?? ""}`} aria-hidden="true">
+            <div
+                className="flex animate-marquee"
+                style={{
+                    animationDuration: `${duration}s`,
+                    animationDirection: direction === "forward" ? "normal" : "reverse",
+                    animationTimingFunction: "linear",
+                    animationIterationCount: "infinite",
+                    willChange: "transform",
+                }}
+            >
+                {doubled.map((img, index) => (
+                    <div
+                        key={index}
+                        className="shrink-0 mx-1.5 overflow-hidden"
+                        style={{ width: "220px", height: "272px" }}
+                    >
                         <Image
                             src={img.src || "/svg/placeholder.svg"}
-                            alt={`Marquee image ${(index % images.length) + 1}`}
-                            width={240}
-                            height={260}
-                            className="shadow-md object-cover object-center hover:scale-105 hover:rotate-2 transition-transform ease-in-out duration-300 h-full w-full"
-                            sizes="(max-width: 640px) 55vw, (max-width: 768px) 30vw, 20vw"
-                            priority={index < 4} // Prioritize first few images
-                        />
-                    </div>
-                ))}
-                {images.map((img, index) => (
-                    <div key={index} className="shrink-0 mx-2 relative" style={{ width: "240px", height: "260px" }} aria-hidden="true">
-                        <Image
-                            src={img.src || "/svg/placeholder.svg"}
-                            alt={`Marquee image ${(index % images.length) + 1}`}
-                            width={240}
-                            height={260}
-                            className="shadow-md object-cover object-center hover:scale-105 hover:rotate-2 transition-transform ease-in-out duration-300 h-full w-full"
-                            sizes="(max-width: 768px) 70vw, 30vw"
-                            priority={index < 4} // Prioritize first few images
+                            alt=""   /* decorative images need empty alt */
+                            width={220}
+                            height={272}
+                            className="w-full h-full object-cover object-center
+                                       transition-transform duration-500 ease-out
+                                       hover:scale-[1.04]"
+                            sizes="220px"
+                            priority={index < 5}
                         />
                     </div>
                 ))}

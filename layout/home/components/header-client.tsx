@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import ThemeButton from "./button-theme"
 import CartDrawerButton from "./button-cart-drawer"
-import { useDrawer } from "@lib/context/drawer-context"
+import { useDrawer } from "@/lib/context/drawer-context"
 import MobileDrawer from "../templates/mobile-drawer"
 
 const HOME_REGEX = /^\/?$/

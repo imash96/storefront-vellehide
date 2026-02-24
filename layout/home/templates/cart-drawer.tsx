@@ -3,9 +3,9 @@ import CartFooter from "../components/cart-footer"
 import { li as Li } from "motion/react-client"
 import { QuntityButton, RemoveButton } from "../components/cart-buttons";
 import Image from "next/image";
-import { retrieveCart } from "@lib/action/cart"
+import { retrieveCart } from "@/lib/action/cart"
 import Link from "next/link";
-import { convertToLocale } from "@lib/util/money";
+import { convertToLocale } from "@/lib/util/money";
 import EmptyCart from "@/ui/empty-cart";
 import { Minus, Plus, Trash } from "lucide-react";
 
