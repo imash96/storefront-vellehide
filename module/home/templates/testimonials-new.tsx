@@ -32,7 +32,7 @@ export default function Testimonials() {
 
                 {/* Desktop: 3-col grid */}
                 <div className="hidden md:grid md:grid-cols-3 gap-4 lg:gap-5">
-                    {testimonials.slice(0, 3).map((t, i) => (
+                    {testimonials.map((t, i) => (
                         <TestimonialCard key={t.id} testimonial={t} featured={i === 1} />
                     ))}
                 </div>
@@ -88,14 +88,6 @@ function TestimonialCard({
                         />
                     </div>
                 )}
-                <div>
-                    <p className="text-[13px] font-semibold text-text-primary leading-tight">{testimonial.name}</p>
-                    {testimonial.product && (
-                        <p className="text-[11px] text-text-tertiary mt-0.5 truncate max-w-[160px]">
-                            {testimonial.product}
-                        </p>
-                    )}
-                </div>
 
                 {/* Verified badge */}
                 <div className="ml-auto shrink-0">

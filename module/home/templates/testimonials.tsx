@@ -9,6 +9,7 @@ import { div as Div } from "motion/react-client";
 import RatingSystem from "@/ui/rating-system";
 import { testimonials } from "@/lib/constant/testimonials";
 import Autoplay from "embla-carousel-autoplay";
+import SectionHeader from "../components/section-header";
 
 export default function Testimonials() {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ stopOnInteraction: false, delay: 3000 })]);
@@ -38,10 +39,8 @@ export default function Testimonials() {
     }, [emblaApi, onSelect]);
 
     return (
-        <div className="max-w-6xl mx-auto px-4 md:px-12 lg:px-20 pt-12 lg:pt-16">
-            <h2 className="text-center text-2xl lg:text-3xl font-semibold tracking-tight text-foreground mb-8">
-                Our Customer Feedbacks
-            </h2>
+        <SectionHeader title="Worn &amp; Loved" desc="Real reviews from real leather enthusiasts." sectionName="Customer testimonials" eyebrow="Reviews" align="center">
+
 
             <div className="relative">
                 <div className="overflow-hidden no-scrollbar" ref={emblaRef}>
@@ -99,6 +98,6 @@ export default function Testimonials() {
                     </div>
                 </Div>
             </AnimatePresence>
-        </div>
+        </SectionHeader>
     );
 }
