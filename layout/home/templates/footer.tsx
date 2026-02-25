@@ -6,7 +6,7 @@ import Image from "next/image";
 import { IconProp } from "@/types/common";
 import RegionModal from "./region-modal";
 import type { Route } from "next";
-import Container from "@/module/common/create-section";
+import Container from "@/ui/container";
 import { footer } from "@/lib/constant/footer";
 
 export default async function Footer() {

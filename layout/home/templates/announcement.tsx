@@ -1,28 +1,27 @@
 "use client"
 
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Container from '@/module/common/create-section';
+import Container from '@/ui/container';
 import type { AnnouncementItem } from '@/types/homepage';
 import Link from "next/link";
 
 export default function AnnouncementBar({ items }: { items: AnnouncementItem[] }) {
-    const autoplay = useRef(Autoplay({ stopOnInteraction: false, delay: 4000 }))
 
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay.current])
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 4000 })])
 
     const scrollPrev = useCallback(() => {
         if (!emblaApi) return
-        emblaApi.scrollPrev()
-        autoplay.current.reset()
+        emblaApi.goToPrev()
+        emblaApi.plugins().autoplay?.reset()
     }, [emblaApi])
 
     const scrollNext = useCallback(() => {
         if (!emblaApi) return
-        emblaApi.scrollNext()
-        autoplay.current.reset()
+        emblaApi.goToNext()
+        emblaApi.plugins().autoplay?.reset()
     }, [emblaApi])
 
     if (!items?.length) return null
@@ -36,45 +35,43 @@ export default function AnnouncementBar({ items }: { items: AnnouncementItem[] }
             aria-live="polite"
             role="region"
         >
-            <Container width={7}>
-                <div className="flex items-center justify-between h-9 gap-2">
-                    <AnnouncementButton
-                        onClick={scrollPrev}
-                        direction="prev"
-                        label="Previous announcement"
-                    />
-                    <div className="overflow-hidden flex-1" ref={emblaRef}>
-                        <div className="flex">
-                            {items.map((item, index) => {
-                                const baseClass =
-                                    "flex-[0_0_100%] flex items-center justify-center text-center text-xs text-primary-foreground font-body tracking-wide uppercase"
+            <Container className="flex items-center justify-between h-9 gap-2">
+                <AnnouncementButton
+                    onClick={scrollPrev}
+                    direction="prev"
+                    label="Previous announcement"
+                />
+                <div className="overflow-hidden flex-1" ref={emblaRef}>
+                    <div className="flex">
+                        {items.map((item, index) => {
+                            const baseClass =
+                                "flex-[0_0_100%] flex items-center justify-center text-center text-xs text-primary-foreground font-body tracking-wide uppercase"
 
-                                if (item.link) {
-                                    return (
-                                        <Link
-                                            key={index}
-                                            href={item.link}
-                                            className={`${baseClass} hover:opacity-90 transition-opacity`}
-                                        >
-                                            {item.message}
-                                        </Link>
-                                    )
-                                }
-
+                            if (item.link) {
                                 return (
-                                    <span key={index} className={baseClass}>
+                                    <Link
+                                        key={index}
+                                        href={item.link}
+                                        className={`${baseClass} hover:opacity-90 transition-opacity`}
+                                    >
                                         {item.message}
-                                    </span>
+                                    </Link>
                                 )
-                            })}
-                        </div>
+                            }
+
+                            return (
+                                <span key={index} className={baseClass}>
+                                    {item.message}
+                                </span>
+                            )
+                        })}
                     </div>
-                    <AnnouncementButton
-                        onClick={scrollNext}
-                        direction="next"
-                        label="Next announcement"
-                    />
                 </div>
+                <AnnouncementButton
+                    onClick={scrollNext}
+                    direction="next"
+                    label="Next announcement"
+                />
             </Container >
         </div >
     )

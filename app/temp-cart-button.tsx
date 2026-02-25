@@ -4,7 +4,7 @@ import { startTransition, useActionState } from "react";
 import { addToCart } from "@/lib/action/cart";
 import { ShoppingCart } from "lucide-react";
 import Button from "@/ui/button";
-import Container from "@/module/common/create-section";
+import Container from "@/ui/container";
 import { StoreProduct } from "@medusajs/types";
 
 export default function TempCart({ countryCode, products }: { countryCode: string, products: StoreProduct[] }) {
