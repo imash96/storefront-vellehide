@@ -1,3 +1,4 @@
+import Container from "@/ui/container"
 import React from "react"
 
 type SectionHeaderProps = {
@@ -29,7 +30,7 @@ export default function SectionHeader({
     const isCenter = align === "center"
 
     return (
-        <section aria-label={sectionName} className="container-custom py-12 md:py-16 lg:py-20">
+        <Container as="section" aria-label={sectionName} className="py-12 md:py-16 lg:py-20">
             {/* ── Header row ── */}
             <div
                 className={`mb-10 md:mb-12 flex flex-col gap-4 ${isCenter ? "items-center text-center" : "sm:flex-row sm:items-end sm:justify-between gap-5"}`}
@@ -67,6 +68,6 @@ export default function SectionHeader({
 
             {/* ── Section content ── */}
             {children}
-        </section>
+        </Container>
     )
 }

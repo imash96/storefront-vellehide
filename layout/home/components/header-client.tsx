@@ -9,6 +9,7 @@ import ThemeButton from "./button-theme"
 import CartDrawerButton from "./button-cart-drawer"
 import { useDrawer } from "@/lib/context/drawer-context"
 import MobileDrawer from "../templates/mobile-drawer"
+import Container from "@/ui/container"
 
 const HOME_REGEX = /^\/?$/
 
@@ -42,7 +43,7 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
         <>
             {/* Main Header */}
             <header aria-label="Main Navigation" className={`sticky top-0 z-50 transition-all border-border duration-300 ease-out ${shouldSolid ? "bg-surface/98 backdrop-blur-xl text-foreground border-b shadow-md" : "bg-transparent"}`}>
-                <div className="container-custom relative flex items-center justify-between h-16 lg:h-20">
+                <Container className="relative flex items-center justify-between h-16 lg:h-20">
                     {/* Logo */}
                     <Link
                         href="/"
@@ -93,7 +94,7 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                             <Menu className="w-6 h-6" strokeWidth={1.5} />
                         </button>
                     </div>
-                </div>
+                </Container>
                 {/* Progress Bar on Scroll */}
                 {isScrolled && (
                     <div

@@ -1,12 +1,13 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 import Image from "next/image"
 import { Quote } from "lucide-react"
 import RatingSystem from "@/ui/rating-system"
 import { testimonials } from "@/lib/constant/testimonials"
+import Container from "@/ui/container"
 
 export default function Testimonials() {
     return (
@@ -14,7 +15,7 @@ export default function Testimonials() {
             aria-label="Customer testimonials"
             className="w-full bg-background-secondary border-y border-border-subtle"
         >
-            <div className="container-custom py-12 md:py-16 lg:py-20">
+            <Container className="py-12 md:py-16 lg:py-20">
                 {/* Header */}
                 <div className="text-center mb-10 md:mb-14 space-y-2">
                     <p className="inline-flex items-center gap-2.5 text-[9px] font-semibold tracking-[0.30em] uppercase text-accent">
@@ -39,7 +40,7 @@ export default function Testimonials() {
 
                 {/* Mobile: embla carousel */}
                 <MobileTestimonialCarousel />
-            </div>
+            </Container>
         </section>
     )
 }
@@ -106,15 +107,12 @@ function MobileTestimonialCarousel() {
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [emblaRef, emblaApi] = useEmblaCarousel(
         { loop: true },
-        [Autoplay({ stopOnInteraction: true, delay: 3500 })]
+        [Autoplay({ delay: 3500 })]
     )
-
-    const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
-    const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
 
     useEffect(() => {
         if (!emblaApi) return
-        emblaApi.on("select", () => setSelectedIndex(emblaApi.selectedScrollSnap()))
+        emblaApi.on("select", () => setSelectedIndex(emblaApi.selectedSnap()))
     }, [emblaApi])
 
     return (
@@ -133,7 +131,7 @@ function MobileTestimonialCarousel() {
                 {testimonials.slice(0, 5).map((_, i) => (
                     <button
                         key={i}
-                        onClick={() => emblaApi?.scrollTo(i)}
+                        onClick={() => emblaApi?.goTo(i)}
                         aria-label={`Go to review ${i + 1}`}
                         className={`rounded-full transition-all duration-300 ${i === selectedIndex ? "w-5 h-1.5 bg-primary" : "w-1.5 h-1.5 bg-border-strong"}`}
                     />

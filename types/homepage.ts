@@ -44,7 +44,7 @@ export type BannerSlide = {
     heading: string
     subheading?: string
     cta: { label: string; href: string }
-    align?: "left" | "center" | "right"
+    align: "left" | "center" | "right"
 }
 
 export interface HeroSlide {

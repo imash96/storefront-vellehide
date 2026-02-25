@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { BannerSlide } from "@/types/homepage";
 import BannerCarousel from "@/module/home/templates/banner";
-import IconGridSection from "@/module/home/templates/icon-grid-section";
+import IconGridSection from "@/module/home/templates/icon-grid";
 import { podData, uspData } from "@/module/home/components/icon-with-text";
 import GalleryWall from "@/module/home/templates/gallery-wall";
 import Blog from "@/module/home/templates/blog";

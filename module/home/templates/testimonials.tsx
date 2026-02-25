@@ -12,23 +12,23 @@ import Autoplay from "embla-carousel-autoplay";
 import SectionHeader from "../components/section-header";
 
 export default function Testimonials() {
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ stopOnInteraction: false, delay: 3000 })]);
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 3000 })]);
     const [selectedIndex, setSelectedIndex] = useState(0);
 
     const scrollPrev = useCallback(() => {
         if (!emblaApi) return
-        emblaApi.scrollPrev();
+        emblaApi.goToPrev();
         emblaApi.plugins().autoplay.reset()
     }, [emblaApi]);
     const scrollNext = useCallback(() => {
         if (!emblaApi) return
-        emblaApi.scrollNext();
+        emblaApi.goToNext();
         emblaApi.plugins().autoplay.reset()
     }, [emblaApi]);
 
     const onSelect = useCallback(() => {
         if (!emblaApi) return;
-        setSelectedIndex(emblaApi.selectedScrollSnap());
+        setSelectedIndex(emblaApi.selectedSnap());
     }, [emblaApi]);
 
     useEffect(() => {

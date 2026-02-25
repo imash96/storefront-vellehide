@@ -20,6 +20,7 @@ import ExtraTab from './components/extra';
 import DrawerTab from './components/drawer';
 import PaginationTab from './components/pagination';
 import CustomTab from './components/custom';
+import Container from '@/ui/container';
 
 export default function InteractiveTestPage() {
     const [activeTab, setActiveTab] = useState<Tabs>('colors');
@@ -30,7 +31,7 @@ export default function InteractiveTestPage() {
         <main className="bg-background min-h-screen">
             {/* Sticky Navigation */}
             <nav className="sticky top-0 z-50 bg-surface/95 backdrop-blur-sm border-b border-border shadow-sm">
-                <div className="container-custom">
+                <Container>
                     <div className="flex items-center justify-between h-14 sm:h-16">
                         {/* Mobile Menu Button */}
                         <button
@@ -85,9 +86,9 @@ export default function InteractiveTestPage() {
                             <TabButton activeTab={activeTab} currentTab='custom' onClick={() => { setActiveTab('custom'); setMobileMenuOpen(false); }} name='Custom' />
                         </div>
                     )}
-                </div>
+                </Container>
             </nav>
-            <section className="container-custom py-8 sm:py-12 md:py-16 space-y-12 sm:space-y-14 md:space-y-16">
+            <Container as='section' className="py-8 sm:py-12 md:py-16 space-y-12 sm:space-y-14 md:space-y-16">
                 {/* Header */}
                 <header className="text-center space-y-3 sm:space-y-4">
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary px-4">
@@ -127,7 +128,7 @@ export default function InteractiveTestPage() {
 
                 {/* Drawer Tab */}
                 {activeTab === 'custom' && (<CustomTab />)}
-            </section>
+            </Container>
         </main>
     )
 
