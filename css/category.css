@@ -1,0 +1,262 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   CATEGORY SECTION STYLES
+   ────────────────────────────────────────────────────────────────────────────
+   High-conversion category grid with responsive asymmetric layout
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Base Card Styles ────────────────────────────────────────────────────── */
+.category-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.875rem;
+    transition: all 500ms cubic-bezier(0.23, 1, 0.320, 1);
+    background-color: var(--surface);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.category-card:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Image Container ─────────────────────────────────────────────────────── */
+.category-card-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 700ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.category-card:hover .category-card-image {
+    transform: scale(1.05);
+}
+
+/* ── Overlay Layer ───────────────────────────────────────────────────────── */
+.category-card-overlay {
+    position: absolute;
+    inset: 0;
+    transition: all 500ms ease;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+.category-card:hover .category-card-overlay {
+    opacity: 1.1;
+}
+
+/* ── Content Container ───────────────────────────────────────────────────── */
+.category-card-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    transition: all 400ms ease;
+}
+
+@media (min-width: 768px) {
+    .category-card-content {
+        padding: 1.25rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .category-card-content {
+        padding: 1.5rem;
+    }
+}
+
+/* ── Badge Styling ───────────────────────────────────────────────────────── */
+.category-badge {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 9999px;
+    transition: all 300ms ease;
+}
+
+.category-card:hover .category-badge {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── Corner Accent ───────────────────────────────────────────────────────── */
+.category-corner-accent {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0);
+    border-right: 1px solid rgba(255, 255, 255, 0);
+    border-radius: 0.125rem;
+    transition: all 500ms ease;
+}
+
+.category-card:hover .category-corner-accent {
+    border-top-color: rgba(255, 255, 255, 0.4);
+    border-right-color: rgba(255, 255, 255, 0.4);
+    width: 2rem;
+    height: 2rem;
+}
+
+/* ── Title Styling ───────────────────────────────────────────────────────── */
+.category-title {
+    font-family: var(--font-family-heading);
+    font-weight: 600;
+    color: white;
+    line-height: 1.2;
+    transition: color 300ms ease;
+}
+
+@media (max-width: 768px) {
+    .category-title {
+        font-size: 1.125rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .category-title {
+        font-size: 1.25rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .category-title {
+        font-size: 1.5rem;
+    }
+}
+
+.category-card:hover .category-title {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* ── Underline Animation ─────────────────────────────────────────────────── */
+.category-title-underline {
+    width: 0;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 9999px;
+    margin-top: 0.5rem;
+    transition: width 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.category-card:hover .category-title-underline {
+    width: 3rem;
+}
+
+/* ── CTA Button Styling ──────────────────────────────────────────────────── */
+.category-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    background-color: white;
+    color: black;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: fit-content;
+}
+
+.category-cta-button:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    gap: 0.75rem;
+    padding-right: 1.25rem;
+}
+
+.category-cta-button:active {
+    transform: scale(0.95);
+}
+
+/* ── Arrow Icon Animation ────────────────────────────────────────────────── */
+.category-cta-arrow {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 300ms ease;
+}
+
+.category-card:hover .category-cta-arrow {
+    transform: translateX(0.125rem);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── 
+   RESPONSIVE GRID LAYOUTS
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Desktop: Asymmetric Magazine Layout ─────────────────────────────────── */
+@media (min-width: 1024px) {
+    .category-grid-desktop {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        height: 600px;
+    }
+
+    .category-hero-column {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .category-hero-column > .category-card {
+        flex: 1;
+    }
+
+    .category-compact-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+/* ── Tablet: 3-Column Grid ──────────────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .category-grid-tablet {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+}
+
+/* ── Mobile: 2-Column Grid ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .category-grid-mobile {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── 
+   ACCESSIBILITY & MOTION
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+    .category-card,
+    .category-card-image,
+    .category-card-overlay,
+    .category-card-content,
+    .category-badge,
+    .category-corner-accent,
+    .category-title,
+    .category-title-underline,
+    .category-cta-button,
+    .category-cta-arrow {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Focus visible for keyboard navigation */
+.category-card:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
