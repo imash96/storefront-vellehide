@@ -5,4 +5,10 @@ export const collecionToShow = [
   "Celebrity Jackets",
   "Best Seller",
   "Men's Wallets",
+  "Workwear & Office Attire",
+  "The Urban Explorer",
+  "All-Weather Warriors",
+  "Timeless Trench Coats",
+  "The Suede Selection",
+  "New Arrivals",
 ];

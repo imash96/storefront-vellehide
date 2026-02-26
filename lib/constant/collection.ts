@@ -176,17 +176,6 @@ export const product_collections = [
         }
     },
     {
-        "id": "pcol_01HWF7J844GZ3PR4DTHGNA1R0N",
-        "handle": "travel-essentials",
-        "title": "Travel Essentials",
-        "metadata": {
-            "thumbnail": "/images/col_thumb/col_travelessentials.webp",
-            "alt": "A collection of leather duffel bags, backpacks, and travel accessories",
-            "description": "Travel in style with our collection of durable and fashionable leather travel essentials. Discover spacious duffel bags, comfortable backpacks, and accessories built for the journey.",
-            "is_active": true
-        }
-    },
-    {
         "id": "pcol_01HWF8A1B2C3D4E5F6G7H8J9K0",
         "handle": "the-bikers-choice",
         "title": "The Biker's Choice",
@@ -359,17 +348,6 @@ export const product_collections = [
             "thumbnail": "/images/col_thumb/col_gifts.webp",
             "alt": "A curated collection of leather apparel perfect for gifting",
             "description": "Find the perfect timeless gift for any occasion. Our leather gift guide includes a curated selection of wallets, bags, belts, and accessories that are sure to impress.",
-            "is_active": true
-        }
-    },
-    {
-        "id": "pcol_01K7CJDPK4FWE3JYQ1R7BGYF4V",
-        "handle": "workwear-office-attire",
-        "title": "Workwear & Office Attire",
-        "metadata": {
-            "thumbnail": "/images/col_thumb/col_workwear.webp",
-            "alt": "Professional leather briefcases, blazers, and shoes",
-            "description": "Elevate your professional style with our leather workwear collection. Shop for sophisticated leather blazers, briefcases, portfolios, and dress shoes for a polished office look.",
             "is_active": true
         }
     },

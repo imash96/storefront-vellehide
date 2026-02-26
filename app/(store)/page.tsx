@@ -4,14 +4,13 @@ import BannerCarousel from "@/module/home/templates/banner";
 import IconGridSection from "@/module/home/templates/icon-grid";
 import { podData, uspData } from "@/module/home/components/icon-with-text";
 import GalleryWall from "@/module/home/templates/gallery-wall";
+import GalleryWallNew from "@/module/home/templates/gallery-wall-new";
 import Blog from "@/module/home/templates/blog";
 import { getRegion } from "@/lib/action/region";
 import Category from "@/module/home/templates/category";
-import TrendingNow from "@/module/home/templates/col-tending-now";
 import Collection from "@/module/home/templates/collection";
-import NewArrival from "@/module/home/templates/col-new-arrivals";
 import Testimonials from "@/module/home/templates/testimonials";
-import OnSale from "@/module/home/templates/col-on-sale";
+import { NewArrival, OnSale, TrendingNow } from "@/module/home/templates/list-collection";
 
 export default async function Page() {
   const countryCode = (await cookies()).get("__country_code")?.value || process.env.NEXT_PUBLIC_DEFAULT_REGION || "us"
@@ -26,6 +25,7 @@ export default async function Page() {
       <Collection />
       <NewArrival region_id={region.id} />
       <GalleryWall />
+      <GalleryWallNew />
       <Testimonials />
       <OnSale region_id={region.id} />
       <Blog />

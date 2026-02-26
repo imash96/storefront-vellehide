@@ -82,11 +82,7 @@ export default function RegionModal({ countryCode }: RegionModalProps) {
                             transition={{ delay: 0.1 }}
                             className="flex items-center gap-3"
                         >
-                            <div className="
-                                p-3 rounded-full
-                                bg-primary/10
-                                text-primary
-                            ">
+                            <div className="p-3 rounded-full bg-primary/10 text-primary">
                                 <Globe className="w-6 h-6" strokeWidth={1.5} />
                             </div>
                             <div>

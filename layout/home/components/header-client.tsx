@@ -1,7 +1,7 @@
 "use client"
 
 import Logo from "@/icon/logo"
-import { Search, User, Menu } from "lucide-react"
+import { User, Menu } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -10,6 +10,7 @@ import CartDrawerButton from "./button-cart-drawer"
 import { useDrawer } from "@/lib/context/drawer-context"
 import MobileDrawer from "../templates/mobile-drawer"
 import Container from "@/ui/container"
+import { SearchModal } from "../templates/search-modal"
 
 const HOME_REGEX = /^\/?$/
 
@@ -57,12 +58,7 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                     {/* Right Actions */}
                     <div className="flex items-center gap-2 lg:gap-4">
                         {/* Search Button */}
-                        <button
-                            className="p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
-                            aria-label="Search"
-                        >
-                            <Search className="w-5 h-5" strokeWidth={1.5} />
-                        </button>
+                        <SearchModal />
 
                         {/* Theme Toggle */}
                         <ThemeButton
@@ -76,7 +72,7 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                             className="hidden md:flex p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
                             aria-label="Account"
                         >
-                            <User className="w-5 h-5" strokeWidth={1.5} />
+                            <User className="w-5 h-5" strokeWidth={1.5} aria-hidden/>
                         </Link>
 
                         {/* Cart Button */}
@@ -91,7 +87,7 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                             aria-label="Open menu"
                             aria-expanded={isMobileDrawerOpen}
                         >
-                            <Menu className="w-6 h-6" strokeWidth={1.5} />
+                            <Menu className="w-6 h-6" strokeWidth={1.5} aria-hidden/>
                         </button>
                     </div>
                 </Container>
