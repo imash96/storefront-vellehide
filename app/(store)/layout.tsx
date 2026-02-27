@@ -2,21 +2,20 @@ import type { Metadata } from "next";
 import Announcement from "@/layout/home/templates/announcement";
 import { announcements } from "@/lib/constant/announcement";
 import Header from "@/layout/home/templates/header";
-import { DrawerProvider } from "@/lib/context/drawer-context";
 import CartDrawer from "@/layout/home/templates/cart-drawer";
 import Footer from "@/layout/home/templates/footer";
 import BottomTabs from "@/layout/home/templates/bottom-tab";
 
 export default function StoreLayout({ children }: LayoutProps<"/">) {
     return (
-        <DrawerProvider>
+        <>
             <Announcement items={announcements} />
             <Header />
             <CartDrawer />
             {children}
             <BottomTabs />
             <Footer />
-        </DrawerProvider>
+        </>
     );
 }
 

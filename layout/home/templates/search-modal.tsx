@@ -1,12 +1,7 @@
 "use client"
 
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/ui/modal"
+import { useSearchModal } from "@/lib/store/useDrawerStore"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/ui/modal"
 import { ArrowRight, Clock, Search, TrendingUp, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -16,23 +11,23 @@ const LISTBOX_ID = "search-results-listbox"
 const MIN_QUERY_LENGTH = 2
 
 export function SearchModal() {
-    const [open, setOpen] = useState(false)
     const [query, setQuery] = useState("")
     const inputRef = useRef<HTMLInputElement>(null)
+    const { isOpen, toggle, close } = useSearchModal()
 
     /* ─────────────────────────────────────────────
        Autofocus when opened
     ───────────────────────────────────────────── */
     useEffect(() => {
-        if (open) {
+        if (isOpen) {
             requestAnimationFrame(() => {
                 inputRef.current?.focus()
             })
         }
-    }, [open])
+    }, [isOpen])
 
-    const close = () => {
-        setOpen(false)
+    const closeModal = () => {
+        close()
         setQuery("")
     }
 
@@ -52,7 +47,7 @@ export function SearchModal() {
     const handleSubmit = () => {
         if (query.trim().length > 1) {
             // Replace with router push to search page
-            close()
+            closeModal()
         }
     }
 
@@ -62,12 +57,12 @@ export function SearchModal() {
     const hasResults = filteredResults.length > 0
 
     return (
-        <Dialog open={open} onOpenChange={setOpen} key="search-modal">
+        <Dialog open={isOpen} onOpenChange={toggle} key="search-modal">
             <DialogTrigger asChild>
                 <button
                     aria-label="Open search"
                     aria-haspopup="dialog"
-                    aria-expanded={open}
+                    aria-expanded={isOpen}
                     className="inline-flex items-center justify-center rounded-full p-2 transition hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring"
                 >
                     <Search className="size-5 text-foreground" strokeWidth={1.5} aria-hidden />
@@ -79,10 +74,12 @@ export function SearchModal() {
                 size="lg"
                 className="bg-surface-elevated shadow-2xl max-w-2xl w-full h-[80vh] lg:h-[60vh] max-h-160 flex flex-col overflow-hidden"
                 aria-label="Search products"
+                aria-describedby="Search produts"
             >
                 {/* HEADER */}
                 <DialogHeader className="border-b border-divider">
                     <DialogTitle hidden />
+                    <DialogDescription hidden />
                     <div className="flex items-center w-full gap-3 px-5 py-4">
                         <Search className="size-5 text-text-tertiary" />
 
@@ -102,7 +99,7 @@ export function SearchModal() {
                             onChange={(e) => setQuery(e.target.value)}
                             onKeyDown={(e) => {
                                 if (e.key === "Enter") handleSubmit()
-                                if (e.key === "Escape") close()
+                                if (e.key === "Escape") closeModal()
                             }}
                             placeholder="Search..."
                             className="flex-1 min-w-0 bg-transparent text-base text-text-primary outline-none placeholder:text-input-placeholder"

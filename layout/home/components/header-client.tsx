@@ -3,16 +3,14 @@
 import Logo from "@/icon/logo"
 import { User, Menu } from "lucide-react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import ThemeButton from "./button-theme"
 import CartDrawerButton from "./button-cart-drawer"
-import { useDrawer } from "@/lib/context/drawer-context"
 import MobileDrawer from "../templates/mobile-drawer"
 import Container from "@/ui/container"
 import { SearchModal } from "../templates/search-modal"
+import { useMenuDrawer } from "@/lib/store/useDrawerStore"
 
-const HOME_REGEX = /^\/?$/
 
 type HeaderClientProps = {
     initialTheme: 'light' | 'dark'
@@ -20,10 +18,8 @@ type HeaderClientProps = {
 } & React.PropsWithChildren
 
 export default function HeaderClient({ initialTheme, totalItems, children }: HeaderClientProps) {
-    const pathname = usePathname()
     const [isScrolled, setIsScrolled] = useState(false)
 
-    const isHome = HOME_REGEX.test(pathname)
 
     // Handle scroll effect
     useEffect(() => {
@@ -36,14 +32,12 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const shouldSolid = isScrolled || !isHome //|| activeCategory;
-
-    const { toggleMobileDrawer, isMobileDrawerOpen } = useDrawer();
+    const { isOpen: isMenuOpen, open: openMenu } = useMenuDrawer()
 
     return (
         <>
             {/* Main Header */}
-            <header aria-label="Main Navigation" className={`sticky top-0 z-50 transition-all border-border duration-300 ease-out ${shouldSolid ? "bg-surface/98 backdrop-blur-xl text-foreground border-b shadow-md" : "bg-transparent"}`}>
+            <header aria-label="Main Navigation" className={`sticky top-0 z-50 transition-all duration-300 ease-out bg-surface/98 ${isScrolled ? "backdrop-blur-xl text-foreground shadow-md" : "bg-transparent"}`}>
                 <Container className="relative flex items-center justify-between h-16 lg:h-20">
                     {/* Logo */}
                     <Link
@@ -72,7 +66,7 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                             className="hidden md:flex p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
                             aria-label="Account"
                         >
-                            <User className="w-5 h-5" strokeWidth={1.5} aria-hidden/>
+                            <User className="w-5 h-5" strokeWidth={1.5} aria-hidden />
                         </Link>
 
                         {/* Cart Button */}
@@ -82,12 +76,12 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                         />
                         {/* Mobile Menu Button */}
                         <button
-                            onClick={toggleMobileDrawer}
+                            onClick={openMenu}
                             className="lg:hidden p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
                             aria-label="Open menu"
-                            aria-expanded={isMobileDrawerOpen}
+                            aria-expanded={isMenuOpen}
                         >
-                            <Menu className="w-6 h-6" strokeWidth={1.5} aria-hidden/>
+                            <Menu className="w-6 h-6" strokeWidth={1.5} aria-hidden />
                         </button>
                     </div>
                 </Container>

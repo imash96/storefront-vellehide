@@ -1,16 +1,16 @@
 "use client"
 
 import { ShoppingBag, X } from "lucide-react"
-import { useDrawer } from "@/lib/context/drawer-context";
 import { Drawer } from "@/ui/drawer";
 import { div as Div } from "motion/react-client";
+import { useCartDrawer } from "@/lib/store/useDrawerStore"
 
 export default function CartDrawerClient({ children }: React.PropsWithChildren) {
-    const { isCartDrawerOpen, toggleCartDrawer } = useDrawer();
+    const { isOpen: isCartOpen, close: closeCart } = useCartDrawer()
     return (
         <Drawer
-            isOpen={isCartDrawerOpen}
-            onClose={toggleCartDrawer}
+            isOpen={isCartOpen}
+            onClose={closeCart}
             direction="right"
             size="sm"
             showCloseButton={false}
@@ -36,7 +36,7 @@ export default function CartDrawerClient({ children }: React.PropsWithChildren) 
 
                     <button
                         className="p-2 rounded-md text-foreground-secondary hover:bg-muted hover:text-foreground transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-focus-ring hover:scale-110 active:scale-95"
-                        onClick={toggleCartDrawer}
+                        onClick={closeCart}
                         aria-label="Close cart drawer"
                     >
                         <X className="size-5" strokeWidth={2} />

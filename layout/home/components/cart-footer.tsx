@@ -2,13 +2,13 @@
 
 import type { StoreCart } from "@medusajs/types"
 import { convertToLocale } from "@/lib/util/money"
-import { useDrawer } from "@/lib/context/drawer-context";
+import { useCartDrawer } from "@/lib/store/useDrawerStore"
 import Button from "@/ui/button";
 import { ArrowRight } from "lucide-react";
 import { div as Div } from "motion/react-client"
 
 export default function CartFooter({ cart }: { cart: StoreCart }) {
-    const { toggleCartDrawer } = useDrawer();
+    const { toggle: toggleCart } = useCartDrawer();
     return (
         <Div
             initial={{ opacity: 0, y: 10 }}
@@ -36,7 +36,7 @@ export default function CartFooter({ cart }: { cart: StoreCart }) {
             {/* Checkout Button */}
             <Button
                 variant="primary"
-                onClick={toggleCartDrawer}
+                onClick={toggleCart}
                 href="/cart"
                 size="lg"
                 fullWidth

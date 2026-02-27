@@ -5,14 +5,14 @@ import { useState } from "react";
 import { AnimatePresence } from "motion/react";
 import { div as Div } from "motion/react-client";
 import { ChevronLeft, ChevronRight, Home, Logs, X } from "lucide-react";
-import { useDrawer } from "@/lib/context/drawer-context";
 import { ProductCategory } from "@/types/common";
 import { Drawer } from "@/ui/drawer";
 import MobileMenuPromotion from "../components/mobile-menu-promotion";
 import { product_categories } from "@/lib/constant/category";
+import { useMenuDrawer } from "@/lib/store/useDrawerStore";
 
 export default function MobileDrawer() {
-    const { isMobileDrawerOpen, toggleMobileDrawer } = useDrawer();
+    const { isOpen: isMenuOpen, close: closeMenu } = useMenuDrawer()
 
     const [navigationStack, setNavigationStack] = useState<NavigationState[]>([
         { level: 0, category: null, breadcrumb: [] },
@@ -41,14 +41,14 @@ export default function MobileDrawer() {
 
     const handleClose = () => {
         setNavigationStack([{ level: 0, category: null, breadcrumb: [] }]);
-        toggleMobileDrawer();
+        closeMenu();
     };
 
     const getCurrentCategories = () => currentNav.level === 0 ? product_categories : currentNav.category?.category_children || [];
 
     return (
         <Drawer
-            isOpen={isMobileDrawerOpen}
+            isOpen={isMenuOpen}
             onClose={handleClose}
             direction="left"
             size="sm"

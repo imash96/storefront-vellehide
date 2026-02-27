@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation"
 import { House, Menu, Search, ShoppingBag, User } from "lucide-react"
-import { useDrawer } from "@/lib/context/drawer-context"
+import { useCartDrawer, useMenuDrawer, useSearchModal } from "@/lib/store/useDrawerStore"
 import Link from "next/link"
 import type { Route } from "next"
 
@@ -12,7 +12,9 @@ type Tab =
 
 export default function BottomTabs() {
     const pathname = usePathname()
-    const { toggleCartDrawer, toggleMobileDrawer } = useDrawer()
+    const { toggle: toggleCart } = useCartDrawer()
+    const { toggle: toggleMenu } = useMenuDrawer()
+    const { toggle: toggleSearch } = useSearchModal()
 
     // Hide on product pages for better UX
     if (pathname.includes("/product")) return null
@@ -21,9 +23,9 @@ export default function BottomTabs() {
 
     const tabs: Tab[] = [
         { type: "link", href: "/", label: "Home", Icon: House },
-        { type: "button", onClick: toggleMobileDrawer, label: "Menu", Icon: Menu },
-        { type: "button", onClick: toggleMobileDrawer, label: "Search", Icon: Search },
-        { type: "button", onClick: toggleCartDrawer, label: "Cart", Icon: ShoppingBag },
+        { type: "button", onClick: toggleMenu, label: "Menu", Icon: Menu },
+        { type: "button", onClick: toggleSearch, label: "Search", Icon: Search },
+        { type: "button", onClick: toggleCart, label: "Cart", Icon: ShoppingBag },
         { type: "link", href: "/account", label: "Account", Icon: User },
     ]
 

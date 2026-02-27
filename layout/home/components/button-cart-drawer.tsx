@@ -1,15 +1,15 @@
 "use client"
 
 import { ShoppingBag } from "lucide-react"
-import { useDrawer } from "@/lib/context/drawer-context";
+import { useCartDrawer } from "@/lib/store/useDrawerStore";
 import { span as Span } from "motion/react-client"
 
 // TODO: mix cartbutton with cart drawer
 export default function CartDrawerButton({ className, totalItems }: CartDrawerButtonProps) {
-    const { toggleCartDrawer } = useDrawer();
+    const { toggle: toggleCart } = useCartDrawer();
 
     return (
-        <button onClick={toggleCartDrawer} className={`relative ${className}`} aria-label={`Shopping cart with ${totalItems} items`}>
+        <button onClick={toggleCart} className={`relative ${className}`} aria-label={`Shopping cart with ${totalItems} items`}>
             <ShoppingBag
                 className="w-5 h-5"
                 strokeWidth={1.5}

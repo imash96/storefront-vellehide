@@ -72,29 +72,28 @@ export default function RegionModal({ countryCode }: RegionModalProps) {
                 rounded={false}
                 size="md"
                 className="space-y-0"
+                aria-label="Select region"
             >
                 {/* Header */}
                 <DialogHeader>
-                    <div className="space-y-2 pr-8">
-                        <Div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="flex items-center gap-3"
-                        >
-                            <div className="p-3 rounded-full bg-primary/10 text-primary">
-                                <Globe className="w-6 h-6" strokeWidth={1.5} />
-                            </div>
-                            <div>
-                                <DialogTitle className="text-foreground font-heading">
-                                    Welcome to Artisan Hide
-                                </DialogTitle>
-                                <DialogDescription className="text-foreground-secondary font-light">
-                                    Select your region for the best shopping experience
-                                </DialogDescription>
-                            </div>
-                        </Div>
-                    </div>
+                    <Div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                        className="flex items-center gap-3 space-y-2 pr-8"
+                    >
+                        <div className="p-3 rounded-full bg-primary/10 text-primary">
+                            <Globe className="w-6 h-6" strokeWidth={1.5} />
+                        </div>
+                        <div>
+                            <DialogTitle className="text-foreground font-heading">
+                                Welcome to Artisan Hide
+                            </DialogTitle>
+                            <DialogDescription className="text-foreground-secondary font-light">
+                                Select your region for the best shopping experience
+                            </DialogDescription>
+                        </div>
+                    </Div>
                     <DialogClose className="absolute top-4 right-4">
                         <X className="w-5 h-5" />
                     </DialogClose>

@@ -266,6 +266,8 @@
     --font-mono: var(--font-family-mono);
 
     /* ── Animation ──────────────────────────────────────────── */
+    --animate-marquee-left: marquee-left linear infinite;
+    --animate-marquee-right: marquee-right linear infinite;
     --animate-marquee: marquee linear infinite;
 }
 
