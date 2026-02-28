@@ -12,7 +12,7 @@ import {
 import { createElement, useMemo, useState, useTransition } from "react"
 import { X, Globe } from "lucide-react";
 import { updateRegion } from "@/lib/action/cart";
-import { regions } from "@/lib/constant/regions";
+import { regions } from "@/data/regions";
 import Button from "@/ui/button";
 import NativeSelect from "@/ui/native-select";
 import Input from "@/ui/input";

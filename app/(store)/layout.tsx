@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Announcement from "@/layout/home/templates/announcement";
-import { announcements } from "@/lib/constant/announcement";
+import { announcements } from "@/data/announcement";
 import Header from "@/layout/home/templates/header";
 import CartDrawer from "@/layout/home/templates/cart-drawer";
 import Footer from "@/layout/home/templates/footer";

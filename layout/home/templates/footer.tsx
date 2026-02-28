@@ -7,7 +7,7 @@ import { IconProp } from "@/types/common";
 import RegionModal from "./region-modal";
 import type { Route } from "next";
 import Container from "@/ui/container";
-import { footer } from "@/lib/constant/footer";
+import { footer } from "@/data/footer";
 
 export default async function Footer() {
     const countryCode = (await cookies()).get('__country_code')?.value
@@ -16,7 +16,7 @@ export default async function Footer() {
             <h2 id="footer-heading" className="sr-only">
                 Footer
             </h2>
-            <Container>
+            <Container size="2xl" >
                 <div className="grid grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-2 sm:grid-rows-2 lg:grid-cols-4 lg:grid-rows-1">
                     <div className="grid gap-y-6">
                         <Logo

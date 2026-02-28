@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react"
 import BlogCard from "../components/blog-card"
 import Button from "@/ui/button"
 import SectionHeader from "../components/section-header"
-import { blogData } from "@/lib/constant/blog"
+import { blogData } from "@/data/blog"
 
 export default function Blog() {
     return (

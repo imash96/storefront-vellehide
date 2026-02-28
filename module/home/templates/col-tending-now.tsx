@@ -1,6 +1,6 @@
 import { fetchProductsByCollection } from "@/lib/action/product";
 import ProductSection from "../components/product-section";
-import { product_collections } from "@/lib/constant/collection";
+import { product_collections } from "@/data/collection";
 
 export default async function TrendingNow({
     region_id,

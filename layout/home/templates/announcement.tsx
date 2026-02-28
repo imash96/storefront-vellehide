@@ -35,7 +35,7 @@ export default function AnnouncementBar({ items }: { items: AnnouncementItem[] }
             aria-live="polite"
             role="region"
         >
-            <Container className="flex items-center justify-between h-9 gap-2">
+            <Container size="2xl" className="flex items-center justify-between h-9 gap-2">
                 <AnnouncementButton
                     onClick={scrollPrev}
                     direction="prev"

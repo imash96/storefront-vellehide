@@ -8,8 +8,13 @@ import ThemeButton from "./button-theme"
 import CartDrawerButton from "./button-cart-drawer"
 import MobileDrawer from "../templates/mobile-drawer"
 import Container from "@/ui/container"
-import { SearchModal } from "../templates/search-modal"
 import { useMenuDrawer } from "@/lib/store/useDrawerStore"
+import dynamic from "next/dynamic"
+
+const SearchModal = dynamic(
+    () => import("../templates/search-modal").then(m => m.SearchModal),
+    { ssr: false }
+)
 
 
 type HeaderClientProps = {
@@ -38,7 +43,7 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
         <>
             {/* Main Header */}
             <header aria-label="Main Navigation" className={`sticky top-0 z-50 transition-all duration-300 ease-out bg-surface/98 ${isScrolled ? "backdrop-blur-xl text-foreground shadow-md" : "bg-transparent"}`}>
-                <Container className="relative flex items-center justify-between h-16 lg:h-20">
+                <Container size="2xl" className="relative flex items-center justify-between h-16 lg:h-20">
                     {/* Logo */}
                     <Link
                         href="/"

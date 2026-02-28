@@ -21,7 +21,7 @@ export default function Rating({ averageRating, reviewCount = 0, size = "sm", cl
                 <Star
                     key={i}
                     size={sizeMap[size]}
-                    className={`${i < rounded ? "fill-accent text-accent" : "fill-foreground-muted text-foreground-muted"}`}
+                    className={`${i < rounded ? "fill-accent text-accent" : "fill-muted-foreground text-muted-foreground"}`}
                 />
             ))}
             {type !== "test" &&

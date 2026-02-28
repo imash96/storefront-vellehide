@@ -1,6 +1,6 @@
 import { fetchProductsByCollection } from "@/lib/action/product"
 import ProductSection from "../components/product-section-new"
-import { product_collections } from "@/lib/constant/collection"
+import { product_collections } from "@/data/collection"
 
 export async function NewArrival({ region_id }: { region_id: string }) {
     const collection = product_collections[12]

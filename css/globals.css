@@ -249,6 +249,15 @@
     --color-neutral-900: var(--neutral-900);
     --color-neutral-950: var(--neutral-950);
 
+    /* ── Gradients ──────────────────────────────────────── */
+
+    --color-gradient-primary: var(--gradient-primary);
+    --color-gradient-accent: var(--gradient-accent);
+    --color-gradient-warm: var(--gradient-warm);
+    --color-gradient-hero: var(--gradient-hero);
+    --color-gradient-card: var(--gradient-card);
+    --color-gradient-surface: var(--gradient-surface);
+
     /* ── Shadows ─────────────────────────────────────────────── */
     --shadow-sm: var(--shadow-sm);
     --shadow: var(--shadow);
@@ -266,9 +275,9 @@
     --font-mono: var(--font-family-mono);
 
     /* ── Animation ──────────────────────────────────────────── */
-    --animate-marquee-left: marquee-left linear infinite;
-    --animate-marquee-right: marquee-right linear infinite;
-    --animate-marquee: marquee linear infinite;
+    /* ── Marquee keyframe animations ─────────────────────────────────────── */
+    --animate-marquee-left: marquee-left var(--marquee-duration, 40s) linear infinite;
+    --animate-marquee-right: marquee-right var(--marquee-duration, 40s) linear infinite;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

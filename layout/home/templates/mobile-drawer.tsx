@@ -8,7 +8,7 @@ import { ChevronLeft, ChevronRight, Home, Logs, X } from "lucide-react";
 import { ProductCategory } from "@/types/common";
 import { Drawer } from "@/ui/drawer";
 import MobileMenuPromotion from "../components/mobile-menu-promotion";
-import { product_categories } from "@/lib/constant/category";
+import { product_categories } from "@/data/category";
 import { useMenuDrawer } from "@/lib/store/useDrawerStore";
 
 export default function MobileDrawer() {

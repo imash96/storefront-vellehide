@@ -1,29 +1,50 @@
-/* ─────────────────────────────────────────────────────────────────────────────
-   marquee.css
-   ─────────────────────────────────────────────────────────────────────────────
-
-   NOTE: This file now only provides the .animate-marquee utility class.
-   The @keyframes marquee definition lives ONLY in common.css:
-
-       @keyframes marquee {
-           0%   { transform: translateX(0%);   }   ← start position
-           100% { transform: translateX(-50%); }   ← left by one full set
-       }
-
-   Why one canonical keyframe location?
-   Having two CSS files define the same @keyframes marquee name caused a
-   silent override bug [3] — whichever file bundled last would win, reversing
-   the direction for all instances. common.css is the single source of truth.
-
-   Direction (left vs right) is controlled entirely by animation-direction:
-     - direction="left"  → animationDirection: "normal"   → 0% → 100% → moves LEFT ✓
-     - direction="right" → animationDirection: "reverse"  → 100% → 0% → moves RIGHT ✓
-
-   ─────────────────────────────────────────────────────────────────────────── */
-
 @layer utilities {
-    .animate-marquee {
-        animation: marquee linear infinite;
-        /* Duration and direction are set inline by the component */
+    .marquee-track {
+        display: flex;
+        width: max-content;
+        will-change: transform;
+        /* GPU-composited layer — prevents paint during scroll */
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+    }
+
+    .marquee-track--left {
+        animation: marquee-left linear infinite;
+    }
+
+    .marquee-track--right {
+        animation: marquee-right linear infinite;
+    }
+
+    /* Pause on hover/focus */
+    .marquee-root:hover .marquee-track,
+    .marquee-root:focus-within .marquee-track {
+        animation-play-state: paused;
+    }
+
+    /* Mask fade edges */
+    .marquee-mask {
+        -webkit-mask-image: var(--marquee-mask);
+        mask-image: var(--marquee-mask);
+    }
+
+    @keyframes marquee-left {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    @keyframes marquee-right {
+        0% {
+            transform: translateX(-50%);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
     }
 }

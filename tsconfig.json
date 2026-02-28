@@ -16,6 +16,7 @@
     "plugins": [ { "name": "next" } ],
     "paths": {
       "@/css/*": [ "./css/*" ],
+      "@/data/*": [ "./data/*" ],
       "@/icon/*": [ "./icon/*" ],
       "@/layout/*": [ "./layout/*" ],
       "@/lib/*": [ "./lib/*" ],

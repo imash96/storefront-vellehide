@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import SectionHeader from "../components/section-header"
-import { product_categories } from "@/lib/constant/category"
+import { product_categories } from "@/data/category"
 import { ProductCategory } from "@/types/common"
 
 export default async function Category() {

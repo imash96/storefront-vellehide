@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { product_collections } from "@/lib/constant/collection";
-import { collecionToShow } from "@/lib/constant/home";
+import { product_collections } from "@/data/collection";
+import { collecionToShow } from "@/data/home";
 import Button from "@/ui/button";
 import SectionHeader from "../components/section-header";
 import { ArrowRight } from "lucide-react";
