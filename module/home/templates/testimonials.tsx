@@ -15,7 +15,8 @@ export default function Testimonials() {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [emblaRef, emblaApi] = useEmblaCarousel(
         {
-            align: "start",
+            loop: true,
+            align: "center",
             skipSnaps: false,
             slidesToScroll: 1,
             containScroll: false,
@@ -55,31 +56,7 @@ export default function Testimonials() {
     }, [emblaApi, onSelect]);
 
     return (
-        <SectionHeader title="Worn & Loved" desc="Hear from our community about the craftsmanship, comfort, and customer service that define the Velle Hide experience." sectionName="Customer testimonials" eyebrow="Customer Stories" action={<div className="hidden sm:flex items-center gap-6 shrink-0">
-            {/* Aggregate stats pill */}
-            <div className="flex items-center gap-3 rounded-full border border-border-subtle bg-surface px-5 py-2.5">
-                <span className="text-2xl font-bold tracking-tight text-text-primary font-heading">
-                    {avgRating}
-                </span>
-                <div className="flex flex-col gap-0 leading-none">
-                    <div className="flex items-center gap-0.5">
-                        {[0, 1, 2, 3, 4].map((i) => (
-                            <svg
-                                key={i}
-                                width="12"
-                                height="12"
-                                viewBox="0 0 24 24"
-                                className={`shrink-0 ${i < Math.floor(Number(avgRating)) ? "fill-rating-filled text-rating-filled" : "fill-rating-empty text-rating-empty"}`}
-                            >
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                        ))}
-                    </div>
-                    <span className="text-[10.5px] font-medium text-text-tertiary mt-1">
-                        {totalReviews} verified reviews
-                    </span>
-                </div>
-            </div>
+        <SectionHeader title="What Our Customers Say" desc="Hear from our community about the craftsmanship, comfort, and customer service that define the Velle Hide experience." sectionName="Customer testimonials" eyebrow="Customer Stories" action={<div className="hidden sm:flex items-center gap-6 shrink-0">
             {/* Nav arrows */}
             <div className="hidden md:flex items-center gap-2">
                 <button
@@ -108,7 +85,7 @@ export default function Testimonials() {
                         {testimonials.map((testimonial, index) => (
                             <div
                                 key={testimonial.id}
-                                className="min-w-0 shrink-0 grow-0 basis-[85%] pl-4 first:pl-0 sm:basis-[48%] md:pl-5 lg:basis-[33.333%] xl:basis-[23.333%] lg:pl-6"
+                                className="min-w-0 pl-4 md:pl-5 lg:pl-6 flex-[0_0_85%] sm:flex-[0_0_45%] md:flex-[0_0_40%] lg:flex-[0_0_33%] xl:flex-[0_0_23%]"
                             >
                                 <TestimonialCard
                                     testimonial={testimonial}
