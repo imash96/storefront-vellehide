@@ -10,14 +10,19 @@ import Category from "@/module/home/templates/category";
 import Collection from "@/module/home/templates/collection";
 import TestimonialsFinal from "@/module/home/templates/testimonials";
 import { NewArrival, OnSale, TrendingNow } from "@/module/home/templates/list-collection";
+import { sdk } from "@/lib/sdk";
 
 export default async function Page() {
   const countryCode = (await cookies()).get("__country_code")?.value || process.env.NEXT_PUBLIC_DEFAULT_REGION || "us"
   const region = getRegion(countryCode);
   if (!region) return null;
+  const { products } = await getProducts()
+  const localVarArray = products.flatMap((product) =>
+    product.variants?.map((variant) => variant.id) ?? []
+  );
   return (
     <>
-      <BannerCarousel slides={DEMO_SLIDES} />
+      <BannerCarousel slides={DEMO_SLIDES} countryCode={countryCode} products={localVarArray} />
       <IconGridSection items={uspData} />
       <Category />
       <TrendingNow region_id={region.id} />
@@ -30,6 +35,10 @@ export default async function Page() {
       <IconGridSection items={podData} />
     </>
   );
+}
+
+const getProducts = () => {
+  return sdk.store.product.list()
 }
 
 // ─── Demo Data ────────────────────────────────────────────────────────────────

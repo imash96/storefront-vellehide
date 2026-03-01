@@ -1,84 +1,37 @@
-"use client";
+// "use client";
 
-import { startTransition, useActionState } from "react";
-import { addToCart } from "@/lib/action/cart";
-import { ShoppingCart } from "lucide-react";
-import Button from "@/ui/button";
-import Container from "@/ui/container";
-import { StoreProduct } from "@medusajs/types";
+// import { startTransition } from "react";
+// import { addToCart } from "@/lib/action/cart";
+// import { ArrowRight } from "lucide-react";
+// import Button from "@/ui/button";
+// import { StoreProduct } from "@medusajs/types";
 
-export default function TempCart({ countryCode, products }: { countryCode: string, products: StoreProduct[] }) {
+// export default function TempCart({ countryCode, products, label }: { countryCode: string, products: StoreProduct[], label?: string }) {
 
-    const localVarArray = products.flatMap((product) =>
-        product.variants?.map((variant) => variant.id) ?? []
-    );
+//     const localVarArray = products.flatMap((product) =>
+//         product.variants?.map((variant) => variant.id) ?? []
+//     );
 
-    const handleAddToCart = () => {
-        const selectedVariant =
-            localVarArray[Math.floor(Math.random() * localVarArray.length)];
-        startTransition(() =>
-            addToCart({
-                variantId: selectedVariant,
-                quantity: 1,
-                countryCode,
-            })
-        );
-    };
+//     const handleAddToCart = () => {
+//         const selectedVariant = localVarArray[Math.floor(Math.random() * localVarArray.length)];
+//         startTransition(() =>
+//             addToCart({
+//                 variantId: selectedVariant,
+//                 quantity: 1,
+//                 countryCode,
+//             })
+//         );
+//     };
 
-    // async function addWishlistItem(formData: FormData) {
-    //     const selectedProd = prodArray[Math.floor(Math.random() * prodArray.length)];
-    //     await addToWishlist(selectedProd)
-    // }
 
-    // async function deleteWishlistItem(_: any, formData: FormData) {
-    //     const product_id = formData.get("product_id") as string
-    //     if (!product_id) return console.error("Product id not found")
-    //     await deleteItemWishlist(product_id)
-    // }
-
-    // const [state, formAction, isPending] = useActionState(deleteWishlistItem, null);
-    const [stateCart, formActionCart, isPendingCart] = useActionState(handleAddToCart, null);
-
-    return (
-        <Container>
-            <div className="flex flex-col gap-y-4 mx-auto py-10 max-w-md">
-                <form action={formActionCart} className="flex flex-col gap-4 w-full">
-                    <div className="flex gap-2">
-                        <Button
-                            type="submit"
-                            isLoading={isPendingCart}
-                            className="shrink-0"
-                            icon={<ShoppingCart />}
-                        >
-                            Add to Cart
-                        </Button>
-                    </div>
-                </form>
-                {/* <form action={addWishlistItem} className="flex flex-col gap-4 w-full">
-                    <div className="flex gap-2">
-                        <Button
-                            type="submit"
-                            isLoading={isPending}
-                            className="shrink-0"
-                        >
-                            Add to Wishlist
-                        </Button>
-                    </div>
-                </form>
-
-                <form action={formAction} className="flex flex-col gap-4 w-full">
-                    <div className="flex gap-2">
-                        <Input label="Product Id" type="text" name="product_id" />
-                        <Button
-                            type="submit"
-                            isLoading={isPending}
-                            className="shrink-0"
-                        >
-                            Add to Wishlist
-                        </Button>
-                    </div>
-                </form> */}
-            </div>
-        </Container>
-    );
-}
+//     return (
+//         <Button
+//             onClick={handleAddToCart}
+//             className={`inline-flex items-center gap-2 bg-button-accent text-button-accent-foreground hover:bg-button-accent-hover px-6 py-3 text-xs tracking-wide uppercase transition-all duration-200 active:scale-95 ${ctaSelfClass} ${isActive ? "opacity-100 translate-y-0" : "opacity-0 md:opacity-100 translate-y-3"}`}
+//             icon={<ArrowRight className="size-4" />}
+//             iconPosition="right"
+//         >
+//             {label || "Add to Cart"}
+//         </Button>
+//     );
+// }

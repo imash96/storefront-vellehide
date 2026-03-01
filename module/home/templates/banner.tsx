@@ -4,14 +4,15 @@ import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import { ArrowRight } from "lucide-react"
 import { BannerSlide } from "@/types/homepage"
-import Button from "@/ui/button"
+import AddToCart from "../../../app/add-to-cart"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type HeroBannerCarouselProps = {
     slides: BannerSlide[]
+    countryCode?: string
+    products?: string[]
 }
 
 const alignClasses = {
@@ -26,7 +27,7 @@ const ctaSelfClasses = {
     right: "self-end",
 }
 
-export default function BannerCarousel({ slides }: HeroBannerCarouselProps) {
+export default function BannerCarousel({ slides, countryCode, products }: HeroBannerCarouselProps) {
 
     const [selectedIndex, setSelectedIndex] = useState(0)
 
@@ -119,14 +120,21 @@ export default function BannerCarousel({ slides }: HeroBannerCarouselProps) {
                                     />
 
                                     {/* CTA Button */}
-                                    <Button
+                                    {/* <Button
                                         href={slide.cta.href}
                                         className={`inline-flex items-center gap-2 bg-button-accent text-button-accent-foreground hover:bg-button-accent-hover px-6 py-3 text-xs tracking-wide uppercase transition-all duration-200 active:scale-95 ${ctaSelfClass} ${isActive ? "opacity-100 translate-y-0" : "opacity-0 md:opacity-100 translate-y-3"}`}
                                         icon={<ArrowRight className="size-4" />}
                                         iconPosition="right"
                                     >
                                         {slide.cta.label}
-                                    </Button>
+                                    </Button> */}
+                                    <AddToCart
+                                        countryCode={countryCode}
+                                        products={products || []}
+                                        ctaSelfClass={ctaSelfClass}
+                                        isActive={isActive}
+                                        label={slide.cta.label}
+                                    />
                                 </div>
                             </div>
                         )
