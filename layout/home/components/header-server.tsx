@@ -9,7 +9,7 @@ import { product_categories } from "@/data/category";
 import { ProductCategory } from "@/types/common";
 import { AnimatePresence } from "motion/react";
 import { div as Div } from "motion/react-client";
-import { MEGA_MENU } from "@/data/header";
+import { MEGA_MENU, MegaMenu } from "@/data/header";
 
 type NavigationProps = {
     links: Array<{
@@ -31,7 +31,7 @@ export default function HeaderServer({ links }: NavigationProps) {
     };
 
     // Get top-level categories (Men, Women)
-    const megaMenuCategories = product_categories?.filter(category => MEGA_MENU.includes(category.name));
+    const megaMenuCategories = product_categories?.filter(category => MEGA_MENU.includes(category.name as MegaMenu));
 
     return (
         <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">

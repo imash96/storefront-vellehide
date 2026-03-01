@@ -1,6 +1,28 @@
-export const MEGA_MENU = ["Men", "Women",]
+import { product_categories } from "./category";
 
-export const features = {
+export const MEGA_MENU = ["Men", "Women",] as const
+export type MegaMenu = typeof MEGA_MENU[number]
+
+export function getMegaCategories() {
+    return product_categories.filter(c => (MEGA_MENU as readonly string[]).includes(c.name));
+}
+
+export const NAV_LINKS = [
+    { label: 'New Arrivals', href: '/new-arrivals' },
+    { label: 'Best Sellers', href: '/best-sellers' },
+    { label: 'Sale', href: '/sale' },
+] as const;
+
+export type MenuSection = {
+    id: string;
+    name: string;
+    handle: string;
+    thumbnail: string;
+    alt: string;
+};
+
+
+export const features: Record<MegaMenu, MenuSection[]> = {
     "Men": [
         {
             id: 'men-co1-01',
@@ -34,21 +56,24 @@ export const features = {
             alt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
         }
     ],
-
-    "Footwear": [
-        {
-            id: 'women-col-01',
-            name: 'New Arrivals',
-            handle: 'new-arrivals-women',
-            thumbnail: '/images/col_thumb/col_trending.webp',
-            alt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-        },
-        {
-            id: 'women-col-02',
-            name: 'Best Sellers',
-            handle: 'best-sellers-women',
-            thumbnail: '/images/col_thumb/col_winter.webp',
-            alt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-        }
-    ],
 }
+
+export const navLinks = [
+    {
+        label: 'Kids',
+        href: '/category/kids',
+    },
+    {
+        label: 'Accessories',
+        href: '/category/accessories',
+    },
+    {
+        label: 'Home Decor',
+        href: '/category/home-decor',
+        badge: "New"
+    },
+    {
+        label: 'Gifting',
+        href: '/category/gifting',
+    },
+];
