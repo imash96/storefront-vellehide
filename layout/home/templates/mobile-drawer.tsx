@@ -119,9 +119,9 @@ export default function MobileDrawer() {
                     <AnimatePresence mode="wait">
                         <Div
                             key={`nav-level-${currentNav.level}`}
-                            initial={{ opacity: 0, x: 15 }}
+                            initial={{ opacity: 0, x: 10 }}
                             animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -15 }}
+                            exit={{ opacity: 0, x: -10 }}
                             transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
                             className="p-4 space-y-1"
                         >

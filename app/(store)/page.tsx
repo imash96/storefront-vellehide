@@ -23,7 +23,7 @@ export default async function Page() {
   return (
     <>
       <BannerCarousel slides={DEMO_SLIDES} countryCode={countryCode} products={localVarArray} />
-      <IconGridSection items={uspData} />
+      <IconGridSection items={uspData} className="bg-background-secondary" />
       <Category />
       <TrendingNow region_id={region.id} />
       <Collection />
@@ -32,7 +32,7 @@ export default async function Page() {
       <TestimonialsFinal />
       <OnSale region_id={region.id} />
       <Blog />
-      <IconGridSection items={podData} />
+      <IconGridSection items={podData} className="bg-background-tertiary" />
     </>
   );
 }

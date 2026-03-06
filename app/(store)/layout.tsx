@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Announcement from "@/layout/home/templates/announcement";
 import { announcements } from "@/data/announcement";
 import Header from "@/layout/home/templates/header-next";
-import CartDrawer from "@/layout/home/templates/cart-drawer";
+import CartDrawer from "@/layout/home/templates/cart-drawer-final";
 import Footer from "@/layout/home/templates/footer";
 import BottomTabs from "@/layout/home/templates/bottom-tab";
 

@@ -6,14 +6,17 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import ThemeButton from "./button-theme"
 import CartDrawerButton from "./button-cart-drawer"
-import MobileDrawer from "../templates/mobile-drawer"
+import MobileDrawer from "../templates/mobile-drawer-final"
 import Container from "@/ui/container"
 import { useMenuDrawer } from "@/lib/store/useDrawerStore"
 import dynamic from "next/dynamic"
 
 const SearchModal = dynamic(
     () => import("../templates/search-modal").then(m => m.SearchModal),
-    { ssr: false }
+    {
+        ssr: false,
+        loading: () => null,
+    }
 )
 
 type HeaderClientProps = {
@@ -26,8 +29,14 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
 
     // Handle scroll effect
     useEffect(() => {
+        let last = false
+
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 40);
+            const next = window.scrollY > 40
+            if (next !== last) {
+                last = next
+                setIsScrolled(next)
+            }
         };
         handleScroll();
         window.addEventListener("scroll", handleScroll, { passive: true });
@@ -60,13 +69,13 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                         {/* Theme Toggle */}
                         <ThemeButton
                             initialTheme={initialTheme}
-                            className="p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                            className="p-2 rounded-md duration-200 hover:bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-focus-ring"
                         />
 
                         {/* Account Link - Hidden on mobile */}
                         <Link
                             href="/account"
-                            className="hidden md:flex p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                            className="hidden md:flex p-2 rounded-md duration-200 hover:bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-focus-ring"
                             aria-label="Account"
                         >
                             <User className="w-5 h-5" strokeWidth={1.5} aria-hidden />
@@ -75,12 +84,12 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                         {/* Cart Button */}
                         <CartDrawerButton
                             totalItems={totalItems}
-                            className="relative p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                            className="relative p-2 rounded-md duration-200 hover:bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-focus-ring"
                         />
                         {/* Mobile Menu Button */}
                         <button
                             onClick={openMenu}
-                            className="lg:hidden p-2 rounded-md hover:bg-muted/10 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-focus-ring"
+                            className="lg:hidden p-2 rounded-md duration-200 hover:bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-focus-ring"
                             aria-label="Open menu"
                             aria-expanded={isMenuOpen}
                         >
@@ -91,8 +100,9 @@ export default function HeaderClient({ initialTheme, totalItems, children }: Hea
                 {/* Progress Bar on Scroll */}
                 {isScrolled && (
                     <div
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-accent to-transparent opacity-50"
                         aria-hidden="true"
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 transition-opacity duration-300 ${isScrolled ? "opacity-50" : "opacity-0"
+                            } bg-linear-to-r from-transparent via-accent to-transparent`}
                     />
                 )}
             </header>

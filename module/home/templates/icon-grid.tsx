@@ -8,7 +8,7 @@ type IconGridSectionProps = {
 
 export default function IconGridSection({ items, className = '' }: IconGridSectionProps) {
     return (
-        <div className={`w-full border-y border-border-subtle bg-background-secondary py-8 lg:py-10 ${className}`}>
+        <div className={`w-full border-y border-border-subtle py-8 lg:py-10 ${className}`}>
             <Container size="2xl" as="ul" role="list" className="grid grid-cols-2 md:grid-cols-4 gap-3 gap-y-6">
                 {items.map(({ name, Icon, description }) => {
                     return (

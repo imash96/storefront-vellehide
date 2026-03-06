@@ -4,11 +4,13 @@ import HeaderClient from "../components/header-client-next";
 import HeaderNav from "../components/header-nav-next";
 
 export default async function Header() {
-    const initialTheme = await getInitialTheme()
-    const totalItems = await fetchCartItemCount()
+    const [initialTheme, totalItems] = await Promise.all([
+        getInitialTheme(),
+        fetchCartItemCount(),
+    ])
 
     return (
-        <HeaderClient initialTheme={initialTheme} totalItems={totalItems} >
+        <HeaderClient initialTheme={initialTheme} totalItems={totalItems ?? 0} >
             <HeaderNav />
         </HeaderClient>
     )
