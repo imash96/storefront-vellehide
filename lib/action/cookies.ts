@@ -17,7 +17,8 @@ export async function getAuthHeaders(): Promise<{ authorization?: string; }> {
 
 export async function getCacheTag(tag: string) {
     const cacheId = (await cookies()).get("__cache_id")?.value
-    return cacheId ? `${tag}-${cacheId}` : null;
+    // return cacheId ? `${tag}-${cacheId}` : null;
+    return `${tag}-${cacheId}`;
 }
 
 export async function getCacheOptions(tag: string) {

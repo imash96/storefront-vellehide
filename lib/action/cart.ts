@@ -35,7 +35,7 @@ export async function retrieveCart(cartId?: string, fields?: string): Promise<St
     try {
         const { cart } = await sdk.store.cart.retrieve(id, { fields }, {
             ...headers,
-            next: nextOptions,
+            // next: nextOptions,
             cache: "force-cache",
         })
 
@@ -359,7 +359,7 @@ export async function listCartOptions() {
     try {
         const { shipping_options } = await sdk.store.fulfillment.listCartOptions({ cart_id: cartId }, {
             ...headers,
-            next: nextOptions,
+            // next: nextOptions,
             cache: "force-cache",
         })
         return shipping_options;
