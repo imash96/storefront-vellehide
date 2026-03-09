@@ -153,5 +153,5 @@ type ListProductsWithSortResp = {
 type FetchByCollectionProps = {
     regionId: string;
     collectionId: string;
-    limit: number
+    limit?: number
 };
