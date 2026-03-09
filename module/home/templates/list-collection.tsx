@@ -7,8 +7,7 @@ export async function NewArrival({ region_id }: { region_id: string }) {
     const collection = product_collections[12]
     const products = await fetchProductsByCollection({
         regionId: region_id,
-        collection_id: collection.id,
-        handle: collection.handle,
+        collectionId: collection.id,
     })
 
     return (
@@ -28,7 +27,7 @@ export async function NewArrival({ region_id }: { region_id: string }) {
 export async function OnSale({ region_id }: { region_id: string }) {
     const collection = product_collections[6]
     const products = await fetchProductsByCollection({
-        collection_id: collection.id,
+        collectionId: collection.id,
         regionId: region_id,
     })
 
@@ -49,8 +48,7 @@ export async function TrendingNow({ region_id }: { region_id: string }) {
     const collection = product_collections[9]
     const products = await fetchProductsByCollection({
         regionId: region_id,
-        collection_id: collection.id,
-        handle: collection.handle,
+        collectionId: collection.id,
     })
 
     return (
