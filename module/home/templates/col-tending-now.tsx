@@ -10,8 +10,7 @@ export default async function TrendingNow({
     const collection = product_collections[9];
     const products = await fetchProductsByCollection({
         regionId: region_id,
-        collection_id: collection.id,
-        handle: collection.handle,
+        collectionId: collection.id,
     });
 
     return (
