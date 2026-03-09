@@ -6,8 +6,7 @@ export default async function NewArrival({ region_id }: { region_id: string }) {
     const collection = product_collections[12];
     const products = await fetchProductsByCollection({
         regionId: region_id,
-        collection_id: collection.id,
-        handle: collection.handle,
+        collectionId: collection.id,
     });
 
     return (
