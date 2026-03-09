@@ -5,7 +5,7 @@ import { product_collections } from "@/data/collection";
 export default async function OnSale({ region_id, }: { region_id: string }) {
     const collection = product_collections[6]
     const products = await fetchProductsByCollection({
-        collection_id: collection.id,
+        collectionId: collection.id,
         regionId: region_id,
     },
         // `${collection.handle}-${region_id}`
