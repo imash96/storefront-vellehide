@@ -1,15 +1,3 @@
-export interface Testimonial {
-    id: number;
-    star: number;
-    name: string;
-    review: string;
-    image: string;
-    product?: string;
-    location?: string;
-    verified?: boolean;
-    date?: string;
-}
-
 export const testimonials: Testimonial[] = [
     {
         id: 1,
@@ -144,3 +132,15 @@ export const overallStats = {
         { stars: 1, percentage: 1 },
     ],
 };
+
+export interface Testimonial {
+    id: number;
+    star: number;
+    name: string;
+    review: string;
+    image: string;
+    product?: string;
+    location?: string;
+    verified?: boolean;
+    date?: string;
+}

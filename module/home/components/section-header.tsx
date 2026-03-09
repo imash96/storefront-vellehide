@@ -30,7 +30,7 @@ export default function SectionHeader({
     const isCenter = align === "center"
 
     return (
-        <Container size="2xl" as="section" aria-label={sectionName} className="py-12 md:py-16 lg:py-20">
+        <Container size="2xl" as="section" aria-label={sectionName} className="py-10 md:py-14 lg:py-16">
             {/* ── Header row ── */}
             <div
                 className={`mb-10 md:mb-12 flex flex-col gap-4 ${isCenter ? "items-center text-center" : "sm:flex-row sm:items-end sm:justify-between gap-5"}`}
@@ -38,7 +38,7 @@ export default function SectionHeader({
                 <div className={`flex flex-col gap-2 ${isCenter ? "max-w-lg" : "max-w-xl"}`}>
                     {/* Eyebrow */}
                     {eyebrow && (
-                        <p className={`inline-flex items-center gap-2.5 text-[9px] font-semibold tracking-[0.30em] uppercase text-accent ${isCenter && 'mx-auto'}`}>
+                        <p className={`inline-flex items-center gap-2.5 text-[10px] font-semibold tracking-[0.30em] uppercase text-accent ${isCenter && 'mx-auto'}`}>
                             <span className="block h-px w-7 bg-accent" aria-hidden="true" />
                             {eyebrow}
                             {isCenter && <span className="block h-px w-7 bg-accent" aria-hidden="true" />}
@@ -46,9 +46,7 @@ export default function SectionHeader({
                     )}
 
                     {/* Title */}
-                    <h2
-                        className={`font-heading font-light leading-[1.08] tracking-[-0.02em] text-text-primary text-[2rem] md:text-[2.4rem] lg:text-[2.75rem] ${className}`}
-                    >
+                    <h2 className={`font-heading font-light leading-[1.08] tracking-[-0.02em] text-text-primary text-balance text-[1.85rem] md:text-[2.25rem] lg:text-[2.6rem] ${className}`}>
                         {title}
                     </h2>
 

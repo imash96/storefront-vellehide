@@ -1,160 +1,27 @@
-/**
- * GalleryWall — Premium leather jacket lookbook section
- *
- * Two infinite marquee rows:
- *   Row 1 → scrolls LEFT  at a slower pace (wider tiles, richer presence)
- *   Row 2 → scrolls RIGHT at a faster pace (narrower tiles, dynamic contrast)
- *
- * Uses Unsplash source images that fit a leather-jacket / fashion aesthetic.
- * In production, swap src values for your real CDN URLs or Next.js <Image />.
- */
-
 import Container from "@/ui/container";
-import ImageMarquee, { MarqueeImage } from "../components/marquee";
-
-/* ─── Image data ────────────────────────────────────────────────────────── */
-
-// Top row — forward (left)
-const topImages: MarqueeImage[] = [
-    {
-        id: "1",
-        src: "/images/marquee/t1.jpg",
-        alt: "Customer wearing a black leather biker jacket",
-        customerName: "James M.",
-        tag: "Moto Classic",
-    },
-    {
-        id: "2",
-        src: "/images/marquee/t2.jpg",
-        alt: "Customer in cognac leather jacket on city street",
-        customerName: "Priya S.",
-        tag: "Cognac Racer",
-    },
-    {
-        id: "3",
-        src: "/images/marquee/t3.jpg",
-        alt: "Model in dark brown leather jacket",
-        customerName: "Lena K.",
-        tag: "Heritage Bomber",
-    },
-    {
-        id: "4",
-        src: "/images/marquee/t4.jpg",
-        alt: "Woman wearing a distressed leather jacket",
-        customerName: "Sofia R.",
-        tag: "Distressed Edit",
-    },
-    {
-        id: "5",
-        src: "/images/marquee/t5.jpg",
-        alt: "Man in slim-fit black leather jacket",
-        customerName: "Marcus T.",
-        tag: "Slim Rider",
-    },
-    {
-        id: "6",
-        src: "/images/marquee/t6.jpg",
-        alt: "Customer in olive leather jacket",
-        customerName: "Hana W.",
-        tag: "Field Jacket",
-    },
-    {
-        id: "7",
-        src: "/images/marquee/t7.jpg",
-        alt: "Person in vintage-style leather jacket",
-        customerName: "Tom A.",
-        tag: "Vintage Biker",
-    },
-    {
-        id: "8",
-        src: "/images/marquee/t8.jpg",
-        alt: "Model wearing oversized leather jacket",
-        customerName: "Nour E.",
-        tag: "Oversized Moto",
-    },
-]
-
-// Bottom row — reverse (right)
-const bottomImages: MarqueeImage[] = [
-    {
-        id: "11",
-        src: "/images/marquee/b1.jpg",
-        alt: "Customer in slim brown leather jacket",
-        customerName: "Elena V.",
-        tag: "Café Racer",
-    },
-    {
-        id: "12",
-        src: "/images/marquee/b2.jpg",
-        alt: "Man in black leather jacket outdoor shoot",
-        customerName: "Carlos D.",
-        tag: "Moto Classic",
-    },
-    {
-        id: "13",
-        src: "/images/marquee/b3.jpg",
-        alt: "Woman in tan leather jacket",
-        customerName: "Maya L.",
-        tag: "Tan Rider",
-    },
-    {
-        id: "14",
-        src: "/images/marquee/b4.jpg",
-        alt: "Customer in burgundy leather jacket",
-        customerName: "Zara P.",
-        tag: "Burgundy Biker",
-    },
-    {
-        id: "15",
-        src: "/images/marquee/b5.jpg",
-        alt: "Man in double-rider leather jacket",
-        customerName: "Kai F.",
-        tag: "Double Rider",
-    },
-    {
-        id: "16",
-        src: "/images/marquee/b6.jpg",
-        alt: "Customer in tailored leather blazer",
-        customerName: "Leo B.",
-        tag: "Leather Blazer",
-    },
-    {
-        id: "17",
-        src: "/images/marquee/b7.jpg",
-        alt: "Woman in black moto jacket",
-        customerName: "Aria N.",
-        tag: "Moto Edit",
-    },
-    {
-        id: "18",
-        src: "/images/marquee/b8.jpg",
-        alt: "Customer wearing premium leather jacket",
-        customerName: "Sara M.",
-        tag: "Heritage Slim",
-    },
-]
+import ImageMarquee from "../components/marquee";
+import { bottomImages, topImages } from "@/data/gallery-wall";
 
 /* ─── Stats strip ───────────────────────────────────────────────────────── */
 const STATS = [
     { value: "12K+", label: "Happy customers" },
     { value: "4.9★", label: "Average rating" },
     { value: "86%", label: "Repeat buyers" },
-];
+]
 
 /* ─── Section component ─────────────────────────────────────────────────── */
-export function GalleryWall() {
+export default function GalleryWall() {
 
     return (
-        <section aria-label="Premium leather lookbook - customer gallery" className="w-full overflow-hidden bg-background py-14 md:py-20 lg:py-28">
+        <section aria-label="Premium leather lookbook - customer gallery" className="w-full overflow-hidden bg-background py-10 md:py-16 lg:py-20">
             {/* ── Header ──────────────────────────────────────────────────────── */}
-            <Container size="2xl" className="mb-10 md:mb-14">
+            <Container size="2xl" className="mb-8 md:mb-10">
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
 
                     {/* Left: label + heading */}
-                    <div className="space-y-3">
-                        {/* Eyebrow */}
+                    <div className="space-y-2.5">
                         <div className="flex items-center gap-3">
-                            <span className="block h-px w-8 bg-accent" aria-hidden="true" />
+                            <span className="block h-px w-8 bg-accent" aria-hidden />
                             <p className="text-[10px] font-semibold tracking-[0.32em] uppercase text-accent">
                                 The Edit
                             </p>
@@ -227,5 +94,3 @@ export function GalleryWall() {
         </section>
     );
 }
-
-export default GalleryWall;

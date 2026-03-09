@@ -145,7 +145,7 @@ function MegaPanel({ category, onMouseEnter, onMouseLeave, onClose }: MegaPanelP
 
     const heroLabel = hoveredSub?.name ?? category.name
     const heroDesc = hoveredSub?.description ?? category.description ?? ""
-    const heroHref = `/${hoveredSub?.handle ?? category.handle}`
+    const heroHref = `/category/${hoveredSub?.handle ?? category.handle}`
     const heroBadge = hoveredSub ? "Category" : "Collection"
 
     return (
@@ -218,7 +218,7 @@ function MegaPanel({ category, onMouseEnter, onMouseLeave, onClose }: MegaPanelP
                             {feats.map((fc) => (
                                 <Link
                                     key={fc.id}
-                                    href={`/${fc.handle}`}
+                                    href={`/collection/${fc.handle}`}
                                     onClick={onClose}
                                     className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border text-[11px] font-medium text-foreground-secondary hover:text-accent hover:border-accent transition-colors duration-150 cursor-pointer"
                                 >
@@ -229,7 +229,7 @@ function MegaPanel({ category, onMouseEnter, onMouseLeave, onClose }: MegaPanelP
                         </div>
 
                         <Link
-                            href={`/${category.handle}`}
+                            href={`/collection/${category.handle}`}
                             onClick={onClose}
                             className="text-[13px] font-semibold text-accent hover:text-accent-hover transition-colors inline-flex items-center gap-1.5 cursor-pointer group"
                         >
@@ -303,14 +303,14 @@ export function HeroPanelImage({ src, label, description, href, badge, onClose }
                                 {description.length > 80 ? `${description.slice(0, 80)}…` : description}
                             </p>
                         )}
-                        <a
+                        <Link
                             href={href}
-                            onClick={(e) => { e.preventDefault(); onClose(); }}
+                            onClick={() => { onClose(); }}
                             className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground text-[11px] font-bold uppercase tracking-wider rounded-sm hover:bg-accent-hover transition-colors duration-200 group"
                         >
                             Shop Now
                             <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                        </a>
+                        </Link>
                     </motion.div>
                 </AnimatePresence>
             </div>
@@ -344,34 +344,24 @@ function MegaColumn({
             onMouseEnter={onHover}
             className="group/col h-full"
         >
-            <a href={`/${category.handle}`} className="block mb-4 group/head">
+            <Link href={`/category/${category.handle}`} className="block mb-4 group/head">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
                         <motion.div
                             className="w-2 h-2 rounded-xs shrink-0"
                             initial={false}
                             animate={{
-                                backgroundColor: isActive
-                                    ? "var(--accent)"
-                                    : "var(--border)",
+                                backgroundColor: isActive ? "var(--accent)" : "var(--border)",
                                 rotate: isActive ? 45 : 0,
                             }}
                             transition={{ duration: 0.25 }}
                         />
-                        <h3
-                            className={`font-heading font-bold text-sm uppercase tracking-[0.12em] transition-colors duration-200 ${isActive
-                                ? "text-accent"
-                                : "text-foreground group-hover/head:text-accent"
-                                }`}
-                        >
+                        <h3 className={`font-heading font-bold text-sm uppercase tracking-[0.12em] transition-colors duration-200 ${isActive ? "text-accent" : "text-foreground group-hover/head:text-accent"}`}>
                             {category.name}
                         </h3>
                     </div>
                     <ArrowRight
-                        className={`w-3.5 h-3.5 transition-all duration-200 ${isActive
-                            ? "text-accent opacity-100 translate-x-0"
-                            : "opacity-0 -translate-x-2 group-hover/head:opacity-60 group-hover/head:translate-x-0"
-                            }`}
+                        className={`w-3.5 h-3.5 transition-all duration-200 ${isActive ? "text-accent opacity-100 translate-x-0" : "opacity-0 -translate-x-2 group-hover/head:opacity-60 group-hover/head:translate-x-0"}`}
                         strokeWidth={1.5}
                     />
                 </div>
@@ -384,16 +374,16 @@ function MegaColumn({
                         transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                     />
                 </div>
-            </a>
+            </Link>
             {/* Numbered items */}
             {children.length > 0 && (
                 <ul className="space-y-0" role="list">
                     {children.map((child) => (
                         <li key={child.handle}>
-                            <a
-                                href={`/${child.handle}`}
+                            <Link
+                                href={`/category/${child.handle}`}
                                 className="group/link flex items-center gap-3 py-2.5 border-b border-border-subtle last:border-b-0 transition-colors duration-150 hover:bg-muted/50 -ml-5 pl-5 pr-3"
-                                onClick={(e) => { e.preventDefault(); onClose(); }}
+                                onClick={() => { onClose(); }}
                             >
                                 {/* Sliding dash indicator */}
                                 <span className="relative w-4 h-px shrink-0">
@@ -411,32 +401,29 @@ function MegaColumn({
                                 />
                                 {(child.category_children?.length ?? 0) > 0 && (
                                     <span
-                                        className={`text-[9px] font-bold px-1 py-px rounded-full transition-colors ${isActive
-                                            ? "bg-accent/20 text-accent group-hover/tag:bg-accent-foreground/20 group-hover/tag:text-accent-foreground"
-                                            : "bg-muted text-foreground-tertiary group-hover/tag:bg-accent/20 group-hover/tag:text-accent"
-                                            }`}
+                                        className={`text-[9px] font-bold px-1 py-px rounded-full transition-colors ${isActive ? "bg-accent/20 text-accent group-hover/tag:bg-accent-foreground/20 group-hover/tag:text-accent-foreground" : "bg-muted text-foreground-tertiary group-hover/tag:bg-accent/20 group-hover/tag:text-accent"}`}
                                     >
                                         {child.category_children!.length}
                                     </span>
                                 )}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ul>
             )}
             {/* Explore link */}
             <div className="mt-4">
-                <a
-                    href={`/${category.handle}`}
+                <Link
+                    href={`/category/${category.handle}`}
                     className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] text-accent hover:text-accent-hover transition-colors duration-150 group/all"
-                    onClick={(e) => { e.preventDefault(); onClose(); }}
+                    onClick={() => { onClose(); }}
                 >
                     <span className="relative">
                         Explore All
                         <span className="absolute left-0 -bottom-px w-0 group-hover/all:w-full h-px bg-accent transition-all duration-200" />
                     </span>
                     <ArrowUpRight className="w-3 h-3 group-hover/all:translate-x-0.5 group-hover/all:-translate-y-0.5 transition-transform" />
-                </a>
+                </Link>
             </div>
 
         </motion.div>

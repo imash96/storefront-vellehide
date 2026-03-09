@@ -1,5 +1,5 @@
 import { fetchProductsByCollection } from "@/lib/action/product";
-import ProductSection from "../components/product-section-new";
+import ProductSection from "../components/product-section";
 import { product_collections } from "@/data/collection";
 
 export default async function OnSale({ region_id, }: { region_id: string }) {

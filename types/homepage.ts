@@ -3,6 +3,8 @@
  * Premium Leather Clothing Brand
  */
 
+import { StoreProduct } from "@medusajs/types";
+
 export interface AnnouncementItem {
     id: string;
     message: string;
@@ -29,6 +31,28 @@ export interface MegaMenuData {
     };
 }
 
+export type ProductSectionProps = {
+    products: StoreProduct[];
+    title: string;
+    desc: string;
+    sectionName: string;
+    buttonLink?: string;
+    buttonText?: string;
+    eyebrow?: string;
+};
+
+
+export type SectionHeaderProps = {
+    title: string;
+    desc?: string;
+    sectionName: string;
+    className?: string;
+    align?: 'left' | 'center';
+    eyebrow?: string;
+    action?: React.ReactNode;
+    children?: React.ReactNode;
+};
+
 export interface MegaMenuCategory {
     title: string;
     links: {
@@ -43,6 +67,7 @@ export type BannerSlide = {
     image: { src: string; alt: string }
     heading: string
     subheading?: string
+    desc?: string
     cta: { label: string; href: string }
     align: "left" | "center" | "right"
 }

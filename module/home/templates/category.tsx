@@ -15,7 +15,7 @@ export default async function Category() {
             eyebrow="Shop by Category"
             sectionName="Category"
         >
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[180px] md:auto-rows-[220px] lg:auto-rows-[260px]">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[200px] md:auto-rows-[230px] lg:auto-rows-[270px]">
                 {cats.map((cat, index) => {
                     const isHero = index === 0
                     const isPromo = index === 5
@@ -24,7 +24,7 @@ export default async function Category() {
                         <CategoryCard
                             key={cat.id}
                             category={cat}
-                            isHero
+                            isHero={isHero}
                             priority={index < 2}
                             className={`${isHero ? "col-span-2 lg:row-span-2" : isPromo ? "col-span-2 md:col-span-3 lg:col-span-1" : ""}`}
                         />
@@ -41,7 +41,7 @@ function CategoryCard({ category, isHero, className = "", priority = false, }: {
     return (
         <Link
             href={`/category/${category.handle}`}
-            className={`group relative overflow-hidden rounded-md border border-border-subtle bg-muted transition-all duration-300 ease-(--ease-spring) hover:shadow-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${className}`}
+            className={`group relative overflow-hidden rounded-md border border-border-subtle bg-muted transition-all duration-300 ease-(--ease-spring) hover:shadow-primary active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${className}`}
         >
             {/* Image */}
             <Image
@@ -49,15 +49,15 @@ function CategoryCard({ category, isHero, className = "", priority = false, }: {
                 alt={category.name}
                 fill
                 priority={priority}
-                className="object-cover object-center transition-transform duration-700 ease-(--ease-out-quart) group-hover:scale-[1.06]"
-                sizes="(max-width:768px) 50vw, (max-width:1024px) 33vw, 25vw"
+                className="object-cover object-center transition-transform duration-700 ease-(--ease-out-quart) group-hover:scale-[1.06] will-change-transform"
+                sizes={isHero ? "(max-width:768px) 100vw, (max-width:1024px) 66vw, 50vw" : "(max-width:768px) 50vw, (max-width:1024px) 33vw, 25vw"}
             />
 
             {/* Premium Scrim */}
             <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                    background: "linear-gradient(to top, var(--scrim) 0%, transparent 65%)",
+                    background: "linear-gradient(to top, var(--scrim) 0%, transparent 70%)",
                 }}
             />
 
@@ -70,14 +70,14 @@ function CategoryCard({ category, isHero, className = "", priority = false, }: {
                         {category.name}
                     </h3>
 
-                    <span className="flex items-center gap-2 text-xs md:text-sm font-medium text-white/75 group-hover:text-white transition-all duration-200">
+                    <span className="flex items-center gap-1.5 text-xs md:text-sm font-medium text-white/75 group-hover:text-white transition-all duration-200">
                         Discover Collection
                         <ArrowRight className="size-3 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
                     </span>
                 </div>
 
                 {(category as any).products_count != null && (
-                    <span className="text-xs text-white/60 tabular-nums shrink-0">
+                    <span className="text-xs text-white/60 tabular-nums shrink-0 ml-2">
                         {(category as any).products_count} pcs
                     </span>
                 )}

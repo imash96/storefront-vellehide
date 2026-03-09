@@ -1,5 +1,6 @@
 import { StoreCreateMeasurementDTO, StoreMeasurementResponse, StoreUpdateMeasurementDTO } from '@/types/measurement';
-import type { Client, ClientHeaders } from '@medusajs/js-sdk';
+import type { Client } from '../client';
+import { ClientHeaders } from '../types';
 
 export class StoreMeasurementResource {
     constructor(private client: Client) { }

@@ -1,11 +1,8 @@
 /* ─────────────────────────────────────────────────────────────────────────────
    GLOBALS.CSS — Main stylesheet entry point
    ────────────────────────────────────────────────────────────────────────────
-   Import order: fonts → tailwind → theme tokens → common utilities
+   Import order: tailwind → theme tokens → common utilities
    ───────────────────────────────────────────────────────────────────────────── */
-
-/* ── FONTS ────────────────────────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap');
 
 /* ── TAILWIND ─────────────────────────────────────────────────────────────── */
 @import "tailwindcss";

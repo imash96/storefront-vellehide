@@ -3,7 +3,7 @@
 import type { StoreCart } from "@medusajs/types"
 import { convertToLocale } from "@/lib/util/money"
 import { useCartDrawer } from "@/lib/store/useDrawerStore"
-import Button from "@/ui/button";
+import Button from "@/ui/button-new";
 import { ArrowRight } from "lucide-react";
 import { div as Div } from "motion/react-client"
 

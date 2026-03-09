@@ -8,14 +8,14 @@ type IconGridSectionProps = {
 
 export default function IconGridSection({ items, className = '' }: IconGridSectionProps) {
     return (
-        <div className={`w-full border-y border-border-subtle py-8 lg:py-10 ${className}`}>
-            <Container size="2xl" as="ul" role="list" className="grid grid-cols-2 md:grid-cols-4 gap-3 gap-y-6">
+        <div className={`w-full border-y border-border py-7 lg:py-9 ${className}`}>
+            <Container size="2xl" as="ul" role="list" className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-6 md:gap-x-6">
                 {items.map(({ name, Icon, description }) => {
                     return (
-                        <li key={name} className={`flex flex-col md:flex-row items-center gap-3 md:gap-4 p-4`}>
-                            <Icon className="w-14 lg:w-16 shrink-0 text-accent" aria-hidden />
+                        <li key={name} className={`flex flex-col md:flex-row items-center gap-3 md:gap-4 p-3 md:p-4`}>
+                            <Icon className="size-14 lg:size-14 shrink-0 text-accent" aria-hidden />
                             <div className="flex flex-col items-center md:items-start gap-0.5 text-center md:text-left">
-                                <h3 className="text-sm font-semibold tracking-wide text-text-primary">
+                                <h3 className="text-[13px] md:text-sm font-semibold tracking-wide text-text-primary">
                                     {name}
                                 </h3>
                                 <p className="text-xs font-light leading-snug text-text-secondary">

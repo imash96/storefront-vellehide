@@ -13,7 +13,7 @@ import { createElement, useMemo, useState, useTransition } from "react"
 import { X, Globe, ChevronRight } from "lucide-react";
 import { updateRegion } from "@/lib/action/cart";
 import { regions } from "@/data/regions";
-import Button from "@/ui/button";
+import Button from "@/ui/button-new";
 import NativeSelect from "@/ui/native-select";
 import Input from "@/ui/input";
 import { div as Div, form as Form } from "motion/react-client"

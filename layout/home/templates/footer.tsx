@@ -12,7 +12,7 @@ import { footer } from "@/data/footer";
 export default async function Footer() {
     const countryCode = (await cookies()).get('__country_code')?.value
     return (
-        <footer aria-labelledby="footer-heading" className="bg-background-secondary border-t border-border pb-6 lg:pb-0">
+        <footer aria-labelledby="footer-heading" className="bg-background-secondary border-t border-border pb-14 lg:pb-0">
             <h2 id="footer-heading" className="sr-only">
                 Footer
             </h2>

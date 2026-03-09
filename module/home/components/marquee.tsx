@@ -1,14 +1,7 @@
 import Image from "next/image";
+import { MarqueeImage } from "@/data/gallery-wall";
 
 import "@/css/marquee.css"
-
-export interface MarqueeImage {
-    id: string;
-    src: string;
-    alt: string;
-    customerName?: string; // Optional: customer name shown on hover 
-    tag?: string; //Optional: product tag shown on hover 
-}
 
 export interface ImageMarqueeProps {
     items: MarqueeImage[];

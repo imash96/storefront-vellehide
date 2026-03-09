@@ -1,142 +1,128 @@
 "use server";
 
-import type {
-    FindParams,
-    StoreProduct,
-    StoreProductListParams,
-    StoreProductParams,
-    StoreRegion,
-} from "@medusajs/types";
+import type { FindParams, StoreProduct, StoreProductListParams, } from "@medusajs/types";
 import type { SortOptions } from "@/types/common";
 import { sdk } from "../sdk";
-import { sortProducts } from "../util/sort-products";
-import { getAuthHeaders, getCacheOptions } from "./cookies";
+import { getAuthHeaders } from "./cookies";
 import { getRegion, retrieveRegion } from "./region";
+import { sortProducts } from "../util/sort-products";
 
+const DEFAULT_LIMIT = 12;
+const SORT_BATCH_LIMIT = 100;
+const DEFAULT_FIELDS = "*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags";
+const SERVER_SORT_MAP: Partial<Record<SortOptions, string>> = {
+    created_at: "-created_at",
+};
 
-export const listProducts = async ({ pageParam = 1, queryParams, countryCode, regionId, }: ListProductsParam, cacheKey?: string,): Promise<ListProductsResp> => {
-    if (!countryCode && !regionId) {
-        throw new Error("Country code or region ID is required")
-    }
-
-    const limit = queryParams?.limit || 12
-    const _pageParam = Math.max(pageParam, 1)
-    const offset = _pageParam === 1 ? 0 : (_pageParam - 1) * limit
-
-    let region: StoreRegion | undefined | null
-
-    if (countryCode) {
-        region = getRegion(countryCode)
-    } else {
-        region = retrieveRegion(regionId!)
-    }
-
-    if (!region) {
-        return {
-            response: { products: [], count: 0 },
-            nextPage: null,
-        }
-    }
-
-    const headers = {
-        ...(await getAuthHeaders()),
-    }
-
-    const next = cacheKey ? { ...(await getCacheOptions(cacheKey)) } : { ...(await getCacheOptions("products")) }
-
-    return sdk.client.fetch<{ products: StoreProduct[]; count: number }>(
-        `/store/products`,
-        {
-            method: "GET",
-            query: {
-                limit,
-                offset,
-                region_id: region?.id,
-                fields:
-                    "*variants.calculated_price,+variants.inventory_quantity,*variants.images,+metadata,+tags,",
-                ...queryParams,
-            },
-            headers,
-            next,
-            cache: "force-cache",
-        }
-    ).then(({ products, count }) => {
-        const nextPage = count > offset + limit ? pageParam + 1 : null
-
-        return {
-            response: {
-                products,
-                count,
-            },
-            nextPage: nextPage,
-            queryParams,
-        }
-    })
+function resolveRegion(countryCode?: string, regionId?: string) {
+    if (countryCode) return getRegion(countryCode) ?? null;
+    if (regionId) return retrieveRegion(regionId) ?? null;
+    return null;
 }
 
-/**
- * This will fetch 100 products to the Next.js cache and sort them based on the sortBy parameter.
- * It will then return the paginated products based on the page and limit parameters.
- */
-export const listProductsWithSort = async ({
-    page = 0,
-    queryParams,
-    sortBy = "created_at",
-    countryCode,
-}: ListProductsWithSortParam): Promise<ListProductsWithSortResp> => {
-    const limit = queryParams?.limit || 12
+function isPriceSort(sortBy: SortOptions): boolean {
+    return sortBy === "price_asc" || sortBy === "price_desc";
+}
 
-    const {
-        response: { products, count },
-    } = await listProducts({
-        pageParam: 0,
-        queryParams: {
-            ...queryParams,
-            limit: 100,
+export async function listProducts({ pageParam = 1, queryParams, countryCode, regionId }: ListProductsProps, cacheKey?: string,): Promise<ListProductsResp> {
+    if (!countryCode && !regionId) throw new Error("Country code or region ID is required")
+
+    const region = resolveRegion(countryCode, regionId)
+
+    if (!region) return { response: { products: [], count: 0 }, nextPage: null }
+
+    const limit = queryParams?.limit ?? DEFAULT_LIMIT;
+    const page = Math.max(pageParam, 1);
+    const offset = (page - 1) * limit;
+    const fields = queryParams?.fields ?? DEFAULT_FIELDS;
+
+    const { limit: _l, offset: _o, fields: _f, ...filterParams } = queryParams ?? {};
+
+    // Fetch auth headers and cache config
+    const headers = await getAuthHeaders();
+    const next = { tags: [cacheKey ?? `products-${region.id}`] };
+
+    const { products, count } = await sdk.store.product.list(
+        {
+            ...filterParams,
+            limit,
+            offset,
+            region_id: region.id,
+            fields,
         },
+        headers,
+        next,
+    );
+
+    return {
+        response: { products, count },
+        nextPage: count > offset + limit ? page + 1 : null,
+        queryParams,
+    };
+}
+
+export async function listProductsWithSort({ page = 1, queryParams, sortBy = "created_at", countryCode }: ListProductsWithSortProps): Promise<ListProductsWithSortResp> {
+    const limit = queryParams?.limit || DEFAULT_LIMIT
+    const safePage = Math.max(page, 1)
+    const offset = (safePage - 1) * limit
+
+    // ── Fast path: server-side sort ──────────────────────────────────────────
+    if (!isPriceSort(sortBy)) {
+        const order = SERVER_SORT_MAP[sortBy] ?? `-${sortBy}`;
+
+        const { response } = await listProducts({
+            pageParam: safePage,
+            queryParams: { ...queryParams, limit, order },
+            countryCode,
+        });
+
+        const hasMore = response.count > offset + limit;
+
+        return {
+            response,
+            nextPage: hasMore ? safePage + 1 : null,
+            hasMore,
+            limit,
+            queryParams,
+        };
+    }
+
+    // ── Slow path: client-side price sort ────────────────────────────────────
+    const { response: { products, count } } = await listProducts({
+        pageParam: 1,
+        queryParams: { ...queryParams, limit: SORT_BATCH_LIMIT },
         countryCode,
     })
 
-    const sortedProducts = sortProducts(products, sortBy)
-
-    const pageParam = (page - 1) * limit
-
-    const nextPage = count > pageParam + limit ? pageParam + limit : null
-
-    const paginatedProducts = sortedProducts.slice(pageParam, pageParam + limit)
+    const sorted = sortProducts(products, sortBy);
+    const paginated = sorted.slice(offset, offset + limit);
+    const hasMore = count > offset + limit;
 
     return {
-        response: {
-            products: paginatedProducts,
-            count,
-        },
-        nextPage,
+        response: { products: paginated, count },
+        nextPage: hasMore ? safePage + 1 : null,
+        hasMore,
+        limit,
         queryParams,
     }
 }
 
-export async function fetchProductsByCollection({ regionId, collection_id, handle }: FetchProductsByCollectionParam) {
-    const { response } = await listProducts(
+export async function fetchProductsByCollection({ regionId, collectionId, limit = 6 }: FetchByCollectionProps): Promise<StoreProduct[]> {
+    const { response: { products } } = await listProducts(
         {
             regionId,
             queryParams: {
-                collection_id,
-                limit: 6,
+                collection_id: [collectionId],
+                limit,
                 fields: "id,handle,title,*images,*variants.calculated_price",
             },
         },
-        `${handle}-${regionId}`,
+        `collection-${collectionId}-${regionId}`
     );
-    return response.products;
+    return products;
 }
 
-type FetchProductsByCollectionParam = {
-    regionId: string;
-    collection_id: string;
-    handle?: string;
-}
-
-type ListProductsParam = {
+type ListProductsProps = {
     pageParam?: number
     queryParams?: FindParams & StoreProductListParams
     countryCode?: string
@@ -149,9 +135,9 @@ type ListProductsResp = {
     queryParams?: FindParams & StoreProductListParams
 }
 
-type ListProductsWithSortParam = {
+type ListProductsWithSortProps = {
     page?: number
-    queryParams?: FindParams & StoreProductParams
+    queryParams?: FindParams & StoreProductListParams
     sortBy?: SortOptions
     countryCode: string
 }
@@ -159,5 +145,13 @@ type ListProductsWithSortParam = {
 type ListProductsWithSortResp = {
     response: { products: StoreProduct[]; count: number }
     nextPage: number | null
-    queryParams?: FindParams & StoreProductParams
+    limit: number
+    queryParams?: FindParams & StoreProductListParams
+    hasMore: boolean
 }
+
+type FetchByCollectionProps = {
+    regionId: string;
+    collectionId: string;
+    limit: number
+};

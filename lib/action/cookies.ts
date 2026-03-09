@@ -17,13 +17,21 @@ export async function getAuthHeaders(): Promise<{ authorization?: string; }> {
 
 export async function getCacheTag(tag: string) {
     const cacheId = (await cookies()).get("__cache_id")?.value
-    return cacheId ? `${tag}-${cacheId}` : "";
+    return cacheId ? `${tag}-${cacheId}` : null;
 }
 
 export async function getCacheOptions(tag: string) {
-    if (typeof window !== "undefined") return null
     const cacheTag = await getCacheTag(tag);
-    return cacheTag ? { tags: [cacheTag] } : null;
+    return cacheTag ? { tags: [cacheTag] } : undefined;
+}
+
+/** Parallel fetch of auth headers + cache config for non-product actions. */
+export async function getNextHeader(cacheKey: string) {
+    const [headers, next] = await Promise.all([
+        getAuthHeaders(),
+        getCacheOptions(cacheKey),
+    ]);
+    return { headers, next };
 }
 
 export async function setAuthToken(token: string) {

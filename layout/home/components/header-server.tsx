@@ -47,7 +47,7 @@ export default function HeaderServer({ links }: NavigationProps) {
                         onMouseLeave={handleMouseLeave}
                     >
                         <Link
-                            href={`/${category.handle}`}
+                            href={`/category/${category.handle}`}
                             className={`flex items-center gap-1 px-3 xl:px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${isActive ? "text-accent bg-accent/10" : "text-foreground over:text-accent hover:bg-muted/50"}`}
                         >
                             {category.name}
@@ -96,7 +96,7 @@ export default function HeaderServer({ links }: NavigationProps) {
 
                                                 {category.metadata?.thumbnail as string && (
                                                     <Link
-                                                        href={`/${category.handle}`}
+                                                        href={`/category/${category.handle}`}
                                                         className="relative overflow-hidden rounded-lg group mb-4 aspect-3/4 block"
                                                     >
                                                         <Image
@@ -118,7 +118,7 @@ export default function HeaderServer({ links }: NavigationProps) {
                                                 )}
 
                                                 <Link
-                                                    href={`/${category.handle}`}
+                                                    href={`/category/${category.handle}`}
                                                     className="mt-auto text-sm font-medium text-accent hover:text-accent-hover transition-colors duration-200 flex items-center gap-2 group"
                                                 >
                                                     <span>Shop All {category.name}</span>
@@ -158,7 +158,7 @@ function MegaMenuColumn({ category }: { category: ProductCategory }) {
     return (
         <div className="space-y-3">
             <Link
-                href={`/${category.handle}`}
+                href={`/category/${category.handle}`}
                 className="block group"
             >
                 <h3 className="font-heading font-semibold text-sm uppercase tracking-wide text-foreground mb-3 group-hover:text-accent transition-colors duration-200">
@@ -171,7 +171,7 @@ function MegaMenuColumn({ category }: { category: ProductCategory }) {
                     {category.category_children.slice(0, 6).map((subCat) => (
                         <li key={`submenu-${subCat.id || subCat.handle}`}>
                             <Link
-                                href={`/${subCat.handle}`}
+                                href={`/category/${subCat.handle}`}
                                 className="text-sm text-foreground-secondary hover:text-accent transition-colors duration-200 flex items-center gap-2 group"
                             >
                                 <span className="group-hover:translate-x-1 transition-transform duration-200">
@@ -188,7 +188,7 @@ function MegaMenuColumn({ category }: { category: ProductCategory }) {
                     {category.category_children.length > 6 && (
                         <li>
                             <Link
-                                href={`/${category.handle}`}
+                                href={`/category/${category.handle}`}
                                 className="text-sm font-medium text-accent hover:text-accent-hover transition-colors duration-200 inline-flex items-center gap-1 mt-2"
                             >
                                 <span>View All</span>
