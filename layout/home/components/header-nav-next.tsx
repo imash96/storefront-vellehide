@@ -43,13 +43,16 @@ export default function HeaderNav() {
         timeoutRef.current = setTimeout(() => setActiveMenu(null), CLOSE_DELAY_MS)
     }, [clearCloseTimeout])
 
-    const handleTriggerEnter = useCallback(
-        (name: string) => {
-            clearCloseTimeout()
-            setActiveMenu(name)
-        },
-        [clearCloseTimeout]
-    )
+    const handleTriggerEnter = useCallback((name: string) => {
+        clearCloseTimeout()
+        setActiveMenu(name)
+    }, [clearCloseTimeout])
+
+    const handleToggleClick = useCallback((name: string) => {
+        if (activeMenu) setActiveMenu(null)
+        clearCloseTimeout()
+        setActiveMenu(name)
+    }, [clearCloseTimeout, activeMenu])
 
     // Passed to MegaPanel so hovering BACK into the panel cancels any pending close
     const handlePanelEnter = useCallback(() => {
@@ -74,6 +77,7 @@ export default function HeaderNav() {
                     {/* Trigger button */}
                     <button
                         className={`relative flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors duration-150 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring rounded-sm ${activeMenu === cat.name ? "text-accent" : "text-foreground-secondary hover:text-foreground"}`}
+                        onClick={() => handleToggleClick(cat.name)}
                         aria-expanded={activeMenu === cat.name}
                         aria-haspopup="true"
                     >
@@ -229,7 +233,7 @@ function MegaPanel({ category, onMouseEnter, onMouseLeave, onClose }: MegaPanelP
                         </div>
 
                         <Link
-                            href={`/collection/${category.handle}`}
+                            href={`/category/${category.handle}`}
                             onClick={onClose}
                             className="text-[13px] font-semibold text-accent hover:text-accent-hover transition-colors inline-flex items-center gap-1.5 cursor-pointer group"
                         >

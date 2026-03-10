@@ -1,63 +1,84 @@
 import { fetchProductsByCollection } from "@/lib/action/product"
-import ProductSection from "../components/product-section"
 import { product_collections } from "@/data/collection"
 import { ProductSectionClassic } from "../components/product-section-final"
 
+// ─── New Arrival ──────────────────────────────────────────────────────────────
+
 export async function NewArrival({ region_id }: { region_id: string }) {
-    const collection = product_collections[12]
-    const products = await fetchProductsByCollection({
-        regionId: region_id,
-        collectionId: collection.id,
-    })
+    // FIX 1: try/catch — graceful degradation
+    let products
+    try {
+        const collection = product_collections[12]
+        products = await fetchProductsByCollection({
+            regionId: region_id,
+            collectionId: collection.id,
+        })
+        // FIX 3: hide section when no products
+        if (!products?.length) return null
 
-    return (
-        <ProductSectionClassic
-            title={collection.title}
-            desc={(collection.metadata as any)?.description ?? ""}
-            buttonLink={`/collection/${collection.handle}`}
-            sectionName={collection.handle}
-            products={products}
-            eyebrow="Popular"
-        />
-    )
+        return (
+            <ProductSectionClassic
+                title={collection.title}
+                desc={(collection.metadata as any)?.description ?? ""}
+                buttonLink={`/collection/${collection.handle}`}
+                sectionName={collection.handle}
+                products={products}
+                eyebrow="Just Dropped"
+            />
+        )
+    } catch {
+        return null
+    }
 }
 
-// ─── col-on-sale.tsx ──────────────────────────────────────────────────────────
-
-export async function OnSale({ region_id }: { region_id: string }) {
-    const collection = product_collections[6]
-    const products = await fetchProductsByCollection({
-        collectionId: collection.id,
-        regionId: region_id,
-    })
-
-    return (
-        <ProductSection
-            title={collection.title}
-            desc={(collection.metadata as any)?.description ?? ""}
-            buttonLink={`/collection/${collection.handle}`}
-            sectionName={collection.handle}
-            products={products}
-        />
-    )
-}
-
-// ─── col-trending-now.tsx ─────────────────────────────────────────────────────
+// ─── On Sale ──────────────────────────────────────────────────────────────────
 
 export async function TrendingNow({ region_id }: { region_id: string }) {
-    const collection = product_collections[9]
-    const products = await fetchProductsByCollection({
-        regionId: region_id,
-        collectionId: collection.id,
-    })
+    try {
+        const collection = product_collections[9]
+        const products = await fetchProductsByCollection({
+            collectionId: collection.id,
+            regionId: region_id,
+        })
+        if (!products?.length) return null
 
-    return (
-        <ProductSection
-            title={collection.title}
-            desc={(collection.metadata as any)?.description ?? ""}
-            buttonLink={`/collection/${collection.handle}`}
-            sectionName={collection.handle}
-            products={products}
-        />
-    )
+        return (
+            <ProductSectionClassic
+                title={collection.title}
+                desc={(collection.metadata as any)?.description ?? ""}
+                buttonLink={`/collection/${collection.handle}`}
+                sectionName={collection.handle}
+                products={products}
+                eyebrow="Popular"
+            />
+        )
+    } catch {
+        return null
+    }
+}
+
+// ─── Trending Now ─────────────────────────────────────────────────────────────
+
+export async function OnSale({ region_id }: { region_id: string }) {
+    try {
+        const collection = product_collections[10]
+        const products = await fetchProductsByCollection({
+            regionId: region_id,
+            collectionId: collection.id,
+        })
+        if (!products?.length) return null
+
+        return (
+            <ProductSectionClassic
+                title={collection.title}
+                desc={(collection.metadata as any)?.description ?? ""}
+                buttonLink={`/collection/${collection.handle}`}
+                sectionName={collection.handle}
+                products={products}
+                eyebrow="Most Loved"
+            />
+        )
+    } catch {
+        return null
+    }
 }

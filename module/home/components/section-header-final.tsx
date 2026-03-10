@@ -16,7 +16,7 @@ export function SectionHeaderClassic({
 }: SectionHeaderProps) {
     return (
         <Container size="2xl" as="section" aria-label={sectionName} className="py-10 md:py-14 lg:py-16">
-            <div className="mb-10 md:mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-5">
+            <div className="mb-6 md:mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-5">
                 <div className="flex flex-col gap-2 max-w-xl">
                     {eyebrow && (
                         <p className="inline-flex items-center gap-2.5 text-[10px] font-semibold tracking-[0.30em] uppercase text-accent">

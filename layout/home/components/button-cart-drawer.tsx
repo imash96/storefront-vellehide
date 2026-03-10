@@ -2,7 +2,7 @@
 
 import { ShoppingBag } from "lucide-react"
 import { useCartDrawer } from "@/lib/store/useDrawerStore";
-import { span as Span } from "motion/react-client"
+import { motion } from "motion/react"
 
 // TODO: mix cartbutton with cart drawer
 export default function CartDrawerButton({ className, totalItems }: CartDrawerButtonProps) {
@@ -10,14 +10,9 @@ export default function CartDrawerButton({ className, totalItems }: CartDrawerBu
 
     return (
         <button onClick={toggleCart} className={`relative ${className}`} aria-label={`Shopping cart with ${totalItems} items`}>
-            <ShoppingBag
-                className="w-5 h-5"
-                strokeWidth={1.5}
-                aria-hidden="true"
-            />
-
+            <ShoppingBag className="w-5 h-5" strokeWidth={1.5} aria-hidden />
             {/* Cart Badge */}
-            <Span
+            <motion.span
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{
@@ -29,7 +24,7 @@ export default function CartDrawerButton({ className, totalItems }: CartDrawerBu
                 aria-hidden="true"
             >
                 {totalItems > 99 ? '99+' : totalItems}
-            </Span>
+            </motion.span>
 
             <span className="sr-only">
                 {totalItems === 0 ? 'Cart is empty' : `${totalItems} ${totalItems === 1 ? 'item' : 'items'} in cart`}

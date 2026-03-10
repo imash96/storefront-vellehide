@@ -1,5 +1,4 @@
 import Container from "@/ui/container"
-import React from "react"
 
 type SectionHeaderProps = {
     title: string
@@ -11,12 +10,6 @@ type SectionHeaderProps = {
     action?: React.ReactNode
 } & React.PropsWithChildren
 
-/**
- * SectionHeader
- * ─────────────
- * Wraps each home section with consistent heading + optional eyebrow/action row.
- * Respects brand tokens: font-heading (Bricolage Grotesque), accent for eyebrow rule, text-primary/secondary scale.
- */
 export default function SectionHeader({
     title,
     desc,
@@ -30,27 +23,25 @@ export default function SectionHeader({
     const isCenter = align === "center"
 
     return (
-        <Container size="2xl" as="section" aria-label={sectionName} className="py-10 md:py-14 lg:py-16">
-            {/* ── Header row ── */}
-            <div
-                className={`mb-10 md:mb-12 flex flex-col gap-4 ${isCenter ? "items-center text-center" : "sm:flex-row sm:items-end sm:justify-between gap-5"}`}
-            >
-                <div className={`flex flex-col gap-2 ${isCenter ? "max-w-lg" : "max-w-xl"}`}>
-                    {/* Eyebrow */}
+        <Container
+            size="2xl"
+            as="section"
+            aria-label={sectionName}
+            className="py-8 md:py-12 lg:py-14"
+        >
+            {/* Header row */}
+            <div className={`flex flex-col gap-4 ${isCenter ? "items-center text-center" : "sm:flex-row sm:items-end sm:justify-between gap-5"} mb-7 md:mb-9`}>
+                <div className={`flex flex-col gap-2 ${isCenter ? "max-w-2xl" : "max-w-xl"}`}>
                     {eyebrow && (
-                        <p className={`inline-flex items-center gap-2.5 text-[10px] font-semibold tracking-[0.30em] uppercase text-accent ${isCenter && 'mx-auto'}`}>
+                        <p className={`inline-flex items-center gap-2.5 text-[10px] font-semibold tracking-[0.30em] uppercase text-accent ${isCenter ? "mx-auto" : ""}`}>
                             <span className="block h-px w-7 bg-accent" aria-hidden="true" />
                             {eyebrow}
                             {isCenter && <span className="block h-px w-7 bg-accent" aria-hidden="true" />}
                         </p>
                     )}
-
-                    {/* Title */}
                     <h2 className={`font-heading font-light leading-[1.08] tracking-[-0.02em] text-text-primary text-balance text-[1.85rem] md:text-[2.25rem] lg:text-[2.6rem] ${className}`}>
                         {title}
                     </h2>
-
-                    {/* Description */}
                     {desc && (
                         <p className="text-sm md:text-[13.5px] leading-relaxed font-light text-text-secondary mt-0.5">
                             {desc}
@@ -58,13 +49,9 @@ export default function SectionHeader({
                     )}
                 </div>
 
-                {/* Right-side action (e.g. "View All" link) — left-align only */}
-                {action && !isCenter && (
-                    <>{action}</>
-                )}
+                {action && !isCenter && <>{action}</>}
             </div>
 
-            {/* ── Section content ── */}
             {children}
         </Container>
     )

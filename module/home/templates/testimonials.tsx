@@ -5,11 +5,20 @@ import SectionHeader from "../components/section-header"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
-import { useCallback, useEffect, useState } from "react"
+import { memo, useCallback, useEffect, useRef, useState } from "react"
 import TestimonialCard from "../components/testimonials-card"
 
 export default function Testimonials() {
     const [selectedIndex, setSelectedIndex] = useState(0)
+
+    const autoplayRef = useRef(
+        Autoplay({
+            delay: 5500,
+            instant: false,
+            defaultInteraction: false,
+            stopOnLastSnap: false
+        })
+    )
 
     const [emblaRef, emblaApi] = useEmblaCarousel(
         {
@@ -25,25 +34,19 @@ export default function Testimonials() {
                 "(min-width: 1280px)": { slidesToScroll: 4 },
             },
         },
-        [Autoplay({ delay: 5000 })]
+        [autoplayRef.current]
     )
 
     const scrollPrev = useCallback(() => {
         if (!emblaApi) return
         emblaApi?.goToPrev()
-        emblaApi.plugins().autoplay.reset()
+        autoplayRef.current.reset()
     }, [emblaApi])
 
     const scrollNext = useCallback(() => {
         if (!emblaApi) return
         emblaApi?.goToNext()
-        emblaApi.plugins().autoplay.reset()
-    }, [emblaApi])
-
-    const scrollTo = useCallback((index: number) => {
-        if (!emblaApi) return
-        emblaApi?.goTo(index)
-        emblaApi.plugins().autoplay.reset()
+        autoplayRef.current.reset()
     }, [emblaApi])
 
     useEffect(() => {
@@ -55,74 +58,63 @@ export default function Testimonials() {
         }
     }, [emblaApi])
 
-    // Navigation controls to inject into the SectionHeader action slot
+    // Navigation controls injected into SectionHeader action slot
     const NavControls = (
-        <div className="hidden md:flex items-center gap-3">
-            {/* FIX: arrows now visible on all viewports */}
-            <button
-                onClick={scrollPrev}
-                aria-label="Previous testimonial"
-                className="flex size-9 items-center justify-center rounded-full border border-border bg-card text-text-secondary transition-all duration-200 hover:border-border-strong hover:bg-card-hover hover:text-text-primary active:scale-95"
-            >
-                <ChevronLeft size={16} strokeWidth={1.5} />
-            </button>
-            <button
-                onClick={scrollNext}
-                aria-label="Next testimonial"
-                className="flex size-9 items-center justify-center rounded-full border border-border bg-card text-text-secondary transition-all duration-200 hover:border-border-strong hover:bg-card-hover hover:text-text-primary active:scale-95"
-            >
-                <ChevronRight size={16} strokeWidth={1.5} />
-            </button>
+        <div className="hidden md:flex items-center gap-2">
+            <NavBtn onClick={scrollPrev} label="Previous" dir="prev" />
+            <NavBtn onClick={scrollNext} label="Next" dir="next" />
         </div>
     )
 
     return (
         <SectionHeader
             title="What Our Customers Say"
-            desc="Hear from our community about the craftsmanship, comfort, and customer service that define the Velle Hide experience."
+            desc="Real stories from people who wear Velle Hide every day."
             sectionName="testimonials"
             eyebrow="Customer Stories"
             action={NavControls}
         >
             <div className="relative -mx-3">
-                {/* Fade edges — desktop only */}
+                {/* Fade edges — desktop */}
                 <div className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-12 bg-linear-to-r from-background to-transparent lg:block" />
                 <div className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-12 bg-linear-to-l from-background to-transparent lg:block" />
-                {/* ── Carousel ────────────────────────────────────────────────── */}
+
+                {/* Carousel */}
                 <div ref={emblaRef} className="overflow-hidden">
-                    <div className="flex gap-3 md:gap-4 touch-pan-y">
+                    <div className="flex gap-3 md:gap-4 touch-pan-y will-change-transform">
                         {testimonials.map((t, i) => (
                             <div
                                 key={t.id}
+                                role="group"
+                                aria-roledescription="slide"
                                 className="flex-[0_0_85%] sm:flex-[0_0_48%] md:flex-[0_0_40%] lg:flex-[0_0_31%] xl:flex-[0_0_23%] min-w-0 px-1"
                                 aria-current={i === selectedIndex ? "true" : undefined}
                             >
-                                <TestimonialCard testimonial={t} isActive={i === selectedIndex} />
+                                <TestimonialCard testimonial={t} />
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
 
-            {/* ── Dot pagination ──────────────────────────────────────────── */}
-            {(emblaApi?.snapList() || []).length > 1 && (
-                <div
-                    className="mt-6 flex justify-center items-center gap-1.5"
-                    role="tablist"
-                    aria-label="Testimonial navigation"
-                >
-                    {emblaApi!.snapList().map((_, i) => (
-                        <button
-                            key={i}
-                            role="tab"
-                            aria-selected={i === selectedIndex}
-                            aria-label={`Go to slide ${i + 1}`}
-                            onClick={() => scrollTo(i)}
-                            className={`rounded-full bg-accent transition-all duration-300 ${i === selectedIndex ? "w-5 h-1.5 opacity-100" : "w-1.5 h-1.5 opacity-25 hover:opacity-50"}`}
-                        />
-                    ))}
-                </div>
-            )}
+            {/* Mobile nav arrows */}
+            <div className="flex justify-center gap-3 mt-4 md:hidden">
+                <NavBtn onClick={scrollPrev} label="Previous" dir="prev" />
+                <NavBtn onClick={scrollNext} label="Next" dir="next" />
+            </div>
         </SectionHeader>
     )
 }
+
+const NavBtn = memo(function NavBtn({ onClick, label, dir, }: { onClick: () => void; label: string; dir: "prev" | "next"; }) {
+    return (
+        <button
+            type="button"
+            onClick={onClick}
+            aria-label={label}
+            className="size-9 flex items-center justify-center rounded-full border border-border bg-card text-foreground hover:bg-accent hover:text-accent-foreground hover:border-accent transition-all duration-200 focus-visible:outline-2 focus-visible:outline-ring active:scale-95"
+        >
+            {dir === "prev" ? <ChevronLeft className="size-4" aria-hidden /> : <ChevronRight className="size-4" aria-hidden />}
+        </button>
+    );
+});

@@ -1,13 +1,6 @@
 "use client"
 
-/**
- * app/category/[parent]/[...handle]/ProductListingClient.tsx
- *
- * Client boundary that owns the filter drawer toggle state
- * and wires together <FilterDrawer> + <ProductGrid>.
- */
-
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import FilterDrawer from "../components/filter-drawer"
 import ProductGrid from "../components/product-grid"
 import { StoreProductCategory, StoreProduct } from "@medusajs/types"
@@ -40,16 +33,20 @@ export default function ProductListingClient({
 }: ProductListingClientProps) {
     const [drawerOpen, setDrawerOpen] = useState(false)
 
+    // Stable callbacks — prevent unnecessary child re-renders
+    const openDrawer = useCallback(() => setDrawerOpen(true), [])
+    const closeDrawer = useCallback(() => setDrawerOpen(false), [])
+
     const activeFilterCount =
         activeFilters.sizes.length +
         activeFilters.colors.length +
         (activeFilters.minPrice || activeFilters.maxPrice ? 1 : 0)
 
     return (
-        <div className="pt-8">
+        <div className="pt-6 sm:pt-8">
             <FilterDrawer
                 isOpen={drawerOpen}
-                onClose={() => setDrawerOpen(false)}
+                onClose={closeDrawer}
                 currentCategory={category}
                 sizes={sizes}
                 activeFilters={activeFilters}
@@ -61,7 +58,7 @@ export default function ProductListingClient({
                 currentPage={currentPage}
                 limit={limit}
                 sort={sort}
-                onFilterOpen={() => setDrawerOpen(true)}
+                onFilterOpen={openDrawer}
                 activeFilterCount={activeFilterCount}
             />
         </div>

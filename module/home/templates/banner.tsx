@@ -1,39 +1,49 @@
 "use client"
 
+import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
-import { useEffect, useState } from "react"
-import Image from "next/image"
-import { ArrowRight, ChevronRight } from "lucide-react"
-import Link from "next/link"
 import { BannerSlide } from "@/types/homepage"
 
-const alignClasses = {
+const ALIGN: Record<BannerSlide["align"], string> = {
     left: "items-start text-left",
     center: "items-center text-center",
     right: "items-end text-right",
 }
 
-const ctaSelfClasses = {
+const CTA_SELF: Record<BannerSlide["align"], string> = {
     left: "self-start",
     center: "self-center",
     right: "self-end",
+}
+
+const RULE_ORIGIN: Record<BannerSlide["align"], string> = {
+    left: "[transform-origin:left]",
+    center: "[transform-origin:center]",
+    right: "[transform-origin:right]",
 }
 
 export default function BannerCarousel() {
 
     const [selectedIndex, setSelectedIndex] = useState(0)
 
-    const [emblaRef, emblaApi] = useEmblaCarousel(
-        {
-            align: "start",
-            slidesToScroll: 1,
-            breakpoints: {
-                "(min-width: 1024px)": { active: false, },
-            },
-        },
-        [Autoplay({ delay: 3500, })]
+    const autoplayRef = useRef(
+        Autoplay({
+            delay: 4500,
+            instant: false,
+            defaultInteraction: false,
+            stopOnLastSnap: false
+        })
     )
+
+    const [emblaRef, emblaApi] = useEmblaCarousel({
+        align: "start",
+        slidesToScroll: 1,
+        breakpoints: { "(min-width: 1024px)": { active: false } },
+    }, [autoplayRef.current])
 
     useEffect(() => {
         if (!emblaApi) return
@@ -52,12 +62,9 @@ export default function BannerCarousel() {
         >
             {/* Embla viewport */}
             <div ref={emblaRef} className="overflow-hidden">
-                <div className="flex touch-pan-y">
+                <div className="flex touch-pan-y will-change-transform">
                     {Slides.map((slide, i) => {
                         const isActive = selectedIndex === i;
-                        const alignClass = alignClasses[slide.align];
-                        const ctaSelfClass = ctaSelfClasses[slide.align];
-
                         return (
                             <div
                                 key={slide.id}
@@ -77,29 +84,33 @@ export default function BannerCarousel() {
                                 />
 
                                 {/* Premium Gradient Overlay */}
-                                <div className="absolute inset-0 bg-linear-to-t from-scrim via-overlay-light to-transparent" aria-hidden />
-
+                                <div
+                                    className="absolute inset-0 pointer-events-none"
+                                    aria-hidden="true"
+                                    style={{
+                                        background: "linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.26) 46%, transparent 68%)",
+                                    }}
+                                />
                                 {/* Content */}
-                                <div className={`absolute inset-0 z-10 flex flex-col justify-end gap-3 p-5 md:p-7 lg:p-8 ${alignClass}`}>
+                                <div className={`absolute inset-0 z-10 flex flex-col justify-end gap-3 p-5 md:p-7 lg:p-8 ${ALIGN[slide.align]}`}>
                                     {/* Eyebrow / subheading */}
                                     {slide.subheading && (
-                                        <p className={`text-white/70 text-[10px] md:text-xs tracking-[0.32em] uppercase transition-all duration-500 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 md:opacity-100 translate-y-3"}`}
+                                        <p className={`text-white/65 text-[10px] md:text-xs tracking-[0.32em] uppercase transition-all duration-500 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 md:opacity-100 translate-y-3"}`}
                                             style={{ transitionDelay: isActive ? "80ms" : "0ms" }}>
                                             {slide.subheading}
                                         </p>
                                     )}
 
                                     {/* Heading */}
-                                    <h2 className={`font-heading text-white text-xl md:text-2xl lg:text-3xl xl:text-4xl leading-[1.1] tracking-tight transition-all duration-500 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 md:opacity-100 translate-y-4"}`}>
+                                    <h2 className={`font-heading font-light text-white text-[1.4rem] sm:text-2xl md:text-3xl lg:text-4xl leading-[1.1] tracking-tight transition-all duration-500 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 md:opacity-100 translate-y-4"}`}>
                                         {slide.heading}
                                     </h2>
 
                                     {/* Divider accent */}
                                     <div
-                                        className={`h-px w-10 bg-accent transition-all duration-500 ${isActive ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"} ${ctaSelfClass}`}
+                                        className={`h-px w-10 bg-accent transition-all duration-500 ${RULE_ORIGIN[slide.align]} ${isActive ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"} ${CTA_SELF[slide.align]}`}
                                         style={{
                                             transitionDelay: isActive ? "260ms" : "0ms",
-                                            transformOrigin: slide.align === "right" ? "right" : "left",
                                         }}
                                         aria-hidden
                                     />
@@ -107,12 +118,12 @@ export default function BannerCarousel() {
                                     {/* CTA Button */}
                                     <Link
                                         href={slide.cta.href}
-                                        className={`inline-flex items-center gap-2 border border-white/30 text-white px-6 py-3 text-sm font-medium hover:bg-white/10 transition-colors bg-white/10 backdrop-blur-sm hover:border-white/60 tracking-[0.14em] uppercaserounded-none duration-300 active:scale-[0.97] ${ctaSelfClass} ${isActive ? "opacity-100 translate-y-0" : "opacity-0 md:opacity-100 translate-y-3"}`}
+                                        className={`inline-flex items-center gap-2 border border-white/30 hover:border-white/65 bg-white/10 hover:bg-white/20 backdrop-blur-[2px] text-white px-6 py-3 text-sm font-medium tracking-[0.14em] uppercase rounded-none transition-all duration-300 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-white/60 ${CTA_SELF[slide.align]} ${isActive ? "opacity-100 translate-y-0" : "opacity-0 md:opacity-100 translate-y-3"}`}
                                         style={{ transitionDelay: isActive ? "320ms" : "0ms" }}>
                                         {slide.cta.label}
-                                        <ArrowRight className="size-3.5" aria-hidden />
+                                        <ArrowRight className="size-3.5 shrink-0" aria-hidden="true" />
                                     </Link>
-                                    <div className="flex items-center gap-3 flex-wrap">
+                                    {/* <div className="flex items-center gap-3 flex-wrap">
                                         <button
                                             className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors">
                                             Shop All Categories
@@ -122,7 +133,7 @@ export default function BannerCarousel() {
                                             className="inline-flex items-center gap-2 border border-white/30 text-white px-6 py-3 text-sm font-medium hover:bg-white/10 transition-colors">
                                             Men’s Collection
                                         </button>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         )

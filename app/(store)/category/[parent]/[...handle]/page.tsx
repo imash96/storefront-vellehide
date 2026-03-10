@@ -2,15 +2,15 @@ import type { Metadata } from "next"
 import { Suspense } from "react"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import Image from "next/image"
 import ProductListingClient from "@/module/category/templates/product-listing-client"
 import { getCategoryByHandle } from "@/lib/action/category"
 import { StoreProductCategory } from "@medusajs/types"
 import { getSizesForHandle } from "@/data/category-page"
 import { listProductsWithSort } from "@/lib/action/product"
 import { SortOptions } from "@/types/common"
+import { ChevronRight } from "lucide-react"
 
-/* ─── Params & SearchParams ───────────────────────────────────────── */
+/* ─── Types ───────────────────────────────────────────────────────────── */
 type SearchParams = {
     sort?: SortOptions
     page?: string
@@ -29,48 +29,101 @@ type GetProductsProps = {
     maxPrice?: number
 }
 
-/* ─── Helpers ─────────────────────────────────────────────────────── */
+/* ─── Helpers ─────────────────────────────────────────────────────────── */
 function toArray(v: string | string[] | undefined): string[] {
     if (!v) return []
     return Array.isArray(v) ? v : [v]
 }
 
-async function getProducts(category_id: string, { sort, page }: GetProductsProps) {
-    console.log(category_id)
+async function getProducts(
+    category_id: string,
+    { sort, page }: GetProductsProps
+) {
     return await listProductsWithSort({
         page,
-        queryParams: {
-            category_id,
-        },
+        queryParams: { category_id },
         sortBy: sort,
-        countryCode: 'us'
+        countryCode: "us",
     })
-
 }
 
-/* ─── Metadata ────────────────────────────────────────────────────── */
-export async function generateMetadata({ params, }: PageProps<"/category/[parent]/[...handle]">): Promise<Metadata> {
+function buildCrumbs(
+    parent: string,
+    handle: string[],
+    category: StoreProductCategory
+): { label: string; href: string }[] {
+    const crumbs: { label: string; href: string }[] = [
+        { label: "Home", href: "/" },
+        { label: "Categories", href: "/category" },
+        { label: parent.charAt(0).toUpperCase() + parent.slice(1), href: `/category/${parent}` },
+    ]
+
+    // Build intermediate crumbs for nested handles
+    handle.forEach((seg, idx) => {
+        if (idx < handle.length - 1) {
+            const path = [parent, ...handle.slice(0, idx + 1)].join("/")
+            crumbs.push({
+                label: seg.charAt(0).toUpperCase() + seg.slice(1).replace(/-/g, " "),
+                href: `/category/${path}`,
+            })
+        }
+    })
+
+    // Last crumb is the current category name (not linked)
+    crumbs.push({ label: category.name, href: "#" })
+
+    return crumbs
+}
+
+/* ─── Skeleton ────────────────────────────────────────────────────────── */
+function GridSkeleton() {
+    return (
+        <div className="pt-8">
+            {/* Toolbar skeleton */}
+            <div className="flex items-center justify-between gap-3 mb-8 pb-5 border-b border-divider">
+                <div className="h-9 w-28 bg-surface-sunken rounded-lg animate-pulse" />
+                <div className="h-9 w-36 bg-surface-sunken rounded-lg animate-pulse" />
+            </div>
+            {/* Grid skeleton */}
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 sm:gap-x-5 sm:gap-y-10">
+                {Array.from({ length: 8 }).map((_, i) => (
+                    <div key={i}>
+                        <div className="aspect-3/4 rounded-xl bg-surface-sunken animate-pulse mb-3" />
+                        <div className="h-3 w-16 bg-surface-sunken rounded animate-pulse mb-2" />
+                        <div className="h-4 w-3/4 bg-surface-sunken rounded animate-pulse mb-1.5" />
+                        <div className="h-3.5 w-20 bg-surface-sunken rounded animate-pulse" />
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+/* ─── Metadata ────────────────────────────────────────────────────────── */
+export async function generateMetadata({
+    params,
+}: PageProps<"/category/[parent]/[...handle]">): Promise<Metadata> {
     const { parent, handle } = await params
     const fullHandle = [parent, ...handle].join("/")
-    console.log({ parent, handle, fullHandle })
     const category = await getCategoryByHandle(fullHandle)
     const name = category?.name ?? handle.at(-1) ?? "Collection"
 
     return {
         title: `${name} | Nocturne Leather`,
-        description:
-            category?.description ??
-            `Shop our premium ${name.toLowerCase()} leather collection.`,
+        description: category?.description ?? `Shop our premium ${name.toLowerCase()} leather collection.`,
         openGraph: {
             images: category?.metadata?.thumbnail ? [category.metadata.thumbnail as string] : [],
         },
     }
 }
 
-/* ─── Page (Server Component) ─────────────────────────────────────── */
-export default async function Page({ params, searchParams }: PageProps<"/category/[parent]/[...handle]">) {
+/* ─── Page (Server Component) ─────────────────────────────────────────── */
+export default async function Page({
+    params,
+    searchParams,
+}: PageProps<"/category/[parent]/[...handle]">) {
     const { parent, handle } = await params
-    const sp = await searchParams as SearchParams
+    const sp = (await searchParams) as SearchParams
     const fullHandle = [parent, ...handle].join("/")
 
     // ── Category ──
@@ -78,7 +131,7 @@ export default async function Page({ params, searchParams }: PageProps<"/categor
     if (!category) notFound()
 
     // ── Query params ──
-    const sort = sp.sort ?? "created_at"
+    const sort: SortOptions = sp.sort ?? "created_at"
     const page = Math.max(1, parseInt(sp.page ?? "1", 10))
     const sizes = toArray(sp.size)
     const colors = toArray(sp.color)
@@ -86,8 +139,16 @@ export default async function Page({ params, searchParams }: PageProps<"/categor
     const maxPrice = sp.maxPrice ? parseInt(sp.maxPrice, 10) : undefined
 
     // ── Products ──
-    const { response: { products, count }, limit } = await getProducts(category.id, {
-        sort, page, sizes, colors, minPrice, maxPrice,
+    const {
+        response: { products, count },
+        limit,
+    } = await getProducts(category.id, {
+        sort,
+        page,
+        sizes,
+        colors,
+        minPrice,
+        maxPrice,
     })
 
     // ── Sizes config ──
@@ -97,15 +158,12 @@ export default async function Page({ params, searchParams }: PageProps<"/categor
     const crumbs = buildCrumbs(parent, handle, category)
 
     return (
-        <main
-            className="min-h-screen"
-            style={{ background: "var(--color-brand-bg)" }}
-        >
+        <main className="min-h-screen bg-background">
             {/* ── Category hero ──────────────────────────────────────────── */}
             <ProductCategoryHero category={category} crumbs={crumbs} />
 
             {/* ── Listing ────────────────────────────────────────────────── */}
-            <section className="px-5 sm:px-10 lg:px-20 pb-20 sm:pb-28">
+            <section className="px-4 sm:px-6 lg:px-8 xl:px-10 max-w-screen-2xl mx-auto pb-16 sm:pb-24">
                 <Suspense fallback={<GridSkeleton />}>
                     <ProductListingClient
                         products={products}
@@ -115,7 +173,12 @@ export default async function Page({ params, searchParams }: PageProps<"/categor
                         sort={sort}
                         category={category}
                         sizes={sizes_for_category}
-                        activeFilters={{ sizes, colors, minPrice: sp.minPrice ?? "", maxPrice: sp.maxPrice ?? "" }}
+                        activeFilters={{
+                            sizes,
+                            colors,
+                            minPrice: sp.minPrice ?? "",
+                            maxPrice: sp.maxPrice ?? "",
+                        }}
                     />
                 </Suspense>
             </section>
@@ -123,7 +186,7 @@ export default async function Page({ params, searchParams }: PageProps<"/categor
     )
 }
 
-/* ─── Hero ────────────────────────────────────────────────────────── */
+/* ─── Hero ────────────────────────────────────────────────────────────── */
 function ProductCategoryHero({
     category,
     crumbs,
@@ -133,124 +196,72 @@ function ProductCategoryHero({
 }) {
     return (
         <section
-            className="relative px-5 sm:px-10 lg:px-20 pt-6 pb-12 sm:pb-16 overflow-hidden grain"
+            className="relative px-4 sm:px-6 lg:px-8 xl:px-10 max-w-screen-2xl mx-auto pt-5 pb-10 sm:pb-14 overflow-hidden"
             style={{ background: "var(--color-brand-surface)" }}
         >
-            {/* Ambient light */}
+            {/* Ambient light — fixed opacity to valid Tailwind value */}
             <div
-                className="absolute top-0 right-0 w-100 h-62.5 rounded-full opacity-8 blur-[100px] pointer-events-none"
+                className="absolute top-0 right-0 w-96 h-64 rounded-full opacity-[0.08] blur-[100px] pointer-events-none"
                 style={{ background: "var(--color-accent)" }}
                 aria-hidden="true"
             />
 
             {/* Breadcrumb */}
-            <nav aria-label="Breadcrumb" className="mb-6">
-                <ol className="flex items-center gap-2 flex-wrap text-xs" style={{ color: "var(--color-brand-text-faint)" }}>
-                    {crumbs.map((c, i) => (
-                        <li key={i} className="flex items-center gap-2">
-                            {i === crumbs.length - 1 ? (
-                                <span style={{ color: "var(--color-brand-text-soft)" }}>{c.label}</span>
-                            ) : (
-                                <Link href={c.href} className="hover:text-accent transition-colors">
-                                    {c.label}
-                                </Link>
-                            )}
-                            <span aria-hidden="true">/</span>
-                        </li>
-                    ))}
+            <nav aria-label="Breadcrumb" className="mb-5 relative z-10">
+                <ol className="flex items-center gap-1.5 flex-wrap text-xs">
+                    {crumbs.map((c, i) => {
+                        const isLast = i === crumbs.length - 1
+                        return (
+                            <li key={i} className="flex items-center gap-1.5">
+                                {isLast ? (
+                                    <span
+                                        className="font-medium"
+                                        style={{ color: "var(--color-brand-text-soft)" }}
+                                        aria-current="page"
+                                    >
+                                        {c.label}
+                                    </span>
+                                ) : (
+                                    <>
+                                        <Link
+                                            href={c.href}
+                                            className="transition-colors hover:opacity-80"
+                                            style={{ color: "var(--color-brand-text-faint)" }}
+                                        >
+                                            {c.label}
+                                        </Link>
+                                        <ChevronRight
+                                            className="size-3 opacity-40"
+                                            style={{ color: "var(--color-brand-text-faint)" }}
+                                        />
+                                    </>
+                                )}
+                            </li>
+                        )
+                    })}
                 </ol>
             </nav>
 
-            <div className="relative z-10 grid lg:grid-cols-[1fr_auto] gap-6 items-end">
-                <div>
-                    <h1
-                        className="text-4xl sm:text-5xl lg:text-6xl font-light leading-[1.1] tracking-tight mb-3"
-                        style={{
-                            fontFamily: "var(--font-display)",
-                            color: "var(--color-brand-text)",
-                        }}
+            {/* Title + description */}
+            <div className="relative z-10 max-w-2xl">
+                <h1
+                    className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.1] mb-3"
+                    style={{
+                        fontFamily: "var(--font-heading)",
+                        color: "var(--color-brand-text)",
+                    }}
+                >
+                    {category.name}
+                </h1>
+                {category.description && (
+                    <p
+                        className="text-sm sm:text-base leading-relaxed max-w-xl"
+                        style={{ color: "var(--color-brand-text-soft)" }}
                     >
-                        {category.name}
-                    </h1>
-                    {category.description && (
-                        <p
-                            className="text-sm sm:text-base leading-relaxed max-w-xl"
-                            style={{ color: "var(--color-brand-text-soft)" }}
-                        >
-                            {category.description}
-                        </p>
-                    )}
-                </div>
-                {category.metadata?.thumbnail as string && (
-                    <div
-                        className="hidden lg:flex items-center gap-3 px-4 py-2 rounded-full border"
-                        style={{
-                            background: "var(--color-brand-elevated)",
-                            border: "1px solid var(--color-brand-border)",
-                        }}
-                    >
-                        <div className="relative w-8 h-8 rounded-full overflow-hidden">
-                            <Image src={category.metadata?.thumbnail as string} alt="" fill className="object-cover" sizes="32px" />
-                        </div>
-                        <span className="text-xs pr-1" style={{ color: "var(--color-brand-text-soft)" }}>
-                            {category.name}
-                        </span>
-                    </div>
+                        {category.description}
+                    </p>
                 )}
             </div>
         </section>
-    )
-}
-
-/* ─── Breadcrumb builder ──────────────────────────────────────────── */
-function buildCrumbs(
-    parent: string,
-    handle: string[],
-    leaf: StoreProductCategory
-): { label: string; href: string }[] {
-    const crumbs: { label: string; href: string }[] = [
-        { label: "Category", href: "/category" },
-        { label: toTitleCase(parent), href: `/category/${parent}` },
-    ]
-
-    handle.forEach((seg, i) => {
-        const isLast = i === handle.length - 1
-        const href = `/category/${parent}/${handle.slice(0, i + 1).join("/")}`
-        crumbs.push({
-            label: isLast ? leaf.name : toTitleCase(seg),
-            href,
-        })
-    })
-
-    return crumbs
-}
-
-function toTitleCase(str: string) {
-    return str
-        .replace(/-/g, " ")
-        .replace(/\b\w/g, (c) => c.toUpperCase())
-}
-
-/* ─── Loading skeleton ────────────────────────────────────────────── */
-function GridSkeleton() {
-    return (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10">
-            {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="animate-pulse">
-                    <div
-                        className="rounded-xl aspect-3/4 mb-3"
-                        style={{ background: "var(--color-brand-elevated)" }}
-                    />
-                    <div
-                        className="h-2.5 rounded-full w-2/3 mb-2"
-                        style={{ background: "var(--color-brand-border)" }}
-                    />
-                    <div
-                        className="h-2 rounded-full w-1/2"
-                        style={{ background: "var(--color-brand-border)" }}
-                    />
-                </div>
-            ))}
-        </div>
     )
 }
