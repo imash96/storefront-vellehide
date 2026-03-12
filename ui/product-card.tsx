@@ -17,7 +17,7 @@ function ProductCard({ product }: { product: StoreProduct }) {
             <Link href={`/products/${product.handle}`} className="block" tabIndex={-1} aria-hidden>
                 {/* ── Image ─────────────────────────────────────────────── */}
                 {/* FIX 4: aspect-[3/4] reserves space → eliminates CLS */}
-                <div className="relative aspect-3/4 overflow-hidden border border-border bg-card">
+                <div className="relative aspect-3/4 overflow-hidden border border-border bg-white">
                     <ProductThumbnail
                         src={product.images}
                         alt={product.title}

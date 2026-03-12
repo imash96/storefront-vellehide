@@ -69,7 +69,10 @@ export type BannerSlide = {
     subheading?: string
     desc?: string
     cta: { label: string; href: string }
+    ctaSecondary?: { label: string; href: string }
     align: "left" | "center" | "right"
+    badge?: string
+    price?: { current: string; original?: string }
 }
 
 export interface HeroSlide {

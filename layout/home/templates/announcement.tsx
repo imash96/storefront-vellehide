@@ -1,35 +1,18 @@
 "use client"
 
-import { useCallback, useRef } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Container from '@/ui/container';
 import type { AnnouncementItem } from '@/types/homepage';
 import Link from "next/link";
+import { useCarousel } from "@/lib/hook/use-carousel";
 
 export default function AnnouncementBar({ items }: { items: AnnouncementItem[] }) {
 
-    const autoplayRef = useRef(
-        Autoplay({
-            delay: 4000,
-            instant: false,
-            defaultInteraction: false,
-            stopOnLastSnap: false
-        })
-    )
-
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplayRef.current])
-
-    const scrollPrev = useCallback(() => {
-        emblaApi?.goToPrev();
-        autoplayRef.current.reset();
-    }, [emblaApi]);
-
-    const scrollNext = useCallback(() => {
-        emblaApi?.goToNext();
-        autoplayRef.current.reset();
-    }, [emblaApi]);
+    const { scrollPrev, emblaRef, scrollNext } = useCarousel({
+        autoplay: true,
+        autoplayDelay: 4000,
+        options: { loop: true },
+    })
 
     if (!items?.length) return null;
 

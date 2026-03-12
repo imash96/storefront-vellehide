@@ -3,25 +3,15 @@
 import { testimonials } from "@/data/testimonials"
 import SectionHeader from "../components/section-header"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import useEmblaCarousel from "embla-carousel-react"
-import Autoplay from "embla-carousel-autoplay"
-import { memo, useCallback, useEffect, useRef, useState } from "react"
+import { memo } from "react"
 import TestimonialCard from "../components/testimonials-card"
+import { useCarousel } from "@/lib/hook/use-carousel"
 
 export default function Testimonials() {
-    const [selectedIndex, setSelectedIndex] = useState(0)
-
-    const autoplayRef = useRef(
-        Autoplay({
-            delay: 5500,
-            instant: false,
-            defaultInteraction: false,
-            stopOnLastSnap: false
-        })
-    )
-
-    const [emblaRef, emblaApi] = useEmblaCarousel(
-        {
+    const { scrollPrev, emblaRef, scrollNext, selectedIndex } = useCarousel({
+        autoplay: true,
+        autoplayDelay: 5500,
+        options: {
             loop: true,
             align: "center",
             skipSnaps: false,
@@ -34,29 +24,7 @@ export default function Testimonials() {
                 "(min-width: 1280px)": { slidesToScroll: 4 },
             },
         },
-        [autoplayRef.current]
-    )
-
-    const scrollPrev = useCallback(() => {
-        if (!emblaApi) return
-        emblaApi?.goToPrev()
-        autoplayRef.current.reset()
-    }, [emblaApi])
-
-    const scrollNext = useCallback(() => {
-        if (!emblaApi) return
-        emblaApi?.goToNext()
-        autoplayRef.current.reset()
-    }, [emblaApi])
-
-    useEffect(() => {
-        if (!emblaApi) return
-        const onSelect = () => setSelectedIndex(emblaApi.selectedSnap())
-        emblaApi.on("select", onSelect)
-        return () => {
-            emblaApi.off("select", onSelect)
-        }
-    }, [emblaApi])
+    })
 
     // Navigation controls injected into SectionHeader action slot
     const NavControls = (
