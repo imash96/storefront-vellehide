@@ -1,17 +1,22 @@
 export const announcements = [
     {
         id: '1',
-        message: "🎉  10% OFF ON YOUR FIRST PURCHASE.",
-        link: '/sale',
+        message: "🎉 30-Day Easy Returns — No Questions Asked.",
+        type: 'info',
     },
     {
         id: '2',
-        message: '✨ FREE SHIPPING ON ORDERS OVER $150',
+        message: '✨ Free shipping on orders over $149',
+        type: 'info',
+    },
+    {
+        id: '3',
+        message: '100% Genuine Full-Grain Leather, Guaranteed',
         type: 'info',
     },
     {
         id: '3',
         message: '🆕 New Year Sale is Live! Use Code: NY10',
-        link: '/collections/new-arrivals',
+        type: 'info',
     },
 ]

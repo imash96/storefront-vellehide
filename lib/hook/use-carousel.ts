@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState, useCallback } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
-import type { EmblaOptionsType } from "embla-carousel"
 import Autoplay from "embla-carousel-autoplay"
+import type { EmblaCarouselType, EmblaOptionsType } from "embla-carousel"
 
 type UseCarouselOptions = {
     autoplay?: boolean
@@ -23,7 +23,7 @@ export function useCarousel({ autoplay = false, autoplayDelay = 4500, options }:
 
     const [emblaRef, emblaApi] = useEmblaCarousel(
         options,
-        autoplay ? [autoplayRef.current!] : undefined
+        autoplay ? [autoplayRef.current!] : []
     )
 
     const scrollTo = useCallback((index: number) => {
@@ -44,9 +44,9 @@ export function useCarousel({ autoplay = false, autoplayDelay = 4500, options }:
 
     useEffect(() => {
         if (!emblaApi) return
-        const onSelect = () => setSelectedIndex(emblaApi.selectedSnap())
+        const onSelect = (api: EmblaCarouselType) => setSelectedIndex(api.selectedSnap())
         emblaApi.on("select", onSelect)
-        onSelect()
+        onSelect(emblaApi)
         return () => { emblaApi.off("select", onSelect) }
     }, [emblaApi])
 
